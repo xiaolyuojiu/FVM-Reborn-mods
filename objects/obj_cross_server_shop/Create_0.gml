@@ -8,6 +8,8 @@ shop_type = 1;
 exchange_cards = [];
 silver_cards = [];
 // 显示名单直接读取跨服注册分类，避免新增商品遗漏。
+// 卡包解锁用的跨服进度只在这里算一次（商店每次打开都新建实例，买卡包也不会改进度）
+cs_star_max = cross_server_cleared_star_max();
 var _goods_ids = [];
 ds_map_keys_to_array(global.goods_map, _goods_ids);
 for (var _i = 0; _i < array_length(_goods_ids); _i++) {
@@ -147,6 +149,12 @@ function cross_shop_buy_do(){
     confirm_id = "";
     if (_id == "" || !ds_map_exists(global.goods_map, _id)) return;
     var _g = global.goods_map[? _id];
+    // 卡包进度门槛（2026-11-21）：别靠调用方把关 —— 发货前再判一次
+    var _need_star = variable_struct_exists(_g, "cs_stage_star") ? _g.cs_stage_star : 0;
+    if (!cross_server_stage_star_met(_need_star, cs_star_max)){
+        show_notice(cross_server_stage_star_text(_need_star) + "后才能购买", 60);
+        return;
+    }
     // 武器前置校验（防绕过 Mouse_4 的直接调用）：必须在扣勋章之前
     if (variable_struct_exists(_g, "required_weapon_id") && !is_weapon_unlocked(_g.required_weapon_id)){
         var _rw2 = global.goods_map[? _g.required_weapon_id];

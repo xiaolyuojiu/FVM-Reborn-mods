@@ -196,12 +196,9 @@ global.mouse_limit_hz = 0;
 if (ini_read_string("settings", "ime_block", "") == "") {
     ini_write_bool("settings", "ime_block", true);
 }
-// 合成屋概率强化开关（config.ini 可手改；键缺失时补写）
-global.craft_rate_enabled = ini_read_bool("settings", "craft_rate_enabled", true);
-if (ini_read_string("settings", "craft_rate_enabled", "") == "") {
-    ini_write_bool("settings", "craft_rate_enabled", true);
-}
 // 合成屋「保险金」开关（默认关；键缺失时补写）
+// 🔴 2026-11-19：「概率强化」勾选框已从界面删掉（换成「强化说明」按钮），
+//    强化恒定按概率走 → 不再读 craft_rate_enabled（旧 config 里留着 false 也不再生效）。
 global.craft_assure_enabled = ini_read_bool("settings", "craft_assure_enabled", false);
 global.boss_music_random = ini_read_bool("settings", "boss_music_random", false); // BOSS 随机音乐（曲库在 %LOCALAPPDATA%\FVM_Reborn_makk\boss_music）
 if (ini_read_string("settings", "craft_assure_enabled", "") == "") {

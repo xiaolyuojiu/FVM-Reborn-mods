@@ -3145,7 +3145,7 @@
         {
             "wave_index": 6.0,
             "boss": "iron_man_mouse",
-            "boss_1_hp_modify": 1.3500000000000001,
+            "boss_1_hp_modify": 1.35,
             "subwaves": [
                 {
                     "local_min_wave_time": -1.0,
@@ -5319,37 +5319,37 @@
     ],
     "rewards": [
         {
-            "gold": 36000.0,
+            "gold": 176800.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 2400
+                    "id": "warcard_11",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_5",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 2100
-                },
-                {
-                    "id": "clover_3",
-                    "amount": 10.0
                 }
             ]
         },
         {
             "skill_level": 0.0,
-            "gold": 36000.0,
+            "gold": 176800.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 2400
+                    "id": "warcard_11",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_5",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 2100
-                },
-                {
-                    "id": "clover_3",
-                    "amount": 10.0
                 }
             ],
             "card_unlock": [],

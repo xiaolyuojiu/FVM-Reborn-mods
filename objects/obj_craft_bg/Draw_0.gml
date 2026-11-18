@@ -1,5 +1,7 @@
 panel_anim_step(id)
 if (!instance_exists(id)) { exit }
+craft_bar_sync()   // 道具条显示量：本帧再算一次（鼠标事件可能在 Step 之后改过库存）
+if (!variable_instance_exists(id, "craft_surf_y")){ craft_surf_y = -99999; craft_surf_tab = -1; craft_surf_nav = "" }   // 右侧列表 surface 的「上次绘制状态」
 draw_set_alpha(0.5 * ui_anim_alpha(id));
 // 绘制半透明遮罩
 draw_rectangle_color(0, 0, room_width, room_height, c_black, c_black, c_black, c_black, false);
@@ -56,7 +58,7 @@ if (craft_top_tab == 3) {
 	}
 	var _chk_e = evo_check();
 
-	// 三个子页按钮已在上方统一画完（原来这里是单张 spr_evo_left_on）
+	// 三个子页按钮已在上方统一画完
 
 	// ② 三个槽：星座卡 / 普通卡 / 进化凭证（空槽用官方「二转·星座卡 / 二转·普通卡 / 进化·凭证」文字）
 	for (var _i = 0; _i < 3; _i++) {
@@ -89,7 +91,7 @@ if (craft_top_tab == 3) {
 				draw_sprite_ext(_lab, 0, _cx, _cy, 1.8, 1.8, 0, c_white, 0.9);
 			}
 		} else {
-			// 进化凭证槽：跟另外两个槽同一条水平线（原来整体 +5 偏下，2026-10-27 修）
+			// 进化凭证槽：跟另外两个槽同一条水平线
 			draw_sprite_ext(spr_evo_slot_prop, 0, _cx, _cy, 1.8, 1.8, 0, c_white, 1);
 			if (evo_target != "") {
 				// 凭证图标 = 金色底板 + 该金卡立绘（绘制细节在 mod/craft 的金卡表里）
@@ -210,7 +212,7 @@ if (craft_top_tab == 2) {
 	} else {
 		tg_scroll = tg_scroll_target;
 	}
-	// 列表 + 卡元数据：**只在变化时重建**（2026-10-26 性能修，原来每帧重建 → 卡成幻灯片）
+	// 列表 + 卡元数据：**只在变化时重建**（每帧重建会卡成幻灯片）
 	if (tg_list_dirty) tg_rebuild();
 	var _n = array_length(tg_list);
 
@@ -297,7 +299,7 @@ if (craft_top_tab == 2) {
 
 	// ④ 需金币条（左）＋ 成功率条（右）
 	//    需金币数字：**照强化页原样**（`font_number` + `c_yellow` + `fa_left`，落点 (x-460, y+300)）
-	//    —— 强化页是 `draw_text(x-460,y+300,string(craft_rule.gold_amount))`，转职页原来画在条右端-61，位置不对
+	//    —— 强化页是 `draw_text(x-460,y+300,string(craft_rule.gold_amount))`，转职页跟它同一口径
 	draw_sprite_ext(spr_craft_gold_require_bg, 0, tg_gold_x, tg_bar_y, 1.8, 1.8, 0, c_white, 1);
 	draw_sprite_ext(spr_craft_rate_bar, 0, tg_rate_x, tg_bar_y, 1.8, 1.8, 0, c_white, 1);
 	draw_set_font(font_number);
@@ -348,7 +350,7 @@ if (craft_top_tab == 2) {
 			// 已放进主卡槽的那张：列表里**原位留空**（用户 2026-10-25：卡进槽后右边那张消失、格子空着）
 			// 旧做法是原位画卡 + 盖 35% 黑罩，现在整格不画（只留空槽底）
 			if (_cid == tg_card) continue;
-			// 格子内容直接查元数据（2026-10-26 性能修：原来每格都扫一遍 unlocked_cards
+			// 格子内容直接查元数据（每格都扫 unlocked_cards 会卡
 			// 再 deck_get_card_data（内部线性扫 player_deck），56 格 × 188 张 = 每帧上万次）
 			var _m2 = tg_meta_get(_cid);
 			if (!is_undefined(_m2)) {
@@ -561,7 +563,7 @@ if (craft_top_tab == 1) {
 	// ── 演出：三档各自的官方融合特效（25 帧铺在 62 帧的演出时长上）──
 	if (fusion_phase == 1) {
 		var _fxspr = fusion_fx_sprites[fusion_level - 1];
-		// 速度：fusion_fx_speed = 0.5 时，25 帧铺到 t=0~100（原来 t=0~50）；_ft 是折算回「原速」的 tick
+		// 速度：fusion_fx_speed = 0.5 时，25 帧铺到 t=0~100；_ft 是折算回「原速」的 tick
 		var _ft   = fusion_t * fusion_fx_speed;
 		var _fxfr = clamp(floor(_ft * fusion_fx_frames / 51), 0, fusion_fx_frames - 1);
 		// 落位：整张特效画布当成「四格面板的覆盖层」—— 水平居中（面板 528 宽）、顶部对齐面板上沿。
@@ -721,12 +723,13 @@ if (craft_top_tab == 1) {
 		draw_roundrect_ext(_bx1, _tbar_y, _bx1 + _cell_w, _tbar_y + _bar_h, 4*fusion_ws, 4*fusion_ws, true);
 	}
 	// 🔴 spr_craft_material 的原点是「正中心」，不能走 fusion_draw_center（那个按左上角原点减半宽高）
-	// 缩放倍率跟强化页底部道具栏一致（那里就是 0.9）；原来按「缩到 32*ws」算，图标比强化页小一圈
+	// 缩放倍率跟强化页底部道具栏一致（0.9），否则图标会比强化页小一圈
 	var _ic_scl = 0.9;
+	var _mat_off = max(0, (10 - array_length(fusion_material_id_list)) div 2);   // 不足 10 项时居中摆
 	for (var _mj = 0; _mj < array_length(fusion_material_id_list); _mj++){
 		var _mid = fusion_material_id_list[_mj];
-		var _ccx = _bar_x + _mj*_bar_pitch + _cell_w*0.5;
-		draw_sprite_ext(spr_craft_material, get_material_info(_mid).icon,
+		var _ccx = _bar_x + (_mj + _mat_off)*_bar_pitch + _cell_w*0.5;
+		draw_sprite_ext(craft_material_spr(_mid), craft_material_frame(_mid),
 			_ccx, _tbar_y + _bar_h*0.47, _ic_scl, _ic_scl, 0, c_white, 1);
 		var _mamt = get_material_amount(_mid);
 		var _mamt_txt = (_mamt < 10000) ? string(_mamt) : string(floor(_mamt/10000)) + "w";
@@ -788,51 +791,54 @@ if (craft_top_tab == 1) {
 
 
 
-// 强化选项固定显示在合成面板顶部，不随卡片列表滚动。
-var _rate_settings = craft_rate_settings()
-var _rate_on = _rate_settings.enabled
-var _toggle_frame = _rate_on ? 1 : 0
-draw_sprite_ext(spr_craft_rate_check, _toggle_frame, rate_toggle_x, rate_toggle_y, 1.4, 1.4, 0, c_white, 1)
-if (rate_toggle_hover) {
-    draw_set_alpha(0.25)
-    draw_rectangle(rate_toggle_x - 18, rate_toggle_y - 18, rate_toggle_x + 18, rate_toggle_y + 18, false)
-    draw_set_alpha(1)
-}
-draw_set_font(font_yuan)
-draw_set_valign(fa_middle)
-draw_set_halign(fa_left)
-var _rate_color = _rate_on ? make_colour_rgb(35, 165, 55) : make_colour_rgb(205, 40, 30)
-draw_set_colour(c_black)
-draw_text(rate_toggle_x + 25, rate_toggle_y + 1, "概率强化")
-draw_set_colour(_rate_color)
-draw_text(rate_toggle_x + 26, rate_toggle_y, "概率强化")
+// ── 「强化说明」+「一键强化」两个按钮（v7）───────────────────────────
+//   说明：87×33 三帧素材字（spr_craft_help_btn），点开只读说明弹窗
+//   一键：78×33 空底（spr_craft_onekey_btn）+ 字体写「一键强化」，
+//         点开走「介绍 → 消耗预览 → 执行」三段（craft_onekey_plan / _apply）
+//   都在卡片强化页（craft_top_tab == 0 / button_select == 0）才画
+if (button_select == 0 && craft_top_tab == 0) {
+	// 说明：素材字烤在图里（spr_craft_help_btn，87×33 三帧：常态/悬停/按下）
+	var _hf = craft_help_btn_hover ? (mouse_check_button(mb_left) ? 2 : 1) : 0
+	draw_sprite_ext(spr_craft_help_btn, _hf, craft_help_btn_x, craft_help_btn_y, 1.35, 1.35, 0, c_white, 1)
 
-draw_set_colour(c_white)
-draw_set_valign(fa_top)
-draw_set_halign(fa_left)
+	// 一键：空底按钮（spr_craft_onekey_btn，78×33 三帧）+ 字体写「一键强化」
+	var _of = craft_onekey_hover ? (mouse_check_button(mb_left) ? 2 : 1) : 0
+	draw_sprite_ext(spr_craft_onekey_btn, _of, craft_onekey_x, craft_onekey_y, 1.35, 1.35, 0, c_white, 1)
+	draw_set_font(font_yuan)
+	draw_set_halign(fa_center)
+	draw_set_valign(fa_middle)
+	draw_set_colour(c_black)
+	draw_text(craft_onekey_x + 1, craft_onekey_y + 1, "一键强化")
+	draw_set_colour(c_white)
+	draw_text(craft_onekey_x, craft_onekey_y, "一键强化")
+
+	draw_set_halign(fa_left)
+	draw_set_valign(fa_top)
+}
 
 if (button_select == 0) {
-    var _assure_off = !_rate_on
-    if (_assure_off) draw_set_alpha(0.45)
-    var _assure_frame = _rate_settings.assure_enabled ? 1 : 0
-    draw_sprite_ext(spr_craft_insure_badge, 0, assure_badge_cx, assure_badge_cy, 1.5, 1.5, 0, c_white, 1)
-    if (assure_toggle_hover && !_assure_off) {
-        draw_set_alpha(0.25)
-        draw_rectangle(assure_badge_cx - 33, assure_badge_cy - 36, assure_badge_cx + 33, assure_toggle_y + 18, false)
-        draw_set_alpha(1)
-    }
-    draw_set_font(font_yuan)
-    draw_set_valign(fa_middle)
-    draw_set_halign(fa_center)
-    draw_set_colour(c_black)
-    draw_text(assure_badge_cx + 1, assure_badge_cy + 26, "金币")
-    draw_set_colour(make_colour_rgb(255, 150, 60))
-    draw_text(assure_badge_cx, assure_badge_cy + 25, "金币")
-    draw_set_colour(c_white)
-    draw_set_valign(fa_top)
-    draw_set_halign(fa_left)
-    draw_sprite_ext(spr_craft_rate_check, _assure_frame, assure_toggle_x, assure_toggle_y, 1.4, 1.4, 0, c_white, 1)
-    if (_assure_off) draw_set_alpha(1)
+	// 保险金：**恒定显示**（2026-11-19 用户口径：花不花钱都显示，1★ 就写 0）
+	var _rate_settings = craft_rate_settings()
+	{
+		var _assure_frame = _rate_settings.assure_enabled ? 1 : 0
+		draw_sprite_ext(spr_craft_insure_badge, 0, assure_badge_cx, assure_badge_cy, 1.5, 1.5, 0, c_white, 1)
+		if (assure_toggle_hover) {
+			draw_set_alpha(0.25)
+			draw_rectangle(assure_badge_cx - 33, assure_badge_cy - 36, assure_badge_cx + 33, assure_toggle_y + 18, false)
+			draw_set_alpha(1)
+		}
+		draw_set_font(font_yuan)
+		draw_set_valign(fa_middle)
+		draw_set_halign(fa_center)
+		draw_set_colour(c_black)
+		draw_text(assure_badge_cx + 1, assure_badge_cy + 26, "金币")
+		draw_set_colour(make_colour_rgb(255, 150, 60))
+		draw_text(assure_badge_cx, assure_badge_cy + 25, "金币")
+		draw_set_colour(c_white)
+		draw_set_valign(fa_top)
+		draw_set_halign(fa_left)
+		draw_sprite_ext(spr_craft_rate_check, _assure_frame, assure_toggle_x, assure_toggle_y, 1.4, 1.4, 0, c_white, 1)
+	}
 }
 
 // 需金币（左）与成功率（右）同一排：两条都用 spr_craft_gold_require_bg 贴图（原点在右端）
@@ -846,26 +852,28 @@ var _rr_bar_left = _rr_bar_x - 230.4      // 条子左缘（128*1.8，原点在�
 var _rr_bar_ix = _rr_bar_left + 3.6       // 框内区左缘（2 像素 * 1.8）
 var _rr_bar_iy = _rr_bar_y - 18           // 框内区上缘（整条高 20*1.8）
 var _rr_set = craft_rate_settings()
-var _rr_base = 100
-var _rr_streak = 0
-var _rr_bonus = 0
 var _rr_text = "100%"
-if _rr_set.enabled{
+if button_select == 0 {
+	// 卡片：显示基础（两位小数）+ 额外率（进游戏随机 3.00~5.99 + 补偿）
+	//   基础 100 只写 100%；基础 0 也照写 `0%+X.XX%`（判定为 0，见 craft_judge_rate）
 	_rr_text = "0%"
 	if current_uprade_target_id != ""{
-		if button_select == 0{
-			var _rr_card = get_card_info_simple(current_uprade_target_id)
-			if _rr_card != false{
-				_rr_base = get_card_craft_rate_base(current_uprade_target_id, _rr_card.max_level+1)
-				_rr_streak = get_card_fail_streak(current_uprade_target_id)
-				_rr_bonus = get_card_craft_bonus(current_uprade_target_id)
-			}
+		var _rr_card = get_card_info_simple(current_uprade_target_id)
+		if _rr_card != false{
+			var _rr_t = _rr_card.max_level + 1
+			var _rr_base = craft_display_base(craft_total_rate(spice_slot, _rr_t, clover_slot, 0))
+			var _rr_extra = get_craft_fail_bonus()
+			_rr_text = craft_rate_text(_rr_base, _rr_extra)
 		}
-		else{
-			_rr_base = get_gem_craft_rate_base(current_uprade_target_id, get_gem_max_level(current_uprade_target_id)+1)
-			_rr_streak = get_gem_fail_streak(current_uprade_target_id)
-			_rr_bonus = get_gem_craft_bonus(current_uprade_target_id)
-		}
+	}
+}
+else {
+	// 宝石：老口径（分段衰减 + 每次失败加成），一行不动
+	_rr_text = "0%"
+	if current_uprade_target_id != ""{
+		var _rr_base = get_gem_craft_rate_base(current_uprade_target_id, get_gem_max_level(current_uprade_target_id)+1)
+		var _rr_streak = get_gem_fail_streak(current_uprade_target_id)
+		var _rr_bonus = get_gem_craft_bonus(current_uprade_target_id)
 		if _rr_set.pity_guarantee > 0 && _rr_streak >= _rr_set.pity_guarantee{
 			_rr_text = "必成"
 		}
@@ -907,18 +915,18 @@ draw_text(x+758,y+473,string(global.save_data.player.gold))
 draw_set_colour(c_white)
 draw_set_valign(fa_top)
 draw_set_halign(fa_left)
-// 底部材料余量条底格：卡片页 2 行（7 香料 + 8 四叶草），宝石页 1 行
-var _strip_rows = (button_select == 0) ? 2 : 1
-for(var i = 0 ; i < 8 ; i++){
-    for(var _sr = 0 ; _sr < _strip_rows ; _sr++){
-        draw_sprite_ext(spr_package_slot_bg, 1, x-752+i*84, y + 454 - _sr*84, 0.9, 0.9, 0, c_white, 1)
-    }
+// 底部材料条底格：卡片页 = 一行 10 格（v7 分页道具条），宝石页 = 一行 8 格
+var _bar_tbl = craft_bar_table()
+var _bar_cols = (button_select == 0) ? _bar_tbl.per_page : 8
+for(var i = 0 ; i < _bar_cols ; i++){
+	draw_sprite_ext(spr_package_slot_bg, 1, x + _bar_tbl.x0 + i * _bar_tbl.cell, y + _bar_tbl.row_y,
+		_bar_tbl.scale, _bar_tbl.scale, 0, c_white, 1)
 }
 
 if button_select == 0{
 	//绘制卡片强化UI背景
 	// 槽位布局走表：scripts/mod_craft_slot_table 的 craft_slot_table()
-	//   表里 = 主卡 + 香料①~③（上 / 左 / 右）+ 四叶草（左下）；坐标只写在那张表，这里只按表画
+	//   表里 = 主卡 + 强化用卡①~③（上 / 左 / 右）+ 四叶草（左下）；坐标只写在那张表，这里只按表画
 	var _slot_tbl = craft_slot_table();
 	var _slot_ofs = _slot_tbl.text_ofs;
 	var _slot_pos = {};
@@ -927,42 +935,138 @@ if button_select == 0{
 		var _px = x + _sl.dx;
 		var _py = y + _sl.dy;
 		draw_sprite_ext(asset_get_index(_sl.bg_spr), 0, _px, _py, _sl.scale, _sl.scale, 0, c_white, 1);
-		draw_sprite_ext(spr_craft_slot_text, _sl.label_spr, _px, _py, _sl.scale, _sl.scale, 0, c_white, 1);
+		// 料槽底字用 spr_craft_warcard_label（烤了「强化用卡」四个字）
+		if (_sl.kind == "spices"){
+			draw_sprite_ext(spr_craft_warcard_label, 0, _px, _py, _sl.scale, _sl.scale, 0, c_white, 1);
+		} else {
+			draw_sprite_ext(spr_craft_slot_text, _sl.label_spr, _px, _py, _sl.scale, _sl.scale, 0, c_white, 1);
+		}
 		_slot_pos[$ _sl.id] = { x: _px, y: _py };
 	}
-	var _slot_sp1_x = _slot_pos[$ "spice1"].x;
-	var _slot_sp1_y = _slot_pos[$ "spice1"].y;
 	var _slot_clv_x = _slot_pos[$ "clover"].x;
 	var _slot_clv_y = _slot_pos[$ "clover"].y;
-	//绘制卡片强化材料（两行：香料 7 个 / 四叶草 8 个，下标见 card_material_row_break）
-	for(var i = 0 ; i < array_length(card_material_id_list) ; i++){
-		var material_id = card_material_id_list[i]
-		var material_info = get_material_info(material_id)
-		var material_amount = get_material_amount(material_id)
-		var _mc  = (i < card_material_row_break) ? i : (i - card_material_row_break)
-		var _mcy = y + 454 - ((i < card_material_row_break) ? 0 : 84)
-		var _mcx = x - 752 + _mc*84
-		draw_sprite_ext(spr_craft_material, material_info.icon, _mcx, _mcy, 0.9, 0.9, 0, c_white, 1)
-		draw_set_halign(fa_right);
-		draw_set_valign(fa_bottom);
+	// ── 三槽内容（**不依赖有没有选卡**：没选卡也照样把料画出来）──────────
+	//   2026-11-20：料统一换成「自带星级的强化用卡」、每槽固定 1 张 → 槽上不再画星级角标、不写数量
+	var _slot_ids_d = ["spice1", "spice2", "spice3"]
+	for (var _sk = 0; _sk < 3; _sk++){
+		var _smid = spice_slot[_sk]
+		if (_smid == "") continue
+		var _spos = _slot_pos[$ _slot_ids_d[_sk]]
+		draw_sprite_ext(craft_material_spr(_smid), craft_material_frame(_smid), _spos.x, _spos.y + 4, 1.05, 1.05, 0, c_white, 1)
+	}
+	if (clover_slot != ""){
+		// 一草一次，同样不写数字
+		draw_sprite_ext(craft_material_spr(clover_slot), craft_material_frame(clover_slot), _slot_clv_x, _slot_clv_y + 4, 1.05, 1.05, 0, c_white, 1)
+		// 倍率画在槽**上方**，白字 + 黑描边 + 加粗（画在下方会压在面板边上）
+		var _cm  = craft_clover_mult(clover_slot)
+		var _ctxt = "×" + string_format(_cm, 1, 1)
+		draw_set_font(font_yuan)
+		draw_set_halign(fa_center)
+		draw_set_valign(fa_middle)
+		draw_set_colour(c_black)
+		draw_text_transformed(_slot_clv_x - 1.2, _slot_clv_y - 58, _ctxt, 1.35, 1.35, 0)
+		draw_text_transformed(_slot_clv_x + 1.2, _slot_clv_y - 58, _ctxt, 1.35, 1.35, 0)
+		draw_text_transformed(_slot_clv_x, _slot_clv_y - 59.2, _ctxt, 1.35, 1.35, 0)
+		draw_text_transformed(_slot_clv_x, _slot_clv_y - 56.8, _ctxt, 1.35, 1.35, 0)
+		draw_set_colour(c_white)
+		draw_text_transformed(_slot_clv_x, _slot_clv_y - 58, _ctxt, 1.35, 1.35, 0)
+		draw_set_colour(c_white)
+		draw_set_halign(fa_left)
+		draw_set_valign(fa_top)
+	}
+	draw_set_colour(c_white)
+	draw_set_halign(fa_left)
+	draw_set_valign(fa_top)
+	// ── 分页道具条（v7）：**完全照宝石页那套老画法**（图标 0.9 贴格子角 + 白字压底）
+	//   格子 = spr_package_slot_bg(1) 0.9，锚点 = 格子右下角；图标同锚点 0.9（88px）、数字在 +40/+42
+	//   页内容 = 强化用卡 1~15★ + 四叶草，一条长表按 10 格翻；数字 = 持有 − 三槽预扣
+	var _bt = craft_bar_table()
+	var _page_ids = craft_bar_page_ids(craft_mat_page)
+	craft_mat_hover = -1
+	for (var _bi = 0; _bi < array_length(_page_ids); _bi++){
+		var _bid = _page_ids[_bi]
+		var _mcx = x + _bt.x0 + _bi * _bt.cell
+		var _mcy = y + _bt.row_y
+		if (point_in_rectangle(mouse_x, mouse_y, _mcx - 44 * _bt.scale, _mcy - 51 * _bt.scale, _mcx, _mcy)) craft_mat_hover = _bi;
+		if (_bid == "") continue
+		draw_sprite_ext(craft_material_spr(_bid), craft_material_frame(_bid), _mcx, _mcy, 0.9, 0.9, 0, c_white, 1)
+		// 显示 = 持有 − 已进槽的（进槽=假装没了；点槽里的料或退出面板就回来）
+		var _bamt = craft_bar_display_amount(_bid)
+		draw_set_halign(fa_right)
+		draw_set_valign(fa_bottom)
 		draw_set_colour(c_white)
 		draw_set_font(font_number)
-		if get_material_amount(material_id) < 10000{
-			draw_text(_mcx+40,_mcy+42,string(get_material_amount(material_id)))
-		}
-		else{
-			draw_text(_mcx+40,_mcy+42,string(floor(get_material_amount(material_id)/10000))+"w")
-		}
-		
+		if (_bamt < 10000) draw_text(_mcx + 40, _mcy + 42, string(_bamt))
+		else draw_text(_mcx + 40, _mcy + 42, string(floor(_bamt / 10000)) + "w")
 	}
+	// 翻页箭头：**上下排列**（同一个 X），上 = 上一页、下 = 下一页；只有 1 页时画灰
+	var _pages = craft_bar_page_count()
+	var _can = (_pages > 1)
+	var _ax = x + _bt.arrow_x
+	var _apy = y + _bt.row_y + _bt.arrow_prev_y
+	var _any = y + _bt.row_y + _bt.arrow_next_y
+	var _apf = _can ? (craft_arrow_l_hover ? (mouse_check_button(mb_left) ? 2 : 1) : 0) : 0
+	var _anf = _can ? (craft_arrow_r_hover ? (mouse_check_button(mb_left) ? 2 : 1) : 0) : 0
+	if (_can) draw_sprite_ext(spr_craft_arrow_l, _apf, _ax, _apy, _bt.arrow_scale, _bt.arrow_scale, 0, c_white, 1)
+	else      draw_sprite_ext(spr_craft_arrow_l, 0, _ax, _apy, _bt.arrow_scale, _bt.arrow_scale, 0, c_gray, 1)
+	if (_can) draw_sprite_ext(spr_craft_arrow_r, _anf, _ax, _any, _bt.arrow_scale, _bt.arrow_scale, 0, c_white, 1)
+	else      draw_sprite_ext(spr_craft_arrow_r, 0, _ax, _any, _bt.arrow_scale, _bt.arrow_scale, 0, c_gray, 1)
+	// 页码（箭头下方，字号加大才看得清）
+	draw_set_font(font_yuan)
+	draw_set_halign(fa_center)
+	draw_set_valign(fa_middle)
+	draw_set_colour(c_black)
+	draw_text_transformed(x + _bt.page_tx + 1, y + _bt.row_y + _bt.page_ty + 1, string(craft_mat_page + 1) + "/" + string(_pages), 1.1, 1.1, 0)
+	draw_set_colour(c_white)
+	draw_text_transformed(x + _bt.page_tx, y + _bt.row_y + _bt.page_ty, string(craft_mat_page + 1) + "/" + string(_pages), 1.1, 1.1, 0)
+	draw_set_halign(fa_left)
+	draw_set_valign(fa_top)
 	// 排序：普卡 → 融合卡 → 金卡（类型内保持存档原顺序）。craft_sort_order 是实例变量，
 	// Mouse_53 点卡时也要用它把 hover_card_index 换算回 unlocked_cards 的下标
+	// 2026-11-20 性能：deck_get_card_data 是线性扫 player_deck，222 张卡每帧查 2 轮 =
+	//   每帧十几万次比较，合成屋越呆越卡就是这个。这里建一次 "id|shape → shape_data" 索引，
+	//   之后排序和绘制都走 O(1) 查表。卡数据变了（强化升星）由 obj_craft_bg 里 destroy 置脏。
+	if (!variable_instance_exists(id, "craft_slot_cache")) craft_slot_cache = -1
+	if (craft_slot_cache != -1 && !ds_exists(craft_slot_cache, ds_type_map)) craft_slot_cache = -1
+	// 卡数量变了（解锁新卡 / 读档）才重建，否则一直用
+	if (craft_slot_cache != -1){
+		if (!variable_instance_exists(id, "craft_cache_n")) craft_cache_n = -1
+		if (craft_cache_n != array_length(global.save_data.unlocked_cards)){
+			if (ds_exists(craft_slot_cache, ds_type_map)) ds_map_destroy(craft_slot_cache)
+			craft_slot_cache = -1
+		}
+	}
+	if (craft_slot_cache == -1){
+		craft_slot_cache = ds_map_create()
+		var _pl = global.player_deck
+		for (var _pi = 0; _pi < ds_list_size(_pl); _pi += 2){
+			var _cid = _pl[| _pi]
+			var _cd  = _pl[| _pi + 1]
+			var _shs = _cd[? "shapes"]
+			for (var _sj = 0; _sj < ds_list_size(_shs); _sj++){
+				var _sd = _shs[| _sj]
+				ds_map_add(craft_slot_cache, _cid + "|" + string(_sd[? "shape"]), _sd)
+			}
+		}
+		craft_cache_n = array_length(global.save_data.unlocked_cards)
+	}
+	// 2026-11-20：照搬转职页 tg_list_dirty 的做法 —— 排序数组只在「脏 / 卡数变化」时重建，
+	//   不再每帧 222 次查表。绘制循环照旧每帧跑（要算 hover，不能条件化）。
+	if (!variable_instance_exists(id, "craft_sort_dirty")){ craft_sort_dirty = true; craft_sort_n = -1 }
+	var _need_sort = craft_sort_dirty || (craft_sort_n != array_length(global.save_data.unlocked_cards))
+	if (_need_sort){
 	craft_sort_order = []
 	var _craft_fusion_order = []
 	var _craft_gold_order = []
 	for(var _csi = 0; _csi < array_length(global.save_data.unlocked_cards); _csi++){
 		var _sort_card = global.save_data.unlocked_cards[_csi]
-		var _sort_slot = deck_get_card_data(_sort_card.id, _sort_card.shape)
+		// 2026-11-20：16★ 已满级的卡不再画（跟转职页一个做法），少画一批也就少一半遍历
+		var _sml = variable_struct_exists(_sort_card, "max_level") ? _sort_card.max_level : 0;
+		if (_sml >= 16) continue
+		// 2026-11-21：已经放进强化槽的那张卡，右侧列表里不再出现（点槽里的卡即放回）
+		if (_sort_card.id == current_uprade_target_id) continue
+		var _sort_slot = ds_map_find_value(craft_slot_cache, _sort_card.id + "|" + string(_sort_card.shape))
+		if (is_undefined(_sort_slot)) _sort_slot = noone   // 缓存未命中要当 noone，否则下面 ds_map_find_value 会崩
 		if (_sort_slot != noone && ds_map_find_value(_sort_slot, "is_fusion") == 1){
 			array_push(_craft_fusion_order, _csi)
 		}
@@ -980,13 +1084,51 @@ if button_select == 0{
 		array_push(craft_sort_order, _craft_gold_order[_csi])
 	}
 
+	craft_sort_n = array_length(global.save_data.unlocked_cards)
+	craft_sort_dirty = false
+	}  // end 排序缓存
 	// 行数按卡数动态算（至少 20 行＝原样式），滚动上限同步，避免卡多了滚不到
 	var _craft_rows = max(20, ceil(array_length(craft_sort_order) / 7))
 	craft_max_y_offset = max(0, 96 * _craft_rows - 815)
 	// 卡数变少（或换档）时把滚动夹回上限，避免停在空白区
 	y_offset_target = clamp(y_offset_target, 0, craft_max_y_offset)
 	y_offset = clamp(y_offset, 0, craft_max_y_offset)
-	if (!surface_exists(card_surface)){ card_surface = surface_create(600,815) }   // 保证配对，别 set 到不存在的 surface
+	if (!surface_exists(card_surface)){ card_surface = surface_create(600,815); craft_surf_y = -99999 }   // 保证配对；新建的空 surface 必须重画一次
+	// 2026-11-21：切屏 / 最小化回来时 surface 内容会丢（对象还在但画的是空白）→ 重新获得焦点就强制重画
+	if (!variable_instance_exists(id, "craft_had_focus")) craft_had_focus = window_has_focus();
+	var _focus_now = window_has_focus();
+	if (_focus_now != craft_had_focus){ craft_had_focus = _focus_now; if (_focus_now) craft_surf_y = -99999; }
+	// 2026-11-21：hover 与绘制拆成两遍 ——
+	//   hover 每帧跑（只算矩形，很便宜）；卡面只在「排序变 / 滚动变 / 切页签 / 搜索变」时重画进 surface。
+	//   （上一版把整块包进 if，hover 跟着不跑 → 点不了卡，所以这里不能用一个 if 包住两件事。）
+	var _surf_key = (craft_nav.active ? "1" : "0") + "|" + craft_nav.text;
+	// 2026-11-21：再把「当前强化卡」纳入 —— 卡进槽 / 出槽 / 切页签自动取下都会改它，
+	//   而列表内容会因此多一张少一张；只比 tab 的话，切走再切回来 tab 值相同就不重绘 → 卡不见了
+	if (!variable_instance_exists(id, "craft_surf_target")) craft_surf_target = "__init__";
+	var _need_redraw = _need_sort || craft_surf_y != y_offset || craft_surf_tab != craft_top_tab
+	                || craft_surf_nav != _surf_key || craft_surf_target != current_uprade_target_id;
+
+	// ① 悬停：每帧算，不画
+	hover_card_index = -1
+	if (craft_top_tab == 0 && mouse_y > y-321-48 && mouse_y < y + 450){
+		for(var di = 0 ; di < array_length(craft_sort_order);di++){
+			var hover_card_x = x + 196 + (di mod 7)*84
+			var hover_card_y = y - 321 + 96 * (di div 7) - y_offset
+			if (point_in_rectangle(mouse_x, mouse_y,
+			                        hover_card_x - 42, hover_card_y - 48,
+			                        hover_card_x + 42, hover_card_y + 48)) {
+				hover_card_index = di;
+				// 记下这一格的中心：Mouse_53 是全局左键，拿到的是**上一帧**的 hover，
+				// 鼠标在同一帧里移到按钮上再点仍会命中这张卡 → 点卡时按这个中心复核一次
+				hover_card_cx = hover_card_x;
+				hover_card_cy = hover_card_y;
+				break;
+			}
+		}
+	}
+
+	// ② 卡面：只在需要时重画
+	if (_need_redraw){
 	surface_set_target(card_surface)
 	//绘制右侧栏位
 	for(var i = 0 ; i < 7 ; i++){
@@ -996,14 +1138,14 @@ if button_select == 0{
     }
 	//绘制所有已解锁防御卡
 	var card_index = 0
-	hover_card_index = -1
 	for(var di = 0 ; di < array_length(craft_sort_order);di++){
 		var i = craft_sort_order[di]
 		var card_col = card_index mod 7
 		var card_row = card_index div 7
 		var card_data = global.save_data.unlocked_cards[i]
 		var card_id = card_data.id
-		var card_slot_data = deck_get_card_data(card_id,card_data.shape)
+		var card_slot_data = ds_map_find_value(craft_slot_cache, card_id + "|" + string(card_data.shape))
+		if (is_undefined(card_slot_data)) card_slot_data = noone
 		var card_x = 42 + card_col*84
 		var card_y = 48+96 * card_row - y_offset
 
@@ -1026,32 +1168,15 @@ if button_select == 0{
 				draw_sprite_ext(spr_star_slot,  card_data.max_level - 1,  card_x-25,  card_y-35, 0.7, 0.7, 0, _tint, _tint_a);
 			}
 		}
-		
-		// 检查鼠标是否悬停在卡片上
-        var spr_width = 84;
-        var spr_height = 96;
-		
-		var hover_card_x = x + 196 + card_col*84
-		var hover_card_y = y - 321 + 96 * card_row - y_offset
-		
-		if (craft_top_tab == 0 && mouse_y > y-321-48 && mouse_y < y + 450){
-                
-	        if (point_in_rectangle(mouse_x, mouse_y, 
-	                                hover_card_x - spr_width/2, hover_card_y - spr_height/2,
-	                                hover_card_x + spr_width/2, hover_card_y + spr_height/2)) {
-	            hover_card_index = card_index;
-	            // 记下这一格的中心：Mouse_53 是全局左键，拿到的是**上一帧**的 hover，
-	            // 鼠标在同一帧里移到按钮上再点仍会命中这张卡 → 点卡时按这个中心复核一次
-	            hover_card_cx = hover_card_x;
-	            hover_card_cy = hover_card_y;
-	        }
-		}
 		card_index++
 	}
 	surface_reset_target()
+	craft_surf_y = y_offset; craft_surf_tab = craft_top_tab; craft_surf_nav = _surf_key;
+	craft_surf_target = current_uprade_target_id;
+	}
 	draw_surface(card_surface,x+196-42,y-321-48)
 
-	// 搜索栏的绘制挪到文件末尾（2026-11-09）：原来写在这里 = 被 `if button_select == 0`
+	// 搜索栏的绘制在文件末尾：写在这里会被 `if button_select == 0`
 	//   包住 → 宝石强化 / 卡片转职 / 进化页都没有搜索框和「清空」
 
 	// 2026-11-08 用户口径：**不再画命中光圈**（未命中整片灰掉已经够醒目），只保留滚动定位
@@ -1085,20 +1210,19 @@ if button_select == 0{
 		if card_data.max_level > 0{
 			draw_sprite_ext(spr_star_slot,  card_data.max_level - 1,  card_x-25,  card_y-35, 0.7, 0.7, 0, c_white, 1);
 		}
-		//绘制强化需要的材料
+		// ── 三槽内容（v7，2026-11-19）─────────────────────────────────
+		//   每槽各画自己放的那档料 + 「消耗/拥有」；同档占多槽时**合并显示一次**（数量按份数累加）
 		if card_data.max_level <= 15{
-			var spices_list = [0,0,0]
-			var clover_list = [0,0,0]
-			var craft_rule = get_card_craft_rule(string(card_data.max_level+1))
+			var _T = card_data.max_level + 1
+			var craft_rule = get_card_craft_rule(string(_T))
 			draw_set_font(font_number)
 			draw_set_colour(c_yellow)
 			draw_set_valign(fa_middle)
 			draw_set_halign(fa_left)
 			draw_text(x-460,y+300,string(craft_rule.gold_amount))
-			// 保险金消耗数字（画在徽章中间；不够钱时转红）——只要总开关「概率强化」开着就显示
-			// 金额最多 6 位：基准字号放得下 5 位，超过 5 位按位数等比缩小
-			if craft_rate_settings().enabled{
-				var _assure_cost = craft_assure_gold(card_data.max_level)
+			// 保险金价格（**恒定显示**，1★ = 0；不够钱转红）。金额最多 6 位：超过 5 位按位数等比缩小
+			{
+				var _assure_cost = craft_assure_cost(_T)
 				var _amt_txt = string(_assure_cost)
 				var _amt_len = string_length(_amt_txt)
 				var _amt_sc = 1
@@ -1116,58 +1240,9 @@ if button_select == 0{
 				draw_set_colour(c_white)
 				draw_set_halign(fa_left)
 			}
-			draw_sprite_ext(spr_craft_material, get_material_info(craft_rule.spices_require).icon, _slot_sp1_x, _slot_sp1_y, 0.9, 0.9, 0, c_white, 1)
-			// 香料数量写在默认槽（上槽）右侧：槽下方是主卡槽，写了会压到主卡边框
+			draw_set_colour(c_white)
 			draw_set_halign(fa_left)
-			draw_set_colour(c_black)
-			//如果低级材料不足，尝试获取高级材料
-			var display_spices_amount = 0
-			var use_enhanced_spices = false
-			if get_material_amount(craft_rule.spices_require) < craft_rule.spices_amount{
-				for(var i = array_get_index(spices_use_order,craft_rule.spices_require);i < array_length(spices_use_order);i++){
-					display_spices_amount += get_material_amount(spices_use_order[i])
-					if display_spices_amount>= craft_rule.spices_amount{
-						use_enhanced_spices = true
-						break
-					}
-				}
-			}
-			else{
-				display_spices_amount = get_material_amount(craft_rule.spices_require)
-			}
-			draw_text(_slot_sp1_x + _slot_ofs.spices_x, _slot_sp1_y + _slot_ofs.spices_y, string(display_spices_amount)+"/"+string(craft_rule.spices_amount))
-			draw_set_font(font_yuan)
-			if use_enhanced_spices{
-				draw_set_colour(c_red)
-				draw_text(_slot_sp1_x + _slot_ofs.spices_x, _slot_sp1_y + _slot_ofs.spices_hint_y, "使用了高级香料")
-			}
-			if craft_rule.clover_require != "none"{
-				//如果低级材料不足，尝试获取高级材料
-				var display_clover_amount = 0
-				var use_enhanced_clover = false
-				if get_material_amount(craft_rule.clover_require) < craft_rule.clover_amount{
-					for(var i = array_get_index(clover_use_order,craft_rule.clover_require);i < array_length(clover_use_order);i++){
-						display_clover_amount += get_material_amount(clover_use_order[i])
-						if display_clover_amount>= craft_rule.clover_amount{
-							use_enhanced_clover = true
-							break
-						}
-					}
-				}
-				else{
-					display_clover_amount = get_material_amount(craft_rule.clover_require)
-				}
-				draw_sprite_ext(spr_craft_material, get_material_info(craft_rule.clover_require).icon, _slot_clv_x, _slot_clv_y, 0.9, 0.9, 0, c_white, 1)
-				draw_set_halign(fa_center)
-				draw_set_colour(c_black)
-				draw_set_font(font_number)
-				draw_text(_slot_clv_x, _slot_clv_y + _slot_ofs.clover_y, string(display_clover_amount)+"/"+string(craft_rule.clover_amount))
-				draw_set_font(font_yuan)
-				if use_enhanced_clover{
-					draw_set_colour(c_red)
-					draw_text(_slot_clv_x, _slot_clv_y + _slot_ofs.clover_hint_y, "使用了高级四叶草")
-				}
-			}
+			draw_set_valign(fa_top)
 		}
 	}
 	
@@ -1280,7 +1355,7 @@ else if button_select == 1{
 			draw_set_valign(fa_middle)
 			draw_set_halign(fa_left)
 			draw_text(x-460,y+300,string(craft_rule.gold_amount))
-			draw_sprite_ext(spr_craft_material, get_material_info(craft_rule.crystal_require).icon, x-305, y-40, 0.9, 0.9, 0, c_white, 1)
+			draw_sprite_ext(craft_material_spr(craft_rule.crystal_require), craft_material_frame(craft_rule.crystal_require), x-305, y-40, 0.9, 0.9, 0, c_white, 1)
 			draw_set_halign(fa_center)
 			draw_set_colour(c_black)
 			//如果低级材料不足，尝试获取高级材料
@@ -1352,9 +1427,14 @@ else if button_select == 1{
 
 // ── 搜索栏（2026-11-09）──
 //   「清空 / 下一个」不再在这里画：改由搜索框实例自己画（SearchBox.set_on_draw_extra）。
-//   原来画在这儿会被转职页 / 神级进化页那些 depth 更低的按钮实例盖住 —— 点得到、看不见。
+//   画在这里会被转职页 / 神级进化页那些 depth 更低的按钮实例盖住 —— 点得到、看不见。
 if (craft_nav.hit_t > 0) craft_nav.hit_t--;
 
 // 提示框：推进尺寸/消失动画并绘制（每帧一次）
 tooltip_draw();
+
+// ── 强化说明 / 一键强化 弹窗（v7）：画在最上层，盖住面板和提示 ──────────
+if (craft_help_open) craft_help_draw(craft_help_ok_hover);
+if (craft_onekey_open) craft_onekey_draw(craft_onekey_hover_idx, craft_onekey_stage, craft_onekey_plan_data);
+
 panel_anim_end_parts(id, craft_parts, 260)

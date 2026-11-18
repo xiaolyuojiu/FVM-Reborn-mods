@@ -80,6 +80,10 @@ for (var _slot = 0; _slot < 16; _slot++) {
         _owned = mod_gear_evo_buyable_locked(_goods.unlock_item_id);
     }
 
+    // 2026-11-21：卡包按跨服进度解锁（与 Mouse_4 同一字段、同一函数）
+    var _stage_star = variable_struct_exists(_goods, "cs_stage_star") ? _goods.cs_stage_star : 0;
+    var _stage_ok   = cross_server_stage_star_met(_stage_star, cs_star_max);
+
     // 绘制商品图标
     if (_goods_type == "card") {
         if (_card_shape > 0) {
@@ -133,7 +137,7 @@ for (var _slot = 0; _slot < 16; _slot++) {
         || (_goods_type == "material");
     var _gacha_disabled = is_random_gift_mode() || (is_eternal_gacha_mode() && !_gacha_ok);
 
-    draw_sprite_ext(spr_shop_buy_btn, 0, _gx + 77, _gy + 60, 1.8, 1.8, 0, (_gacha_disabled || !_prerequisite_met) ? c_gray : c_white, 1);
+    draw_sprite_ext(spr_shop_buy_btn, 0, _gx + 77, _gy + 60, 1.8, 1.8, 0, (_gacha_disabled || !_prerequisite_met || !_stage_ok) ? c_gray : c_white, 1);
     draw_set_font(font_yuan);
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
@@ -167,6 +171,10 @@ for (var _slot = 0; _slot < 16; _slot++) {
         draw_set_font(font_yuan);
         draw_set_color(c_white);
         draw_text(_gx + 77, _gy + 60, "不可购买");
+    } else if (!_stage_ok) {
+        draw_set_font(font_yuan);
+        draw_set_color(c_white);
+        draw_text(_gx + 77, _gy + 60, "需通关" + string(_stage_star) + "★");
     } else if (!_prerequisite_met) {
         draw_set_font(font_yuan);
         draw_set_color(c_white);

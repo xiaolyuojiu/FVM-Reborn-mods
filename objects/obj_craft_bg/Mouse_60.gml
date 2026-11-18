@@ -26,6 +26,9 @@ if craft_top_tab == 1{
 	}
 	exit
 }
-if button_select == 0 || button_select == 1{
-	y_offset_target = max(0, y_offset_target - 40)
+// 2026-11-21：鼠标必须在右侧卡列表里才滚 —— 否则在道具条上滚轮会把列表一起带走
+if (button_select == 0 || button_select == 1){
+	if (point_in_rectangle(mouse_x, mouse_y, x + 196 - 42, y - 321 - 48, x + 196 + 7 * 84, y + 450)){
+		y_offset_target = max(0, y_offset_target - 40)
+	}
 }

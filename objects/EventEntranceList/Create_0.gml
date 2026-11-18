@@ -37,6 +37,7 @@ function create_widgets() {
 
     array_push(_items, _laboratory_entrance)
 
+
     /// @type {Asset.GMObject.GridList} 
     self.state.grid_list = instance_create_layer(self.state.left, self.state.top, "Instances", GridList)
     self.state.grid_list.set_viewport(self.state.left, self.state.top, self.state.width, self.state.height)

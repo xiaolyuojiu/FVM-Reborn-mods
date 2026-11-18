@@ -21,7 +21,7 @@ draw_set_halign(fa_left);
 draw_text_transformed(x-240, y - 10, "消耗货币",1.2,1.2,0);
 draw_set_colour(c_white)
 draw_sprite_ext(spr_camp_shop_buy_confirm_coin_display,0,x+80,y-10,1.8,1.8,0,c_white,1)
-draw_sprite_ext(spr_craft_material,get_material_info(banding_buy_btn.coin_type).icon,x-70,y-10,0.9,0.9,0,c_white,1)
+draw_sprite_ext(craft_material_spr(banding_buy_btn.coin_type), craft_material_frame(banding_buy_btn.coin_type),x-70,y-10,0.9,0.9,0,c_white,1)
 draw_text_transformed(x-10, y - 10, string(banding_buy_btn.cost),1.2,1.2,0);
 
 // 绘制按钮

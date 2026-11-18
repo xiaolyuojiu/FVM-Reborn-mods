@@ -1,3 +1,18 @@
+/// 槽里的数量必须跟着库存走 —— 只判「总数 <= 0 才清」的话，
+///   结果剩 2 张、槽里还挂 3 个（画着 3 张卡、道具条显示 0、点强化被拦「数量不足」）。
+///   现在从后往前清：同一个料最多留「持有量」个槽。
+///   （预扣语义不变：进槽的料只从道具条扣数，真正扣料点在点「强化」那一下）
+for (var _ci = 2; _ci >= 0; _ci--){
+	if (spice_slot[_ci] == "") continue;
+	var _sid = spice_slot[_ci];
+	var _keep = 0;
+	for (var _cj = 0; _cj <= _ci; _cj++) if (spice_slot[_cj] == _sid) _keep++;
+	if (_keep <= get_material_amount(_sid)) continue;
+	spice_slot[_ci] = "";
+}
+if (clover_slot != "" && get_material_amount(clover_slot) <= 0) clover_slot = "";
+craft_bar_sync();   // 道具条显示量每帧只算这一次（Draw / 本文件后面的悬停提示都读它）
+
 // ── 融合确认弹窗（系统提示）：开着就吃掉本帧所有输入，只处理「确定 / 取消」──
 // 放在最前面 + exit：底下的页签、档位、卡格、概率强化开关一概点不到（模态）
 if (fusion_confirm){
@@ -18,7 +33,8 @@ if (fusion_confirm){
 		audio_play_sound(snd_button,0,0);
 	}
 	craft_tab_hover = -1;
-	rate_toggle_hover = false;
+	craft_help_btn_hover = false;
+	craft_onekey_hover = false;
 	assure_toggle_hover = false;
 	// 弹窗期间把合成屋的 X 藏起来
 	// ⚠️ visible = false **拦不住鼠标**（只跳过 Draw），点击拦截在 obj_closecraft_btn/Mouse_4 里
@@ -44,9 +60,82 @@ if (evo_confirm){
 		audio_play_sound(snd_button,0,0);
 	}
 	craft_tab_hover = -1;
-	rate_toggle_hover = false;
+	craft_help_btn_hover = false;
+	craft_onekey_hover = false;
 	assure_toggle_hover = false;
 	with (obj_closecraft_btn) visible = !other.evo_confirm;
+	exit;
+}
+
+// ── 一键强化弹窗：模态，两阶段（0 介绍 → 1 消耗预览 → 执行）──────────
+if (craft_onekey_open){
+	craft_onekey_hover_idx = -1;
+	for (var _oi = 0; _oi < 2; _oi++){
+		var _or = craft_onekey_rect(_oi);
+		if (point_in_rectangle(mouse_x, mouse_y, _or[0], _or[1], _or[2], _or[3])) craft_onekey_hover_idx = _oi;
+	}
+	if (mouse_check_button_pressed(mb_left) && craft_onekey_hover_idx != -1){
+		if (craft_onekey_hover_idx == 0){
+			if (craft_onekey_stage == 0){
+				// 介绍 → 算方案 → 预览
+				var _ok_plan = craft_onekey_plan(current_uprade_target_id);
+				if (!_ok_plan.ok){
+					show_notice(_ok_plan.reason, 90);
+				}
+				else{
+					craft_onekey_plan_data = _ok_plan;
+					craft_onekey_stage = 1;
+				}
+			}
+			else{
+				// 预览 → 真扣料/扣金币/升星
+				var _p = craft_onekey_plan_data;
+				if (!is_undefined(_p) && craft_onekey_apply(current_uprade_target_id, _p)){
+					show_notice("强化完成，卡片升至 " + string(_p.to) + " 星", 80);
+					spice_slot  = ["", "", ""];        // 方案只吃背包、不吃槽，槽里的料没动过 → 清空免误会
+					clover_slot = "";
+					craft_sort_dirty = true;
+					craft_surf_target = "__onekey__";  // 星级/列表都变了，强制重绘
+				}
+				else{
+					show_notice("材料、金币或星级已变化，请重新计算", 90);
+				}
+				craft_onekey_open = false;
+				craft_onekey_stage = 0;
+				craft_onekey_plan_data = undefined;
+			}
+		}
+		else{
+			craft_onekey_open = false;
+			craft_onekey_stage = 0;
+			craft_onekey_plan_data = undefined;
+		}
+		audio_play_sound(snd_button,0,0);
+	}
+	craft_help_btn_hover = false;
+	craft_onekey_hover = false;
+	assure_toggle_hover = false;
+	craft_mat_hover = -1;
+	with (obj_craft_select_btn) visible = false;
+	with (obj_craft_confirm_btn) visible = false;
+	exit;
+}
+
+// ── 强化说明弹窗（v7）：开着就吃掉本帧输入，点「确定」或任意处关闭 ──────────
+//   和融合 / 进化确认弹窗同一套模态口径（下面整段 exit）
+if (craft_help_open){
+	var _hr = craft_help_rect();
+	craft_help_ok_hover = point_in_rectangle(mouse_x, mouse_y, _hr[0], _hr[1], _hr[2], _hr[3]);
+	if (mouse_check_button_pressed(mb_left)){
+		craft_help_open = false;
+		audio_play_sound(snd_button,0,0);
+	}
+	craft_help_btn_hover = false;
+	craft_onekey_hover = false;
+	assure_toggle_hover = false;
+	craft_mat_hover = -1;
+	with (obj_craft_select_btn) visible = false;
+	with (obj_craft_confirm_btn) visible = false;
 	exit;
 }
 
@@ -74,6 +163,11 @@ for (var _ti = 0; _ti < 3; _ti++){
 if (mouse_check_button_pressed(mb_left) && craft_tab_hover != -1 && craft_tab_hover != craft_top_tab && !tg_help && !_anim_lock){
 	craft_top_tab = craft_tab_hover
 	current_uprade_target_id = ""
+	// 2026-11-21：主卡放回的同时，槽里的卡包 / 四叶草也一起放回，保险勾选取消
+	spice_slot  = ["", "", ""]
+	clover_slot = ""
+	craft_rate_settings().assure_enabled = false
+	craft_sort_dirty = true   // 2026-11-20：切页签就重排右侧列表（融合/升金后回来要对）
 	// 切页签 = 融合页重开：装填状态和「刚融出来的临时结果卡」一起清掉
 	fusion_stage = 0
 	fusion_phase = 0
@@ -90,15 +184,19 @@ if (mouse_check_button_pressed(mb_left) && craft_tab_hover != -1 && craft_tab_ho
 	tg_confirm_mode = 0
 	// 切页签**不再清保底**（2026-11-06 用户口径：切卡 / 退出界面都不清，只有转职成功才清）
 	// 🔴 2026-10-30：转职列表/元数据（含星级、形态、卡图）必须重建。
-	//   否则「转职页 → 强化页把卡强化一下 → 回转职页」会一直显示旧的星级，
-	//   因为 tg_list 只在新建 / 转职成功时置脏，切页签这一侧原来漏了。
+	//   否则「转职页 → 强化页把卡强化一下 → 回转职页」会一直显示旧的星级
+	//   （tg_list 只在新建 / 转职成功时置脏，切页签这一侧也要置）。
 	tg_list_dirty = true
 	audio_play_sound(snd_button,0,0)
 }
 // 页签切到融合时把「卡片强化 / 宝石强化」两个按钮和强化按钮藏起来，免得点到
 // ⚠️ with 里要用 other. 取本实例的变量，直接写 craft_top_tab 会被解析成目标实例的变量 → 报 not set
-with (obj_craft_select_btn) visible = (other.craft_top_tab != 1 && other.craft_top_tab != 3)   // 转职页要显示，神级进化页不显示（那页只画「金卡进化」一个按钮）
-with (obj_craft_confirm_btn) visible = (other.craft_top_tab == 0)
+// 🔴 2026-11-19：说明 / 一键弹窗开着时同样藏起来 —— visible=false 既跳过 Draw 也让
+//    obj_craft_select_btn 的 Mouse 直接 exit（那边开头有 `if (!visible) exit`），
+//    否则弹窗会被「强化」按钮盖住还能点（实机截图反馈）
+// 🔴 不能在 with 里读 other._modal_open：那是 var 局部变量，other. 只认**实例变量**（GM 报 not set）
+with (obj_craft_select_btn) visible = (other.craft_top_tab != 1 && other.craft_top_tab != 3) && !other.craft_help_open && !other.craft_onekey_open   // 转职页要显示，神级进化页不显示（那页只画「金卡进化」一个按钮）
+with (obj_craft_confirm_btn) visible = (other.craft_top_tab == 0) && !other.craft_help_open && !other.craft_onekey_open
 with (obj_closecraft_btn) visible = !_anim_lock   // 演出中把 X 藏起来（弹窗分支里也会隐藏，播完自动恢复）
 
 // ── 食灵融合页：档位按钮 + 融合按钮 + 演出计时（纯演出，不判断任何前置、不消耗）──
@@ -205,7 +303,7 @@ if (craft_top_tab == 1){
 	// ── 演出计时 → 出结果 ──
 	if fusion_phase == 1{
 		fusion_t += 1
-		// 结束判定按 fusion_fx_speed 换算：0.5 = 半速 → 124 tick 才结束（原来 62）
+		// 结束判定按 fusion_fx_speed 换算：0.5 = 半速 → 124 tick 才结束
 		if (fusion_t * fusion_fx_speed >= 62){
 			fusion_phase = 0
 			fusion_t = 0
@@ -224,12 +322,14 @@ if (craft_top_tab == 1){
 			// 食谱（融合凭证）扣 1 本：诸神商店卖的是可持有道具，用掉就少一本
 			var _recipe_item = fusion_recipe_item_id(fusion_loaded_id, _cfg.shape)
 			if (get_material_amount(_recipe_item) > 0) add_material_amount(_recipe_item, -1)
-			// 结果卡真进存档（原来只播动画，白扣材料拿不到卡）；unlock_card 内部取 max，不会把已练的形态降下来
-			unlock_card(fusion_loaded_id, 0, _cfg.shape, 0)
-			// 材料卡被消耗：初级清主卡 + 副卡；深度 / 灵魂只清副卡（那一档的主卡是上一档产物本身，不动）
+			// 材料卡：初级清主卡 + 副卡；深度 / 灵魂只清副卡（那一档的主卡是上一档产物本身，不动）
+			var _rq = fusion_main_req();
+			var _rs = fusion_sub_card(fusion_loaded_id);
+			// 结果卡继承「两张材料卡里更高的星级」（官方 4. 融合卡属性：星级取主卡与副卡中最高）
+			var _lv_inh = max(get_card_level(_rq.id), get_card_level(_rs.id));
+			// 结果卡必须真进存档，否则就是白扣材料拿不到卡；unlock_card 内部取 max，不会把已练的形态降下来
+			unlock_card(fusion_loaded_id, _lv_inh, _cfg.shape, 0)
 			if (!global.debug){
-				var _rq = fusion_main_req();
-				var _rs = fusion_sub_card(fusion_loaded_id);
 				if (fusion_level == 1 && _rq.id != "") reset_card_to_new(_rq.id);
 				if (_rs.id != "") reset_card_to_new(_rs.id);
 			}
@@ -331,7 +431,7 @@ if (craft_top_tab == 3) {
 		}
 
 		// ② 点卡槽 → 整组下卡（一组两张，不单独留一张）。灰占位（未拥有）不可点
-		//    ⚠️ 绿色箭头在下面，且 x 与第 2 槽重合 —— 点在箭头区不算点槽（原来会误当成取回）
+		//    ⚠️ 绿色箭头在下面，且 x 与第 2 槽重合 —— 点在箭头区不算点槽（否则会误当成取回）
 		var _on_arrow = point_in_rectangle(mouse_x, mouse_y, evo_arrow_x - 32, evo_arrow_y - 32,
 			evo_arrow_x + 32, evo_arrow_y + 32);
 		for (var _i = 0; _i < 2; _i++) {
@@ -356,7 +456,7 @@ if (craft_top_tab == 3) {
 			exit;
 		}
 	}
-	// 🔴 2026-10-27 修：这里原来有一句 exit（在 if 块内、非点击分支之后），
+	// 🔴 这里不要加 exit（在 if 块内、非点击分支之后的那种），
 	//    会把事件尾部「close_timer → panel_anim_close」整段跳过 → 在神级进化页点右上角 X 关不掉窗口。
 	//    exit 只保留在上面的各个点击分支里。
 	}   // ← else 结束（金卡进化页分支）
@@ -489,60 +589,213 @@ if (craft_top_tab == 2) {
 	}
 }
 
-// 概率强化 = 总开关：关掉时「保险金」一并关掉
-// 「失败掉星」已内置进概率强化 —— 没有独立开关，开着就一定掉（5★ 及以下免疫）
-// 热区要连右侧文字一起算（原来只到 +18，点「概率强化」四个字是点不到的）
-// ⚠️ 只在「卡片宝石」页生效：融合页（craft_top_tab == 1）右边没有 exit，
-//    这个热区正好压在融合场景的锅左侧 → 点场景会静默改开关 + 写 config.ini
-rate_toggle_hover = (craft_top_tab == 0) && point_in_rectangle(mouse_x, mouse_y, rate_toggle_x-18, rate_toggle_y-18, rate_toggle_x+118, rate_toggle_y+18)
-if mouse_check_button_pressed(mb_left) && rate_toggle_hover{
-	var _s = craft_rate_settings()
-	_s.enabled = !_s.enabled
-	if !_s.enabled{
-		_s.assure_enabled = false
+// ── 「强化说明」/「一键强化」两个按钮（v7）─────────────────────────────
+//   说明：打开说明弹窗（弹窗本身在下面的模态块处理）
+//   一键：走「介绍 → 消耗预览 → 执行」三段（craft_onekey_plan / _apply）
+craft_help_btn_hover = false
+craft_onekey_hover = false
+if (button_select == 0 && craft_top_tab == 0){
+	var _hbw = sprite_get_width(spr_craft_help_btn) * 1.35 * 0.5
+	var _hbh = sprite_get_height(spr_craft_help_btn) * 1.35 * 0.5
+	craft_help_btn_hover = point_in_rectangle(mouse_x, mouse_y,
+		craft_help_btn_x - _hbw, craft_help_btn_y - _hbh, craft_help_btn_x + _hbw, craft_help_btn_y + _hbh)
+	var _obw = sprite_get_width(spr_craft_onekey_btn) * 1.35 * 0.5
+	var _obh = sprite_get_height(spr_craft_onekey_btn) * 1.35 * 0.5
+	craft_onekey_hover = point_in_rectangle(mouse_x, mouse_y,
+		craft_onekey_x - _obw, craft_onekey_y - _obh, craft_onekey_x + _obw, craft_onekey_y + _obh)
+
+	if (mouse_check_button_pressed(mb_left)){
+		if (craft_help_btn_hover){
+			craft_help_open = true
+			craft_help_ok_hover = false
+			audio_play_sound(snd_button,0,0)
+		}
+		else if (craft_onekey_hover){
+			// 没放卡先说清楚；放了卡才弹「介绍 → 消耗预览 → 执行」三段
+			if (current_uprade_target_id == ""){
+				show_notice("请先选择卡片",80)
+			}
+			else{
+				craft_onekey_open = true
+				craft_onekey_stage = 0
+				craft_onekey_plan_data = undefined
+				craft_onekey_hover_idx = -1
+				audio_play_sound(snd_button,0,0)
+			}
+		}
 	}
-	audio_play_sound(snd_button,0,0)
-	ini_open("config.ini")
-	ini_write_bool("settings","craft_rate_enabled",_s.enabled)
-	ini_write_bool("settings","craft_assure_enabled",_s.assure_enabled)
-	ini_close()
-	if _s.enabled show_notice("概率强化已开启",60)
-	else show_notice("概率强化已关闭",60)
 }
 
 // 保险金开关点击（在徽章上：点徽章或下面那个勾选框都算；只在卡片强化页）
-// 保险金是单独开关，但必须建立在「概率强化」开着的前提下（掉星内置在概率强化里，开概率强化才有星可保）
+// v7：没有「概率强化」总开关了，保险金只看自己那个开关 + 该星能不能保
 assure_toggle_hover = false
 if (button_select == 0 && craft_top_tab == 0){
 	assure_toggle_hover = point_in_rectangle(mouse_x, mouse_y, assure_badge_cx-33, assure_badge_cy-36, assure_badge_cx+33, assure_toggle_y+18)
 	if mouse_check_button_pressed(mb_left) && assure_toggle_hover{
 		var _a = craft_rate_settings()
-		if !_a.enabled{
-			show_notice("要先开启[概率强化]",80)
+		// 开启前先算清「本次强化总共要花多少金币」（强化金币 + 保险金），不够就不让勾上
+		var _need_total = -1
+		if current_uprade_target_id != ""{
+			var _cd = get_card_info_simple(current_uprade_target_id)
+			if _cd != false{
+				var _ri = get_card_craft_rule(string(_cd.max_level+1))
+				if !is_undefined(_ri) _need_total = _ri.gold_amount + craft_assure_cost(_cd.max_level+1)
+			}
+		}
+		if !_a.assure_enabled && _need_total >= 0 && global.save_data.player.gold < _need_total{
+			show_notice("金币不足",80)
 		}
 		else{
-			// 开启前先算清「本次强化总共要花多少金币」（强化金币 + 保险金），不够就不让勾上
-			var _need_total = -1
-			if current_uprade_target_id != ""{
-				var _cd = get_card_info_simple(current_uprade_target_id)
-				if _cd != false{
-					var _ri = get_card_craft_rule(string(_cd.max_level+1))
-					if !is_undefined(_ri) _need_total = _ri.gold_amount + craft_assure_gold(_cd.max_level)
-				}
-			}
-			if !_a.assure_enabled && _need_total >= 0 && global.save_data.player.gold < _need_total{
-				show_notice("金币不足，无法开启保险金",80)
-			}
-			else{
-				_a.assure_enabled = !_a.assure_enabled
-				audio_play_sound(snd_button,0,0)
-				ini_open("config.ini")
-				ini_write_bool("settings","craft_assure_enabled",_a.assure_enabled)
-				ini_close()
-				if _a.assure_enabled show_notice("保险金已开启",80)
-				else show_notice("保险金已关闭",60)
+			_a.assure_enabled = !_a.assure_enabled
+			audio_play_sound(snd_button,0,0)
+			ini_open("config.ini")
+			ini_write_bool("settings","craft_assure_enabled",_a.assure_enabled)
+			ini_close()
+			// 2026-11-20：开关不弹提示（勾选状态自己会变，别刷屏）；只保留"金币不足开不了"的拦截提示
+		}
+	}
+}
+
+// ── 三槽 + 底部道具条（v7 手投放料）──────────────────────────────────
+//   ① 点条里的料 → 填进第一个空槽（强化用卡进料槽、四叶草只进草槽）② 点槽里的料 = 取出
+//   ④ 左右箭头整页翻（不能翻的那边画灰、点了只给提示）
+craft_mat_hover = -1
+craft_arrow_l_hover = false
+craft_arrow_r_hover = false
+if (button_select == 0 && craft_top_tab == 0 && !is_submenu_opened){
+	var _bt = craft_bar_table()
+	// 材料用掉后页数会变少 → 每帧夹一次，别停在空页
+	craft_mat_page = clamp(craft_mat_page, 0, craft_bar_page_count() - 1)
+	var _page_ids = craft_bar_page_ids(craft_mat_page)
+	var _mx = mouse_x, _my = mouse_y
+
+	// ① 点槽 = 取出（主卡放回、卡包槽放回、草槽清空）
+	var _stbl = craft_slot_table()
+	for (var _si = 0; _si < array_length(_stbl.slots); _si++){
+		var _s = _stbl.slots[_si]
+		var _sx = x + _s.dx, _sy = y + _s.dy
+		var _spr_w = sprite_get_width(asset_get_index(_s.bg_spr)) * _s.scale * 0.5
+		var _spr_h = sprite_get_height(asset_get_index(_s.bg_spr)) * _s.scale * 0.5
+		if (!point_in_rectangle(_mx, _my, _sx - _spr_w, _sy - _spr_h, _sx + _spr_w, _sy + _spr_h)) continue
+		if (!mouse_check_button_pressed(mb_left)) break
+		if (_s.kind == "card"){
+			// 2026-11-21：点槽里的主卡 = 放回去（取消选择），右侧列表里这张卡重新出现
+			if (current_uprade_target_id != ""){
+				current_uprade_target_id = "";
+				craft_sort_dirty = true;
+				audio_play_sound(snd_button,0,0);
 			}
 		}
+		else if (_s.kind == "clover"){
+			if (clover_slot != ""){ clover_slot = ""; audio_play_sound(snd_button,0,0); }
+		}
+		else{
+			var _sid = 0
+			if (_s.id == "spice2") _sid = 1
+			else if (_s.id == "spice3") _sid = 2
+			if (spice_slot[_sid] != ""){ spice_slot[_sid] = ""; audio_play_sound(snd_button,0,0); }
+		}
+		break
+	}
+
+	// ② 点道具条 = 填进槽：强化用卡进**第一个空料槽**（没有替换，三槽满就提示），四叶草只进草槽
+	for (var _bi = 0; _bi < array_length(_page_ids); _bi++){
+		var _bcx = x + _bt.x0 + _bi * _bt.cell
+		var _bcy = y + _bt.row_y
+		// 热区 = **图标本体**（88×88×0.9 ≈ 80px，中心就是格子锚点），跟画出来的大小对齐
+		if (!point_in_rectangle(_mx, _my, _bcx - 40, _bcy - 40, _bcx + 40, _bcy + 40)) continue
+		craft_mat_hover = _bi
+		var _bid = _page_ids[_bi]
+		// 悬停提示：强化用卡写「可作为 X 星用料 + 拥有数量」，四叶草写「X 倍成功率 + 每次消耗 1 个」
+		//   拥有数量取**显示量**（= 持有 − 已进槽），和格子里那个数字同一口径
+		if (_bid != ""){
+			var _hname = get_material_info(_bid).name
+			if (craft_spice_star(_bid) > 0){
+				var _wtip = _hname + "（点击放入）\n可作为" + string(craft_spice_star(_bid)) + "星级强化副卡用料";
+				_wtip += "\n拥有数量：" + string(craft_bar_display_amount(_bid));
+				tooltip_set(_mx - 15, _my - 15, _wtip, -1);
+			}
+			else{
+				tooltip_set(_mx - 15, _my - 15, _hname + "（点击放入）\n可以提供" + string(craft_clover_mult(_bid))
+					+ "倍成功倍率\n每次消耗1个\n拥有数量：" + string(craft_bar_display_amount(_bid)), -1)
+			}
+		}
+		if (!mouse_check_button_pressed(mb_left)) break
+		if (_bid == "") break
+		if (craft_spice_star(_bid) > 0){
+			// 🔴 数量不够也**允许放入**（2026-11-20 用户口径）：
+			//   槽上写「拥有/需要」并标红，点「强化」时才拦（提示 XX可使用数量不足）
+			var _empty = -1
+			for (var _k = 0; _k < 3; _k++) if (spice_slot[_k] == ""){ _empty = _k; break }
+			if (_empty == -1){
+				show_notice("用料槽已满，请先取下",80)
+			}
+			else{
+				spice_slot[_empty] = _bid
+				audio_play_sound(snd_button,0,0)
+			}
+		}
+		else{
+			// 四叶草：槽里已经有同一个就不重复放；一个都没有也挡一下
+			if (clover_slot == _bid){
+				show_notice("已使用该级别四叶草",70)
+			}
+			else if (get_material_amount(_bid) < 1){
+				show_notice("该级别四叶草可使用数量不足",70)
+			}
+			else{
+				clover_slot = _bid
+				audio_play_sound(snd_button,0,0)
+			}
+		}
+		break
+	}
+
+	// ③ 翻页箭头：**上下排列**（同一个 X），上面=上一页、下面=下一页
+	var _can = (craft_bar_page_count() > 1)
+	var _ax = x + _bt.arrow_x
+	var _apy = y + _bt.row_y + _bt.arrow_prev_y
+	var _any = y + _bt.row_y + _bt.arrow_next_y
+	var _aw = 17 * _bt.arrow_scale * 0.5 + 6      // 热区比贴图略大一圈，好点
+	var _ah = 22 * _bt.arrow_scale * 0.5 + 4
+	craft_arrow_l_hover = point_in_rectangle(_mx, _my, _ax - _aw, _apy - _ah, _ax + _aw, _apy + _ah)
+	craft_arrow_r_hover = point_in_rectangle(_mx, _my, _ax - _aw, _any - _ah, _ax + _aw, _any + _ah)
+	if (mouse_check_button_pressed(mb_left) && _can){
+		if (craft_arrow_l_hover){
+			craft_mat_page = craft_bar_next_page(craft_mat_page, -1)
+			audio_play_sound(snd_button,0,0)
+		}
+		else if (craft_arrow_r_hover){
+			craft_mat_page = craft_bar_next_page(craft_mat_page, 1)
+			audio_play_sound(snd_button,0,0)
+		}
+	}
+	// ③b 滚轮左右翻页（2026-11-19）：鼠标停在道具条上，滚轮上 = 上一页、下 = 下一页
+	//     只有真有多页时才响应；范围和条 + 箭头一起算，不用精确对准格子
+	var _bar_x1 = x + _bt.x0 - 8
+	var _bar_x2 = x + _bt.arrow_x + 24
+	var _bar_y1 = y + _bt.row_y - 57 * _bt.scale - 8
+	var _bar_y2 = y + _bt.row_y + 8
+	if (_can && point_in_rectangle(_mx, _my, _bar_x1, _bar_y1, _bar_x2, _bar_y2)){
+		if (mouse_wheel_up()){
+			craft_mat_page = craft_bar_next_page(craft_mat_page, -1)
+			audio_play_sound(snd_button,0,0)
+		}
+		else if (mouse_wheel_down()){
+			craft_mat_page = craft_bar_next_page(craft_mat_page, 1)
+			audio_play_sound(snd_button,0,0)
+		}
+	}
+
+	// ④ 箭头提示：说清翻到哪一页（灰的那边也提示，告诉玩家没东西可翻）
+	//   🔴 变量名跟着 ③ 走：上下排列只有 _can
+	if (craft_arrow_l_hover || craft_arrow_r_hover){
+		var _tip = ""
+		if (!_can) _tip = "这一页到头了"
+		// 2026-11-20：提示只写方向，不写翻到哪一页
+		else if (craft_arrow_r_hover) _tip = "下一页"
+		else _tip = "上一页"
+		tooltip_set(mouse_x - 15, mouse_y - 15, _tip, -1)
 	}
 }
 

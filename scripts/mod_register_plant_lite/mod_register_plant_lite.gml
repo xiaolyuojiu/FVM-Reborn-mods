@@ -175,7 +175,10 @@ function mod_custom_key_check(){
                 // 2026-11-13 用户口径：以下两类不再报——它们都有兜底、不影响运行
                 //   ① 自定义 key 与技能字段同名：技能值按档位覆盖，属预期用法（春笋「准备时间」就是）
                 //   ② 某形态漏写某个 key：运行时会有跨形态兜底（info_island_text_vars 里补一遍）
-                if (!is_real(_val) && !is_array(_val)){
+                // 🔴 2026-11-19：`"∞"` 是**允许的哨兵值**（法师蛇 0 转「叠加层数」，
+                //   obj_fashishe/Create_0:164 用 is_string → -1（不限）兜底，情报岛也靠它显示「∞层」），
+                //   不算类型问题，否则每次启动都刷一条假报错把真问题淹了。
+                if (!is_real(_val) && !is_array(_val) && _val != "∞"){
                     show_debug_message(_tag + "✗ 值类型 " + _id + " shape" + string(_shape_s) + " [" + _key + "]：只能写数字或按星级取值的数组");
                     _bad++;
                 }

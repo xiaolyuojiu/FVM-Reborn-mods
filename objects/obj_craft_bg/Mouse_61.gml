@@ -26,18 +26,21 @@ if craft_top_tab == 1{
 	}
 	exit
 }
-if button_select == 0{
-	// 卡片强化标签页
-	if (variable_instance_exists(id, "craft_max_y_offset")) {
-		y_offset_target = min(craft_max_y_offset, y_offset_target + 40)
+// 2026-11-21：同样限定在右侧卡列表矩形内
+if (point_in_rectangle(mouse_x, mouse_y, x + 196 - 42, y - 321 - 48, x + 196 + 7 * 84, y + 450)){
+	if button_select == 0{
+		// 卡片强化标签页
+		if (variable_instance_exists(id, "craft_max_y_offset")) {
+			y_offset_target = min(craft_max_y_offset, y_offset_target + 40)
+		}
+		else{
+			y_offset_target = min(96 * 20 - 815, y_offset_target + 40)
+		}
 	}
-	else{
-		y_offset_target = min(96 * 20 - 815, y_offset_target + 40)
-	}
-}
-else if button_select == 1{
-	// 宝石强化标签页
-	if (variable_instance_exists(id, "craft_gem_max_y_offset")) {
-		y_offset_target = min(craft_gem_max_y_offset, y_offset_target + 40)
+	else if button_select == 1{
+		// 宝石强化标签页
+		if (variable_instance_exists(id, "craft_gem_max_y_offset")) {
+			y_offset_target = min(craft_gem_max_y_offset, y_offset_target + 40)
+		}
 	}
 }

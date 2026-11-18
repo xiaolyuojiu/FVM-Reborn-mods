@@ -12,7 +12,6 @@
 ///   ③ 购买判据：_buyable / _buyable_locked / 爬塔门槛 / 商店排序键（威望商店用）
 ///   ④ 背包「凭证」页的分段 / 换行 / 绘制：transfer_credit_tab_*
 ///   ⑤ 「威望」标签：ui_prestige_tag_*
-/// 详细方案：桌面\fvm的ai\转职系统方案.md
 
 /// @function transfer_credit_tier_offset(card_id)
 /// @desc 金卡的形态编号从「三转」起：金卡 shape 1/2/3 = 三转/四转/终转 → 档位 = shape + 2

@@ -5493,7 +5493,7 @@
                     ]
                 }
             ],
-            "boss_1_hp_modify": 2.3999999999999999,
+            "boss_1_hp_modify": 2.4,
             "boss2": "",
             "boss_2_hp_modify": 1.0
         },
@@ -8023,7 +8023,7 @@
                     ]
                 }
             ],
-            "boss_1_hp_modify": 1.4399999999999999,
+            "boss_1_hp_modify": 1.44,
             "boss2": "",
             "boss_2_hp_modify": 1.0
         },
@@ -11953,46 +11953,48 @@
                     ]
                 }
             ],
-            "boss_1_hp_modify": 1.6499999999999999,
+            "boss_1_hp_modify": 1.65,
             "boss2": "",
             "boss_2_hp_modify": 1.0
         }
     ],
     "rewards": [
         {
-            "gold": 12000.0,
+            "gold": 12800.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 600.0
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 500.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 3.0
                 }
             ]
         },
         {
-            "gold": 12000.0,
+            "gold": 12800.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 600.0
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 500.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 3.0
                 }
             ],
-            "card_unlock": ["sugar_ball_pult"],
+            "card_unlock": [
+                "sugar_ball_pult"
+            ],
             "weapon_unlock": [],
             "gem_unlock": [],
             "player_level": 0.0,

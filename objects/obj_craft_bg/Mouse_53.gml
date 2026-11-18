@@ -9,6 +9,7 @@ if !is_submenu_opened{
 			if point_in_rectangle(mouse_x, mouse_y, hover_card_cx - 42, hover_card_cy - 48, hover_card_cx + 42, hover_card_cy + 48){
 				global.audio.play(snd_button,0,0)
 				current_uprade_target_id = global.save_data.unlocked_cards[craft_sort_order[hover_card_index]].id
+				craft_sort_dirty = true   // 2026-11-21：选中的卡要从右侧列表里下去（已在槽里）
 			}
 		}
 		if button_select == 1 && hover_gem_index != -1{

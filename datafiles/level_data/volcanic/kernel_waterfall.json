@@ -2398,7 +2398,7 @@
             "boss_wave": true,
             "wave_index": 4.0,
             "boss": "war_god",
-            "boss_1_hp_modify": 0.59999999999999998,
+            "boss_1_hp_modify": 0.6,
             "subwaves": [
                 {
                     "subwave_index": 0.0,
@@ -2554,20 +2554,28 @@
     ],
     "rewards": [
         {
-            "gold": 5000.0,
+            "gold": 34600.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 1200.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 }
             ]
         },
         {
-            "gold": 5000.0,
+            "gold": 34600.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 1200.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "copper_cookbook_fragment",

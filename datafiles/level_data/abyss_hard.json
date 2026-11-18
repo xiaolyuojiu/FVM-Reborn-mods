@@ -5237,16 +5237,16 @@
             "gold": 7500.0,
             "items": [
                 {
-                    "id": "natural_spices",
-                    "amount": 150.0
+                    "id": "warcard_6",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_2",
+                    "amount": 2.0
                 },
                 {
                     "id": "less_crystal",
                     "amount": 50.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 3
                 }
             ]
         },
@@ -5260,19 +5260,21 @@
             "gold": 7500.0,
             "items": [
                 {
-                    "id": "natural_spices",
-                    "amount": 150.0
+                    "id": "warcard_6",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_2",
+                    "amount": 2.0
                 },
                 {
                     "id": "less_crystal",
                     "amount": 50.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 3
                 }
             ],
-            "card_unlock": ["chocolate_pult"],
+            "card_unlock": [
+                "chocolate_pult"
+            ],
             "weapon_unlock": []
         }
     ]

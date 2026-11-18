@@ -34,11 +34,18 @@ if (!instance_exists(obj_longyuan_enter))
         instance_create_depth(950, 56, -3, obj_longyuan_enter);
 }
 
-// 金马盛典入口按钮（图标 2026-11-18 换成 116.png：56×47，原点左上 → y 取 32 与旁边几个入口图标中线齐平）
+// 金马盛典入口按钮
 if (!instance_exists(obj_zz_enter))
 {
     if (room == room_map || room == room_menu)
-        instance_create_depth(1010, 32, -3, obj_zz_enter);
+        instance_create_depth(1014, 8, -3, obj_zz_enter);
+}
+
+// 假期特惠入口按钮
+if (!instance_exists(obj_holiday_entry_btn))
+{
+    if (room == room_map || room == room_menu)
+        instance_create_depth(1290, 56, -3, obj_holiday_entry_btn);
 }
 
 if (!noticed && variable_global_exists("preloaded") && global.preloaded == true)

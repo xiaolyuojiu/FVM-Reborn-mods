@@ -698,7 +698,7 @@ else if package_button_select == 3{
             var tooltip_text = ""
 
 			var _tooltip_amount = get_material_amount(material_id);
-			tooltip_text = material_data.description + "\n数量："+string(_tooltip_amount)
+			tooltip_text = material_data.name + "\n" + material_data.description + "\n数量："+string(_tooltip_amount)
 			// 最低获取方式（表在 scripts/material_init 的 material_min_source_list）
 			// 只给登记过的养成材料追加，其它道具原样不变
 			var _src_text = material_min_source_text(material_id);

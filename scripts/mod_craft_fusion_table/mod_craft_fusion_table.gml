@@ -134,11 +134,12 @@ function mod_fusion_table(){
 
 /// @func mod_fusion_levels() 三档消耗
 /// @return { array } [{ name 显示名, shape 产物形态, gold 金币, mat 材料 id, mat_n 数量 }, ...]
+///   材料 = 对应档的融合剂 ×5（官方 CardFusion.xml：36 条菜谱 agent_count 全是 5）
 function mod_fusion_levels(){
     return [
-        { name: "初级", shape: 0, gold: 150000, mat: "secret_spices", mat_n: 1000 },
-        { name: "深度", shape: 1, gold: 320000, mat: "clover_4",      mat_n: 15   },
-        { name: "灵魂", shape: 2, gold: 560000, mat: "royal_spices",  mat_n: 1000 }
+        { name: "初级", shape: 0, gold: 150000, mat: "fusion_basic", mat_n: 5 },
+        { name: "深度", shape: 1, gold: 320000, mat: "fusion_deep",  mat_n: 5 },
+        { name: "灵魂", shape: 2, gold: 560000, mat: "fusion_soul",  mat_n: 5 }
     ];
 }
 

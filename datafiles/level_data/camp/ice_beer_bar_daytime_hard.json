@@ -3385,16 +3385,16 @@
             "gold": 6000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 300.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 250.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 1.0
                 }
             ]
         },
@@ -3402,8 +3402,12 @@
             "gold": 6000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 300.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
@@ -3414,7 +3418,9 @@
                     "amount": 1.0
                 }
             ],
-            "card_unlock": ["nut_frier"],
+            "card_unlock": [
+                "nut_frier"
+            ],
             "weapon_unlock": [],
             "gem_unlock": [],
             "player_level": 0.0,

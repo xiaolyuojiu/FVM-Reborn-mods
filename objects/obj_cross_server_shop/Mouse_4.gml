@@ -127,7 +127,11 @@ for (var _slot = 0; _slot < 16; _slot++) {
 
     var _medal_id = shop_type == 0 ? "cross_server_gold_medal" : "cross_server_silver_medal";
     var _balance = get_material_amount(_medal_id);
+    // 2026-11-21：卡包按跨服进度解锁（门槛来自商品字段 cs_stage_star，10★ 无门槛）
+    var _stage_star = variable_struct_exists(_goods, "cs_stage_star") ? _goods.cs_stage_star : 0;
+    var _stage_ok   = cross_server_stage_star_met(_stage_star, cs_star_max);
     if (_owned) show_notice("该商品已兑换", 60);
+    else if (!_stage_ok) show_notice(cross_server_stage_star_text(_stage_star) + "后才能购买", 60);
     else if (!_prerequisite_met) {
         if (_required_weapon_id != "") {
             var _rw = global.goods_map[? _required_weapon_id];

@@ -1,5 +1,5 @@
 {
-    "version": 1.3999999999999999,
+    "version": 1.4,
     "level_name": "cotton_candy_sky_night_hard",
     "level_time_feature": "night",
     "map_sprite": "spr_cotton_candy_sky_night",
@@ -3569,16 +3569,16 @@
             "gold": 5500.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 250.0
+                    "id": "warcard_9",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_3",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 200.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 1.0
                 }
             ]
         },
@@ -3586,16 +3586,16 @@
             "gold": 5500.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 250.0
+                    "id": "warcard_9",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_3",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 200.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 1.0
                 }
             ],
             "card_unlock": [

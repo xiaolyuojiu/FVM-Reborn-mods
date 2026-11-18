@@ -3005,8 +3005,12 @@
             "gold": 3000.0,
             "items": [
                 {
-                    "id": "natural_spices",
-                    "amount": 60
+                    "id": "warcard_4",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_1",
+                    "amount": 2.0
                 },
                 {
                     "id": "less_crystal",
@@ -3024,8 +3028,12 @@
             "gold": 3000.0,
             "items": [
                 {
-                    "id": "natural_spices",
-                    "amount": 60
+                    "id": "warcard_4",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_1",
+                    "amount": 2.0
                 },
                 {
                     "id": "less_crystal",

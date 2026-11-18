@@ -11420,39 +11420,41 @@
     ],
     "rewards": [
         {
-            "gold": 18000.0,
+            "gold": 76400.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 1200.0
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 1000.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 3.0
                 }
             ]
         },
         {
-            "gold": 18000.0,
+            "gold": 76400.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 1200.0
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 1000.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 3.0
                 }
             ],
-            "card_unlock": ["pizza_oven"],
+            "card_unlock": [
+                "pizza_oven"
+            ],
             "weapon_unlock": [],
             "gem_unlock": [],
             "player_level": 0.0,

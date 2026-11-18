@@ -10,7 +10,7 @@ draw_set_alpha(image_alpha)
 draw_text(x-65,y-98,goods_name)
 draw_set_font(font_number)
 if not is_disabled{
-	draw_sprite_ext(spr_craft_material,get_material_info(coin_type).icon,x-50,y-54,0.5,0.5,0,c_white,image_alpha)
+	draw_sprite_ext(craft_material_spr(coin_type), craft_material_frame(coin_type),x-50,y-54,0.5,0.5,0,c_white,image_alpha)
 	draw_set_color(c_white)
 	draw_text(x-20,y-54,string(cost))
 }

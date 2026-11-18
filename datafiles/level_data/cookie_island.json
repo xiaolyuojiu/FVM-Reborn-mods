@@ -1662,8 +1662,8 @@
             "gold": 1000.0,
             "items": [
                 {
-                    "id": "natural_spices",
-                    "amount": 20
+                    "id": "warcard_1",
+                    "amount": 6.0
                 }
             ]
         },
@@ -1676,8 +1676,8 @@
             "gold": 1000.0,
             "items": [
                 {
-                    "id": "natural_spices",
-                    "amount": 20
+                    "id": "warcard_1",
+                    "amount": 6.0
                 }
             ],
             "card_unlock": [

@@ -20,5 +20,8 @@
     {"name":"Cross Server","path":"folders/物体/mod/Cross Server.yy",},
     {"name":"germ","path":"folders/物体/mod/germ.yy",}
   ],
-  "listItems":[],
+  "listItems":[
+    {"name":"obj_holiday_exchange","path":"objects/obj_holiday_exchange/obj_holiday_exchange.yy",},
+    {"name":"obj_holiday_entry_btn","path":"objects/obj_holiday_entry_btn/obj_holiday_entry_btn.yy",},
+  ],,
 }

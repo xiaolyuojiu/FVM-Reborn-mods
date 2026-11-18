@@ -2311,7 +2311,7 @@
             "boss_wave": true,
             "wave_index": 4.0,
             "boss": "thor",
-            "boss_1_hp_modify": 0.59999999999999998,
+            "boss_1_hp_modify": 0.6,
             "subwaves": [
                 {
                     "subwave_index": 0.0,
@@ -2752,21 +2752,29 @@
     ],
     "rewards": [
         {
-            "gold": 12000.0,
+            "gold": 325600.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 4800
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_5",
+                    "amount": 1.0
                 }
             ]
         },
         {
             "skill_level": 0.0,
-            "gold": 12000.0,
+            "gold": 325600.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 4800
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_5",
+                    "amount": 1.0
                 },
                 {
                     "id": "gold_cookbook_fragment",

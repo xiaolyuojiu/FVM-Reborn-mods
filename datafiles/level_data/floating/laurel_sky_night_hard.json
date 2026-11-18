@@ -3305,39 +3305,41 @@
     ],
     "rewards": [
         {
-            "gold": 8000.0,
+            "gold": 16000.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 500.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 400.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 1.0
                 }
             ]
         },
         {
-            "gold": 8000.0,
+            "gold": 16000.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 500.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 400.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 1.0
                 }
             ],
-            "card_unlock": ["tang_hu_lu"],
+            "card_unlock": [
+                "tang_hu_lu"
+            ],
             "weapon_unlock": [],
             "gem_unlock": [],
             "player_level": 48.0,

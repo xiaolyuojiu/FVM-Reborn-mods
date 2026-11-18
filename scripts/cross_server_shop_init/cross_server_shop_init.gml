@@ -52,12 +52,20 @@ function cross_server_shop_init()
     //   type "material" 是本次新加的类型：消耗品，**没有「已拥有」概念**，
     //   每买一次就 add_material_amount(material_id, material_qty)。
     //   价格 / 数量只写在这里，别在别处再抄一份。
+    // 2026-11-21 用户口径：**一次卖 3 张**，6 档全上架
+    //   10★ 70 / 11★ 150 / 12★ 450 / 13★ 750 / 14★ 1050 / 15★ 1350
+    //   12~15★ 是跨服专属（不进掉落、不进假期特惠）
+    // 2026-11-21 用户口径：**按跨服进度解锁**（门槛只写在这张表里，别处不再抄）
+    //   10★ 无门槛 —— 打任意跨服关才有银勋章，本来就买不到；
+    //   11★ 要通关**跨服 10★ 关卡**，12★ 起各自对应（12★ → 12★ 关，13/14/15 同理）。
+    //   判定走 cross_server_stage_star_met()：任意一章通关该星即算。
     var _cs_material_goods = [
-        {id: "royal_spices", qty: 200, cost:  400},
-        {id: "magic_spices", qty: 200, cost:  600},
-        {id: "elf_spices",   qty: 200, cost:  800},
-        {id: "angel_spices", qty: 200, cost: 1000},
-        {id: "saint_spices", qty: 200, cost: 1200}
+        {id: "warcard_10", qty: 3, cost:   70, stage:  0},
+        {id: "warcard_11", qty: 3, cost:  150, stage: 10},
+        {id: "warcard_12", qty: 3, cost:  450, stage: 12},
+        {id: "warcard_13", qty: 3, cost:  750, stage: 13},
+        {id: "warcard_14", qty: 3, cost: 1050, stage: 14},
+        {id: "warcard_15", qty: 3, cost: 1350, stage: 15}
     ];
     for (var _csm = 0; _csm < array_length(_cs_material_goods); _csm++) {
         var _cmi = _cs_material_goods[_csm];
@@ -73,6 +81,7 @@ function cross_server_shop_init()
             description: _cmdata.description,
             sort_no: _csm + 1            // 白银页排最前，5 件挨在一起（排序见 obj_cross_server_shop/Create_0）
         });
+        if (_cmi.stage > 0) global.goods_map[? _cmi.id].cs_stage_star = _cmi.stage;
     }
 
     // ── 跨服白银页卖的卡片本体 ────────────────────────────────────

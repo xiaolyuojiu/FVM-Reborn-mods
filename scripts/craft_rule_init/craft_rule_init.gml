@@ -22,171 +22,14 @@ function get_gem_craft_rule(target_level){
 function craft_rule_init(){
 	craft_rate_settings_init()
 	craft_rule_registry_init()
-	register_card_craft_rule(
-		"1",
-		{
-		"spices_require":"natural_spices",
-		"spices_amount":5,
-		"clover_require":"none",
-		"clover_amount":0,
-		"gold_amount":300
-		}
-	)
-	register_card_craft_rule(
-		"2",
-		{
-		"spices_require":"natural_spices",
-		"spices_amount":10,
-		"clover_require":"none",
-		"clover_amount":0,
-		"gold_amount":300
-		}
-	)
-	register_card_craft_rule(
-		"3",
-		{
-		"spices_require":"natural_spices",
-		"spices_amount":15,
-		"clover_require":"none",
-		"clover_amount":0,
-		"gold_amount":300
-		}
-	)
-	register_card_craft_rule(
-		"4",
-		{
-		"spices_require":"natural_spices",
-		"spices_amount":25,
-		"clover_require":"none",
-		"clover_amount":0,
-		"gold_amount":300
-		}
-	)
-	register_card_craft_rule(
-		"5",
-		{
-		"spices_require":"natural_spices",
-		"spices_amount":35,
-		"clover_require":"none",
-		"clover_amount":0,
-		"gold_amount":300
-		}
-	)
-	register_card_craft_rule(
-		"6",
-		{
-		"spices_require":"natural_spices",
-		"spices_amount":55,
-		"clover_require":"none",
-		"clover_amount":0,
-		"gold_amount":400
-		}
-	)
-	register_card_craft_rule(
-		"7",
-		{
-		"spices_require":"secret_spices",
-		"spices_amount":55,
-		"clover_require":"clover_1",
-		"clover_amount":1,
-		"gold_amount":400
-		}
-	)
-	register_card_craft_rule(
-		"8",
-		{
-		"spices_require":"secret_spices",
-		"spices_amount":100,
-		"clover_require":"none",
-		"clover_amount":0,
-		"gold_amount":700
-		}
-	)
-	register_card_craft_rule(
-		"9",
-		{
-		"spices_require":"secret_spices",
-		"spices_amount":150,
-		"clover_require":"none",
-		"clover_amount":0,
-		"gold_amount":700
-		}
-	)
-	register_card_craft_rule(
-		"10",
-		{
-		"spices_require":"secret_spices",
-		"spices_amount":150,
-		"clover_require":"clover_2",
-		"clover_amount":2,
-		"gold_amount":1300
-		}
-	)
-	// ── 11~16★（2026-11-17 用户口径）──
-	//   皇室香料只能强化 11~12★；13★ 起改用金马盛典新增香料（珍珠/王冠/羽翼/圣泉），每级 200 个
-	//   四叶草门槛整体前移两星：11★ 3级×3 / 12★ 4级×4 / 13★ 5级×3 / 14★ 6级×3 / 15★ S级×3 / 16★ SS级×3
-	register_card_craft_rule(
-		"11",
-		{
-		"spices_require":"royal_spices",
-		"spices_amount":200,
-		"clover_require":"clover_3",
-		"clover_amount":3,
-		"gold_amount":2600
-		}
-	)
-	register_card_craft_rule(
-		"12",
-		{
-		"spices_require":"royal_spices",
-		"spices_amount":245,
-		"clover_require":"clover_4",
-		"clover_amount":4,
-		"gold_amount":2600
-		}
-	)
-	register_card_craft_rule(
-		"13",
-		{
-		"spices_require":"magic_spices",
-		"spices_amount":200,
-		"clover_require":"clover_5",
-		"clover_amount":3,
-		"gold_amount":5200
-		}
-	)
-	register_card_craft_rule(
-		"14",
-		{
-		"spices_require":"elf_spices",
-		"spices_amount":200,
-		"clover_require":"clover_6",
-		"clover_amount":3,
-		"gold_amount":5200
-		}
-	)
-	register_card_craft_rule(
-		"15",
-		{
-		"spices_require":"angel_spices",
-		"spices_amount":200,
-		"clover_require":"clover_s",
-		"clover_amount":3,
-		"gold_amount":10000
-		}
-	)
-	register_card_craft_rule(
-		"16",
-		{
-		"spices_require":"saint_spices",
-		"spices_amount":200,
-		"clover_require":"clover_ss",
-		"clover_amount":3,
-		"gold_amount":10000
-		}
-	)
-	
-	
+	// ── 卡片强化 1~16★：**只剩金币** ────────────────────────────────────
+	//   香料 / 四叶草 不再是「固定档位 + 数量门槛」，改成玩家自己往三槽里放（2026-11-19 v7）；
+	//   每槽消耗只看目标星，从 scripts/mod_craft_rate_table 的 craft_cost_info() 取。
+	//   这里的 gold_amount 也直接从同一张表取，改价只改 craft_cost_table()。
+	for (var _t = 1; _t <= 16; _t++){
+		register_card_craft_rule(string(_t), { "gold_amount": craft_cost_info(_t).gold })
+	}
+
 	register_gem_craft_rule(
 		"1",
 		{
@@ -310,25 +153,22 @@ function craft_rule_init(){
 }
 
 #region 概率强化：参数、公式与判定
+// 🔴 2026-11-19 起：**卡片**强化不再走这一套（改查 mod_craft_rate_table 的原版矩阵），
+//    但**宝石**还在用（分段衰减 + 浮动 + 保底），所以这些参数一个都不能删（M74）。
 function craft_rate_settings_init(){
-	var _enabled = true
-	if !is_undefined(global.craft_rate_enabled) _enabled = global.craft_rate_enabled
 	var _assure = false
 	if !is_undefined(global.craft_assure_enabled) _assure = global.craft_assure_enabled
 	global.craft_rate = {
-		enabled: _enabled,
-		// 掉星已内置进「概率强化」（没有独立开关）：enabled 为真且当前星级 > dropstar_min 时失败必掉
+		// 卡片页的「概率强化」勾选框已删除（2026-11-19 用户口径）→ 恒为 true；
+		// 宝石没有勾选框，同样恒为 true（关掉时 craft_roll 直接成功，宝石就没概率了）
+		enabled: true,
+		// 掉星门槛：6★ 起失败降 1 星（卡片用 craft_can_drop()，这里留兼容）
 		dropstar_min: 5,
 		assure_enabled: _assure,
-		// 保险金费用：直接查表，依次对应 1★~15★（5★ 及以下不掉星所以是 0）；
-		// 固定价格，不乘难度倍率（2026-10-19 按用户要求去掉）
-		assure_gold_table: [0, 0, 0, 0, 0, 3000, 3900, 5800, 8200, 11600, 50000, 100000, 250000, 350000, 500000],
-	// 升星率：分段衰减。1★ 固定必成；2★ 起逐级乘衰减并取整，换挡点见 tierN_at
+	// 升星率：分段衰减（**宝石专用**）。1★ 固定必成；2★ 起逐级乘衰减并取整，换挡点见 tierN_at
 	// 现值 → 1★ 100 / 2-5★ 90..66（-0.90）/ 6★ 49（-0.74，台阶）/ 7-9★ 43..32（-0.87）/ 10★ 16（-0.50，跳楼）/ 11-15★ 11..3（-0.70）/ 16★ 1（-0.34）
 		rate_base: 100, rate_max: 100, rate_min: 1,
-		// 随机浮动：每个卡片/宝石各自一个随机值 r(-1~1)，启动时随第一次用到生成、本次启动内固定。
-		// 2★~spread_max_level（11★）按比例浮动 r*spread_ratio（低概率浮动幅度自然更小）；
-		// 12★ 起改用固定点数浮动 r*spread_flat（幅度比前面小）；1★ 必成不浮动
+		// 随机浮动：每个宝石各自一个随机值 r(-1~1)，启动时随第一次用到生成、本次启动内固定。
 		spread_ratio: 0.08, spread_max_level: 11, spread_flat: 0.57,
 		tier1_decay: 0.90, tier2_at: 6, tier2_decay: 0.74,
 		tier3_at: 7, tier3_decay: 0.87, tier4_at: 10, tier4_decay: 0.50,
@@ -349,27 +189,10 @@ function craft_rate_settings(){
 }
 
 /// @func craft_dropstar_can_drop(current_level)
-/// @desc 强化失败是否掉星：掉星已内置进「概率强化」，没有独立开关 ——
-///       概率强化开着且当前星级 > dropstar_min 就掉（5★ 及以下免疫）
+/// @desc 强化失败是否掉星：**6★ 起掉**（当前星 > 5），5★ 及以下免疫。
+///       卡片走 craft_can_drop()（mod_craft_rate_table），这里只是同口径的旧名
 function craft_dropstar_can_drop(current_level){
-	var _s = craft_rate_settings()
-	return _s.enabled && current_level > _s.dropstar_min
-}
-
-/// @func craft_assure_active()
-/// @desc 保险金是否生效：勾选了保险金，且「概率强化」开着（掉星内置在里面；关掉概率强化=100%必成，没星可保）
-function craft_assure_active(){
-	var _s = craft_rate_settings()
-	return _s.assure_enabled && _s.enabled
-}
-
-/// @func craft_assure_gold(current_level)
-/// @desc 保险金费用：查 assure_gold_table（依次对应 1★~15★，5★ 及以下为 0，那几星不掉星）；
-///       固定价格，不乘难度倍率；超出表长按最高档
-function craft_assure_gold(current_level){
-	var _s = craft_rate_settings()
-	var _idx = clamp(current_level - 1, 0, array_length(_s.assure_gold_table) - 1)
-	return _s.assure_gold_table[_idx]
+	return current_level > 5
 }
 
 /// @func craft_rate_base(target_level)
@@ -391,7 +214,7 @@ function craft_rate_base(target_level){
 }
 
 /// @func craft_rate_spread(id)
-/// @desc 该卡片/宝石本次启动的随机浮动值（-1 ~ 1）：每个 id 各自独立，本次启动内固定不变
+/// @desc 该宝石本次启动的随机浮动值（-1 ~ 1）：每个 id 各自独立，本次启动内固定不变
 function craft_rate_spread(_id){
 	if _id == "" return 0
 	if is_undefined(global.craft_rate_spread) global.craft_rate_spread = {}
@@ -427,9 +250,10 @@ function craft_rate_with_pity(_id, target_level, bonus, fail_streak){
 	return clamp(_rate, 0, 100)
 }
 
-// 卡片与宝石共用同一张升星率表（用户要求「宝石跟同一套」），保留各自的函数名方便以后分化
+// 宝石专用是 get_gem_craft_rate / get_gem_craft_rate_base；卡片已改查原版矩阵，
+// 下面三个卡片版函数只保留给旧调用点，返回 100（别在新代码里用）
 function get_card_craft_rate(card_id, target_level, bonus, fail_streak){
-	return craft_rate_with_pity(card_id, target_level, bonus, fail_streak)
+	return 100
 }
 
 function get_gem_craft_rate(gem_id, target_level, bonus, fail_streak){
@@ -437,9 +261,7 @@ function get_gem_craft_rate(gem_id, target_level, bonus, fail_streak){
 }
 
 function get_card_craft_rate_base(card_id, target_level){
-	var _s = craft_rate_settings()
-	if !_s.enabled return 100
-	return craft_rate_rolled(card_id, target_level)
+	return 100
 }
 
 function get_gem_craft_rate_base(gem_id, target_level){
@@ -449,10 +271,7 @@ function get_gem_craft_rate_base(gem_id, target_level){
 }
 
 function get_card_craft_rate_now(card_id){
-	if card_id == "" return 0
-	var _info = get_card_info_simple(card_id)
-	if _info == false return 0
-	return get_card_craft_rate(card_id, _info.max_level + 1, get_card_craft_bonus(card_id), get_card_fail_streak(card_id))
+	return 100
 }
 
 function get_gem_craft_rate_now(gem_id){

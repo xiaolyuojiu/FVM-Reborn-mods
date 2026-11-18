@@ -2421,7 +2421,7 @@
             "boss": ""
         },
         {
-            "boss_1_hp_modify": 0.59999999999999998,
+            "boss_1_hp_modify": 0.6,
             "subwaves": [
                 {
                     "enemy_list": [
@@ -2577,16 +2577,16 @@
             "gold": 4000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 100.0
+                    "id": "warcard_7",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_3",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 75.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 1.0
                 }
             ]
         },
@@ -2595,8 +2595,12 @@
             "gold": 4000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 100.0
+                    "id": "warcard_7",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_3",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",

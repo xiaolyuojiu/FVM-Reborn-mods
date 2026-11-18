@@ -17,7 +17,7 @@
     "total_waves": 5.0,
     "elite_wave": 2.0,
     "boss_wave": 5.0,
-    "hp_modify": 0.59999999999999998,
+    "hp_modify": 0.6,
     "min_wave_time": 240.0,
     "max_wave_time": 1500.0,
     "map": [
@@ -2336,7 +2336,7 @@
             "boss_wave": true,
             "wave_index": 5.0,
             "boss": "travel_record",
-            "boss_1_hp_modify": 0.59999999999999998,
+            "boss_1_hp_modify": 0.6,
             "subwaves": [
                 {
                     "local_max_wave_time": -1.0,
@@ -2489,16 +2489,16 @@
             "gold": 4000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 100.0
+                    "id": "warcard_6",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_2",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 75.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 1.0
                 }
             ]
         },
@@ -2507,8 +2507,12 @@
             "gold": 4000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 100.0
+                    "id": "warcard_6",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_2",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",

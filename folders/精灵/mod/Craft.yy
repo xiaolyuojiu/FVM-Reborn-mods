@@ -78,5 +78,6 @@
     {"name":"spr_transfer_bg_5b","path":"sprites/spr_transfer_bg_5b/spr_transfer_bg_5b.yy",},
     {"name":"spr_transfer_bg_5c","path":"sprites/spr_transfer_bg_5c/spr_transfer_bg_5c.yy",},
     {"name":"spr_transfer_help","path":"sprites/spr_transfer_help/spr_transfer_help.yy",},
+    {"name":"spr_craft_warcard_label","path":"sprites/spr_craft_warcard_label/spr_craft_warcard_label.yy",},
   ],
 }

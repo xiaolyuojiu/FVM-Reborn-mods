@@ -203,8 +203,13 @@ function ensure_save_data() {
     if !variable_struct_exists(global.save_data, "weapon_gem_memory") || !is_struct(global.save_data.weapon_gem_memory) {
         global.save_data.weapon_gem_memory = {}
     }
-    // 转职保底 / 暗概率（2026-11-06）：不单独建字段，直接挂在每张卡的 unlocked_cards 条目上
-    //   （tg_pity / tg_hidden，写法同 craft_fail_streak）→ 每个存档独立计，老存档缺字段按 0 读
+    // 转职保底（2026-11-06）：不单独建字段，直接挂在每张卡的 unlocked_cards 条目上
+    //   （tg_pity，写法同 craft_fail_streak）→ 每个存档独立计，老存档缺字段按 0 读
+
+    // 强化失败补偿（2026-11-19 v7）：全局一份，老存档没有就补 0，并夹到 0~20
+    if !variable_struct_exists(global.save_data, "craft_fail_bonus") { global.save_data.craft_fail_bonus = 0 }
+    if !is_real(global.save_data.craft_fail_bonus) { global.save_data.craft_fail_bonus = 0 }
+    global.save_data.craft_fail_bonus = clamp(global.save_data.craft_fail_bonus, 0, 20)
 
     global.save_data.version = 1.8
 }
@@ -231,6 +236,7 @@ function reset_file(file_slot){
             "completed_elite_levels": [],
             "gacha_box_buy_count": 0,
             "inventory": [],
+            "craft_fail_bonus": 0,
             "unlocked_items": {
                 "max_card_level": 0,
                 "max_skill_level": 0,

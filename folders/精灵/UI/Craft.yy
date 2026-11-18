@@ -41,6 +41,10 @@
     {"name":"81e8b850-1535-4c7c-995b-59dea5274681","path":"sprites/spr_craft_tab_fusion/spr_craft_tab_fusion.yy",},
     {"name":"79d8a7f6-cec9-44b1-8fa6-f9c87d3509e1","path":"sprites/spr_craft_select_btn/spr_craft_select_btn.yy",},
     {"name":"f819faf7-a042-438a-b396-d2e48740ea29","path":"sprites/spr_craft_slot_bg/spr_craft_slot_bg.yy",},
-    {"name":"394ba226-985b-4639-a27a-098804202e2a","path":"sprites/spr_craft_slot_text/spr_craft_slot_text.yy",}
+    {"name":"394ba226-985b-4639-a27a-098804202e2a","path":"sprites/spr_craft_slot_text/spr_craft_slot_text.yy",},
+    {"name":"spr_craft_help_btn","path":"sprites/spr_craft_help_btn/spr_craft_help_btn.yy",},
+    {"name":"spr_craft_arrow_r","path":"sprites/spr_craft_arrow_r/spr_craft_arrow_r.yy",},
+    {"name":"spr_craft_arrow_l","path":"sprites/spr_craft_arrow_l/spr_craft_arrow_l.yy",},
+    {"name":"spr_craft_onekey_btn","path":"sprites/spr_craft_onekey_btn/spr_craft_onekey_btn.yy",}
   ],
 }

@@ -76,6 +76,7 @@ function card_attack_target_data()
         "ice_god": "land_air_ug",
         "ice_long_bao": "normal",
         "iron_fishbone": "pierce",
+        "jiejiema": "land_air_ug",
         "jingangma": "pierce",
         "juxie": "track",
         "kettle_bomb": "normal",
@@ -157,7 +158,7 @@ function card_attack_target_data()
         "youyu_god": "normal",
         "yinyangshe": "pierce",
         "yuanqiniu": "rotate",
-        "yuansushe": "pierce",
+        "yuansushe": "normal",
         "yufengma": "normal",
         "zeus": "track",
         "zhuanzhuanji": "rotate",
@@ -177,20 +178,19 @@ function card_attack_target_exclude()
 function card_attack_target_override()
 {
     static _o = {
-        // 这三张子弹更宽：bbq/法师蛇是灼烧格·毒格的自身机制，天蝎座是二转随机效果，按卡片索敌口径盖回
         "bbq": "陆地鼠军",
         "fashishe": "陆地鼠军",
         "tianxie": "陆地鼠军",
         "shennong_god": ["陆地鼠军", "陆地鼠军", "陆地鼠军丨空军丨地鼠", "陆地鼠军丨空军丨地鼠"],
         "sheng_huo": ["陆地鼠军丨非主流丨幽灵", "陆地鼠军丨非主流丨幽灵", "陆地鼠军丨空军丨非主流丨地鼠丨幽灵", "陆地鼠军丨空军丨非主流丨地鼠丨幽灵"],
-        // 恶作剧神：子弹打 空中 / 陆地 / 潜水 / 地下（没有单一类型名能表达，手写覆盖）
         "joker": "陆地鼠军丨空军丨潜水丨地鼠",
-        // 结界马：结界内只打 空 / 陆 / 地鼠军（卡面原文），没有单一 target_type 能表达
-        "jiejiema": "陆地鼠军丨空军丨地鼠",
-        // 灰烬轰炸（固定落点）：子弹 Destroy 里 with (obj_enemy_parent) 扫全表、只按距离与行列筛，
-        // 不做类型判定，实际全打；卡片上的 target_type 只用来选落点，别拿它当口径。
         "chocolate_cannon": "陆地鼠军丨潜水丨空军丨非主流丨地鼠丨幽灵",
-        "ronghedapao": "陆地鼠军丨潜水丨空军丨非主流丨地鼠丨幽灵"
+        "ronghedapao": "陆地鼠军丨潜水丨空军丨非主流丨地鼠丨幽灵",
+        "jingangma": "陆地鼠军丨空军丨幽灵",
+        "hongliukaochuan": "陆地鼠军丨空军丨幽灵",
+        "hufa_god": ["陆地鼠军丨空军丨幽灵", "陆地鼠军丨空军丨幽灵",
+                     "陆地鼠军丨空军丨幽灵丨地鼠", "陆地鼠军丨空军丨幽灵丨地鼠"],
+        "yuansushe": "陆地鼠军"
     };
     return _o;
 }

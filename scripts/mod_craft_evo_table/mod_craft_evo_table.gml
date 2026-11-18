@@ -24,7 +24,7 @@
 ///    mod_evo_pick_target(card_id)     这张卡该进哪张金卡的哪个槽
 ///    mod_evo_resolve(target, slot, card_id)  落槽后两个槽应该是什么（缺的记 miss）
 ///    mod_evo_check(target, cards, miss)      能不能进化（缺卡 / 形态不足 / 凭证不足）
-///    mod_evo_reward(target)           成功落账：扣 1 张凭证 + 解锁金卡（星级从 0 起）
+///    mod_evo_reward(target)           成功落账：扣 1 张凭证 + 解锁金卡（星级继承两卡中较高的一档）
 ///    mod_evo_credit_id / mod_evo_has_credit / mod_evo_buyable_locked   凭证 id / 有没有 / 商店是否售完
 ///
 ///  四、绘制与文案
@@ -46,12 +46,12 @@ function mod_evo_table(){
                                         {id:"jingangma", slot:1, need:2} ] },  // 俱吠罗神使 ← 星火红柳烤串机 + 梵音金刚马（2026-11-11 按官方配方：金刚马替换幻境归元马）
         gongjiang_god:           { cards:[ {id:"pizza_oven", slot:0, need:2},
                                         {id:"laipishe", slot:1, need:2} ] },  // 鲁班神使 ← 大王赖皮蛇 + 拉丝披萨炉
-        brahma:                  { cards:[ {id:"magic_chicken", slot:0, need:2},
-                                        {id:"baibianshe", slot:1, need:2} ] },  // 梵天神使 ← 幻幻鸡（这卡只注册到本体，need 2 会被上限兜到 0）+ 双子百变蛇
+        brahma:                  { cards:[ {id:"baibianshe", slot:0, need:0},
+                                        {id:"magic_chicken", slot:1, need:2} ] },  // 梵天神使 ← 百变蛇（本体）+ 幻幻鸡（只注册到本体，need 2 会被上限兜到 0）
         guangming_god:           { cards:[ {id:"dragon_fruit", slot:0, need:2},
                                         {id:"dianman", slot:1, need:2} ] },  // 巴德尔神使 ← 九天皓日火龙果（主卡）+ 美味电鳗（副卡·进化，2026-11-07 用户改回）
-        shennong_god:            { cards:[ {id:"yanhuangma", slot:0, need:2},
-                                        {id:"huagao", slot:1, need:2} ] },  // 神农氏神使 ← 焚天炎凰马 + 梦境灯影花糕
+        shennong_god:            { cards:[ {id:"huagao", slot:0, need:2},
+                                        {id:"yanhuangma", slot:1, need:2} ] },  // 神农氏神使 ← 梦境灯影花糕 + 焚天炎凰马
         haiyang_god:             { cards:[ {id:"mozhang", slot:0, need:2},
                                         {id:"hspeed_juicer", slot:1, need:2} ] },  // 塔拉萨神使 ← 凤羽魔杖蛇 + 大菠萝榨汁机
         fengrao_god:             { cards:[ {id:"zhanqima", slot:0, need:2},
@@ -84,8 +84,8 @@ function mod_evo_table(){
                                         {id:"takoyaki", slot:1, need:2} ] },  // 狄安娜神使 ← 巨蟹座星宿 + 火影章鱼烧
         power_god:               { cards:[ {id:"tang_hu_lu", slot:0, need:2},
                                         {id:"fangkongmiao", slot:1, need:2} ] },  // 赫丘利神使（大力神）← 七彩糖葫芦弹 + 狂暴防空喵（2026-11-08 用户指定：主卡是糖葫芦，不是热狗榴弹炮）
-        gaia:                    { cards:[ {id:"curry_lobster_cannon", slot:0, need:2},
-                                        {id:"huojianzhu", slot:1, need:2} ] },  // 盖亚神使 ← 加农龙虾炮 + 反重力火箭猪（2026-11-08 用户指定副卡）
+        gaia:                    { cards:[ {id:"chocolate_cannon", slot:0, need:2},
+                                        {id:"huojianzhu", slot:1, need:2} ] },  // 盖亚神使 ← 死神大炮 + 反重力火箭猪（2026-11-21 按官方配方，替换加农龙虾炮）
         zhurong:                 { cards:[ {id:"pan_fried_bun", slot:0, need:2},
                                         {id:"dangdanghu", slot:1, need:2} ] },  // 祝融神使 ← 驴肉火烧锅 + 微波铛铛虎（2026-11-06 用户指定：替换糖炒栗子）
         rig:                     { cards:[ {id:"nut_frier", slot:0, need:2},
@@ -430,15 +430,18 @@ function mod_evo_pick_target(_card_id){
     return { target:_best, slot:_best_slot };
 }
 
-/// @func mod_evo_reward(target) 进化成功的落账：扣 1 张进化凭证 → 解锁金卡（星级从 0 起）
+/// @func mod_evo_reward(target) 进化成功的落账：扣 1 张进化凭证 → 解锁金卡（星级继承两卡中较高的一档）
 function mod_evo_reward(_target){
     var _lvl = global.save_data.unlocked_items.max_skill_level;
+    var _cs  = mod_evo_cards(_target);
+    // 金卡继承「两张前置卡里更高的星级」——不继承就要把同一张卡从 0 再养一遍
+    var _inh = 0;
+    for (var _ei = 0; _ei < array_length(_cs); _ei++) _inh = max(_inh, get_card_level(_cs[_ei].id));
     if (!global.debug) add_material_amount(mod_evo_credit_id(_target), -1);
-    unlock_card(_target, 0, 0, _lvl);
+    unlock_card(_target, _inh, 0, _lvl);
     // 前置卡被消耗：星级 / 转职 / 历史最高全清（debug 下不毁档）
     if (!global.debug){
-        var _cs = mod_evo_cards(_target);
-        for (var _i = 0; _i < array_length(_cs); _i++) reset_card_to_new(_cs[_i].id);
+        for (var _ri = 0; _ri < array_length(_cs); _ri++) reset_card_to_new(_cs[_ri].id);
     }
 }
 

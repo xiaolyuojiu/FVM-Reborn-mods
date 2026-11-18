@@ -6424,7 +6424,7 @@
             "boss_wave": true,
             "wave_index": 3.0,
             "boss": "lieutenant_buzz",
-            "boss_1_hp_modify": 3.8399999999999999,
+            "boss_1_hp_modify": 3.84,
             "subwaves": [
                 {
                     "subwave_index": 0.0,
@@ -8048,7 +8048,7 @@
                 }
             ],
             "boss2": "irritable_jack",
-            "boss_2_hp_modify": 3.2000000000000002
+            "boss_2_hp_modify": 3.2
         },
         {
             "boss_wave": true,
@@ -16473,37 +16473,37 @@
     ],
     "rewards": [
         {
-            "gold": 36000.0,
+            "gold": 176800.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 2400
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_5",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 2100
-                },
-                {
-                    "id": "clover_3",
-                    "amount": 15.0
                 }
             ]
         },
         {
             "skill_level": 0.0,
-            "gold": 36000.0,
+            "gold": 176800.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 2400
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_5",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 2100
-                },
-                {
-                    "id": "clover_3",
-                    "amount": 15.0
                 }
             ],
             "card_unlock": [],

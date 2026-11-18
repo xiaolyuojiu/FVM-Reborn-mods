@@ -3908,28 +3908,32 @@
     ],
     "rewards": [
         {
-            "gold": 9000.0,
+            "gold": 24200.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 600.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 500.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 1.0
                 }
             ]
         },
         {
-            "gold": 9000.0,
+            "gold": 24200.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 600.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",

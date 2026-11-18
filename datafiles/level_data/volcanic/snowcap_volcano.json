@@ -7647,16 +7647,16 @@
             "gold": 18000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 900.0
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 750.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 5.0
                 }
             ]
         },
@@ -7664,16 +7664,16 @@
             "gold": 18000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 900.0
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 750.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 5.0
                 }
             ],
             "card_unlock": [

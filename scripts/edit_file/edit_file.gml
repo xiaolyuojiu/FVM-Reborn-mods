@@ -99,13 +99,14 @@ function cleanup_orphan_cards() {
 /// @desc 升级卡片等级并保存存档
 /// @param {string} card_id 卡片ID
 /// @param {number} levels 要提升到的等级数
-function upgrade_card(card_id, levels) {
+/// @param {bool} _save 是否立刻写盘（默认 true；连写多次的调用方传 false，最后自己写一次）
+function upgrade_card(card_id, levels, _save = true) {
     for (var i = 0; i < array_length(global.save_data.unlocked_cards); i++) {
         if (global.save_data.unlocked_cards[i].id == card_id) {
             // 找到卡片，升级等级
             global.save_data.unlocked_cards[i].max_level = levels;
 			global.save_data.unlocked_cards[i].level = levels;
-            save_file(global.save_slot); // 立即保存
+            if (_save) save_file(global.save_slot); // 立即保存
             return true;
         }
     }
@@ -403,3 +404,28 @@ function set_gem_craft_bonus(gem_id,amount){
 	}
 	return false
 }
+
+// ── 卡片强化失败补偿（2026-11-19 v7）──────────────────────────────────
+//   全局一份，不再按卡算：每次失败 +2.00~4.00，加起来到 15.40 就停（补完可能超到 19.40）
+//   成功清零。字段 global.save_data.craft_fail_bonus，防炸三件套
+//   （variable_struct_exists → is_real → clamp）缺一不可。
+function get_craft_fail_bonus(){
+	var _v = 0
+	if variable_struct_exists(global.save_data, "craft_fail_bonus") _v = global.save_data.craft_fail_bonus
+	if !is_real(_v) _v = 0
+	return round(clamp(_v, 0, 20) * 100) / 100
+}
+
+function add_craft_fail_bonus(_save = true){
+	// 2026-11-20：每次 +2~3（原 2~4），封顶 15（原 15.4）→ 补偿最多贡献 +15 个百分点
+	if get_craft_fail_bonus() >= 15 return 0
+	var _v = get_craft_fail_bonus() + round(random_range(2.00, 3.00) * 100) / 100
+	global.save_data.craft_fail_bonus = _v
+	if (_save) save_file(global.save_slot)
+	return _v
+}
+
+function reset_craft_fail_bonus(){
+	global.save_data.craft_fail_bonus = 0
+}
+

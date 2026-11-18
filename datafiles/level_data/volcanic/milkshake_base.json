@@ -2522,21 +2522,29 @@
     ],
     "rewards": [
         {
-            "gold": 12000.0,
+            "gold": 239200.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 3600
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_5",
+                    "amount": 1.0
                 }
             ]
         },
         {
             "skill_level": 0.0,
-            "gold": 12000.0,
+            "gold": 239200.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 3600
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_5",
+                    "amount": 1.0
                 },
                 {
                     "id": "gold_cookbook_fragment",

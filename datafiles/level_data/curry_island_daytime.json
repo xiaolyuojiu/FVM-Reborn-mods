@@ -1985,8 +1985,12 @@
             "gold": 3000.0,
             "items": [
                 {
-                    "id": "natural_spices",
-                    "amount": 50.0
+                    "id": "warcard_5",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_1",
+                    "amount": 1.0
                 },
                 {
                     "id": "less_crystal",
@@ -2001,8 +2005,12 @@
             "gold": 3000.0,
             "items": [
                 {
-                    "id": "natural_spices",
-                    "amount": 50.0
+                    "id": "warcard_5",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_1",
+                    "amount": 1.0
                 },
                 {
                     "id": "less_crystal",

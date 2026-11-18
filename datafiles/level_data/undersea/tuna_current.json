@@ -2882,7 +2882,7 @@
             "boss_wave": true,
             "wave_index": 5.0,
             "boss": "blonde_mary",
-            "boss_1_hp_modify": 0.80000000000000004,
+            "boss_1_hp_modify": 0.8,
             "subwaves": [
                 {
                     "subwave_index": 0.0,
@@ -3138,16 +3138,16 @@
             "gold": 4000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 100.0
+                    "id": "warcard_6",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_2",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 75.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 1.0
                 }
             ]
         },
@@ -3156,16 +3156,16 @@
             "gold": 4000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 100.0
+                    "id": "warcard_6",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_2",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 75.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 1.0
                 }
             ],
             "card_unlock": [

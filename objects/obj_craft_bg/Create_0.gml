@@ -18,13 +18,11 @@ var btn3 = instance_create_depth(x-661,y+250,depth-1,obj_craft_select_btn)
 btn3.button_index = 2
 btn3.text_spr = spr_transfer_tab_text
 
-// 底部材料余量条：卡片页 15 项（7 香料 + 8 四叶草），按 7 / 8 排两行（Draw_0 的 _strip_row_break）
-// 顺序：先香料（低→高，13★ 起是金马盛典新增的珍珠/王冠/羽翼/圣泉），再四叶草（1→4→5→6→S→SS）
-card_material_id_list = ["natural_spices","secret_spices","royal_spices","magic_spices","elf_spices","angel_spices","saint_spices","clover_1","clover_2","clover_3","clover_4","clover_5","clover_6","clover_s","clover_ss"]
-card_material_row_break = 7   // 下标 < 7 走第一行（香料），其余走第二行（四叶草）
+// 底部材料余量条（卡片强化页）：分页道具条，内容由 craft_bar_page_ids() 动态给
+// （只放持有 > 0 的，左对齐重排）。
 gem_material_id_list = ["less_crystal","middle_crystal","advanced_crystal"]
-// 融合页底部道具栏固定 10 格，塞不下 15 种 → 单独一张表，保持原来 7 项不变
-fusion_material_id_list = ["natural_spices","secret_spices","royal_spices","clover_1","clover_2","clover_3","clover_4"]
+// 融合页底部道具栏：固定 10 格，只摆这一页真会消耗的东西 —— 三档融合剂
+fusion_material_id_list = ["fusion_basic","fusion_deep","fusion_soul"]
 
 
 hover_card_index = -1
@@ -260,7 +258,7 @@ fusion_sb2h = 208 * fusion_ws
 // 槽内小字：44x40 画布里字形并不居中，按字形包围盒中心兜回来（否则看着总是偏右偏下）
 fusion_lbl_cx = [25.5, 27.5, 27.5, 25, 25, 25]
 fusion_lbl_cy = 21
-// 常用尺寸常量（原来散在 Draw_0 里写死，挪位置要改好几处）
+// 常用尺寸常量（改版式只改这里）
 fusion_slot_inner  = 29;      // 槽内容中心（58/2，横竖都用它）
 fusion_card_inner  = 34;      // 卡槽内容中心 y（68/2）
 fusion_cell_h      = 46.7;    // 底部道具栏格高（×ws = 84px）
@@ -269,7 +267,7 @@ fusion_need_txt_y  = 50;      // 「当前/需求」文字 y
 fusion_card_base_s = 0.25;    // 卡底缩放（跟强化页/列表一口径）
 fusion_card_face_s = 0.7;     // 卡面缩放
 
-// ── 三档配置：需金币 / 融合剂（秘制 → 四叶草 → 皇室）──
+// ── 三档配置：需金币 / 融合剂（初级 → 深度 → 灵魂，各 5 个）──
 fusion_levels = mod_fusion_levels();          // 三档配置（名字/形态/金币/材料）走 mod/craft 表
 
 // ── 配方数据全在 scripts/mod_craft_fusion_table（一张融合卡一个条目，主副卡写在一起）──
@@ -285,8 +283,7 @@ function fusion_recipe_owned(_id, _shape){
 	return has_fusion_recipe(_id, _shape);
 }
 
-// 菜谱图标只有一种画法：mod_fusion_draw_recipe（底板 + 该卡该形态的卡面），
-// 旧的「拿菜谱道具图去画」那套（fusion_recipe_spr / fusion_recipe_sprite）已整套删掉
+// 菜谱图标只有一种画法：mod_fusion_draw_recipe（底板 + 该卡该形态的卡面）
 
 /// @func fusion_recipe_list(shape) 当前档位「还拥有」的食谱 → **融合卡 id 数组**（Draw / Step 共用）
 function fusion_recipe_list(_shape){
@@ -407,11 +404,11 @@ function fusion_confirm_draw(){
 	draw_set_valign(fa_middle);
 	draw_set_colour(c_white);
 	draw_text(_px, _py - 112, "系统提示");
-	draw_text(_px, _py - 20, "融合后，菜谱以及融合剂");
+	draw_text(_px, _py - 20, "融合后，副卡进度、菜谱以及融合剂");
 	draw_text(_px, _py + 12, "将消失，是否消耗金币继续？");
 	// 材料卡会被打回刚解锁状态，跟"保险金"提示同一套红字样式
 	draw_set_colour(make_colour_rgb(215, 40, 40));
-	draw_text_transformed(_px, _py + 112, "所用卡的星级与转职将清零", 1.1, 1.1, 0);
+	draw_text_transformed(_px, _py + 112, "进度指星级/转职重置，卡片本身不消失", 1.05, 1.05, 0);
 	draw_set_colour(c_white);
 	var _lbl = ["确定", "取消"];
 	for (var _i = 0; _i < 2; _i++){
@@ -449,11 +446,11 @@ function evo_confirm_draw(){
 	draw_set_valign(fa_middle);
 	draw_set_colour(c_white);
 	draw_text(_px, _py - 112, "系统提示");
-	draw_text(_px, _py - 20, "进化后，进化凭证将被消耗，");
+	draw_text(_px, _py - 20, "进化后，卡牌进度、进化凭证将被消耗，");
 	draw_text(_px, _py + 12, "是否继续？");
 	// 材料卡会被打回刚解锁状态，跟"保险金"提示同一套红字样式
 	draw_set_colour(make_colour_rgb(215, 40, 40));
-	draw_text_transformed(_px, _py + 112, "所用卡的星级与转职将清零", 1.1, 1.1, 0);
+	draw_text_transformed(_px, _py + 112, "进度指星级/转职重置，卡片本身不消失", 1.05, 1.05, 0);
 	draw_set_colour(c_white);
 	var _lbl = ["确定", "取消"];
 	for (var _i = 0; _i < 2; _i++){
@@ -532,7 +529,7 @@ function fusion_check(){
 		gold_ok: false, mat_ok: false, main_ok: false, sub_ok: false,
 		main_id: "", sub_id: "", need_main: 0, need_sub: 0
 	};
-	if (fusion_stage != 1){ _r.reason = "先选一条融合菜谱"; return _r; }
+	if (fusion_stage != 1){ _r.reason = "请选择融合菜谱"; return _r; }
 
 	// 主卡 / 副卡要哪张、要几转，全走 fusion_main_req() / fusion_sub_card()（口径只有一处）
 	var _mq      = fusion_main_req();
@@ -547,11 +544,14 @@ function fusion_check(){
 	_r.gold_ok = (global.save_data.player.gold >= _cfg.gold);
 	_r.mat_ok  = (get_material_amount(_cfg.mat) >= _cfg.mat_n);
 
-	// 提示词只说「缺哪一边」，具体要几转由槽位卡面 / 灰显表达（用户 2026-10-24 口径）
-	if (!_r.main_ok)      _r.reason = "缺少可用融合主卡，无法融合";
-	else if (!_r.sub_ok)  _r.reason = "缺少可用融合副卡，无法融合";
-	else if (!_r.gold_ok) _r.reason = "金币不足，无法融合";
-	else if (!_r.mat_ok)  _r.reason = "融合剂不足，无法融合";
+	// 缺卡一律报「缺少XX」：直接写缺的那个形态卡名，主副都缺就是「缺少A与B」
+	var _miss = [];
+	if (!_r.main_ok && _r.main_id != "") array_push(_miss, fusion_recipe_card_name(_r.main_id, _r.need_main));
+	if (!_r.sub_ok  && _r.sub_id  != "") array_push(_miss, fusion_recipe_card_name(_r.sub_id,  _r.need_sub));
+	if (array_length(_miss) == 1)      _r.reason = "缺少" + _miss[0];
+	else if (array_length(_miss) > 1)  _r.reason = "缺少" + _miss[0] + "与" + _miss[1];
+	else if (!_r.gold_ok)              _r.reason = "金币不足";
+	else if (!_r.mat_ok)               _r.reason = _cfg.name + "融合剂数量不够";
 	else _r.ok = true;
 	return _r;
 }
@@ -604,24 +604,46 @@ function fusion_card_sort(_list){
 }
 
 // Probability-upgrade toggles
-rate_toggle_x = x - 600
-rate_toggle_y = y - 105
-rate_toggle_hover = false
+// 🔴 2026-11-19：「概率强化」勾选框删除（强化恒定按概率走），那个位置换成「强化说明」按钮；
+//    「一键强化」按钮放对面（同一水平线的右端）。几何都在这里，Draw / Step 只读。
+craft_help_btn_x = x - 548          // 「强化说明」（spr_craft_help_btn 中心锚点，右移避开纸边）
+craft_help_btn_y = y - 104
+craft_help_btn_hover = false
+craft_help_open = false             // 说明弹窗开着
+craft_help_ok_hover = false         // 弹窗「确定」悬停
+craft_onekey_x = x - 74             // 「一键强化」（右上角，和说明左右对称）
+craft_onekey_y = y - 104
+craft_onekey_hover = false
+craft_onekey_open = false           // 一键强化弹窗开着
+craft_onekey_stage = 0              // 0 = 介绍 / 1 = 消耗预览
+craft_onekey_plan_data = undefined  // 预览阶段算好的计划（craft_onekey_plan 返回）
+craft_onekey_hover_idx = -1         // 0 确定 / 1 取消
 assure_badge_cx = x - 90
 assure_badge_cy = y + 140
 assure_toggle_x = x - 90
 assure_toggle_y = y + 202
 assure_toggle_hover = false
 
-spices_use_order = ["natural_spices","secret_spices","royal_spices","magic_spices","elf_spices","angel_spices","saint_spices"]
-clover_use_order = ["clover_1","clover_2","clover_3","clover_4","clover_5","clover_6","clover_s","clover_ss"]
+// ── 强化 v7 三槽状态（2026-11-19）──────────────────────────────────
+//   槽里的料由玩家点底部道具条填；"" = 空槽（空槽不消耗、不加概率）
+spice_slot   = ["", "", ""]          // 三个料槽：**只表示摆放位置，不决定权重**
+                                        //   权重在 craft_bare_rate() 里按**星级**分配：最高星 1、其余各 ⅓
+                                        //   → 不管先放低星还是后放高星，谁星高谁当主槽（2026-11-20）
+clover_slot  = ""                    // "" = 不放（×1.0）
+craft_mat_page = 0                   // 道具条页码（一条长表按 10 格翻）
+craft_mat_hover = -1                 // 道具条上悬停的格子下标（Draw 每帧算）
+craft_arrow_l_hover = false
+craft_arrow_r_hover = false
+
+clover_use_order = ["clover_1","clover_2","clover_3","clover_4","clover_5","clover_6","clover_s","clover_ss",
+                    "clover_sss","clover_ssr","clover_snake","clover_horse"]
 crystal_use_order = ["less_crystal","middle_crystal","advanced_crystal"]
 
 // 整块面板的进出场过渡（实现在 scripts/GuiStack/GuiStack.gml）
 // ─────────────────────────────────────────────────────────────
 // 卡片转职页（craft_top_tab == 2）—— 2026-10-25
 // 几何 / 状态 / 判定函数全部集中在这里，Draw 与 Step 共用同一套（别各算一份）
-// 消耗入口 = 左侧第 3 个按钮；凭证来自商店；数值挂点见 tg_gold_cost / tg_assure_cost / tg_rate
+// 消耗入口 = 左侧第 3 个按钮；凭证来自商店；数值挂点见 mod_tg_gold / tg_assure_cost / mod_tg_rate
 // ─────────────────────────────────────────────────────────────
 tg_slot_x = [x - 455, x - 305, x - 155]      // 屏幕顺序：左 A / 中 C / 右 B
 tg_slot_y = y - 20
@@ -646,7 +668,7 @@ tg_fill_name     = ""                          // 凭证名（卡名（X转凭�
 // ── 「转职说明」按钮（2026-10-28 新增）──
 //   位置 = 面板米色区左上角的空白处（用户圈的位置：凭证 A 槽左上方）
 //   素材 spr_transfer_help 88×33，三帧（0 常态 / 1 悬停 / 2 备用），按下缩 0.96 做手感
-//   点它 → 「转职说明」弹窗：一转 6 星 / 二转 10 星（星级门槛的实装在 mod_tg_star_need）
+//   点它 → 「转职说明」弹窗：一转 9 星 / 二转 12 星（星级门槛的实装在 mod_tg_star_need）
 tg_help_x     = x - 550                        // 按钮中心 X（面板坐标；贴米色区左边缘，离边框约 10px）
 tg_help_y     = y - 110                        // 按钮中心 Y（凭证槽在 y-20，槽顶在 y-67）
 tg_help_s     = 1.3                            // 显示倍数（88×33 → 114×43）
@@ -705,13 +727,9 @@ tg_assure = false                             // 保险金开关（独立于强�
 //         **保险金开关本身不影响次数**（开着关着来回点，已累计的照旧；保险金只管失败退不退凭证）
 //   🔴 2026-11-06 用户改口径：「不要切换卡或退出界面重置保底计数，这个额外效果去掉，
 //      就正常的每张卡自己独立保底」→ 计数挂在**存档里每张卡自己身上**
-//      （save_data.unlocked_cards[i].tg_pity / .tg_hidden，写法同卡牌强化的 craft_fail_streak），
+//      （save_data.unlocked_cards[i].tg_pity，写法同卡牌强化的 craft_fail_streak），
 //      换卡 / 切页签 / 退出合成屋 都不清零；**只有转职成功**才清这张卡。每个存档独立计。
 //      读写一律走 mod_craft_transfer_table 里的 mod_tg_pity_get / _set / _clear。
-// 转职暗概率（2026-10-30 用户定，2026-11-06 一并改成按卡存）：
-//   每失败一次，下一次成功率暗暗 +5 个百分点（不显示给玩家），成功即归零。
-//   存 unlocked_cards[i].tg_hidden，寿命与保底完全一致。
-tg_hidden_step = 5                            // 每次失败加的百分点
 tg_hover_card = -1
 tg_btn_hover = false
 tg_btn_press = 0
@@ -752,9 +770,7 @@ function tg_confirm_draw(){
 function tg_help_rect(){ return mod_tg_help_rect(); }
 function tg_help_draw(){ mod_tg_help_draw(tg_help_hover); }
 function tg_target_shape(_id){ return mod_tg_target_shape(_id); }
-function tg_gold_cost(_tier){ return mod_tg_gold(_tier); }
 function tg_assure_cost(_tier){ return mod_tg_assure(_tier); }
-function tg_rate(_tier){ return mod_tg_rate(_tier); }
 
 /// @func tg_meta_get(id) 取卡的元数据（shape / level / is_gold / sprite / cost）；没建过 → undefined
 function tg_meta_get(_id){
@@ -847,14 +863,13 @@ function tg_do(){
     // ── 转职保底（2026-11-06）：每次转都累计，跟保险金开不开无关；到档位上限那一次必成 ──
     //    计数按卡存在存档里，换卡 / 切页 / 退出都不清（只有转职成功在 tg_fx_commit 里清）
     var _pity = mod_tg_pity_get(_id);
-    // 实际成功率 = 基础成功率 + 暗概率加成（每次失败 +5%，成功归零）
-    var _eff_rate = min(100, _r.rate + mod_tg_hidden_get(_id));
-    var _roll = mod_tg_roll(_eff_rate, _pity, mod_tg_pity_max(transfer_credit_tier(tg_card, _shape)));
+    // 成功率就是界面显示的那个数（2026-11-21 去掉暗概率：有保底就不再加隐性加成）
+    var _roll = mod_tg_roll(_r.rate, _pity, mod_tg_pity_max(transfer_credit_tier(tg_card, _shape)));
     mod_tg_pity_set(_id, _roll.pity);
     var _win = _roll.win;
 
     if (_win){
-        // 保留原来的 level / skill，只把形态提上去（unlock_card 内部取 max，不会降）
+        // 保留 level / skill，只把形态提上去（unlock_card 内部取 max，不会降）
         var _lev = 0;
         var _skl = 0;
         var _uc = global.save_data.unlocked_cards;
@@ -882,8 +897,6 @@ function tg_do(){
         // 失败是即时的（没有动画）：钱照扣；保险金开着则凭证保住，没开就连凭证一起扣
         global.save_data.player.gold -= _r.gold + _r.assure;
         if (!tg_assure) add_material_amount(transfer_credit_id(_id, _shape), -1);
-        // 炸一次 → 暗概率 +5 个百分点（上限 100），下次掷骰就吃到
-        mod_tg_hidden_set(_id, min(100, mod_tg_hidden_get(_id) + tg_hidden_step));
         tg_notice("不够好运，转职失败");
         save_file(global.save_slot);
     }
@@ -966,7 +979,6 @@ evo_sb = { on:false, y:0, off:0 }
 //   （扣金币·融合剂·食谱 / 扣凭证·提形态 / 合卡给金卡）。
 //   → 演出期间**不许操作、不许退出**：页签、档位、升格按钮、右上角 X、ESC 全锁，
 //     保证演出一定播得完，不会出现「点 X 提前退出 = 白扣材料 / 白转」。
-//   ⚠️ 之前的「中途退出就算浪费」的口径已作废（用户 2026-11-11 明确：不要那种设定）。
 //   ⚠️ 窗口右上角那个系统 X 拦不了（LTS2026 运行时没有 window_set_close_button），
 //      Alt+F4 / 强退属于玩家主动杀进程，不在锁定范围。
 
@@ -1069,12 +1081,12 @@ function evo_commit(){
     var _p = evo_fx_pending;
     evo_fx_pending = undefined;
     if (is_undefined(_p)) return;
-    // 扣凭证 + 解锁金卡（星级从 0 起）都在 mod_evo_reward 里
+    // 扣凭证 + 解锁金卡（星级继承两卡较高的一档）都在 mod_evo_reward 里
     mod_evo_reward(_p.target);
     evo_clear();
     evo_list_dirty = true;
     if (variable_global_exists("notice_list")) global.notice_list = [];
-    show_notice("进化成功！", 80);
+    show_notice("成功进化为" + mod_evo_card_name(_p.target), 80);
     save_file(global.save_slot);
 }
 
@@ -1107,7 +1119,7 @@ function evo_rebuild(){
 // ─────────────────────────────────────────────────────────────
 // 神级进化页 · 子页（2026-11-16）
 //   gear_evo_page：0 = 金卡进化（原有三槽那套）/ 1 = 神器进化 / 2 = 宝石进化
-//   书页左侧原来是**一张**烤了「金卡进化」字的 spr_evo_left_on，现在画**三个**竖排按钮，
+//   书页左侧画**三个**竖排按钮，
 //   三张都是原版美术（字烤在图里，别自绘）：
 //     spr_evo_left_on（1 帧）/ spr_evo_left_artifact（2 帧）/ spr_evo_left_gem（2 帧）。
 //   神器 / 宝石两页共用「旧物槽 + 凭证槽 → ▼ → 结果槽 → 进化按钮 + 右侧列表 + 底部凭证架」。
@@ -1120,7 +1132,7 @@ gear_left_x    = x - 660
 gear_left_y    = [y - 67, y + 80, y + 227]      // 三个竖排按钮中心（整组中心仍 = y+80）
 //   间距 147（不是 150）：精灵 46×85 ×1.8 = **153 高**，四角圆角各 3px（×1.8 = 5.4）。
 //   相邻两块必须重叠 ≥ 圆角，接缝才不会露出底图纸色 —— 153 - 147 = 6px 重叠刚好盖住。
-//   原来是 160（缝 7px，用户 2026-11-16 报的「有缝」），150 时只剩 3px 重叠、圆角处仍会漏一线。
+//   150 时只剩 3px 重叠、圆角处仍会漏一线（就是用户 2026-11-16 报的「有缝」）。
 //   ⚠️ 热区半高必须 ≤ 间距/2（Step_0 里用 ±73），否则相邻热区重叠、点接缝会选到下格。
 gear_slot_x    = [x - 455, x - 155]             // 旧物 / 凭证（间距 300，与金卡页一致）
 gear_slot_y    = y - 40
@@ -1582,6 +1594,7 @@ craft_card_order = function() {
     var _n = array_length(global.save_data.unlocked_cards);
     for (var i = 0; i < _n; i++) {
         var _c    = global.save_data.unlocked_cards[i];
+        if ((variable_struct_exists(_c, "max_level") ? _c.max_level : 0) >= 16) continue;   // 满级卡不参与推荐
         var _slot = deck_get_card_data(_c.id, _c.shape);
         if (_slot != noone && ds_map_find_value(_slot, "is_fusion") == 1)      array_push(_fusion, i);
         else if (_slot != noone && ds_map_find_value(_slot, "is_gold") == 1)   array_push(_gold, i);

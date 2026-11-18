@@ -2291,7 +2291,7 @@
             "boss_wave": true,
             "wave_index": 4.0,
             "boss": "hercules",
-            "boss_1_hp_modify": 0.80000000000000004,
+            "boss_1_hp_modify": 0.8,
             "subwaves": [
                 {
                     "subwave_index": 0.0,
@@ -3188,20 +3188,28 @@
     ],
     "rewards": [
         {
-            "gold": 8000.0,
+            "gold": 152800.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 2400.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 }
             ]
         },
         {
-            "gold": 8000.0,
+            "gold": 152800.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 2400.0
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "silver_cookbook_fragment",

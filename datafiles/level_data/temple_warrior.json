@@ -4568,7 +4568,7 @@
                     ]
                 }
             ],
-            "boss_1_hp_modify": 3.2000000000000002,
+            "boss_1_hp_modify": 3.2,
             "boss2": "",
             "boss_2_hp_modify": 1.0
         },
@@ -6798,7 +6798,7 @@
                     ]
                 }
             ],
-            "boss_1_hp_modify": 3.6000000000000001,
+            "boss_1_hp_modify": 3.6,
             "boss2": "",
             "boss_2_hp_modify": 1.0
         },
@@ -11228,43 +11228,43 @@
                     ]
                 }
             ],
-            "boss_1_hp_modify": 4.8499999999999996,
+            "boss_1_hp_modify": 4.85,
             "boss2": "",
             "boss_2_hp_modify": 1.0
         }
     ],
     "rewards": [
         {
-            "gold": 12000.0,
+            "gold": 12800.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 600.0
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 500.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 3.0
                 }
             ]
         },
         {
-            "gold": 12000.0,
+            "gold": 12800.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 600.0
+                    "id": "warcard_10",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 500.0
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 3.0
                 }
             ],
             "card_unlock": [],

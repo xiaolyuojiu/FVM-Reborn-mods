@@ -3281,16 +3281,16 @@
             "gold": 10000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 400.0
+                    "id": "warcard_8",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_3",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 300.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 3.0
                 }
             ]
         },
@@ -3307,16 +3307,16 @@
             "gold": 10000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 400.0
+                    "id": "warcard_8",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_3",
+                    "amount": 2.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 300.0
-                },
-                {
-                    "id": "clover_1",
-                    "amount": 3.0
                 }
             ]
         }

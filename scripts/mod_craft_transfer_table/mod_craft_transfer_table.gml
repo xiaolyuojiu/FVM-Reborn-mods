@@ -3,25 +3,24 @@
 ///  这个文件 = 转职的**全部数值 + 全部规则 + 确认窗绘制**，obj_craft_bg 只调它
 ///  对象那边只留：几何（tg_* 坐标）/ 界面状态（tg_card·tg_assure·tg_confirm·tg_fx）
 ///                列表与元数据缓存（tg_rebuild）/ Draw 与 Step
-///  详细方案：桌面\fvm的ai\转职系统方案.md
 ///
 ///  ⚠️ 下面所有函数的 tier 参数都是**凭证档位 1~5**（1 一转 / 2 二转 / 3 三转 / 4 四转 / 5 终转），
 ///     **不是卡形态**；金卡的档位 = 卡形态 + 2
 ///
 ///  一、数值（要改就改这里，全工程生效）
-///    mod_tg_gold(tier)      转职金币   3000 / 10000 / 50000 / 100000 / 200000（档位越界按 15000）
-///    mod_tg_assure(tier)    保险金     5000 / 40000 / 100000 / 200000 / 300000（越界按 50000）
+///    mod_tg_gold(tier)      转职金币   4,000 / 20,000 / 55,000 / 85,000 / 130,000（越界按 30,000）
+///    mod_tg_assure(tier)    保险金     2,000 / 5,000 / 8,000 / 12,000 / 20,000（失败保住凭证）
 ///    mod_tg_rate(tier)      成功率(%)  一转 30，其余 20
-///    mod_tg_pity_max(tier)  保底次数   一转 6 / 二转 9 / 三·四·终转 12（与保险金开关无关）
-///    mod_tg_star_need(tier) 星级门槛   一转 6 / 二转 10 / 三转 13 / 四转 14 / 终转 16（0 = 不要求）
+///    mod_tg_pity_max(tier)  保底次数   一转 6 / 其余 9（与保险金开关无关）
+///    mod_tg_star_need(tier) 星级门槛   一转 9 / 二转 12 / 三转 13 / 四转 14 / 终转 16（0 = 不要求）
 ///
 ///  二、规则（纯函数，不碰实例变量 —— 状态全由调用方传进来）
 ///    mod_tg_target_shape(card_id)                    目标形态 = 练到过的最高形态 + 1
 ///    mod_tg_check(card_id, assure_on, gold, debug)   能不能转 → { ok, reason, shape, gold, rate, assure, has_credit }
 ///    mod_tg_roll(rate, pity, pity_max)               掷骰 + 保底 → { win, pity }（保底轮必成）
-///    mod_tg_guaranteed(pity, pity_max)               下一次是不是保底轮（一转第 6 / 二转第 9 / 三·四·终转第 12 次）
+///    mod_tg_guaranteed(pity, pity_max)               下一次是不是保底轮（一转第 6 / 其余第 9 次）
 ///    mod_tg_rate_text(rate, pity, pity_max)          成功率条文案：`30%(1/6)` / 保底轮 `100%`
-///    mod_tg_pity_get / _set / mod_tg_hidden_get / _set / mod_tg_pity_clear
+///    mod_tg_pity_get / _set / mod_tg_pity_clear
 ///                                                    保底与暗概率**按卡存在 global.tg_pity**（进程内，不写存档），
 ///                                                    换卡/切页/退出都不清，只有转职成功才 clear
 ///
@@ -46,29 +45,31 @@
 /// =============================================================================
 
 /// @func mod_tg_gold(tier) 转职金币（tier = 凭证档位 1~5，不是卡形态）
-/// 🔴 用户定价（2026-10-27 定稿）：一转 3,000 / 二转 10,000 / 三转 50,000 / 四转 100,000 / 终转 200,000
+/// 🔴 2026-11-21：本体按「期望支出占当时资产」定档（一转 ~9%、二转 ~14%），保费只收 1/5~1/8
 function mod_tg_gold(_tier){
     switch (_tier){
-        case 1: return 1000;      // 一转
-        case 2: return 3000;     // 二转
-        case 3: return 10000;      // 三转（金卡）
-        case 4: return 20000;     // 四转（金卡）
-        case 5: return 50000;     // 终转（金卡）
+        case 1: return 4000;      // 一转（9★）
+        case 2: return 20000;     // 二转（12★）
+        case 3: return 55000;     // 三转（金卡 13★）
+        case 4: return 85000;     // 四转（金卡 14★）
+        case 5: return 130000;    // 终转（金卡 16★）
     }
-    return 15000;
+    return 30000;
 }
 
 /// @func mod_tg_assure(tier) 保险金（货币 = 金币；tier = 凭证档位 1~5）
-/// 🔴 用户定价（2026-10-30 调整）：一转 5,000 / 二转 40,000 / 三转 100,000 / 四转 200,000 / 终转 300,000
+/// 🔴 2026-11-21：单独一张固定表，不跟本体联动
 function mod_tg_assure(_tier){
+    // 保费 = 本体价的 1/3 ~ 1/4：转职有真保底（一转 6 次 / 其余 9 次），
+    //   失败次数封顶 → 总支出可预期，所以保费只收手续费，不按凭证价值定价
     switch (_tier){
-        case 1: return 2000;      // 一转
-        case 2: return 12000;     // 二转
-        case 3: return 40000;      // 三转（金卡）
-        case 4: return 80000;     // 四转（金卡）
-        case 5: return 100000;     // 终转（金卡）
+        case 1: return 2000;      // 一转（本体 1 万）
+        case 2: return 5000;      // 二转（本体 3 万）
+        case 3: return 8000;      // 三转（本体 5.5 万）
+        case 4: return 12000;     // 四转（本体 8.5 万）
+        case 5: return 20000;     // 终转（本体 13 万）
     }
-    return 50000;
+    return 5000;
 }
 
 /// @func mod_tg_rate(tier) 成功率（%）：一转 30，其余 20
@@ -78,23 +79,20 @@ function mod_tg_rate(_tier){
 }
 
 /// @func mod_tg_pity_max(tier) 转职保底次数（按凭证档位）
-///   2026-11-03 用户定：**一转 6 次 / 二转 9 次 / 三转·四转·终转 12 次**
+///   **一转 6 次；二 / 三 / 四 / 终转一律 9 次**（2026-11-20 三·四·终 由 12 改 9）
 ///   🔴 按**档位**取值，不是按卡形态：普卡 一转=1 / 二转=2，金卡 三·四·终转 = 3/4/5
-///      （别把 6 套到二转上 —— 二转是 9）
 ///   与保险金开关无关（开关不影响累计，也不影响必成）
 /// @param _tier 凭证档位 1~5（不是卡形态；金卡 = shape + 2）
 function mod_tg_pity_max(_tier){
-    switch (_tier){
-        case 1: return 6;       // 一转
-        case 2: return 9;       // 二转
-    }
-    return 12;                  // 三转 / 四转 / 终转（金卡）
+    // 只有一转特殊（6 次），其余档位统一走默认 9 —— 别再补 case 2，它跟默认值重复
+    if (_tier == 1) return 6;
+    return 9;
 }
 
 // ── 保底 / 暗概率的**存储**（2026-11-06 用户改口径）──
 //   用户原话：「不要切换卡或退出界面重置保底计数，这个额外效果去掉，就正常的每张卡自己独立保底」
 //   🔴 存法照抄卡牌强化的 `craft_fail_streak`：**写在 save_data.unlocked_cards 每条卡自己身上**
-//     字段：tg_pity（已累计次数）/ tg_hidden（暗概率百分点）
+//     字段：tg_pity（已累计次数）
 //     → 每个存档单独计、每张卡单独计；老存档没有这两个字段时按 0 读（`variable_struct_get` 取到 undefined）
 //   生命周期：
 //     不清 —— 换卡 / 切页签 / 退出合成屋（都还在存档里那条卡上）
@@ -124,35 +122,10 @@ function mod_tg_pity_set(_id, _n){
     return false;
 }
 
-/// @func mod_tg_hidden_get(card_id) 这张卡的暗概率加成（每次失败 +5 个百分点，成功归零）
-function mod_tg_hidden_get(_id){
-    if (_id == "") return 0;
-    var _uc = global.save_data.unlocked_cards;
-    for (var _i = 0; _i < array_length(_uc); _i++){
-        if (_uc[_i].id != _id) continue;
-        var _v = variable_struct_get(_uc[_i], "tg_hidden");
-        return is_undefined(_v) ? 0 : _v;
-    }
-    return 0;
-}
-
-/// @func mod_tg_hidden_set(card_id, n) 写回这张卡的暗概率加成
-function mod_tg_hidden_set(_id, _n){
-    if (_id == "") return false;
-    var _uc = global.save_data.unlocked_cards;
-    for (var _i = 0; _i < array_length(_uc); _i++){
-        if (_uc[_i].id != _id) continue;
-        _uc[_i].tg_hidden = _n;
-        return true;
-    }
-    return false;
-}
-
-/// @func mod_tg_pity_clear(card_id) 清掉这张卡的保底 + 暗概率（只在转职成功时调）
+/// @func mod_tg_pity_clear(card_id) 清掉这张卡的保底计数（只在转职成功时调）
 function mod_tg_pity_clear(_id){
     if (_id == "") return;
     mod_tg_pity_set(_id, 0);
-    mod_tg_hidden_set(_id, 0);
 }
 
 /// @func mod_tg_tier_short(tier) 档位简称：「一转 / 二转 / 三转 / 四转 / 终转」（不带「凭证」两字）
@@ -169,13 +142,13 @@ function mod_tg_tier_short(_tier){
 }
 
 /// @func mod_tg_star_need(tier) 该档转职要求的**星级**（0 = 不要求）
-///   🔴 2026-10-29 用户定（2026-10-30 一转由 7 降到 6）：**一转 6 星 / 二转 10 星 / 三转 13 星 / 四转 14 星 / 终转 16 星**
+///   🔴 2026-11-21 用户定：**一转 9 星 / 二转 12 星 / 三转 13 星 / 四转 14 星 / 终转 16 星**
 ///      （三·四·终转 = 金卡的 1/2/3 形态；16 星是星级上限）
 ///      面板左上角的「转职说明」按钮直接遍历这 5 档显示「X转：X星」，改数不用改弹窗
 function mod_tg_star_need(_tier){
     switch (_tier){
-        case 1: return 6;      // 一转（2026-10-30 由 7 降到 6）
-        case 2: return 10;     // 二转
+        case 1: return 9;      // 一转（2026-11-21 改回 9★）
+        case 2: return 12;     // 二转（2026-11-21 改回 12★）
         case 3: return 13;     // 三转（金卡）
         case 4: return 14;     // 四转（金卡）
         case 5: return 16;     // 终转（金卡）
@@ -242,7 +215,7 @@ function mod_tg_check(_card_id, _assure_on, _gold, _debug = false){
 /// @func mod_tg_roll(rate, pity, pity_max) 掷骰 + 保底
 ///   保底口径（2026-10-28 用户定，2026-11-03 补「必成轮写死 100%」）：
 ///     ① **每次转职都累计**，跟保险金开不开无关（保险金只管失败退不退凭证）；
-///     ② 累计到 pity_max 的那一次（一转第 6 / 二转第 9 / 三·四·终转第 12 次）**必成**：成功率直接按 100% 结算、不掷骰，
+///     ② 累计到 pity_max 的那一次（一转第 6 / 其余第 9 次）**必成**：成功率直接按 100% 结算、不掷骰，
 ///        界面也显示 100%（`mod_tg_rate_text`）—— 免得看不出这是保底轮、主观判断出错；
 ///     ③ 计数**按卡存在存档里**，换卡 / 切换界面 / 退出合成屋 都不清零（2026-11-06 用户改口径）；
 ///        只有转职成功才清这张卡（`mod_tg_pity_clear`）。

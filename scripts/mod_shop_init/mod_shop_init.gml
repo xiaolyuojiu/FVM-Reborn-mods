@@ -672,7 +672,7 @@ function mod_shop_init()
     register_goods("doumaobang", { type: "card", cost: "90000", unlock_item_id: "doumaobang", description: "逗猫棒：撞伤整行老鼠", display_name: "逗猫棒" });
     register_goods("honeytrap", { type: "card", cost: "110000", unlock_item_id: "honeytrap", description: "蜜糖陷阱：吸引强力蜜蜂集火攻击鼠军", display_name: "蜜糖陷阱" });
     register_goods("yinghuoshe", { type: "card", cost: "45000", unlock_item_id: "yinghuoshe", description: "萤火蛇：产火并照亮全场，伤害3*3范围内老鼠", display_name: "萤火蛇" });
-    register_goods("guiyuanma", { type: "card", cost: "80000", unlock_item_id: "guiyuanma", description: "归元马：将前方3行范围内距离最近的普通老鼠送回起点并初始还原，斩杀低血量百分比精英", display_name: "归元马" });
+    register_goods("guiyuanma", { type: "card", cost: "350000", unlock_item_id: "guiyuanma", description: "归元马：将前方3行范围内距离最近的普通老鼠送回起点并初始还原，斩杀低血量百分比精英", display_name: "归元马" });
     register_goods("xingqiongma", { type: "card", cost: "85000", unlock_item_id: "xingqiongma", description: "星穹马：复活5*5范围内1张死亡的卡片", display_name: "星穹马" });
     register_goods("tianxie", { type: "card", cost: "100000", unlock_item_id: "tianxie", description: "天蝎座精灵：猩红毒针，一行连续4格穿透伤害（无视障碍）", display_name: "天蝎座精灵" });
     register_goods("yuansushe", { type: "card", cost: "95000", unlock_item_id: "yuansushe", description: "元素蛇：向本行前方发射1发带不同效果的子弹（黄定身 / 紫毒气 / 蓝冰冻减速 / 红暴击），可穿过障碍物但不穿透老鼠", display_name: "元素蛇" });

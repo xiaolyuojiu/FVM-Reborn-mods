@@ -19,6 +19,10 @@ level_info_island_init()
 material_init()
 material_sell_init()
 craft_rule_init()
+// ── 卡片强化 v7（2026-11-19）──────────────────────────────────────────
+//   额外成功率：3.00~5.99，每次进游戏刷一次（写在 mod_craft_rate_table 里）
+//   连败保底计数：只在本次运行里活，**不进存档**（退出/重开天然归零）
+global.craft_lose_streak = 0
 task_init()
 map_object_init()
 attire_init()

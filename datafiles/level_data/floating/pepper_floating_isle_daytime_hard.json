@@ -3035,37 +3035,37 @@
     ],
     "rewards": [
         {
-            "gold": 10000.0,
+            "gold": 32400.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 700
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 600
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 1.0
                 }
             ]
         },
         {
             "skill_level": 0.0,
-            "gold": 10000.0,
+            "gold": 32400.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 700
+                    "id": "warcard_10",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "middle_crystal",
                     "amount": 600
-                },
-                {
-                    "id": "clover_2",
-                    "amount": 1.0
                 }
             ],
             "card_unlock": [

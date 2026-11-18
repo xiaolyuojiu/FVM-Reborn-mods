@@ -30,10 +30,18 @@ if instance_exists(obj_craft_bg){
 		obj_craft_bg.craft_top_tab = 0
 		obj_craft_bg.tg_card = ""
 		obj_craft_bg.tg_list_dirty = true     // 回到强化页也置脏，下次进转职页自然是新的
+		// 2026-11-21：切界面 = 槽里的卡包 / 四叶草一起放回，保险取消（和切页签同口径）
+		obj_craft_bg.spice_slot  = ["", "", ""]
+		obj_craft_bg.clover_slot = ""
+		craft_rate_settings().assure_enabled = false
 	}
 	if obj_craft_bg.button_select != button_index{
 		obj_craft_bg.button_select = button_index
 		obj_craft_bg.current_uprade_target_id = ""
+		// 2026-11-21：换界面（卡片强化 ↔ 宝石强化）跟切页签一样，槽里的料一起放回、保险取消
+		obj_craft_bg.spice_slot  = ["", "", ""]
+		obj_craft_bg.clover_slot = ""
+		craft_rate_settings().assure_enabled = false
 		obj_craft_bg.y_offset = 0
 		obj_craft_bg.hover_card_index = -1
 		obj_craft_bg.hover_gem_index = -1
