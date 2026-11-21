@@ -120,27 +120,31 @@ function longyuan_is_night() {
 }
 
 // ------------------------------------------------------------
-// 四张「无视魂体减伤」的卡片：烤串机 / 护法神 / 灯影花糕 / 炎帝（神农氏）
+// 六张「无视魂系减伤 + 对魂系额外增伤」的卡片：烤串机 / 护法神 / 灯影花糕 / 炎帝（神农氏）/ 金刚马
 // 对魂系（符咒鼠、符咒随从鼠、开路鼠魂体、执念鼠魂体）+ 药罐鼠：
 //   1) 完全不吃 90% 魂体减伤，也不吃药罐鼠的魂火减伤；
 //   2) 按下面的倍率额外增伤。
 // 倍率只有这一处出处，卡片侧不要另写数字。
+// 🔴 数值出处：陌路「9.追踪」r103 金刚马 1.5 / r104 红柳 1.3 / r105 护法神 1.8；
+//    「11.直射」r84 炎帝（三转魂系 2 倍）、「N.新卡速递」r71 灯影花糕（对魂系高额伤害）。
 // ------------------------------------------------------------
 #macro LY_SOUL_BONUS_KAOCHUAN 1.3  // 烤串机
 #macro LY_SOUL_BONUS_HUFA     1.8  // 护法神
 #macro LY_SOUL_BONUS_HUAGAO   1.5  // 灯影花糕
 #macro LY_SOUL_BONUS_SHENNONG 2.0  // 炎帝
+#macro LY_SOUL_BONUS_JINGANGMA 1.5 // 金刚马
 
-/// 卡片对象 → 魂系额外倍率（不是这四张卡返回 1.0）
+/// 卡片对象 → 魂系额外倍率（不是这几张卡返回 1.0）
 function longyuan_soul_bonus_mult(_src) {
 	if (_src == obj_hongliukaochuan) return LY_SOUL_BONUS_KAOCHUAN;
 	if (_src == obj_hufa_god)        return LY_SOUL_BONUS_HUFA;
 	if (_src == obj_huagao)          return LY_SOUL_BONUS_HUAGAO;
 	if (_src == obj_shennong_god)    return LY_SOUL_BONUS_SHENNONG;
+	if (_src == obj_jingangma)       return LY_SOUL_BONUS_JINGANGMA;
 	return 1.0;
 }
 
-/// 卡片 id（字符串）→ 魂系额外倍率（不是这四张卡返回 1.0）
+/// 卡片 id（字符串）→ 魂系额外倍率（不是这几张卡返回 1.0）
 function longyuan_soul_bonus_mult_id(_id) {
 	if (!is_string(_id)) return 1.0;
 	if (_id == "hongliukaochuan") return LY_SOUL_BONUS_KAOCHUAN;
@@ -148,17 +152,15 @@ function longyuan_soul_bonus_mult_id(_id) {
 	if (_id == "huagao")          return LY_SOUL_BONUS_HUAGAO;
 	if (_id == "shennong_god")    return LY_SOUL_BONUS_SHENNONG;
 	// 2026-11-13：金刚马卡面「无视魂系鬼火减伤并造成 1.5 倍伤害」
-	//   1.5 倍已在 obj_jingangma_bullet 里乘过，这里只用来放行「不减伤」
-	if (_id == "jingangma")       return 1.5;
+	if (_id == "jingangma")       return LY_SOUL_BONUS_JINGANGMA;
 	return 1.0;
 }
 
-/// 该来源（对象索引或卡片 id 字符串）是否属于「无视魂体减伤」的四张卡
+/// 该来源（对象索引或卡片 id 字符串）是否属于「无视魂体减伤」的那几张卡
+/// 判定直接复用倍率表：倍率 > 1 就是「有魂系增伤」的那一批，别再单独维护一份对象名单。
 function longyuan_soul_pierce_source(_src) {
-	if (_src == obj_hongliukaochuan || _src == obj_hufa_god
-	 || _src == obj_huagao         || _src == obj_shennong_god
-	 || _src == obj_jingangma) return true;
-	return (longyuan_soul_bonus_mult_id(_src) > 1.0);
+	if (is_string(_src)) return (longyuan_soul_bonus_mult_id(_src) > 1.0);
+	return (longyuan_soul_bonus_mult(_src) > 1.0);
 }
 
 /// 当前这次命中是否由「无视魂体减伤」的卡片造成。
@@ -172,7 +174,7 @@ function longyuan_hit_pierces_soul_reduction() {
 	return false;
 }
 
-/// 这四张卡的「魂系目标」范围：魂系敌人 + 药罐鼠（药罐鼠本体不是魂系，但按魂系口径吃增伤）
+/// 这几张卡的「魂系目标」范围：魂系敌人 + 药罐鼠（药罐鼠本体不是魂系，但按魂系口径吃增伤）
 function longyuan_is_soul_bonus_target(_e) {
 	if (!instance_exists(_e)) return false;
 	if (longyuan_is_soul_enemy(_e)) return true;

@@ -140,35 +140,15 @@ if target_id != ""{
 			if display_crystal_amount >= craft_rule_info.crystal_amount &&
 			global.save_data.player.gold >= craft_rule_info.gold_amount
 			{
-				var fail_streak = get_gem_fail_streak(target_id)
-				var rate_bonus = get_gem_craft_bonus(target_id)
-				var success_rate = get_gem_craft_rate(target_id, current_level+1, rate_bonus, fail_streak)
-				var is_success = craft_roll(success_rate)
-				var rate_settings = craft_rate_settings()
-				var material_ratio = 1
-				var gold_ratio = 1
-				if !is_success{
-					material_ratio = rate_settings.fail_material_ratio
-					gold_ratio = rate_settings.fail_gold_ratio
-				}
+				// 2026-11-22 防护：**宝石强化固定必成**，这里不掷骰、也没有失败分支。
+				//   强化概率只属于卡片；宝石一旦接了概率就会「莫名其妙失败」，别再往回接。
 				for(var i = 0 ; i < array_length(crystal_use_order) ; i++){
-					if crystal_list[i] > 0 add_material_amount(crystal_use_order[i],-ceil(crystal_list[i]*material_ratio))
+					if crystal_list[i] > 0 add_material_amount(crystal_use_order[i],-ceil(crystal_list[i]))
 				}
-				global.save_data.player.gold -= ceil(craft_rule_info.gold_amount*gold_ratio)
-				if is_success{
-					edit_gem_max_level(target_id,current_level+1)
-					edit_gem_level(target_id,get_gem_max_level(target_id))
-					set_gem_fail_streak(target_id,0)
-					set_gem_craft_bonus(target_id,0)
-					show_notice("强化成功，宝石升至 " + string(current_level+1) + " 星",60)
-				}
-				else{
-					set_gem_fail_streak(target_id,fail_streak+1)
-					if fail_streak < rate_settings.pity_bonus_max_stack{
-						set_gem_craft_bonus(target_id,rate_bonus+random_range(rate_settings.pity_bonus_min, rate_settings.pity_bonus_max))
-					}
-					show_notice("不够好运，强化失败",80)
-				}
+				global.save_data.player.gold -= ceil(craft_rule_info.gold_amount)
+				edit_gem_max_level(target_id,current_level+1)
+				edit_gem_level(target_id,get_gem_max_level(target_id))
+				show_notice("强化成功，宝石升至 " + string(current_level+1) + " 星",60)
 			}
 			else{
 				show_notice("材料不足",60)

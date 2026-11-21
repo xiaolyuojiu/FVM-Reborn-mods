@@ -11,22 +11,25 @@ event_inherited();
 if (is_frozen || state == CARD_STATE.SLEEP)
     exit;
 
-// === 终转（shape 3）：场上炎帝超过 7 只时，攻击力最高的 1 只每 5 秒追加竖向陨焰 ===
-// 规则（数据表）：在 7.5 / 8.5 列 0 行各召唤 1 发竖向子弹向下飞，攻击 7~9 列，
-// 三列分别受击 1 / 2 / 1 次。7.5 列的弹覆盖第 7、8 列，8.5 列的弹覆盖第 8、9 列，
-// 于是第 8 列被两发各打 1 次 = 2 次，第 7、9 列各 1 次。
+// === 场上神农 ≥7 张：攻击力最高的那一只每 5 秒在 7.5 / 8.5 列召唤 2 只竖向朱雀 ===
+// 口径：
+//   · **全形态都吃**（情报岛写在「基础能力」里，不是终转专属）
+//   · 只由场上攻击力最高的那一只放；攻同取 id 最小的那只，保证只有 1 只出手
+//   · 睡着 / 冰冻的不参与评选，不会把全队卡死
+//   · 伤害取那一只自己的 atk（所以它的增幅 / 拐都会跟着这只朱雀走）
+//   · 竖向朱雀打 7~9 列，每次都是全额：0~2 转 = 7 列 1 次 / 8 列 2 次 / 9 列 1 次；
+//     终转（朱雀范围整体放大一档）= 三列各 2 次
 // 本段必须放在 cooldown_timer 判断之前：追加陨焰不吃卡片自身攻击间隔。
 is_top_attacker = false;
 
-if (shape == 3 && instance_number(obj_shennong_god) > 7)
+if (instance_number(obj_shennong_god) >= 7)
 {
-    // 在「已终转」的炎帝里找攻击力最高的那一只；攻击力相同则取 id 最小的，保证只有 1 只出手。
     var _best_id = noone;
     var _best_atk = -1;
 
     with (obj_shennong_god)
     {
-        if (shape != 3) continue;
+        if (state == CARD_STATE.SLEEP || is_frozen) continue;
 
         if (atk > _best_atk)
         {
@@ -52,20 +55,38 @@ if (is_top_attacker)
 
         for (var _vb_i = 0; _vb_i < 2; _vb_i++)
         {
-            // _vb_i = 0 → 列坐标 7.0（即 7.5 列那条边界），1 → 8.0（即 8.5 列）
+            // _vb_i = 0 → 7.5 列那条边界，1 → 8.5 列
             var _line_x = global.grid_offset_x + (7 + _vb_i) * global.grid_cell_size_x;
             var _line_y = global.grid_offset_y - 120;
 
             var _vb = instance_create_depth(_line_x, _line_y, depth - 520, obj_shennong_god_bullet_v3);
             _vb.damage = atk;
             _vb.move_speed = 8;
-            // 7.5 列覆盖第 7、8 列（0 基 6、7）；8.5 列覆盖第 8、9 列（0 基 7、8）
-            _vb.col_left = 6 + _vb_i;
-            _vb.col_hits = [1, 1];
+            if (shape >= 3)
+            {
+                // 终转：朱雀范围整体放大一档 —— 两只都覆盖 7 / 8 / 9 三整列，
+                // 于是每列都被两只各打一次 = 都是 2 次。
+                _vb.col_left = 6;
+                _vb.col_hits = [1, 1, 1];
+            }
+            else
+            {
+                // 0~2 转：7.5 列那只盖第 7、8 列；8.5 列那只盖第 8、9 列。
+                // 叠加后 7 列 1 次、8 列 2 次、9 列 1 次，每次都是全额。
+                _vb.col_left = 6 + _vb_i;
+                _vb.col_hits = [1, 1];
+            }
             _vb.ash_kill = true;
+            _vb.shape = shape;      // 形态要传下去：魂系 2 倍是「三转起」，弹体自己判 shape >= 1
+            // 贴图按释放者形态走（0~2 转用各自形态的朱雀，终转才用 spr_..._3）
+            if (shape == 0)      _vb.sprite_index = spr_shennong_god_bullet;
+            else if (shape == 1) _vb.sprite_index = spr_shennong_god_bullet_1;
+            else if (shape == 2) _vb.sprite_index = spr_shennong_god_bullet_2;
+            else                 _vb.sprite_index = spr_shennong_god_bullet_3;
             if (shape >= 2) {
-                _vb.target_type = "all";   // 四转起：陆 + 空 + 地（不含潜水 / 非主流 / 幽灵）
-                _vb.hittable_types = ["normal", "air", "underground", "obstacle"];
+                _vb.target_type = "land_air_ug";   // 四转起：陆 + 空 + 地（不含潜水 / 非主流 / 幽灵）
+                // 障碍不索敌，但竖落弹扫到仍掉血（名单统一走类型）
+                _vb.hittable_types = get_hittable_enemy_types("land_air_ug");
             } else {
                 _vb.target_type = "normal";
                 _vb.hittable_types = get_hittable_enemy_types("normal");

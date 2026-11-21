@@ -2,14 +2,9 @@
 var _row = difficulty_start_reward_of(sr_diff);
 if (is_undefined(_row)) exit;
 
-// 2026-11-03：附加奖励按玩法模式拼（礼盒模式不能领其他卡，只发金币）
+// 2026-11-22：不朽一律送花火龙；永恒只在抽卡 / 欧皇送；其余模式只写金币
 var _extra = "";
-if (_row.warm_bird && global.play_mode != 3)
-{
-    if (global.play_mode == 1 || global.play_mode == 2) _extra += " + 花火龙";
-    else                                               _extra += " + 暖暖鸡";
-    if (_row.pick) _extra += " + 自选一张卡";
-}
+if (difficulty_start_reward_extra_card(sr_diff) != "") _extra = " + 花火龙";
 
 var _lines = [
     { text: "领取「" + _row.name + "」开局奖励？", red: false },

@@ -17,7 +17,7 @@ flash_speed = 5;
 plant_type = "normal";
 is_slowdown = false;
 target_type = "normal"; // 四转（shape 2）起追加空、地
-if (shape >= 2) target_type = "all";
+if (shape >= 2) target_type = "land_air_ug"; // 陆 + 空 + 地（不含潜水 / 非主流 / 幽灵；障碍不索敌）
 uses_fire_frame = true; // 出弹绑动画帧：cycle 被压小时由 obj_card_parent 压缩动画步长
 
 // 炎帝使用自定义攻击循环，计时器必须在创建时初始化。

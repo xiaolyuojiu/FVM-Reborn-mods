@@ -12,6 +12,13 @@ mus_inst.battle_music = global.level_data.pre_music
 
 global.game_over = false
 
+// 防护（2026-11-22）：不朽必须「切过去 + 点确定锁定」才能开打。
+//   老存档 / 异常路径如果带着 difficulty 5 但本档没锁，这里兜一次回到火山级，别让人直接打不朽。
+if (global.difficulty == 5 && difficulty_locked_value() != 5){
+    difficulty_set_value(1);
+    show_notice("不朽难度未确认，已按火山级开始", 90);
+}
+
 global.enemy_by_type = {};
 
 global.enemy_sx = [];

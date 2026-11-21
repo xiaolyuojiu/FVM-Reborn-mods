@@ -29,6 +29,11 @@ fall_speed_y = 0;
 splash_ratio = 0;
 splash_cells = 1;
 
+// 雪球贴图裁到 206×143（只留砸中 + 碎冰的高度），前三帧的「下落」由实例自己抬 y 完成。
+// 值 = 该帧内容底边在旧 353 高画布里的位置折算出来的屏幕偏移，口径与旧版逐像素一致。
+sb_fall_off  = [-233, -146, -62, 0, 0, 0, 0, 0, 0, 0, 0];
+sb_fall_base = y;                       // 没有目标时停在这个高度
+
 image_speed  = 0;
 image_index  = 0;
 image_angle  = 0;

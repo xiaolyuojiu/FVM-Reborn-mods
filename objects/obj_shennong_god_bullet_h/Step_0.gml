@@ -86,30 +86,40 @@ if (variable_global_exists("enemy_by_type"))
                 && _row_mul > 0
                 && _geo_hit)
             {
-                var _prev_hp = _e.hp;
                 // 炎帝对魂系（符咒鼠/符咒魂鼠/执念鼠魂体/开路鼠魂体）与药罐鼠造成 2 倍基础伤害。
-                // 倍率统一取自 longyuan_soul_bonus_mult()，不要在此另写数字。
+                // 🔴 2026-11-21 口径（数据表 L84「三转魂系老鼠 2 倍伤」）：**三转起**才有 ——
+                //   0 转 / 一转按普通伤害走，连「无视魂体减伤」也不给（来源标记一并清空）。
+                //   倍率统一取自 longyuan_soul_bonus_mult()，不要在此另写数字。
+                var _soul_ok = (shape >= 1);
                 var _base_dmg = damage * _row_mul;
-                var _dmg = longyuan_is_soul_bonus_target(_e) ? floor(_base_dmg * longyuan_soul_bonus_mult(obj_shennong_god)) : _base_dmg;
+                var _dmg = (_soul_ok && longyuan_is_soul_bonus_target(_e))
+                           ? floor(_base_dmg * longyuan_soul_bonus_mult(obj_shennong_god))
+                           : _base_dmg;
 
                 with (_e)
                 {
                     audio_play_sound(hit_sound, 0, 0);
                     damage_amount = _dmg;
                     damage_type = other.damage_type;
-                    // 标记来源：魂系敌人据此豁免 90% 魂体减伤（双通道）
-                    damage_source_object = obj_shennong_god;
-                    damage_source_card_id = "shennong_god";
+                    // 标记来源：魂系敌人据此豁免 90% 魂体减伤 / 药罐鼠据此掉一团魂火（双通道）
+                    damage_source_object = _soul_ok ? obj_shennong_god : noone;
+                    damage_source_card_id = _soul_ok ? "shennong_god" : "";
                     event_user(0);
+                    // 击杀化灰：**先把本体隐去**（ash_death + image_alpha = 0），再放灰烬。
+                    //   否则父类会给这只老鼠播完整的死亡动画，同时灰烬也冒出来 —— 现象就是
+                    //   「老鼠本体躺在那儿和灰烬叠在一起」（2026-11-22 用户报的老问题）。
+                    //   写法与 金刚马 / 石榴爆爆冰 / 护法神 一致：ash_death = true 让父类跳过死亡动画，
+                    //   击杀结算（金币掉落 / 海克斯击杀）照常在父类 Step 里跑完。
+                    if (other.ash_kill && hp <= 0)
+                    {
+                        ash_death   = true;
+                        image_alpha = 0;
+                        instance_create_depth(x, y - 20, depth, obj_mouse_ash_death);
+                    }
                     damage_source_card_id = "";
                 }
 
                 ds_list_add(hitted_enemy, _e.id);
-
-                if (ash_kill && _prev_hp > 0 && _e.hp <= 0)
-                {
-                    instance_create_depth(_e.x, _e.y - 20, depth, obj_mouse_ash_death);
-                }
             }
         }
     }

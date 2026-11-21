@@ -72,10 +72,10 @@ for (var _t = 0; _t < array_length(hittable_types); _t++){
             continue;
         }
 
-        // 魂系：无视鬼火减伤，并吃 1.5 倍伤害
+        // 魂系：无视鬼火减伤，并吃 1.5 倍伤害（倍率统一取自 longyuan_soul_bonus_mult，别在此写死数字）
         var _is_soul = longyuan_is_soul_bonus_target(_e);
         var _dmg = damage;
-        if (_is_soul) _dmg = floor(damage * 1.5);
+        if (_is_soul) _dmg = floor(damage * longyuan_soul_bonus_mult(obj_jingangma));
 
         // 二转秒杀平民鼠（非 BOSS、非精英、非无敌、非魂系豁免）→ 走灰烬（护法神同款）
         var _ash_kill = false;

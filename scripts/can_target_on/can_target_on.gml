@@ -119,8 +119,10 @@ function is_non_mainstream(_inst){
 function get_hittable_enemy_types(bullet_target_type){
 	var _types = [];
 	if (bullet_target_type == "all") return ["normal", "diver", "air", "dance", "obstacle", "underground", "invisible"];
-	// "land_air_ug" = 陆地 + 空军 + 地鼠（全屏打击类），与 can_target_on 同口径
-	if (bullet_target_type == "land_air_ug") return ["normal", "air", "underground"];
+	// "land_air_ug" = 陆地鼠军 + 空军 + 地鼠（全屏打击类），与 can_target_on 同口径
+	//   2026-11-21：**伤害名单补 obstacle** —— 障碍不索敌（can_target_on 仍为 false，不会为了障碍开火、
+	//   也不会被障碍拦子弹），但平射/落点弹扫到障碍时照样掉血。神农四转是第一个平射用它的卡。
+	if (bullet_target_type == "land_air_ug") return ["normal", "air", "underground", "obstacle"];
 	// "pierce_air" = 穿透 + 对空（牛油果飞镖）：普通 + 空军 + 障碍，**不含 dance / invisible**
 	if (bullet_target_type == "pierce_air") return ["normal", "air", "obstacle"];
 

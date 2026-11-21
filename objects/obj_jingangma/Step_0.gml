@@ -1,84 +1,61 @@
 /// 金刚马 Step 事件
-/// 攻击段 = cycle 最后 attack_anim × flash 帧 —— 整段攻击动画都播得完，不再只播几帧就被 cycle 掐断
-/// 出弹：每轮恒 1 发，绑动画第 18 帧（index 17，铃铛晃动段开头）；原版 1/2/3 发已压成 1 发
+/// ── 节奏模型 ──
+///   一轮 = cycle 帧 = 待机段 + 攻击段；攻击段 = attack_anim 个 index，整段在本轮内播完。
+///   步长：cycle 装得下整段就 flash_speed，装不下就 floor(cycle / attack_anim)（口径同弹珠汽水）。
+///   出弹 = 攻击段第 7 帧（动画 index 17 = 铃铛晃动开头），时刻 = 攻击段起点 + 步长 × 6，
+///   与 image_index 同一时间基。一轮 1 发，计时器全程不停，实际间隔恒等于 cycle。
 if (global.is_paused) exit;
 
 event_inherited();
 
-if (is_frozen) exit;
+if (is_frozen || state == CARD_STATE.SLEEP) exit;
 
 var _cfs = flash_speed;
 if (is_slowdown) _cfs = flash_speed * 2;
 
-// ── 有敌才开火 ──
-if (state == CARD_STATE.IDLE){
-    var _hittable = jg_hittable;
-    var _has = false;
-    for (var _t = 0; _t < array_length(_hittable); _t++){
-        var _key = _hittable[_t];
-        if (!variable_global_exists("enemy_by_type")) break;
-        if (!variable_struct_exists(global.enemy_by_type, _key)) continue;
-        var _arr = global.enemy_by_type[$ _key];
-        for (var _i = 0; _i < array_length(_arr); _i++){
-            var _e = _arr[_i];
-            if (!instance_exists(_e)) continue;
-            if (_e.hp <= 0) continue;
-            if (_key == "underground" && !is_digging_dijing(_e)) continue;
-            _has = true;
-            break;
+// ── 每帧选一次目标：jg_hittable 三个桶里 x 最大（最远）的那只 ──
+//   只认已登记进 enemy_by_type 的敌人（obj_battle 建表）；不能改成 with(obj_enemy_parent)，
+//   那样会把不注册的身体部件（obj_thor_head / obj_pete_claw 之类）也当成目标。
+//   选完存进 jg_target，Other_11 直接取用，不再自扫一遍。
+if (!variable_global_exists("enemy_by_type")) exit;
+
+var _best_x = -999999;
+jg_target   = noone;
+for (var _t = 0; _t < array_length(jg_hittable); _t++){
+    if (!variable_struct_exists(global.enemy_by_type, jg_hittable[_t])) continue;
+    var _arr = global.enemy_by_type[$ jg_hittable[_t]];
+    for (var _i = 0; _i < array_length(_arr); _i++){
+        var _e = _arr[_i];
+        if (instance_exists(_e) && _e.hp > 0 && _e.x > _best_x){
+            _best_x   = _e.x;
+            jg_target = _e;
         }
-        if (_has) break;
-    }
-    if (!_has){
-        attack_timer = 0;
-        state = CARD_STATE.IDLE;
-        exit;
     }
 }
-
-// ── 收尾：攻击段到点后，继续往前把 22~24 帧（铃铛放下段）播完再回待机 ──
-//   2026-11-13 用户口径：22~24 本来就是"铃铛慢慢放下来"，不该倒放，也不该直接跳回第 1 帧
-//   做法 = 保持 ATTACK 让父对象继续往后推帧，推到最后一帧再交回待机（下一帧父对象从末帧归 0）
-if (jg_tail){
-    if (image_index >= idle_anim + attack_anim){
-        jg_tail      = false;
-        state        = CARD_STATE.IDLE;
-        attack_timer = 0;
-        jg_fired     = false;
-    }
+if (jg_target == noone){
+    attack_timer = 0;
+    state        = CARD_STATE.IDLE;
     exit;
 }
 
-// ── 周期推进：前段待机，最后 attack_anim × flash 帧走攻击段 ──
-var _atk_span = attack_anim * _cfs;
-if (attack_timer <= cycle - _atk_span){
-    attack_timer++;
-} else if (attack_timer <= cycle){
-    attack_timer++;
-    if (state != CARD_STATE.ATTACK){
-        state       = CARD_STATE.ATTACK;
-        jg_tail     = false;
-        jg_fired    = false;
-        image_index = idle_anim + 1;   // 进攻击段先把动画归位，避免上一轮残留的高帧号当帧就出弹
-    }
-} else {
-    attack_timer = 0;
-    // 🔴 这里**不能**把 jg_fired 清零：清零后 state 还停在 ATTACK，本帧下面的出弹段会再打一发。
-    //   还没播到最后一帧 → 进收尾段把铃铛放下那几帧播完；已经到末帧就直接回待机
-    if (image_index < idle_anim + attack_anim){
-        jg_tail  = true;
-        jg_fired = true;    // 收尾段不再出弹
-    } else {
-        state    = CARD_STATE.IDLE;
-        jg_fired = false;
-    }
-}
+// ── 一轮的时间轴 ──
+//   攻击段步长：cycle 装得下整段就按 flash_speed，装不下就压到 floor(cycle / attack_anim)
+var _step    = clamp(floor(min(cycle, attack_anim * _cfs) / attack_anim), 1, _cfs);
+var _anim_t0 = max(0, cycle - attack_anim * _step);                  // 攻击段起点
+var _fire_off = (jg_fire_frame - idle_anim - 1) * _step;            // 从攻击段起点到出弹帧
+var _fire_t  = clamp(_anim_t0 + _fire_off, 1, max(1, floor(cycle)));
 
-// ── 出弹：压缩后每轮恒 1 发，绑动画第 18 帧（铃铛晃动段开头） ──
-//   窗口太短（攻速压太狠 / 减速）走不到第 18 帧 → 周期末尾补出来，绝不少发
-if (state == CARD_STATE.ATTACK && !jg_fired){
-    if (image_index >= jg_fire_frame || attack_timer >= cycle - 1){
-        jg_fired = true;
-        event_user(1);
-    }
+attack_timer++;
+if (attack_timer > cycle) attack_timer = 1;                         // 上一轮结束，直接开下一轮
+
+if (attack_timer >= _anim_t0){
+    // 攻击段：进段归位到第 12 帧（index 11），之后每帧自己推帧
+    if (state != CARD_STATE.ATTACK) state = CARD_STATE.ATTACK;
+    image_index = min(idle_anim + attack_anim,
+                      idle_anim + 1 + floor((attack_timer - _anim_t0) / _step));
+    if (attack_timer == _fire_t) event_user(1);
+}
+else if (state == CARD_STATE.ATTACK){
+    state       = CARD_STATE.IDLE;                                  // 待机段：还回待机动画
+    image_index = 0;
 }

@@ -1,8 +1,7 @@
 /// 雪球兔 弹体 Step
-/// 2026-11-13 重写（用户：应该像冷萃机 / 冰神那样「从天而降砸到对应老鼠头上」）：
-///   旧版从卡片位置斜飞一段、又用 bbox 判命中 → 经常「天上冒一下，老鼠就受伤了」，还会撞到路过的不相关老鼠。
-///   现在：实例直接钉在目标脚底，播 spr_snowrabbit_bullet 自带的「下落 → 砸中 → 碎冰」动画
-///        （11 帧：0~2 雪球在画布内往下掉、3 砸中、4~9 碎冰、10 空），第 4 帧结算伤害。
+/// 实例直接钉在目标脚底，播 spr_snowrabbit_bullet 的「下落 → 砸中 → 碎冰」动画
+///   （11 帧：0~2 下落、3 砸中、4~9 碎冰、10 空），第 4 帧结算伤害。
+/// 贴图只画到砸中/碎冰那一段高度，前三帧的下落由 sb_fall_off 把 y 抬回去。
 if (global.is_paused) exit;
 
 // ── 错帧等待 ──
@@ -10,20 +9,22 @@ if (fall_delay > 0){
     fall_delay--;
     image_alpha = 0;                     // 等待期间隐藏，别悬在目标头上
     if (instance_exists(target_id) && target_id.hp > 0){
+        sb_fall_base = target_id.y;
         x = target_id.x;
-        y = target_id.y;
     }
+    y = sb_fall_base + sb_fall_off[clamp(floor(image_index), 0, 10)];
     exit;
 }
 image_alpha = 1;
 
+image_index += 0.55;
+
 // ── 落点始终贴着目标（追踪；目标死了就停在最后位置） ──
 if (instance_exists(target_id) && target_id.hp > 0){
+    sb_fall_base = target_id.y;
     x = target_id.x;
-    y = target_id.y;
 }
-
-image_index += 0.55;
+y = sb_fall_base + sb_fall_off[clamp(floor(image_index), 0, 10)];
 
 // ── 砸中（第 4 帧 = index 3）结算 ──
 if (!has_hit && image_index >= 3){

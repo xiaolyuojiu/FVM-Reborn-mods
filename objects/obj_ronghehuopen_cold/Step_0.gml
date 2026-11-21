@@ -1,13 +1,18 @@
-// obj_ronghehuopen_cold（融合火盆·寒气柱特效）Step 事件
-// timer 驱动 19 帧动画（每 2 帧 1 张），播完后淡出销毁
+// obj_ronghehuopen_cold（融合火盆·寒气场）Step 事件
+// timer 驱动：每 60 帧（= 1 秒，与伤害跳同拍）从头冒一次 19 帧寒气动画；
+// 生命走到 fade_frames 内整体淡出，到 life 销毁。
+//   image_index = min(floor((timer mod 60) / 3), 18) → 0~56 帧把 19 张播完（每张 3 帧），
+//   58/59 帧收在末帧（末帧本身是空图，视觉上正好「散掉」）。
 if global.is_paused{
 	exit
 }
 timer++
-image_index = min(floor(timer / 2), 18)
-if timer > 44{
-	instance_destroy()
+image_index = min(floor((timer mod 60) / 3), 18)
+
+var _left = life - timer
+if (_left <= fade_frames){
+	image_alpha = max(0, _left / fade_frames)
 }
-else if timer > 38{
-	image_alpha = (44 - timer) / 6
+if (timer >= life){
+	instance_destroy()
 }

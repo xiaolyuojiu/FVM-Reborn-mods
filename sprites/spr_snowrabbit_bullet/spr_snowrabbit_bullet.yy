@@ -2,7 +2,7 @@
   "$GMSprite":"v2",
   "%Name":"spr_snowrabbit_bullet",
   "bboxMode":0,
-  "bbox_bottom":348,
+  "bbox_bottom":142,
   "bbox_left":4,
   "bbox_right":202,
   "bbox_top":0,
@@ -26,7 +26,7 @@
   ],
   "gridX":0,
   "gridY":0,
-  "height":353,
+  "height":143,
   "HTile":false,
   "layers":[
     {"$GMImageLayer":"","%Name":"447569a6-06bc-4d46-8334-833ca432baee","blendMode":0,"displayName":"default","isLocked":false,"name":"447569a6-06bc-4d46-8334-833ca432baee","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
@@ -112,13 +112,13 @@
               },"Disabled":false,"id":"7a765b82-5bfd-475c-a22e-7ef4ac9e4450","IsCreationKey":false,"Key":9.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
                 "0":{"$SpriteFrameKeyframe":"","Id":{"name":"06ea8469-ab4a-4b6a-adb6-8af3c3e15706","path":"sprites/spr_snowrabbit_bullet/spr_snowrabbit_bullet.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"e1e5419d-651f-4858-9597-2c798cc55d1f","IsCreationKey":false,"Key":10.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,}
+              },"Disabled":false,"id":"e1e5419d-651f-4858-9597-2c798cc55d1f","IsCreationKey":false,"Key":10.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
     "volume":1.0,
     "xorigin":103,
-    "yorigin":353,
+    "yorigin":143,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

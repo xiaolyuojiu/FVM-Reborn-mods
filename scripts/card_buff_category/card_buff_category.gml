@@ -57,7 +57,7 @@ function card_category_data()
         ["sheshou", "直射类", "三线类", ""],
         ["love_god", "直射类", "三线类", ""],
         ["xiao_long_bao", "直射类", "传统直线类", ""],
-        ["yinyangshe", "直射类", "传统直线类", ""],   // 2026-11-18 新卡：阴阳蛇（5 连毒弹）
+        ["yinyangshe", "直射类", "特殊直线类", ""], 
         ["ice_long_bao", "直射类", "传统直线类", ""],
         ["double_long_bao", "直射类", "传统直线类", ""],
         ["double_ice_long_bao", "直射类", "传统直线类", ""],
@@ -73,7 +73,7 @@ function card_category_data()
         ["fenjima", "直射类", "特殊直线类", ""],
         ["double_blade_snake", "直射类", "A型穿透类", ""],
         ["yufengma", "直射类", "A型穿透类", ""],
-        ["yuansushe", "直射类", "A型穿透类", ""],   // 2026-11-13 新卡：元素蛇（四色循环弹）
+        ["yuansushe", "直射类", "A型穿透类", ""],  
         ["laipishe", "直射类", "固定轨迹类", ""],
         ["pizza_oven", "直射类", "固定轨迹类", ""],
         ["gongjiang_god", "直射类", "固定轨迹类", ""],
@@ -205,13 +205,13 @@ function card_category_data()
         ["hamburger", "非远程类", "吞噬类", ""],
         ["hundun_god", "非远程类", "吞噬类", ""],
         ["lightning_baguette", "非远程类", "连携类", ""],
-        ["jiejiema", "非远程类", "连携类", ""],   // 2026-11-18 新卡：结界马（结界多边形）
+        ["jiejiema", "非远程类", "连携类", ""], 
         ["xinjiang_fried_noodles", "非远程类", "近战类", "拳击类"],
         ["iron_fishbone", "非远程类", "近战类", "鱼刺类"],
         ["fishbone", "非远程类", "近战类", "鱼刺类"],
-        ["sugar_roxburghii", "非远程类", "近战类", "鱼刺类"],   // 官方 10.杂项 B.鱼刺类
+        ["sugar_roxburghii", "非远程类", "近战类", "鱼刺类"], 
         ["chocolate_cannon", "灰烬类", "轰炸型", ""],
-        ["galaxy_horse", "灰烬类", "轰炸型", ""],   // 2026-11-13 新卡：银河马（陨石）
+        ["galaxy_horse", "灰烬类", "轰炸型", ""], 
         ["ronghedapao", "灰烬类", "轰炸型", ""],
         ["ronghekafei", "直射类", "传统直线类", ""],
         ["gaia", "灰烬类", "轰炸型", ""],

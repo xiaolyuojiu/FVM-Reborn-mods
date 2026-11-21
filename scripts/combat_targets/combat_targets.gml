@@ -83,3 +83,16 @@ function combat_enemy_find_plant(_enemy) {
     for (var _i = 0; _i < 4; _i++) if (_order[_i] != noone) return _order[_i];
     return noone;
 }
+
+/// @func combat_enemy_body_y(_enemy)
+/// @desc 敌人「身体中部」的 y 坐标。敌人精灵原点在脚底，所以按精灵高度往上抬。
+///   2026-11-22 统一口径：卡片的瞄准方向、命中特效定位都取这个值，别再各写一个固定偏移
+///   （固定偏移在贴身 / 不同体型的老鼠身上会算歪）。
+function combat_enemy_body_y(_enemy) {
+    if (!instance_exists(_enemy)) return 0;
+    var _h = 0;
+    if (_enemy.sprite_index != -1 && _enemy.sprite_index != undefined)
+        _h = sprite_get_height(_enemy.sprite_index) * abs(_enemy.image_yscale);
+    if (_h <= 0) return _enemy.y - 37;                  // 拿不到精灵时退回旧口径
+    return _enemy.y - clamp(_h * 0.45, 24, 90);
+}

@@ -101,17 +101,9 @@ for (var _e = array_length(rec_enemy) - 1; _e >= 0; _e--){
 
 // ③ 命中特效 → 冰冻特效。这些都是工程里各弹种「命中时才建」的特效对象，Create 里都有 `timer = 0`
 //    （对象池复用会重跑 Create，所以 timer ≤ 1 就等于「本帧新建」，不会认到旧特效）
-var _fx_objs = [
-	obj_fire_bullet_effect,
-	obj_war_god_bullet_effect,
-	obj_waterpipe_bullet_effect,
-	obj_coffeecup_bullet_effect,
-	obj_infected_zhanshen_bullet_effect,
-	obj_corn_shooter_effect
-];
 var _convert = [];
-for (var _k = 0; _k < array_length(_fx_objs); _k++){
-	with (_fx_objs[_k]){
+for (var _k = 0; _k < array_length(fx_objs); _k++){
+	with (fx_objs[_k]){
 		var _fresh = false;
 		if (variable_instance_exists(id, "timer")){
 			_fresh = (timer <= 1);

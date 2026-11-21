@@ -10,7 +10,7 @@ shape      = 0;
 row        = 0;
 target_id  = noone;
 
-target_type    = "pierce";
+target_type    = "normal";   // 与卡一致：只为闪避/拦截判定；穿透看 damage_type
 damage_type    = "pierce";
 hittable_types = ["normal", "air", "invisible"];   // 2026-11-13：与卡面一致，去掉 非主流(dance)/障碍/钻地
 

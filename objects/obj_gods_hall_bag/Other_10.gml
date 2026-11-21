@@ -17,15 +17,33 @@ switch (reward_id[0])
         reward_scale = 1.6;
         break;
     
-    case "天然香料":
+    case "1星强化用卡":
         reward_sprite = spr_craft_material;
-        reward_spr = 0;
+        reward_spr = 30;
         reward_scale = 0.8;
         break;
     
-    case "秘制香料":
+    case "2星强化用卡":
         reward_sprite = spr_craft_material;
-        reward_spr = 1;
+        reward_spr = 31;
+        reward_scale = 0.8;
+        break;
+    
+    case "3星强化用卡":
+        reward_sprite = spr_craft_material;
+        reward_spr = 32;
+        reward_scale = 0.8;
+        break;
+    
+    case "4星强化用卡":
+        reward_sprite = spr_craft_material;
+        reward_spr = 33;
+        reward_scale = 0.8;
+        break;
+    
+    case "3级四叶草":
+        reward_sprite = spr_craft_material;
+        reward_spr = 5;
         reward_scale = 0.8;
         break;
     

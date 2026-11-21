@@ -13,7 +13,6 @@
 function card_attack_target_data()
 {
     static _d = {
-        "12yinliao": "normal",
         "aquarius_elve": "normal",
         "athena": "track",
         "beef_hotpot": "pierce",
@@ -63,12 +62,10 @@ function card_attack_target_data()
         "heian_god": "all",
         "hera": "normal",
         "honeytrap": "track",
-        "hongliukaochuan": "normal",
         "hotdog_cannon": "air",
         "houyi_god": "normal",
         "huagao": "normal",
         "huanyingshe": "throw",
-        "hufa_god": "normal",
         "hundun_god": "normal",
         "huojianzhu": "track",
         "ice_bucket_bomb": "normal",
@@ -77,7 +74,6 @@ function card_attack_target_data()
         "ice_long_bao": "normal",
         "iron_fishbone": "pierce",
         "jiejiema": "land_air_ug",
-        "jingangma": "pierce",
         "juxie": "track",
         "kettle_bomb": "normal",
         "king_long_bao": "normal",
@@ -108,7 +104,7 @@ function card_attack_target_data()
         "rig": "normal",
         "ronghedan_god": "throw",
         "ronghehaixing": "track",
-        "ronghehuopen": "all",
+        "ronghehuopen": "normal",
         "ronghekafei": "normal",
         "ronghesanxian": "normal",
         "rongheshuanggu": "air",
@@ -116,6 +112,7 @@ function card_attack_target_data()
         "salad_pult": "throw",
         "sausage": "air",
         "sheshou": "normal",
+        "shennong_god": ["normal", "normal", "land_air_ug", "land_air_ug"],
         "shiliu_baobao_bing": "all",
         "shizi": "all",
         "shuanggu": "air",
@@ -171,6 +168,7 @@ function card_attack_target_data()
 function card_attack_target_exclude()
 {
     return [
+        "12yinliao",      // 纯辅助：全屏回满体力；Destroy 里那颗 3x3 爆炸是模板副作用，不算攻击范围
         "sheshejiu", "shiguangji", "xuanfengniu", "zhuanlonghu"
     ];
 }
@@ -181,7 +179,6 @@ function card_attack_target_override()
         "bbq": "陆地鼠军",
         "fashishe": "陆地鼠军",
         "tianxie": "陆地鼠军",
-        "shennong_god": ["陆地鼠军", "陆地鼠军", "陆地鼠军丨空军丨地鼠", "陆地鼠军丨空军丨地鼠"],
         "sheng_huo": ["陆地鼠军丨非主流丨幽灵", "陆地鼠军丨非主流丨幽灵", "陆地鼠军丨空军丨非主流丨地鼠丨幽灵", "陆地鼠军丨空军丨非主流丨地鼠丨幽灵"],
         "joker": "陆地鼠军丨空军丨潜水丨地鼠",
         "chocolate_cannon": "陆地鼠军丨潜水丨空军丨非主流丨地鼠丨幽灵",
@@ -189,8 +186,7 @@ function card_attack_target_override()
         "jingangma": "陆地鼠军丨空军丨幽灵",
         "hongliukaochuan": "陆地鼠军丨空军丨幽灵",
         "hufa_god": ["陆地鼠军丨空军丨幽灵", "陆地鼠军丨空军丨幽灵",
-                     "陆地鼠军丨空军丨幽灵丨地鼠", "陆地鼠军丨空军丨幽灵丨地鼠"],
-        "yuansushe": "陆地鼠军"
+                     "陆地鼠军丨空军丨幽灵丨地鼠", "陆地鼠军丨空军丨幽灵丨地鼠"]
     };
     return _o;
 }

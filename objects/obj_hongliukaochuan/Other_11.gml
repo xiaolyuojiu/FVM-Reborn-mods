@@ -32,22 +32,22 @@ if (variable_global_exists("enemy_by_type"))
 
 if (_target != noone && instance_exists(_target))
 {
-    // 出弹口（相对植物坐标，可调）：向右偏移贴近"嘴部"
-    var _muzzle_x = x + 95;
-    var _muzzle_y = y + 5;
+    // 出弹口 = 卡片右前方炉口（精灵 (+35,-28)，卡片按 1.8 倍绘制 → (+63,-50)）。
+    // 弹道只由「方向」决定：出弹口固定，方向指向目标身体中部。
+    var _muzzle_x = x + 63;
+    var _muzzle_y = y - 50;
 
     var inst = instance_create_depth(_muzzle_x, _muzzle_y, depth - 500, obj_hongliukaochuan_bullet);
+    // 二转「子弹数 1/1/2」按子弹压缩实现：一轮只出 1 发，伤害已在 atk 表里（二转 = 一转 ×2）
     inst.damage = atk;
-    inst.base_atk = atk;
-    inst.shape = shape;
     inst.target_id = _target.id;
     inst.hittable_types = _hittable;
 
-    // 瞄准点抬高：敌人精灵原点在脚底，往身体方向抬
-    var _aim_h = 37;
+    // 瞄准点 = 目标身体中部（敌人精灵原点在脚底，helper 内部按身高往上抬）
+    var _aim_y = combat_enemy_body_y(_target);
 
     var _dx = _target.x - _muzzle_x;
-    var _dy = (_target.y - _aim_h) - _muzzle_y;
+    var _dy = _aim_y - _muzzle_y;
     var _len = point_distance(0, 0, _dx, _dy);
     if (_len > 0)
     {
@@ -55,7 +55,7 @@ if (_target != noone && instance_exists(_target))
         inst.move_y = (_dy / _len) * inst.move_speed;
     }
 
-    // 三形态共用同一颗红柳肉串（obj_hongliukaochuan_bullet 的默认精灵就是 spr_hongliukaochuan_bullet）
+    // 三形态共用同一颗红柳肉串（子弹默认精灵即 spr_hongliukaochuan_bullet）
     inst.image_angle = point_direction(0, 0, inst.move_x, inst.move_y);
 
     audio_play_sound(snd_shot, 0, 0);

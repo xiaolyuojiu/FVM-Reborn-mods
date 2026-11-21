@@ -30,11 +30,21 @@ if (variable_global_exists("enemy_by_type"))
 
 if (_target != noone && instance_exists(_target))
 {
-    // 终转对 Boss 使用基础形态攻击力的 2 倍，不能直接取终转自身的攻击力。
+    // 终转对 Boss 用的是「基础形态（shape 0）攻击力 × 2 + 子弹压缩的加量」，不能直接取终转自身 atk。
+    //   🔴 注册表 atk 已经含「转职 1.3 倍 + 子弹数压缩（3/3/4/6）」，所以：
+    //      基础值要按「本卡增幅后的 atk ÷ 当前形态原始 atk」折算一遍，
+    //      否则海洋 / 宝石 / 海克斯的增幅不会作用到「基础形态攻击力」上（Boss 重击会显得越后期越弱）。
+    var _cur_raw  = atk;
+    var _base_raw = atk;
+    var _cur_info = get_plant_data_with_skill(plant_id, shape, current_level, skill);
+    if (_cur_info != undefined && ds_map_exists(_cur_info, "atk"))
+        _cur_raw = _cur_info[? "atk"];
     var _base_upgrade = get_plant_data_with_skill(plant_id, 0, current_level, skill);
-    var _base_atk = atk;
     if (_base_upgrade != undefined && ds_map_exists(_base_upgrade, "atk"))
-        _base_atk = _base_upgrade[? "atk"];
+        _base_raw = _base_upgrade[? "atk"];
+
+    var _base_atk = atk;
+    if (_cur_raw > 0) _base_atk = round(_base_raw * atk / _cur_raw);
 
     var inst = instance_create_depth(x, y - 75, depth - 500, obj_hufa_god_bullet);
     inst.damage = atk;

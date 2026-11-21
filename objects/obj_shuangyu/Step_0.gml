@@ -7,6 +7,7 @@ if (is_slowdown)
     current_flash_speed *= 2;
 
 event_inherited();
+if (state == CARD_STATE.SLEEP) exit;
 var has_enemy = false;
 target_instance = -4;
 

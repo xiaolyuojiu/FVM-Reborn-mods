@@ -109,8 +109,13 @@ if (variable_global_exists("enemy_by_type"))
 
                 if (_is_boss && shape == 3)
                 {
-
-                    _dmg = damage * 2;
+                    // 终转 Boss 重击 = 基础形态攻击力 × 2 + 子弹压缩的加量
+                    //   注册表 atk 里已经含「转职 1.3 倍 + 子弹数压缩（3/3/4/6）」，直接 damage×2 会把压缩量也翻倍。
+                    //   写成展开式：base_atk × 2 + (damage − base_atk) ≡ damage + base_atk
+                    //   例（0 星）：终转 atk 780 = 基础 300 + 压缩加量 480；Boss 重击 = 600 + 480 = 1080。
+                    //   base_atk 万一没拿到（0）就退回旧口径 damage × 2，别让重击直接失效。
+                    var _b = (base_atk > 0) ? base_atk : damage;
+                    _dmg = (_b * 2) + (damage - _b);
                 }
                 else if (_is_boss)
                 {
@@ -183,7 +188,20 @@ if (variable_global_exists("enemy_by_type"))
                     _e.ash_death = true;
                 }
 
-                var _fx = instance_create_depth(_e.x, _e.y, depth, obj_hufa_god_effect);
+                // 命中特效贴「老鼠身体中部」（与金刚马同款）：
+                //   敌人精灵原点在脚底，直接用 _e.y 会让特效中心压在脚上（2026-11-22 用户截图报「位置过低」）。
+                //   按敌人精灵高度取 0.45（夹 24~90），大老鼠抬得更高。
+                //   灰烬死亡特效（spr_hufa_god_effect_death，原点在底边中点）仍放脚底，与金刚马一致。
+                var _fx_y = _e.y;
+                if (_effect_spr != spr_hufa_god_effect_death)
+                {
+                    var _eh = 0;
+                    if (_e.sprite_index != -1)
+                        _eh = sprite_get_height(_e.sprite_index) * abs(_e.image_yscale);
+                    _fx_y = _e.y - clamp(_eh * 0.45, 24, 90);
+                }
+
+                var _fx = instance_create_depth(_e.x, _fx_y, depth, obj_hufa_god_effect);
                 _fx.sprite_index = _effect_spr;
             }
         }

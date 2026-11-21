@@ -1619,7 +1619,7 @@
     {"id":{"name":"obj_icelongbao_bullet_effect","path":"objects/obj_icelongbao_bullet_effect/obj_icelongbao_bullet_effect.yy",},},
     {"id":{"name":"obj_icelongbao_bullet_vertical","path":"objects/obj_icelongbao_bullet_vertical/obj_icelongbao_bullet_vertical.yy",},},
     {"id":{"name":"obj_icelongbao_bullet","path":"objects/obj_icelongbao_bullet/obj_icelongbao_bullet.yy",},},
-    {"id":{"name":"obj_immortal_pick","path":"objects/obj_immortal_pick/obj_immortal_pick.yy",},},
+    {"id":{"name":"obj_immortal_confirm","path":"objects/obj_immortal_confirm/obj_immortal_confirm.yy",},},
     {"id":{"name":"obj_in_water_effect","path":"objects/obj_in_water_effect/obj_in_water_effect.yy",},},
     {"id":{"name":"obj_infected_arms_drop","path":"objects/obj_infected_arms_drop/obj_infected_arms_drop.yy",},},
     {"id":{"name":"obj_infected_arno","path":"objects/obj_infected_arno/obj_infected_arno.yy",},},

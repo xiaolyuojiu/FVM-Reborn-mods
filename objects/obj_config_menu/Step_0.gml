@@ -122,12 +122,12 @@ function draw_games_page(){
 		btn32.image_xscale = -0.9
 	    array_push(setting_buttons, btn32);
 
-		// 当前难度是永恒/不朽、开局奖励还没领 → 打开设置页时补弹一次
-		if (!is_undefined(difficulty_start_reward_of(global.difficulty))
-			&& difficulty_start_reward_available(global.difficulty)
+		// 打开设置页时补弹：只有永恒的开局奖励（不朽确认只在「切到不朽」那一下弹）
+		if (global.difficulty == 4
+			&& difficulty_start_reward_available(4)
 			&& !instance_exists(obj_start_reward)) {
 			var _sr_btn = instance_create_depth(0, 0, -16000, obj_start_reward);
-			_sr_btn.sr_diff = global.difficulty;
+			_sr_btn.sr_diff = 4;
 		}
 
 		// 玩法模式（互斥）：抽卡版 / 欧皇版 / 随机礼盒 / 海克斯。标签靠悬停提示

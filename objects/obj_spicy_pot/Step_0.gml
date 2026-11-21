@@ -2,6 +2,7 @@ if global.is_paused{
 	exit
 }
 event_inherited(); 
+if (state == CARD_STATE.SLEEP) exit;
 if is_frozen{
 	exit
 }

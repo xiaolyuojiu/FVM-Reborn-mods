@@ -1,9 +1,8 @@
 // obj_ronghehuopen_ice_ctrl Begin Step 事件
-// ① 记录本帧冰弹坐标（供 End Step 配对命中特效；命中当帧子弹就被池回收，End Step 取不到）
-// ② 冰弹命中 → 减速（与冰冻小笼包一致：ice_timer = 600 = 10 秒）
-//    在 Begin Step 判定：此时子弹还没动，压到老鼠的话这一帧它的 Step 就会打中，
-//    提前一帧给减速玩家看不出来；放到 Step/End Step 判的话，命中当帧子弹可能已被池回收。
-// ③ 记录「本帧可能被冰弹打中」的敌人快照（rec_enemy），End Step 用来判定「直接打死」→ 碎冰特效
+// 只管冰弹（brazier_list 哨兵 -9999）的三件事，换贴图不归这里（见 obj_bullet_parent 的 Begin Draw）：
+// ① 记录本帧冰弹坐标（End Step 配对命中特效；命中当帧子弹常已被池回收，End Step 就取不到了）
+// ② 冰弹**打中**的老鼠 → 减速：同一行（子弹有 row 时）+ bbox 相交 + 无护盾
+// ③ 记录「本帧被冰弹压住」的敌人快照（End Step 判「直接打死」→ 播碎冰死亡）
 // ④ 场上没有冰弹后计时自毁
 if (global.is_paused){
 	exit
@@ -26,32 +25,39 @@ with (obj_bullet_parent){
 if (array_length(_ice) > 0){
 	idle_frames = 0;
 	var _probe = kill_probe;
-	var _hit = ds_list_create();
 	var _near = ds_list_create();
 	for (var _i = 0; _i < array_length(_ice); _i++){
 		var _b = _ice[_i];
 		if (!instance_exists(_b)) continue;
-		var _bl = _b.bbox_left;
-		var _bt = _b.bbox_top;
-		var _br = _b.bbox_right;
-		var _bb = _b.bbox_bottom;
 
-		// 减速：严格相交 + 无护盾（沿用原判定）；用引擎空间索引只取附近的敌人
-		ds_list_clear(_hit);
-		collision_rectangle_list(_bl, _bt, _br, _bb, obj_enemy_parent, false, true, _hit, false);
-		for (var _k = 0; _k < ds_list_size(_hit); _k++){
-			with (ds_list_find_value(_hit, _k)){
-				if (hp > 0 && (!variable_instance_exists(id, "shield_hp") || shield_hp <= 0)){
-					ice_timer = max(ice_timer, 600);   // 冰冻小笼包同款减速
+		// 减速只给「真被打中」的那只：子弹带 row 时要求同一行（追踪 / 斜向弹没有 row，只靠相交）
+		var _brow = variable_instance_exists(_b, "row") ? _b.row : -9999;
+
+		// 一次空间查询覆盖两件事：减速要「相交」，击杀快照要给「这一帧才位移进来」留 kill_probe 余量
+		ds_list_clear(_near);
+		collision_rectangle_list(_b.bbox_left - _probe, _b.bbox_top - _probe,
+		                         _b.bbox_right + _probe, _b.bbox_bottom + _probe,
+		                         obj_enemy_parent, false, true, _near, false);
+		for (var _k = 0; _k < ds_list_size(_near); _k++){
+			var _eid = ds_list_find_value(_near, _k);
+			if (!instance_exists(_eid)) continue;
+
+			// ② 减速：同一行（子弹有 row 时）+ bbox 真相交 + 无护盾
+			with (_eid){
+				if (hp > 0
+					&& (_brow == -9999 || grid_row == _brow)
+					&& (!variable_instance_exists(id, "shield_hp") || shield_hp <= 0)
+					&& bbox_left  < _b.bbox_right
+					&& bbox_right > _b.bbox_left
+					&& bbox_top   < _b.bbox_bottom
+					&& bbox_bottom > _b.bbox_top){
+					// 命中音由子弹自身的通用命中音负责（冰弹专属命中音待新素材接入）
+					ice_timer = max(ice_timer, 600);   // 冰冻小笼包同款：减速 10 秒
 				}
 			}
-		}
 
-		// 击杀快照：往外放宽 kill_probe（子弹这一帧才位移进老鼠，严格相交会漏「第一下就打死」）
-		ds_list_clear(_near);
-		collision_rectangle_list(_bl - _probe, _bt - _probe, _br + _probe, _bb + _probe, obj_enemy_parent, false, true, _near, false);
-		for (var _k = 0; _k < ds_list_size(_near); _k++){
-			with (ds_list_find_value(_near, _k)){
+			// ③ 击杀快照（End Step 用来判「这一帧被冰弹直接打死」→ 碎冰特效）
+			with (_eid){
 				if (hp > 0){
 					// 能不能播碎冰：与「灰烬击杀」同口径（防爆鼠等免疫灰烬的不给碎冰，BOSS 跳过）
 					var _can_shatter = true;
@@ -62,7 +68,6 @@ if (array_length(_ice) > 0){
 			}
 		}
 	}
-	ds_list_destroy(_hit);
 	ds_list_destroy(_near);
 }
 

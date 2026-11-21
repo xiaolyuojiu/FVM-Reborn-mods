@@ -12,9 +12,20 @@ idle_frames = 0
 rec_x = [];
 rec_y = [];
 
-// 本帧 Begin Step 记录的「被冰弹压住」的敌人快照：[id, x, y, depth, hp, object_index]
-// End Step 用它判断这一帧有没有被冰弹直接打死 → 播冰桶的碎冰死亡（见 Step_1 / Step_2）
+// 本帧 Begin Step 记录的「被冰弹压住」的敌人快照：
+//   [id, x, y, depth, hp, object_index, image_xscale, image_yscale, can_shatter]
+// End Step 用它判断这一帧有没有被冰弹直接打死 → 播碎冰死亡（见 Step_1 / Step_2）
 rec_enemy = [];
+
+// 冰弹命中时可能建的「各弹种命中特效」对象表（End Step 认「本帧新建 + 靠近冰弹」用）
+fx_objs = [
+	obj_fire_bullet_effect,
+	obj_war_god_bullet_effect,
+	obj_waterpipe_bullet_effect,
+	obj_coffeecup_bullet_effect,
+	obj_infected_zhanshen_bullet_effect,
+	obj_corn_shooter_effect
+];
 
 // 冰弹「直接打死」的表现：冰桶二转的碎冰死亡动画（spr_mouse_ice_death，15 帧，整只老鼠裂开碎成冰块）
 kill_probe = 48;        // Begin Step 记击杀目标的探测外扩（子弹 8~40px/帧，够覆盖一帧位移）

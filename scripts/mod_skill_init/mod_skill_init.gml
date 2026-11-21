@@ -8,7 +8,7 @@ function mod_skill_init()
     register_card_skill("guiyuanma", "cycle", [156, 153, 150, 147, 144, 141, 138, 132, 120]);
     register_card_skill("huagao", "cycle", [210, 207, 204, 201, 198, 192, 186, 180, 168]);
     register_card_skill("yanhuangma", "cycle", [210, 207, 204, 201, 198, 192, 186, 180, 150]);
-    register_card_skill("shennong_god", "cycle", [210, 207, 204, 201, 198, 192, 186, 180, 168]);
+    register_card_skill("shennong_god", "cycle", [210, 207, 204, 201, 198, 195, 192, 186, 180]);
     register_card_skill("yinhema", "cooldown", [2700, 2580, 2460, 2340, 2220, 2040, 1800, 1500, 900]);
     register_card_skill("fushengcha", "cooldown", [3000, 2880, 2760, 2640, 2400, 2100, 1800, 1500, 1080]);
     register_card_skill("yuansushe", "cycle", [150, 144, 138, 132, 126, 120, 114, 108, 90]);

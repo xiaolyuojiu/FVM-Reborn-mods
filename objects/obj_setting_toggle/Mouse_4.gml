@@ -1,3 +1,4 @@
+if (ui_modal_blocking()) exit;   // 上面有弹窗，别让点击穿透到后面的按钮
 // 切换状态
 state = !state;
 global.audio.play(snd_button,0,0)

@@ -354,6 +354,14 @@ function mod_ui_common_btn_draw(_frame, _cx, _cy, _scale, _alpha = 1){
     draw_sprite_ext(spr_common_button, _frame, _cx, _cy, _scale, _scale, 0, c_white, _alpha);
 }
 
+/// @func ui_modal_blocking()
+/// @desc 当前是否有模态弹窗（开局奖励窗 / 不朽确认窗）盖在上面。
+///       这些窗是「自己画 + 自己判点击」，不会自动吃掉下层点击 ——
+///       所以按钮的 Mouse 事件开头都要挡一下，否则点弹窗的按钮会连带把后面的箭头 / 开关也点了。
+function ui_modal_blocking(){
+    return instance_exists(obj_start_reward) || instance_exists(obj_immortal_confirm);
+}
+
 function mod_tg_confirm_rect(_i){
     var _bx = room_width * 0.5 + ((_i == 0) ? -80 : 80);
     var _by = room_height * 0.5 + 70;

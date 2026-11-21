@@ -1,3 +1,22 @@
+/// @func ocean_god_buff_value(_shape, _level)
+/// @desc 海洋女神自己的增幅倍率（真小倍率，如 1.6 / 2.6 / 5.1）
+///   🔴 2026-11-22 用户口径：读注册表 custom["增幅倍率"]，**不再用 atk / 100**。
+///      原因：atk 会被护盾地形、宝石、海克斯逐层乘上去，倍率跟着涨就等于「被误加」，
+///      玩家把海洋女神摆在护盾格上就能白嫖一大截增幅。
+///   2026-11-22 二改：atk 已归 0（同五行蛇/香料虎），倍率只在 custom 里。
+///   ⚠️ 不需要传 skill：海洋女神的技能表只注册了 cooldown，
+///      `get_plant_data_with_skill` 只会覆盖那一个 key，增幅倍率与技能等级无关。
+///   兜底：注册表缺 custom 时返回 1（不增幅、绝不喂 0），并打日志。
+function ocean_god_buff_value(_shape, _level)
+{
+    var _info = get_plant_data_with_skill("haiyang_god", _shape, clamp(_level, 0, 18), 0);
+    if (_info != undefined && ds_map_exists(_info, "增幅倍率"))
+        return _info[? "增幅倍率"];
+
+    show_debug_message("[ocean] 注册表缺 custom[增幅倍率] → 本次按 1 倍（不增幅）");
+    return 1;
+}
+
 /// @desc 按目标卡的逻辑坐标计算海洋增幅，不依赖放置顺序或格子列表缓存。
 function get_ocean_buff_multiplier(card)
 {

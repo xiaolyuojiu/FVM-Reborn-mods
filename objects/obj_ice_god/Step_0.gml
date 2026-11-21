@@ -3,6 +3,7 @@ if (global.is_paused)
 
 var current_flash_speed = flash_speed;
 event_inherited();
+if (state == CARD_STATE.SLEEP) exit;
 var has_enemy = false;
 
 if (instance_exists(obj_enemy_parent))

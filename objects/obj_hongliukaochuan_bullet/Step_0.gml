@@ -18,10 +18,10 @@ if (!has_hit)
 {
     if (homing_target_ok(target_id))
     {
-        // 瞄准点抬高：敌人精灵原点在脚底，瞄到身体（与 obj_hongliukaochuan/Other_11.gml 的 _aim_h 一致）
-        var _aim_h = 37;
+        // 瞄准点 = 目标身体中部（与 obj_hongliukaochuan/Other_11 同一口径，取 combat_enemy_body_y）
+        var _aim_y = combat_enemy_body_y(target_id);
         var _dx = target_id.x - x;
-        var _dy = (target_id.y - _aim_h) - y;
+        var _dy = _aim_y - y;
         var _len = point_distance(0, 0, _dx, _dy);
         if (_len > move_speed * 2)
         {
@@ -56,18 +56,14 @@ if (variable_global_exists("enemy_by_type"))
         {
             var _e = _list[_i];
             if (!instance_exists(_e)) continue;
-            // underground 只对本关钻地中的地精鼠开放
-            if (_key == "underground" && !(variable_instance_exists(_e, "mouse_id") && _e.mouse_id == "longyuan_dijing"
-                && variable_instance_exists(_e, "ly_mode") && _e.ly_mode == "dig")) continue;
             if (ds_list_find_index(hitted_enemy, _e.id) == -1
                 && _e.hp > 0
                 && precise_bbox_collision(id, _e))
             {
                 has_hit = true;
 
-                // 魂系 = 幽灵类老鼠（invisible）或魂系标记的敌人（含符咒鼠/符咒魂鼠/执念鼠魂体），
-                // 药罐鼠也按魂系口径吃增伤。倍率统一取自 longyuan_soul_bonus_mult()。
-                var _is_soul = (_key == "invisible") || longyuan_is_soul_bonus_target(_e);
+                // 魂系额外倍率：只认「魂系敌人 + 药罐鼠」，幽灵鼠不算魂系；倍率取 longyuan_soul_bonus_mult()
+                var _is_soul = longyuan_is_soul_bonus_target(_e);
 
                 var _dmg = damage;
                 if (_is_soul)
@@ -88,12 +84,7 @@ if (variable_global_exists("enemy_by_type"))
                 }
 
                 ds_list_add(hitted_enemy, _e.id);
-
-                // 命中特效：位置取子弹当前位置（=命中点），朝向与子弹一致；
-                // 不想要这个特效就把下面 3 行注掉即可
-               // var _fx = instance_create_depth(x, y, depth, obj_hongliukaochuan_bullet_effect);
-               // _fx.image_angle = image_angle;
-           }
+            }
         }
     }
 }

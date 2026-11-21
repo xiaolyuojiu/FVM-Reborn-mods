@@ -5,6 +5,7 @@ if global.is_paused{
 }
 
 event_inherited();
+if (state == CARD_STATE.SLEEP) exit;
 
 // 冰冻则不行动（父类已设置is_frozen，这里再次确认）
 if is_frozen{

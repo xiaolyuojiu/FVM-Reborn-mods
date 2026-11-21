@@ -1,7 +1,7 @@
 damage = 0;
 move_speed = 0;
 damage_type = "pierce";
-target_type = "all";
+target_type = "land_air_ug";   // 与其它两发同口径（本对象无生成点，只留作残留清理用）
 timer = 0;
 shape = 0;
 hitted_enemy = ds_list_create();

@@ -39,11 +39,15 @@ global.total_time = 0
 global.player_sprite = noone;
 
 load_file(global.save_slot)
+// 难度对齐存档：锁了不朽的档强制回不朽；没锁的档一律不留在不朽（config 是全局的，可能残留 5）
+if (difficulty_locked_value() == 5) difficulty_apply_save_lock()
+else if (global.difficulty == 5) {
+    difficulty_set_value(1);
+    show_notice("不朽难度未确认，已回到火山级", 90);
+}
 //reset_file(global.save_slot)
 
-// 开局奖励统一走 difficulty_start_reward_*（发奖前先弹 obj_start_reward）；
-// 三选一上一局没点确定就退出 → 这里按第一张补发
-immortal_pick_claim_default()
+// 开局奖励统一走 difficulty_start_reward_*（发奖前先弹 obj_start_reward）
 
 if (!instance_exists(obj_mod_manager))
     global.mod_manager = instance_create_layer(0, 0, "Instances", obj_mod_manager);

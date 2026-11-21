@@ -2,6 +2,7 @@ if (global.is_paused)
     exit;
 
 event_inherited();
+if (state == CARD_STATE.SLEEP) exit;
 
 if (is_frozen)
     exit;
@@ -57,9 +58,10 @@ if (has_enemy)
     if (attack_timer == (cycle - _fire_delay * current_flash_speed))
         event_user(1);
 
-    // 二转（星火）：双发错帧连发 —— 第一发后 5 帧再补一发（数值 = 一转档，不再翻倍）
-    if (shape >= 2 && attack_timer == (cycle - _fire_delay * current_flash_speed) + 5)
-        event_user(1);
+    // 二转（星火）：数据表「子弹数 1/1/2」按**子弹压缩**口径实现 —— 不再补第二发，
+    //   第二发的伤害直接并进这一发（注册表二转 atk 已经是一转的 2 倍，
+    //   与后羿把 3/4/5 发压成 1 发同一套做法；2026-11-22 用户口径）。
+    //   🔴 原来这里是「第一发后 5 帧再补一发」，总伤害一样但多一个实例 + 多一次索敌。
 
     if (attack_timer > cycle)
     {

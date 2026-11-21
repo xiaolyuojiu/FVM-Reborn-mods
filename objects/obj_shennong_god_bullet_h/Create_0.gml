@@ -2,7 +2,7 @@ damage = 0;
 move_speed = 0;
 row = 0;
 damage_type = "pierce";
-target_type = "all";
+target_type = "land_air_ug";   // 炎帝四转起：陆 + 空 + 地（生成方会按形态覆盖）
 timer = 0;
 shape = 0;
 hitted_enemy = ds_list_create();
@@ -25,7 +25,7 @@ image_blend = c_white;
 // 终转（shape 3）专用：按行记录「该行受击次数」。
 // 空数组 = 不走倍率表（改看 cover 或 row）。
 // 非空时命中任意 row_hits[r] > 0 的行，伤害 = damage × row_hits[r]，
-// 用来实现「上中下 5 行分别受击 1/2/3/2/1 次」。
+// 用来实现「上中下 5 行分别受击 1/1/2/1/1 次」（终转两只各扫 3 行、重叠行叠 2 次）。
 row_hits = [];
 
 // 缝隙制（shape 0/1/2，2026-11-17 用户口径）：子弹夹在**两行之间**飞行，

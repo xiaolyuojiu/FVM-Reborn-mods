@@ -123,13 +123,40 @@ function random_gift_prepare_selected_deck() {
     if (!has_wanpilong) add_to_deck("wanpilong", 2);
 }
 
+/// @function difficulty_reward_progress_tier()
+/// @desc 通关进度决定能吃到几倍（2026-11-22 用户口径）：
+///       打通神殿 = 2 / 深渊 = 3 / 雪顶火山 = 4 / 卤料花园 = 5；都没打通 = 1。
+///       这只是**进度侧的上限**，实际倍率还要跟难度自己的上限取小。
+function difficulty_reward_progress_tier() {
+    if (!variable_global_exists("save_data")) return 1;
+    if (!is_struct(global.save_data)) return 1;
+    if (!variable_struct_exists(global.save_data, "completed_levels")) return 1;
+    var _done = global.save_data.completed_levels;
+    if (array_get_index(_done, "marinade_garden") != -1) return 5;
+    if (array_get_index(_done, "snowcap_volcano") != -1) return 4;
+    if (array_get_index(_done, "abyss")           != -1) return 3;
+    if (array_get_index(_done, "temple")          != -1) return 2;
+    return 1;
+}
+
+/// @function difficulty_reward_cap(_difficulty)
+/// @desc 各难度自己的奖励倍率上限：美味 1 / 火山 1 / 浮空 2 / 星际 3 / 永恒 4 / 不朽 5
+function difficulty_reward_cap(_difficulty) {
+    var _caps = [1, 1, 2, 3, 4, 5];
+    return _caps[clamp(floor(_difficulty), 0, array_length(_caps) - 1)];
+}
+
 /// @function difficulty_get_reward_multiplier_for(_difficulty)
 /// @desc 给定难度号的奖励倍率。与玩法模式无关：抽卡版 / 欧皇版 / 随机礼盒 / 海克斯
 ///       一律按"实际基础难度"结算，不按模式给固定值。
-///       美味 1 / 火山 1 / 浮空 2 / 星际 3 / 永恒 4 / 不朽 7
+///       2026-11-22 最终版：**上限看难度、实际看通关进度，取两者较小值**
+///         难度上限：美味 1 / 火山 1 / 浮空 2 / 星际 3 / 永恒 4 / 不朽 5
+///         进度解锁：打通神殿 2 / 深渊 3 / 雪顶火山 4 / 卤料花园 5（都没打通 = 1）
+///       海克斯倍率另外叠加，不在这里。
 function difficulty_get_reward_multiplier_for(_difficulty) {
-    var _table = [1, 1, 2, 3, 4, 7];
-    return _table[clamp(floor(_difficulty), 0, array_length(_table) - 1)];
+    // 实际倍率 = min(难度上限, 通关进度)
+    //   打通神殿但选火山（上限 1）→ 1 倍；打通深渊且选浮空（上限 2）→ 2 倍
+    return min(difficulty_reward_cap(_difficulty), difficulty_reward_progress_tier());
 }
 
 /// @function difficulty_get_reward_multiplier()
@@ -164,122 +191,27 @@ function difficulty_reward_item_amount(_item_id, _base_amount, _multiplier) {
     return _base_amount * _multiplier;
 }
 
-/// @function immortal_pick_card_list()
-/// @desc 不朽开局「自选一张」的候选卡
-///       2026-11-03 用户定：**糖炒栗子 / 披萨炉 / 焦油喷壶（tar_sprayer）**（生煎锅换下）
-///       换卡 / 加卡只改这一行，UI 按 array_length 自动排布，兜底取第 1 张
-function immortal_pick_card_list() {
-    return ["tangchaolizi", "pizza_oven", "tar_sprayer"];
-}
-
-/// @function immortal_pick_info()
-/// @desc 每张候选卡的「开局难度 + 开局星级」，键 = 卡片 id（与 immortal_pick_card_list() 一一对应）
-///       2026-11-01 用户定：**三张一律 0 星、不显示开局难度**（`dif` 留空 = 不画标签）
-///       改某张卡的难度或星级 = 改这里那一行；dif 只认「易 / 中 / 难」（颜色见 immortal_pick_difficulty_colour）
-///       star 是 `unlock_card` 的 level（1 起算的星数，0 = 无星，取数值表第 star 档）
-function immortal_pick_info() {
-    return {
-        tangchaolizi:  { dif: "", star: 3 },
-        pizza_oven:    { dif: "", star: 4 },
-        tar_sprayer:   { dif: "", star: 6 }
-    };
-}
-
-/// @function immortal_pick_info_of(_card_id)
-/// @desc 取某张候选卡的 {dif, star}；表里没有 → {dif:"", star:0}（不画难度、发无星）
-function immortal_pick_info_of(_card_id) {
-    var _t = immortal_pick_info();
-    if (variable_struct_exists(_t, _card_id)) return _t[$ _card_id];
-    return { dif: "", star: 0 };
-}
-
-/// @function immortal_pick_difficulty_colour(_label)
-/// @desc 难度标签配色：易 = 绿 / 中 = 蓝 / 难 = 红
-function immortal_pick_difficulty_colour(_label) {
-    switch (_label) {
-        case "易": return make_colour_rgb(88, 216, 118);
-        case "中": return make_colour_rgb(92, 168, 255);
-        case "难": return make_colour_rgb(246, 86, 86);
-    }
-    return c_white;
-}
-
-/// @function immortal_pick_face_h()
-/// @desc 弹窗卡面「可见内容」的高度（精灵像素，量自该卡 register_card 登记的 sprite 第 0 帧 PNG，
-///       alpha 包围盒阈值 16）。卡面画布下方普遍带一大截透明留白（如生煎锅 101x88 只有 y30~84 有内容），
-///       按画布居中会让图案整体偏上，所以这里按内容高算中心。
-///       这些精灵的原点惯例 = 内容底部中点（§2.2）→ 内容中心 = 原点 y - 内容高/2。
-///       🔴 新增候选卡：量一下它的第 0 帧内容高补进来；表里没有 → 回落「按画布居中」
-function immortal_pick_face_h() {
-    return {
-        tangchaolizi:  52,   // spr_tangchaolizi  103x81，内容 y 27~79
-        pan_fried_bun: 54,   // spr_pan_fried_bun 101x88，内容 y 30~84
-        pizza_oven:    66,   // spr_pizza_oven     90x69，内容 y  2~68
-        tar_sprayer:   74,   // spr_tar_sprayer    86x76，内容 y  2~76
-        spicy_pot:     50    // spr_spicy_pot      88x85，内容 y 19~69（备用，不在三选一名单里）
-    };
-}
-
-/// @function immortal_pick_pending()
-/// @desc 三选一还没结算（存档标记 immortal_pick_pending）
-function immortal_pick_pending() {
-    return variable_struct_exists(global.save_data, "immortal_pick_pending")
-        && global.save_data.immortal_pick_pending;
-}
-
-/// @function immortal_pick_commit(_card_id)
-/// @desc 结算自选：发卡（本体 + 该卡的**开局星级**）→ 清 pending → 存盘。卡片不在名单里返回 false
-///       星级 = immortal_pick_info() 的 star（`unlock_card` 的 level 是 1 起算的星数，0 = 无星）；
-///       2026-10-31 用户定：生煎锅 0 星 / 披萨炉 2 星 / 玉蜀黍 4 星（原来是全部 4 星）
-function immortal_pick_commit(_card_id) {
-    var _list = immortal_pick_card_list();
-    if (array_get_index(_list, _card_id) == -1) return false;
-    var _star = immortal_pick_info_of(_card_id).star;
-    unlock_card(_card_id, _star, 0, 0);
-    global.save_data.immortal_pick_pending = false;
-    global.save_data.immortal_pick_taken = _card_id;
-    save_file(global.save_slot);
-    return true;
-}
-
-/// @function immortal_pick_claim_default()
-/// @desc 异常兜底：选卡窗没点确定就被关掉（强关游戏 / ESC 关界面 / 切房间 / 弹窗被销毁）
-///       → 默认发第一张，保证奖励不丢
-function immortal_pick_claim_default() {
-    if (!immortal_pick_pending()) return false;
-    var _list = immortal_pick_card_list();
-    if (array_length(_list) == 0) return false;
-    return immortal_pick_commit(_list[0]);
-}
-
-/// @function difficulty_grant_immortal_start_cards()
-/// @desc 【2026-11-01 起停用】由 difficulty_start_reward_grant() 取代（发奖前要先弹窗确认）。
-///       现在没有任何地方调用它；留着只是为了老存档路径排查方便，别在新代码里用。
-/// @desc 普通不朽难度的新存档：只发暖暖鸡本体，并置「三选一待选」标记。
-///       2026-10-30 用户要求：原「炎焱兔 + 10 张池子随机 1 张」撤掉，改成点「不朽」时三选一。
-/// @return true = 这一次刚发（启动兜底据此跳过，避免刚置的标记被当场结算掉）
-function difficulty_grant_immortal_start_cards() {
-    if (global.difficulty != 5 || global.play_mode != 0) return false;
-    if (variable_struct_exists(global.save_data, "immortal_start_cards_given")) return false;
-    if (array_length(global.save_data.completed_levels) != 0) return false;
-
-    unlock_card("warm_birds", 0, 0, 0);
-    global.save_data.immortal_pick_pending = true;
-    global.save_data.immortal_pick_taken = "";
-    global.save_data.immortal_start_cards_given = true;
-    save_file(global.save_slot);
-    return true;
-}
-
 // ── 开局奖励：永恒 / 不朽 互斥，发奖前必须先弹 obj_start_reward ──
+//   2026-11-22 用户口径：**自选一张卡（三选一）整套下线**，暖暖鸡也不再送；
+//   抽卡 / 欧皇（play_mode 1 / 2）额外送一张花火龙，其余模式只发金币。
 
 /// @function difficulty_start_reward_table()
 /// @desc 开局奖励表：键 = 难度号（4 永恒 / 5 不朽）
 function difficulty_start_reward_table() {
     return {
-        "4": { name: "永恒级", gold: 60000,  warm_bird: false, pick: false },
-        "5": { name: "不朽级", gold: 200000, warm_bird: true,  pick: true  }
+        "4": { name: "永恒级", gold: 60000  },
+        "5": { name: "不朽级", gold: 200000 }
     };
+}
+
+/// @function difficulty_start_reward_extra_card(_difficulty)
+/// @desc 开局奖励附带的卡片，没有就返回 ""。
+///       2026-11-22：统一成花火龙本体，不再分「普通模式送暖暖鸡」；
+///       同日追加：**不朽不看模式都给**（锁难度的补偿），永恒只在抽卡 / 欧皇给。
+function difficulty_start_reward_extra_card(_difficulty) {
+    if (_difficulty == 5) return "firework_dragon";
+    if (global.play_mode == 1 || global.play_mode == 2) return "firework_dragon";
+    return "";
 }
 
 /// @function difficulty_start_reward_of(_difficulty)
@@ -306,11 +238,56 @@ function difficulty_start_reward_claimed() {
 }
 
 /// @function difficulty_start_reward_available(_difficulty)
-/// @desc 这一档现在能不能领：必须是最上面那一档（新存档，通关数 0）+ 没领过任何一档
+/// @desc 这一档现在能不能领：新档（**没通关过曲奇岛**）+ 没领过任何一档
+///       2026-11-22 用户口径：判定改成看曲奇岛——「打过曲奇岛就不能领了」
 function difficulty_start_reward_available(_difficulty) {
     if (is_undefined(difficulty_start_reward_of(_difficulty))) return false;
-    if (array_length(global.save_data.completed_levels) != 0) return false;
+    if (array_get_index(global.save_data.completed_levels, "cookie_island")      != -1) return false;
+    if (array_get_index(global.save_data.completed_levels, "cookie_island_hard") != -1) return false;
     return difficulty_start_reward_claimed() == 0;
+}
+
+/// @function difficulty_set_value(_difficulty)
+/// @desc 切难度唯一出口：改全局 + 写 config + 把设置页那两个箭头的 state 对齐。
+///       2026-11-22：不朽确认窗「取消」时也要走这里（回火山级），别在别处手写 ini。
+function difficulty_set_value(_difficulty) {
+    var _d = clamp(round(_difficulty), 0, 5);
+    global.difficulty = _d;
+    ini_open("config.ini");
+    ini_write_real("settings", "difficulty", _d);
+    ini_close();
+    with (obj_difficulty_select_btn) {
+        if (config_key == "difficulty") state = _d;
+    }
+    return _d;
+}
+
+/// @function difficulty_locked_value()
+/// @desc 本存档锁定的难度（0 = 没锁 / 5 = 已锁定不朽）。跟着存档走，不跟 config。
+function difficulty_locked_value() {
+    if (!variable_struct_exists(global.save_data, "difficulty_locked")) return 0;
+    return round(global.save_data.difficulty_locked);
+}
+
+/// @function difficulty_lock_immortal(_grant_reward)
+/// @desc 锁定不朽：写存档字段 + 切到不朽 + 写 config + 存盘；_grant_reward 且还够资格时顺手发开局奖励。
+///       锁上之后难度选择器会被拒绝（见 obj_difficulty_select_btn）。
+function difficulty_lock_immortal(_grant_reward = true) {
+    global.save_data.difficulty_locked = 5;
+    difficulty_set_value(5);
+    if (_grant_reward && difficulty_start_reward_available(5)) {
+        difficulty_start_reward_grant(5);
+    }
+    save_file(global.save_slot);
+}
+
+/// @function difficulty_apply_save_lock()
+/// @desc 启动 / 换存档后对齐：这个存档锁了不朽就强制回到不朽（config 是全局的，可能停在别的档）
+function difficulty_apply_save_lock() {
+    if (difficulty_locked_value() != 5) return false;
+    if (global.difficulty == 5) return false;
+    difficulty_set_value(5);
+    return true;
 }
 
 /// @function difficulty_start_reward_gold_text(_gold)
@@ -336,21 +313,10 @@ function difficulty_start_reward_grant(_difficulty) {
     global.save_data.player.gold += _row.gold;
     show_notice("已领取" + _row.name + "开局奖励：+" + difficulty_start_reward_gold_text(_row.gold) + " 金币", 90);
 
-    // 2026-11-03：**特殊模式也能领**，只排除礼盒（礼盒本来就禁止带其他卡）
-    //   普通 / 海克斯 = 暖暖鸡，抽卡 / 欧皇 = 花火龙（普通版），礼盒 = 只发金币
-    //   自选一张（pick）在 play_mode != 3 时都给
-    if (_row.warm_bird && global.play_mode != 3) {
-        if (global.play_mode == 1 || global.play_mode == 2) {
-            unlock_card("firework_dragon", 0, 0, 0);
-        } else {
-            unlock_card("warm_birds", 0, 0, 0);
-            global.save_data.immortal_start_cards_given = true;
-        }
-        if (_row.pick) {
-            global.save_data.immortal_pick_pending = true;
-            global.save_data.immortal_pick_taken = "";
-        }
-    }
+    // 2026-11-22 用户口径：抽卡 / 欧皇 额外送一张花火龙本体；其余模式（普通 / 海克斯 / 礼盒）只发金币。
+    //   暖暖鸡 + 三选一自选卡 已整体下线。
+    var _extra_card = difficulty_start_reward_extra_card(_difficulty);
+    if (_extra_card != "") unlock_card(_extra_card, 0, 0, 0);
 
     // 旧字段一并写掉：其它地方（启动兜底 / 老存档判断）还在读它
     global.save_data.immortal_bonus_given = true;

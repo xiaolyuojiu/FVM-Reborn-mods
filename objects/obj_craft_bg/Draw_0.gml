@@ -851,7 +851,6 @@ var _rr_bar_y = y + 300
 var _rr_bar_left = _rr_bar_x - 230.4      // 条子左缘（128*1.8，原点在右端）
 var _rr_bar_ix = _rr_bar_left + 3.6       // 框内区左缘（2 像素 * 1.8）
 var _rr_bar_iy = _rr_bar_y - 18           // 框内区上缘（整条高 20*1.8）
-var _rr_set = craft_rate_settings()
 var _rr_text = "100%"
 if button_select == 0 {
 	// 卡片：显示基础（两位小数）+ 额外率（进游戏随机 3.00~5.99 + 补偿）
@@ -868,21 +867,10 @@ if button_select == 0 {
 	}
 }
 else {
-	// 宝石：老口径（分段衰减 + 每次失败加成），一行不动
+	// 宝石：固定 100%（2026-11-22 用户口径，卡片那套强化概率不适用），不再读失败连击/加成
 	_rr_text = "0%"
 	if current_uprade_target_id != ""{
-		var _rr_base = get_gem_craft_rate_base(current_uprade_target_id, get_gem_max_level(current_uprade_target_id)+1)
-		var _rr_streak = get_gem_fail_streak(current_uprade_target_id)
-		var _rr_bonus = get_gem_craft_bonus(current_uprade_target_id)
-		if _rr_set.pity_guarantee > 0 && _rr_streak >= _rr_set.pity_guarantee{
-			_rr_text = "必成"
-		}
-		else if _rr_bonus > 0{
-			_rr_text = string_format(_rr_base,1,2)+"%+"+string_format(_rr_bonus,1,2)+"%"
-		}
-		else{
-			_rr_text = string_format(_rr_base,1,2)+"%"
-		}
+		_rr_text = "100%"
 	}
 }
 // 成功率条：直接用官方素材 spr_craft_rate_bar（自带「成功率：」+ 右侧空白字段，原点在右端）

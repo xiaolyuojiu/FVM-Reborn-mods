@@ -9,66 +9,9 @@ if (start_wishing)
 
 if (random_begin)
 {
-    var _is_pity = (global.save_data.player.wish_count >= 50);
-    reward_id = _is_pity ? gods_hall_get_guarantee_reward() : gods_hall_get_random_reward();
+    reward_id = (global.save_data.player.wish_count >= 50) ? gods_hall_get_guarantee_reward() : gods_hall_get_random_reward();
 
-    switch (reward_id[0])
-    {
-        case "金币":
-            global.save_data.player.gold += reward_id[1];
-            global.save_data.player.wish_count++;
-            break;
-
-        case "神谕之石":
-            add_material_amount("oracle_stone", reward_id[1]);
-            global.save_data.player.wish_count = 0;
-            if (_is_pity)
-                global.save_data.player.pity_count++;
-            break;
-
-        case "天然香料":
-            add_material_amount("natural_spices", reward_id[1]);
-            global.save_data.player.wish_count++;
-            break;
-
-        case "秘制香料":
-            add_material_amount("secret_spices", reward_id[1]);
-            global.save_data.player.wish_count++;
-            break;
-
-        case "初级强化水晶":
-            add_material_amount("less_crystal", reward_id[1]);
-            global.save_data.player.wish_count++;
-            break;
-
-        case "中级强化水晶":
-            add_material_amount("middle_crystal", reward_id[1]);
-            global.save_data.player.wish_count++;
-            break;
-
-        case "4级四叶草":
-            add_material_amount("clover_4", reward_id[1]);
-            if (_is_pity)
-            {
-                global.save_data.player.wish_count = 0;
-                global.save_data.player.pity_count++;
-            }
-            else
-                global.save_data.player.wish_count++;
-            break;
-
-        case "高级强化水晶":
-            add_material_amount("advanced_crystal", reward_id[1]);
-            if (_is_pity)
-            {
-                global.save_data.player.wish_count = 0;
-                global.save_data.player.pity_count++;
-            }
-            else
-                global.save_data.player.wish_count++;
-            break;
-    }
-
+    gods_hall_apply_reward(reward_id);
     array_push(reward_list, reward_id);
     random_begin = false;
 }
@@ -96,66 +39,9 @@ if (start_wishing5)
     
     for (var i = 0; i < 5; i++)
     {
-        var _is_pity = (global.save_data.player.wish_count >= 50);
-        reward_id = _is_pity ? gods_hall_get_guarantee_reward() : gods_hall_get_random_reward();
+        reward_id = (global.save_data.player.wish_count >= 50) ? gods_hall_get_guarantee_reward() : gods_hall_get_random_reward();
 
-        switch (reward_id[0])
-        {
-            case "金币":
-                global.save_data.player.gold += reward_id[1];
-                global.save_data.player.wish_count++;
-                break;
-
-            case "神谕之石":
-                add_material_amount("oracle_stone", reward_id[1]);
-                global.save_data.player.wish_count = 0;
-                if (_is_pity)
-                    global.save_data.player.pity_count++;
-                break;
-
-            case "天然香料":
-                add_material_amount("natural_spices", reward_id[1]);
-                global.save_data.player.wish_count++;
-                break;
-
-            case "秘制香料":
-                add_material_amount("secret_spices", reward_id[1]);
-                global.save_data.player.wish_count++;
-                break;
-
-            case "初级强化水晶":
-                add_material_amount("less_crystal", reward_id[1]);
-                global.save_data.player.wish_count++;
-                break;
-
-            case "中级强化水晶":
-                add_material_amount("middle_crystal", reward_id[1]);
-                global.save_data.player.wish_count++;
-                break;
-
-            case "4级四叶草":
-                add_material_amount("clover_4", reward_id[1]);
-                if (_is_pity)
-                {
-                    global.save_data.player.wish_count = 0;
-                    global.save_data.player.pity_count++;
-                }
-                else
-                    global.save_data.player.wish_count++;
-                break;
-
-            case "高级强化水晶":
-                add_material_amount("advanced_crystal", reward_id[1]);
-                if (_is_pity)
-                {
-                    global.save_data.player.wish_count = 0;
-                    global.save_data.player.pity_count++;
-                }
-                else
-                    global.save_data.player.wish_count++;
-                break;
-        }
-
+        gods_hall_apply_reward(reward_id);
         array_push(reward_list, reward_id);
     }
     
@@ -186,66 +72,9 @@ if (start_wishing50)
 
     for (var i = 0; i < 50; i++)
     {
-        var _is_pity = (global.save_data.player.wish_count >= 50);
-        reward_id = _is_pity ? gods_hall_get_guarantee_reward() : gods_hall_get_random_reward();
+        reward_id = (global.save_data.player.wish_count >= 50) ? gods_hall_get_guarantee_reward() : gods_hall_get_random_reward();
 
-        switch (reward_id[0])
-        {
-            case "金币":
-                global.save_data.player.gold += reward_id[1];
-                global.save_data.player.wish_count++;
-                break;
-
-            case "神谕之石":
-                add_material_amount("oracle_stone", reward_id[1]);
-                global.save_data.player.wish_count = 0;
-                if (_is_pity)
-                    global.save_data.player.pity_count++;
-                break;
-
-            case "天然香料":
-                add_material_amount("natural_spices", reward_id[1]);
-                global.save_data.player.wish_count++;
-                break;
-
-            case "秘制香料":
-                add_material_amount("secret_spices", reward_id[1]);
-                global.save_data.player.wish_count++;
-                break;
-
-            case "初级强化水晶":
-                add_material_amount("less_crystal", reward_id[1]);
-                global.save_data.player.wish_count++;
-                break;
-
-            case "中级强化水晶":
-                add_material_amount("middle_crystal", reward_id[1]);
-                global.save_data.player.wish_count++;
-                break;
-
-            case "4级四叶草":
-                add_material_amount("clover_4", reward_id[1]);
-                if (_is_pity)
-                {
-                    global.save_data.player.wish_count = 0;
-                    global.save_data.player.pity_count++;
-                }
-                else
-                    global.save_data.player.wish_count++;
-                break;
-
-            case "高级强化水晶":
-                add_material_amount("advanced_crystal", reward_id[1]);
-                if (_is_pity)
-                {
-                    global.save_data.player.wish_count = 0;
-                    global.save_data.player.pity_count++;
-                }
-                else
-                    global.save_data.player.wish_count++;
-                break;
-        }
-
+        gods_hall_apply_reward(reward_id);
         array_push(reward_list, reward_id);
     }
 

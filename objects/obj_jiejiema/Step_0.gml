@@ -20,6 +20,7 @@ if (jj_life <= 90)
 }
 
 // ── 技能动画态 ────────────────────────────────────────────────────────────
+if (state == CARD_STATE.SLEEP) exit;
 // 结界每次结算（obj_jiejiema_field 的 jj_cycle）会给场上所有马点亮 jj_skill_timer，
 // 这里把它换成一次 ATTACK 态 —— 待机段只播呼吸，不播施法姿势（见 Create_0 的帧结构注释）。
 if (jj_skill_timer > 0)
