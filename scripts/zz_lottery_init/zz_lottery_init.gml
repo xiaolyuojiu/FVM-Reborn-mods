@@ -68,14 +68,15 @@ function zz_pool() {
 		{id:"gold",      name:"金币",       qty:2000,  w:244},
 		{id:"gold",      name:"金币",       qty:5000,  w:90},
 		{id:"gold",      name:"金币",       qty:10000, w:40},
-		{id:"clover_1",  name:"1级四叶草",  qty:1,     w:200},
-		{id:"clover_2",  name:"2级四叶草",  qty:1,     w:180},
-		{id:"clover_3",  name:"3级四叶草",  qty:1,     w:140},
-		{id:"clover_4",  name:"4级四叶草",  qty:1,     w:70},
-		{id:"clover_5",  name:"5级四叶草",  qty:1,     w:20},
-		{id:"clover_6",  name:"6级四叶草",  qty:1,     w:7},
-		{id:"clover_s",  name:"S级四叶草",  qty:1,     w:2},
-		{id:"clover_ss", name:"SS级四叶草", qty:1,     w:1},
+		{id:"clover_1",  name:"1级四叶草",  qty:1,     w:170},
+		{id:"clover_2",  name:"2级四叶草",  qty:1,     w:150},
+		{id:"clover_3",  name:"3级四叶草",  qty:1,     w:120},
+		{id:"clover_4",  name:"4级四叶草",  qty:1,     w:90},
+		{id:"clover_5",  name:"5级四叶草",  qty:1,     w:45},
+		{id:"clover_6",  name:"6级四叶草",  qty:1,     w:25},
+		{id:"clover_s",  name:"S级四叶草",  qty:1,     w:12},
+		{id:"clover_ss", name:"SS级四叶草", qty:1,     w:5},
+		{id:"clover_sss",name:"SSS级四叶草",qty:1,     w:3},
 		{id:ZZ_STAR_ID,  name:"幸运星",     qty:5,     w:3},
 		{id:ZZ_STAR_ID,  name:"幸运星",     qty:10,    w:2},
 		{id:ZZ_STAR_ID,  name:"幸运星",     qty:25,    w:1}
@@ -182,7 +183,8 @@ function zz_pull_batch(_tier) {
 /// @desc 按道具合并（五十连结算用）
 function zz_aggregate(_items) {
 	var _order = ["clover_1", "clover_2", "clover_3", "clover_4", "clover_5",
-	              "clover_6", "clover_s", "clover_ss", ZZ_STAR_ID, "gold"];
+	              "clover_6", "clover_s", "clover_ss", "clover_sss",
+	              "clover_ssr", "clover_snake", "clover_horse", ZZ_STAR_ID, "gold"];
 	var _sum = {};
 	var _pity = {};
 	for (var i = 0; i < array_length(_items); i++) {
@@ -234,6 +236,10 @@ function zz_mat_frame(_id) {
 		case "clover_6":     return 20;
 		case "clover_s":     return 21;
 		case "clover_ss":    return 22;
+		case "clover_sss":   return 26;
+		case "clover_ssr":   return 27;
+		case "clover_snake": return 28;
+		case "clover_horse": return 29;
 		case "zz_star":      return 23;
 		case "magic_spices": return 15;
 		case "elf_spices":   return 16;
@@ -257,7 +263,7 @@ function zz_star_amount() {
 ///    · 香料（皇室 / 魔幻 / 精灵 / 天使 / 圣灵）**全部下架**，改到跨服白银页按白银勋章卖
 ///    · 八张卡从跨服下架后放到这里，用幸运星换：幻幻鸡 66 / 百变蛇 108 / 战旗马 88 /
 ///      法师蛇 66 / 星星兔 54 / 炎炎兔 36 / 巫蛊蛇 36 / 旋风牛 36
-///    · 四叶草 5/6/S/SS 保留
+///    · 四叶草 5/6/S/SS/SSS/SSR/蛇年/马年 都在售（2/4/8/16/32/48/64/64 幸运星）
 ///  卡片带 card:true —— zz_buy_shop 据此走 unlock_card（一次性），否则走 add_material_amount
 function zz_shop_list() {
 	return [
@@ -274,7 +280,11 @@ function zz_shop_list() {
 		{id:"clover_5",      qty:3, cost:2},
 		{id:"clover_6",      qty:3, cost:4},
 		{id:"clover_s",      qty:3, cost:8},
-		{id:"clover_ss",     qty:3, cost:16}
+		{id:"clover_ss",     qty:3, cost:16},
+		{id:"clover_sss",    qty:3, cost:32},
+		{id:"clover_ssr",    qty:3, cost:48},
+		{id:"clover_snake",  qty:3, cost:64},
+		{id:"clover_horse",  qty:3, cost:64}
 	];
 }
 
