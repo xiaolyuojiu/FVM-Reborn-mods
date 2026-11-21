@@ -1141,7 +1141,7 @@ function credit_shop_init()
 
     register_goods("credit_beef_hotpot_2", {
         type: "credit", cost: "30000", coin_type: "prestige", credit_shape: 2,
-        tower_floor: "26-2",
+        tower_floor: "31-2",
         unlock_item_id: transfer_credit_id("beef_hotpot", 2),
         description: "二转凭证\n在合成屋-卡片转职中使用"
     });

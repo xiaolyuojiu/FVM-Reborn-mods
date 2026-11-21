@@ -1,5 +1,11 @@
 # v2.9.0
 ## 优化与修复
+- **肥牛火锅二转凭证门槛改到 31-2（2026-11-21）**：
+  - `scripts/credit_shop_init/credit_shop_init.gml` 的 `credit_beef_hotpot_2` 的 `tower_floor`
+    由 `"26-2"` 改为 `"31-2"`（价格 30000 威望不变）。
+  - 威望商店购买判据、魔塔本层解锁面板、合成屋转职门槛都读同一字段
+    （`transfer_credit_tower_floor_req` → `credit_shop_floor_key`），改一处即全链路生效。
+  - 关卡数据 `datafiles/level_data/tower/tower-31-2.json` 存在，key = `3102`。
 - **猫猫枪一次命中就换行（2026-11-20）**：
   - 症状：有时要打两三发才把老鼠赶去另一行。
   - 原因：换行的位移要 30 帧才走完一格，而 `obj_enemy_parent/Step_0` 每帧按 `y` 反推
