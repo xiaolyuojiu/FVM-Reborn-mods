@@ -25,3 +25,9 @@ invincible = true;
 
 trigger_timer = 0;
 triggered = false;
+
+// custom：毒气伤害（三跳同一数值）
+var _sk = variable_instance_exists(id, "skill") ? skill : 0;
+var _info = get_plant_data_with_skill("panduola_god", shape, clamp(current_level, 0, 18), _sk);
+poison_damage = 900;
+if (_info != undefined && ds_map_exists(_info, "毒气伤害")) poison_damage = _info[? "毒气伤害"];

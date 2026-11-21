@@ -46,9 +46,9 @@ if (variable_global_exists("enemy_by_type"))
 		if (_e.hp > 0 && row == _e.grid_row
     && precise_bbox_collision(id, _e))
 		{
-			// 灵魂融合（2 转）穿透：同一只只结算一次，结算过就继续往前飞
-			if (pierce_all && ds_list_find_index(hited_enemy, _e.id) != -1) continue;
-			if (pierce_all) ds_list_add(hited_enemy, _e.id);
+			// 穿透：同一只只结算一次，结算过就继续往前飞
+			if (pierce_left > 0 && ds_list_find_index(hited_enemy, _e.id) != -1) continue;
+			if (pierce_left > 0) ds_list_add(hited_enemy, _e.id);
 
 			// 先记下 id 与 depth：结算后这只老鼠可能已被打掉，后面挂燃烧特效还要用
 			var _eid = _e.id;
@@ -68,9 +68,9 @@ if (variable_global_exists("enemy_by_type"))
 				event_user(0)
 			}
 
-			// 燃烧 buff：命中后 30% 概率附加，每 1 秒结算 1 次、共 3 次[燃烧伤害]，可叠加
+			// 燃烧 buff：命中后按 burn_chance 概率附加，每 1 秒结算 1 次、共 3 次[燃烧伤害]，可叠加
 			// 统一交给独立控制器（不存在则现建），卡片被铲掉也继续结算
-			if (irandom(99) < burn_chance)
+			if (burn_damage > 0 && irandom(99) < burn_chance)
 			{
 				if (!instance_exists(obj_ronghesanxian_burn_ctrl))
 				{
@@ -102,8 +102,9 @@ if (variable_global_exists("enemy_by_type"))
 				}
 			}
 
-			// 非穿透弹：命中即销毁（命中特效与基础卡 obj_triplewinerack_bullet 一致）
-			if (!pierce_all)
+			// 穿透计数用尽 / 非穿透弹：命中即销毁（命中特效与基础卡 obj_triplewinerack_bullet 一致）
+			if (pierce_left > 0) pierce_left--;
+			if (pierce_left <= 0)
 			{
 				if (!instance_exists(id)) break;
 				if burnt == 0

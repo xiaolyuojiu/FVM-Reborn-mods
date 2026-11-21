@@ -2095,4 +2095,28 @@ function credit_shop_init()
         unlock_item_id: transfer_credit_id("zhuanlonghu", 2),
         description: "二转凭证\n在合成屋-卡片转职中使用"
     });
+    register_goods("credit_nut_frier_1", {
+        type: "credit", cost: "7200", coin_type: "prestige", credit_shape: 1,
+        tower_floor: "14-1",
+        unlock_item_id: transfer_credit_id("nut_frier", 1),
+        description: "一转凭证\n在合成屋-卡片转职中使用"
+    });
+    register_goods("credit_nut_frier_2", {
+        type: "credit", cost: "19200", coin_type: "prestige", credit_shape: 2,
+        tower_floor: "28-1",
+        unlock_item_id: transfer_credit_id("nut_frier", 2),
+        description: "二转凭证\n在合成屋-卡片转职中使用"
+    });
+    register_goods("credit_sugar_roxburghii_1", {
+        type: "credit", cost: "1430", coin_type: "prestige", credit_shape: 1,
+        tower_floor: "1-2",
+        unlock_item_id: transfer_credit_id("sugar_roxburghii", 1),
+        description: "一转凭证\n在合成屋-卡片转职中使用"
+    });
+    register_goods("credit_sugar_roxburghii_2", {
+        type: "credit", cost: "9360", coin_type: "prestige", credit_shape: 2,
+        tower_floor: "7-1",
+        unlock_item_id: transfer_credit_id("sugar_roxburghii", 2),
+        description: "二转凭证\n在合成屋-卡片转职中使用"
+    });
 }

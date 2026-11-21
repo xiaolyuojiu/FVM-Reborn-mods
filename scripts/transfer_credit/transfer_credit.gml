@@ -843,6 +843,40 @@ function transfer_credit_buyable_locked(_card_id, _shape) {
     return false;
 }
 
+/// @function camp_credit_bought(card_id, shape)
+/// @desc 这张卡的这一档有没有在营地商店用营地币买过
+function camp_credit_bought(_card_id, _shape) {
+    if (!variable_global_exists("save_data") || !is_struct(global.save_data)) return false;
+    if (!variable_struct_exists(global.save_data, "camp_credit_bought")) return false;
+    if (!is_array(global.save_data.camp_credit_bought)) return false;
+    return array_contains(global.save_data.camp_credit_bought, string(_card_id) + "|" + string(_shape));
+}
+
+/// @function camp_credit_mark_bought(card_id, shape)
+function camp_credit_mark_bought(_card_id, _shape) {
+    if (!variable_global_exists("save_data") || !is_struct(global.save_data)) return;
+    if (!variable_struct_exists(global.save_data, "camp_credit_bought") || !is_array(global.save_data.camp_credit_bought))
+        global.save_data.camp_credit_bought = [];
+    var _k = string(_card_id) + "|" + string(_shape);
+    if (!array_contains(global.save_data.camp_credit_bought, _k)) array_push(global.save_data.camp_credit_bought, _k);
+}
+
+/// @function camp_credit_gate_ok(card_id, shape)
+/// @desc 威望商店这一档能不能买：只有「营地商店有同档商品」的卡才要求先买过营地版
+function camp_credit_gate_ok(_card_id, _shape) {
+    if (!variable_global_exists("goods_map") || !ds_exists(global.goods_map, ds_type_map)) return true;
+    var _keys = ds_map_keys_to_array(global.goods_map);
+    for (var _i = 0; _i < array_length(_keys); _i++) {
+        var _g = global.goods_map[? _keys[_i]];
+        if (!is_struct(_g)) continue;
+        if (!variable_struct_exists(_g, "type") || _g.type != "camp") continue;
+        if (_g.unlock_item_id != _card_id) continue;
+        if (!variable_struct_exists(_g, "target_shape") || _g.target_shape != _shape) continue;
+        return camp_credit_bought(_card_id, _shape);
+    }
+    return true;
+}
+
 /// @function transfer_credit_buyable(card_id, shape)
 /// @desc 商店能不能买这一档 → 返回 "" = 可买；否则返回**不可买原因**（直接拿去 show_notice）
 ///       2026-10-26 用户改口径：
@@ -861,6 +895,9 @@ function transfer_credit_buyable(_card_id, _shape) {
     // 爬塔门槛（商品级 tower_floor；不写 / 0 = 不限制）
     var _need_key = transfer_credit_tower_floor_req(_card_id, _shape);
     if (_need_key > 0 && transfer_credit_tower_done_key() < _need_key) return "魔塔通关层数不足";
+
+    // 营地专属卡：营地商店买过同档才放行
+    if (!camp_credit_gate_ok(_card_id, _shape)) return "需先在营地商店购买";
 
     return "";
 }

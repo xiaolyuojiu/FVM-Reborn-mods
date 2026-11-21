@@ -65,7 +65,8 @@ function shop_list_recharge(){
 					inst.target_shape = global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*12)].target_shape
 					inst.coin_type = global.goods_map[? ds_list_find_value(goods_list,i*4+j+(current_page-1)*12)].coin_type
 					inst.btn_type = "camp"
-					if is_unlocked{
+					// 已转职到该形态 / 已用营地币买过这一档 → 售完（每档只能买一次）
+					if is_unlocked || camp_credit_bought(inst.target_item, inst.target_shape){
 						inst.is_disabled = true
 						instance_create_depth(x-590+380*j,y-130+190*i,depth-2,obj_sold_out_icon)
 					}

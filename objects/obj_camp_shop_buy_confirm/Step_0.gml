@@ -30,8 +30,13 @@ for (var i = 0; i < array_length(buttons); i++) {
 					obj_camp_shop_bg.is_submenu_opened = false
 					with banding_buy_btn{
 						if btn_type == "camp"{
-							add_material_amount(coin_type,-cost)
-							unlock_card(target_item,get_card_info_simple(target_item).level,target_shape,global.save_data.unlocked_items.max_skill_level)
+							// 营地档只发转职凭证，形态留给合成屋转职
+							var _credit = transfer_credit_id(target_item, target_shape);
+							if (_credit != ""){
+								add_material_amount(coin_type,-cost)
+								add_material_amount(_credit, 1);
+								camp_credit_mark_bought(target_item, target_shape);
+							}
 						}
 					}
 						with obj_camp_shop_bg{

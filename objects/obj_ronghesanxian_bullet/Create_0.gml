@@ -16,11 +16,10 @@ image_yscale = 1.5;
 hittable_types = get_hittable_enemy_types(target_type);
 hit_tick = 0;
 // 融合三线专属：
-//   pierce_all  —— 灵魂融合（2 转）子弹可穿透全部老鼠与障碍（无数量上限）
+//   pierce_left —— 灵魂融合还能穿透几只老鼠（0 = 命中即消失；障碍不消耗）
 //   hited_enemy —— 穿透时记录已结算过的敌人，避免同一只被逐帧反复结算
-//                  （只在子弹自己身上记账，池化复用跑 Create 会天然复位）
-//   burn_damage —— 本卡当前星级的[燃烧伤害]，命中时按 30% 概率写入燃烧控制器
-pierce_all = false;
+//   burn_damage / burn_chance —— 命中时按概率写入燃烧控制器
+pierce_left = 0;
 hited_enemy = ds_list_create();
 burn_damage = 0;
 burn_chance = 30;

@@ -7,7 +7,12 @@ if not is_placed{
 	// 卡片侧有 hex_place_locked() 挡着，人物这条路径一直漏了同一个判断。
 	if (instance_exists(obj_hex_panel)) exit;
 	if (hex_place_locked()) exit;
-	if (global.is_paused) exit;
+	// 🔴 只挡「暂停菜单 / 结算」，不能拿 is_paused 一刀切：
+	//   开局等玩家落位时 pause_manager 会主动 is_paused = true 并画 spr_place_player_tip，
+	//   这一下必须放行，否则点击被吃掉 → 人物永远放不下（整局卡死）。
+	var _menu_open = variable_global_exists("show_menu") && global.show_menu;
+	var _battle_over = variable_global_exists("game_over") && global.game_over;
+	if (global.is_paused && (_menu_open || _battle_over)) exit;
 	var logical_x = mouse_x;
 	var logical_y = mouse_y;
 	var platform_shift_x = 0;

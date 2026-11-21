@@ -29,7 +29,7 @@ function tx_pool_data()
         { w: 10, name: "一档 直射·投掷", classes: [
             { name: "三线类", cards: [
                 { nm: "三线酒架", o: obj_triplewinerack_bullet, dx: 40, dy: -80, spd: 8, n: 6, per: 3, gap: 10, sp: "rows3", wt: 50 },   // 满转 3 行 × 2 批（隔 10 帧）
-                { nm: "子母三线酒架", o: obj_ronghesanxian_bullet, dx: 40, dy: -80, spd: 8, n: 9, per: 3, gap: 5, sp: "rows3", fx: { pierce_all: true, burn_damage: 190 }, wt: 50 },   // 满转 3 行 × 3 批；30% 挂燃烧（满级每跳 190）
+                { nm: "子母三线酒架", o: obj_ronghesanxian_bullet, dx: 40, dy: -80, spd: 8, n: 9, per: 3, gap: 5, sp: "rows3", fx: { pierce_left: 16, burn_damage: 190 }, wt: 50 },   // 满转 3 行 × 3 批；30% 挂燃烧（满级每跳 190）
                 { nm: "射手座精灵", o: obj_sheshou_bullet, dx: 40, dy: -80, spd: 8, n: 6, per: 3, gap: 10, sp: "rows3", wt: 50 },   // 满转 3 行 × 2 批（隔 10 帧）
             ] },
             { name: "传统直线类", cards: [

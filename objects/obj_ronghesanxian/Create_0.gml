@@ -1,11 +1,5 @@
 // obj_ronghesanxian（融合三线）Create 事件
-// 三形态：0 转 子母三线酒架 / 1 转 仙人掌花酒架 / 2 转 烤灯笼鱼酒架
-// 机制：① 同时攻击前方三行（本行 + 上下各一行，全程宽度）
-//       ② 0 转每行 2 发(共 6) / 1 转 3 发(共 9) / 2 转 3 发(共 9) 且子弹可穿透
-//       ③ 命中后 30% 概率附加燃烧 buff：每 1 秒结算 1 次、共 3 次[燃烧伤害]，可叠加
-//       —— 燃烧的持续结算与挂身火焰交给独立控制器 obj_ronghesanxian_burn_ctrl /
-//          obj_ronghesanxian_burn_fx（卡片被铲掉后，已在燃烧的老鼠继续结算）
-// 数值取自「这组卡的推荐数值和情报岛.xlsx」新普卡-融合卡 65-77 行。
+// 三形态：0 子母三线酒架 / 1 仙人掌花酒架 / 2 烤灯笼鱼酒架
 event_inherited();  // 继承父对象属性
 plant_id = "ronghesanxian";
 obj_type = object_index;
@@ -31,11 +25,19 @@ is_slowdown = false
 attack_type = ATTACK_TYPE.SHOOTER
 target_type = "normal"
 
-// 每行子弹数：0 转 2 发 / 1、2 转 3 发（2 转的子弹可穿透）
-shots_per_row = (shape == 0) ? 2 : 3
-
-// 燃烧伤害按星级查表（星 0 表里是"/"，沿用 1 星档 —— 与融合火盆的寒气表同一口径）
-burn_dmg_table = [13, 13, 16, 19, 22, 25, 28, 31, 34, 42, 50, 70, 90, 110, 135, 160, 190];
+// custom：子弹数 / 燃烧概率 / 燃烧伤害 / 穿透数量（灵魂融合）
+var _sk = variable_instance_exists(id, "skill") ? skill : 0;
+var _info = get_plant_data_with_skill("ronghesanxian", shape, clamp(current_level, 0, 16), _sk);
+shots_per_row = (shape == 0) ? 2 : 3;
+burn_chance = 30;
+burn_damage = 0;
+pierce_count = 0;
+if (_info != undefined){
+	if (ds_map_exists(_info, "子弹数"))   shots_per_row = _info[? "子弹数"];
+	if (ds_map_exists(_info, "燃烧概率")) burn_chance   = _info[? "燃烧概率"];
+	if (ds_map_exists(_info, "燃烧伤害")) burn_damage   = _info[? "燃烧伤害"];
+	if (ds_map_exists(_info, "穿透数量")) pierce_count  = _info[? "穿透数量"];
+}
 
 // 本次攻击是否已开火；本次攻击已齐射次数（一次攻击动画内按 shots_per_row 分次齐射、错 5 帧）
 fired_this_attack = false

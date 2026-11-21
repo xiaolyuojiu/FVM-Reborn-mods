@@ -1,5 +1,5 @@
-// 灵魂融合（2 转）：子弹可穿透障碍，直接穿过、不销毁
-if (pierce_all) exit;
+// 灵魂融合：可穿透障碍，直接穿过、不销毁、不消耗穿透数量
+if (pierce_left > 0) exit;
 
 if target_type == "normal" && row == other.row && precise_bbox_collision(id, other){
 	if burnt == 0{

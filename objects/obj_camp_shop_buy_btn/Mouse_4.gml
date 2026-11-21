@@ -13,6 +13,10 @@ if not obj_camp_shop_bg.is_submenu_opened and not is_disabled{
 			show_notice("请先购买一转",60)
 			exit
 		}
+		if camp_credit_bought(target_item, target_shape){
+			show_notice("该档已购买",60)
+			exit
+		}
 		if get_material_amount(coin_type) >= cost || global.debug{
 			var inst = instance_create_depth(room_width/2,room_height/2,depth-3,obj_camp_shop_buy_confirm)
 			inst.banding_buy_btn = id
