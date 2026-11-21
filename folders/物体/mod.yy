@@ -23,5 +23,5 @@
   "listItems":[
     {"name":"obj_holiday_exchange","path":"objects/obj_holiday_exchange/obj_holiday_exchange.yy",},
     {"name":"obj_holiday_entry_btn","path":"objects/obj_holiday_entry_btn/obj_holiday_entry_btn.yy",},
-  ],,
+  ],
 }
