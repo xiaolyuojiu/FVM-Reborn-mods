@@ -93,6 +93,7 @@
 | 编在 `waves[].subwaves[].enemy_list` 里的敌人「不出场」，`wave_ignore` 也修不好 | 看它出生高度：波次路径没有整局时间等它从天上吊下来。落点/配对 target 全交给 Step 的 `banding_target_inst == noone` 补齐块，出生高度贴近落点（`_home.y - 80`），Create 只管数据 | B43 |
 | 新敌人精灵「帧数跟原版一样」但游戏里播错段（走路播成攻击 / 死亡播一半） | 父类 `obj_enemy_parent` 按 `move*2 + attack*2 + death` 索引，**段序固定五段**：正常行走 / 受伤行走 / 正常攻击 / 受伤攻击 / 死亡。帧数要按原版精灵反推每段长度，不能照 SWF FrameLabel 顺序切 | B44 |
 | 商城「看不到某件商品」（如新上的某套时装） | 先算页数再怀疑数据：`shop_list_recharge` 的列表序是 `ds_map_keys_to_array` 的**哈希序**，每页 16 个 → 178 件时装 = 12 页，同批写入的会被打散。数据侧先核对 `goods_map` 与 `attire_pool` 条数是否相等（178=178），别一上来查精灵和绘制 | B45 |
+| 合并外部 PR 后资源「都在」但 IDE 解析报错 / 资源树丢项 | 逐个 `json` 解析 `folders/**/*.yy`（去尾逗号后），别只查 yyp `resources`；解析失败必须打印，不能 `except: continue` 静默跳过 | D7 |
 
 ### A11 用 `Get-ChildItem -Recurse` 找文件 → 每次 15~22 秒
 - **症状**：一件「找一下哪些文件引用了 X」的活儿拖到几十秒；换个关键词再扫一遍，时间线性叠加。
@@ -1224,6 +1225,19 @@
 - **证据**：`objects/obj_shop_buy_btn/Mouse_4.gml:1-12`（新守卫）、
   `objects/obj_zz_enter/Mouse_4.gml:5-7`、`objects/obj_map_manager/Step_0.gml:30-33`、
   `objects/obj_zz_shop_bg/Create_0.gml:26-33,57-67`、2026-11-20 日志。
+
+### D7 外部 PR 合并后工程解析失败，但 yyp resources 逐条都对得上
+
+- **症状**：合并别人的 PR 后，`FVM_Reborn_makk.yyp` 的 `resources` / `Folders` 都能对出来，
+  资源目录也在磁盘上，但 IDE 打开报错、资源树丢项。
+- **错路**：只校验 yyp 的两条（resources 与 Folders），把 `folders/**/*.yy` 的 JSON 语法当默认正确；
+  扫描脚本用 `except Exception: continue` 跳过解析失败的文件，结果把「解析失败」误报成「资源未被收录」，
+  差点得出「PR 漏注册」的错误结论。
+- **正确路径**：合并后必跑一次全量解析，**失败项要打印**：
+  `json.loads(re.sub(r',(\s*[}\]])', r'\1', open(p, encoding='utf-8').read()))`
+  对 `folders/**/*.yy` 逐个跑（BOM 用 `utf-8-sig` 读）。PR48 的
+  `folders/物体/mod.yy` 第 26 行是 `],,` 双逗号，改回 `],` 即恢复。
+- **证据**：`folders/物体/mod.yy:26`（修复前 `],,`）、2026-11-21 日志。
 
 ## 追加模板```
 ### X{n} <一句话症状>
