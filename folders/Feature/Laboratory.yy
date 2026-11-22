@@ -10,9 +10,9 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"Sprites","path":"folders/Feature/Laboratory/Sprites.yy",},
+    {"name":"Components","path":"folders/Feature/Laboratory/Components.yy",},
     {"name":"Scripts","path":"folders/Feature/Laboratory/Scripts.yy",},
-    {"name":"Components","path":"folders/Feature/Laboratory/Components.yy",}
+    {"name":"Sprites","path":"folders/Feature/Laboratory/Sprites.yy",},
   ],
   "listItems":[
     {"name":"LaboratoryGUI","path":"objects/LaboratoryGUI/LaboratoryGUI.yy",},

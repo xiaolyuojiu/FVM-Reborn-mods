@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"scribble_add_macro","path":"scripts/scribble_add_macro/scribble_add_macro.yy",},
     {"name":"scribble_default_preprocessor_get","path":"scripts/scribble_default_preprocessor_get/scribble_default_preprocessor_get.yy",},

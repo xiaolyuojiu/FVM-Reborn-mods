@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"79533628-3bc6-40e0-85f8-805f2b1f36c9","path":"sprites/spr_coffee_pot/spr_coffee_pot.yy",},
     {"name":"3d4c3ff9-6fb6-4022-bf0d-0bfca3b80880","path":"sprites/spr_coffee_pot_1/spr_coffee_pot_1.yy",},

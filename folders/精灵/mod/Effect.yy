@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"c63900b3-cff7-494d-956a-08ef5db9ae09","path":"sprites/spr_aurora_dead/spr_aurora_dead.yy",},
     {"name":"39c63ace-175e-452e-9d83-651aa516547c","path":"sprites/spr_aurora_dead_1/spr_aurora_dead_1.yy",},

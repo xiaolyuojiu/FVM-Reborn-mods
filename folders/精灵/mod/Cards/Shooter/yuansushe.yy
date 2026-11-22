@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"yuansushe",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/yuansushe.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"yuansushe",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

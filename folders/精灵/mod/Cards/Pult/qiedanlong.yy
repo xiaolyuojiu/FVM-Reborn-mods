@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"dcce1a8e-936a-4de9-840e-6846458bc50a","path":"sprites/spr_qiedanlong/spr_qiedanlong.yy",},
     {"name":"04a3de01-f984-460a-8263-314cd20c5a20","path":"sprites/spr_qiedanlong_1/spr_qiedanlong_1.yy",},

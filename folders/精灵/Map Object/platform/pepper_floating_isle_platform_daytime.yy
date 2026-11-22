@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"14579a8d-763d-4f42-9086-11f3397c1ee1","path":"sprites/spr_pepper_floating_isle_platform_daytime_1/spr_pepper_floating_isle_platform_daytime_1.yy",},
     {"name":"0a534fd6-4e58-436d-ab4f-e0aa6a616a13","path":"sprites/spr_pepper_floating_isle_platform_daytime_2/spr_pepper_floating_isle_platform_daytime_2.yy",},

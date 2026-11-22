@@ -1,0 +1,23 @@
+{
+  "$GMFolder":"",
+  "%Name":"boomer",
+  "folderPath":"folders/精灵/mod/Cards/boomer.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"boomer",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"baiyang","path":"folders/精灵/mod/Cards/boomer/baiyang.yy",},
+    {"name":"dianman","path":"folders/精灵/mod/Cards/boomer/dianman.yy",},
+    {"name":"panduola_god","path":"folders/精灵/mod/Cards/boomer/panduola_god.yy",},
+    {"name":"save_god","path":"folders/精灵/mod/Cards/boomer/save_god.yy",},
+    {"name":"shiliu","path":"folders/精灵/mod/Cards/boomer/shiliu.yy",},
+    {"name":"spr_shishi","path":"folders/精灵/mod/Cards/boomer/spr_shishi.yy",},
+    {"name":"tanchitu","path":"folders/精灵/mod/Cards/boomer/tanchitu.yy",},
+    {"name":"yeziguo","path":"folders/精灵/mod/Cards/boomer/yeziguo.yy",},
+  ],
+  "listItems":[],
+}

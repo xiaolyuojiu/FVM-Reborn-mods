@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"niutou",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS/hengha/niutou.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"niutou",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

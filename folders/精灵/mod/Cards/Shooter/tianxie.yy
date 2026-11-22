@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_tianxie","path":"sprites/spr_tianxie/spr_tianxie.yy",},
     {"name":"spr_tianxie_1","path":"sprites/spr_tianxie_1/spr_tianxie_1.yy",},

@@ -10,9 +10,9 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"wooden_plate","path":"folders/精灵/Cards/Vehicle/wooden_plate.yy",},
+    {"name":"cotton_candy","path":"folders/精灵/Cards/Vehicle/cotton_candy.yy",},
     {"name":"soda_bubble","path":"folders/精灵/Cards/Vehicle/soda_bubble.yy",},
-    {"name":"cotton_candy","path":"folders/精灵/Cards/Vehicle/cotton_candy.yy",}
+    {"name":"wooden_plate","path":"folders/精灵/Cards/Vehicle/wooden_plate.yy",},
   ],
   "listItems":[],
 }

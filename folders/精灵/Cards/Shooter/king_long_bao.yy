@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"upgrade","path":"folders/精灵/Cards/Shooter/king_long_bao/upgrade.yy",}
+    {"name":"upgrade","path":"folders/精灵/Cards/Shooter/king_long_bao/upgrade.yy",},
   ],
   "listItems":[
     {"name":"69f3a8a3-5fa0-42b7-b6ef-5646a51c40aa","path":"sprites/spr_king_long_bao_0_0/spr_king_long_bao_0_0.yy",},

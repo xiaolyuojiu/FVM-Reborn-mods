@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_blonde_mary","path":"objects/obj_blonde_mary/obj_blonde_mary.yy",},
     {"name":"obj_blonde_mary_bullet","path":"objects/obj_blonde_mary_bullet/obj_blonde_mary_bullet.yy",}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"aa745137-4f19-4390-b43e-73f680999aa9","path":"sprites/spr_deck_save_btn/spr_deck_save_btn.yy",},
     {"name":"3853222d-d936-4572-b145-04623509a813","path":"sprites/spr_deck_save_menu/spr_deck_save_menu.yy",},

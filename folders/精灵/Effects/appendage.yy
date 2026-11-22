@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"69ee52c4-7c63-4c35-b711-f1a34192fcde","path":"sprites/spr_ladder/spr_ladder.yy",}
   ],

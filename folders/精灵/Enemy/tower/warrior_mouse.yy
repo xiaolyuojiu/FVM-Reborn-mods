@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2efadeb8-0d68-437a-bbb2-dd47a36cae1b","path":"sprites/spr_warrior_minion_mouse/spr_warrior_minion_mouse.yy",},
     {"name":"7f739d51-6dcd-4753-ac54-5dd2d96ef88b","path":"sprites/spr_warrior_minion_mouse_summon/spr_warrior_minion_mouse_summon.yy",},

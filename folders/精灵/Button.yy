@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"26385a93-2ad3-434b-89e9-16cc7bc3c6e8","path":"sprites/spr_battlestart_button/spr_battlestart_button.yy",},
     {"name":"3ef83154-02f4-4f7c-b794-fe0c6c2a5ce0","path":"sprites/spr_battlestart_text/spr_battlestart_text.yy",},

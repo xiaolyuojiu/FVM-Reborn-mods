@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"master_shield",
+  "folderPath":"folders/精灵/mod/germ/master_shield.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"master_shield",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

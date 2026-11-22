@@ -170,6 +170,7 @@ copy /Y "$(TargetPath)" "$(ProjectDir)..\..\extensions\WindowsNative\"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="machine_id.cpp" />
     <ClCompile Include="mod_lua.cpp" />
     <ClCompile Include="..\third_party\lua-5.4.8\src\lapi.c"><CompileAs>CompileAsC</CompileAs></ClCompile>
     <ClCompile Include="..\third_party\lua-5.4.8\src\lauxlib.c"><CompileAs>CompileAsC</CompileAs></ClCompile>

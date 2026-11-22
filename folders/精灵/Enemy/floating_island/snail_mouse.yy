@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"90deb929-32e9-423d-a17a-a3a3599c7f96","path":"sprites/spr_snail_mouse/spr_snail_mouse.yy",},
     {"name":"ace890fe-2947-455e-8ba4-ca41f8dd6ed7","path":"sprites/spr_snail_mouse_mucus/spr_snail_mouse_mucus.yy",}

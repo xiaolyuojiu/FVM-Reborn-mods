@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"9f410a27-16bb-42b3-9990-2a7d0b6f3bc0","path":"sprites/spr_cucumber_paper_boat_mouse/spr_cucumber_paper_boat_mouse.yy",},
     {"name":"1d14da4b-1041-41c1-8dbd-701707351baf","path":"sprites/spr_cucumber_paper_boat_mouse_enter/spr_cucumber_paper_boat_mouse_enter.yy",},

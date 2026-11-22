@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"fc5415eb-093d-4e92-b5f0-4029075785f6","path":"sprites/spr_gatling_popcorn/spr_gatling_popcorn.yy",},
     {"name":"dd43b6a7-1840-4eb0-ab4b-419cf2175e35","path":"sprites/spr_gatling_popcorn_1/spr_gatling_popcorn_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"a620adf7-539a-44b0-83a4-eef5290dfeea","path":"sprites/spr_engineer_bullet/spr_engineer_bullet.yy",},
     {"name":"f7f86be8-a7b2-458a-af92-65bd373345d5","path":"sprites/spr_engineer_bullet_effect/spr_engineer_bullet_effect.yy",},

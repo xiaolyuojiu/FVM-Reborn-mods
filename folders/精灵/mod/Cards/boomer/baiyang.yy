@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"baiyang",
+  "folderPath":"folders/精灵/mod/Cards/boomer/baiyang.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"baiyang",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

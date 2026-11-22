@@ -10,15 +10,15 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"Vehicle","path":"folders/物体/Cards/Vehicle.yy",},
-    {"name":"Defender","path":"folders/物体/Cards/Defender.yy",},
-    {"name":"Melee","path":"folders/物体/Cards/Melee.yy",},
     {"name":"Assistant","path":"folders/物体/Cards/Assistant.yy",},
+    {"name":"Boomer","path":"folders/物体/Cards/Boomer.yy",},
+    {"name":"Defender","path":"folders/物体/Cards/Defender.yy",},
+    {"name":"Flame Producer","path":"folders/物体/Cards/Flame Producer.yy",},
+    {"name":"Melee","path":"folders/物体/Cards/Melee.yy",},
     {"name":"Pult","path":"folders/物体/Cards/Pult.yy",},
     {"name":"Shooter","path":"folders/物体/Cards/Shooter.yy",},
-    {"name":"Boomer","path":"folders/物体/Cards/Boomer.yy",},
-    {"name":"Flame Producer","path":"folders/物体/Cards/Flame Producer.yy",},
-    {"name":"Track","path":"folders/物体/Cards/Track.yy",}
+    {"name":"Track","path":"folders/物体/Cards/Track.yy",},
+    {"name":"Vehicle","path":"folders/物体/Cards/Vehicle.yy",},
   ],
   "listItems":[
     {"name":"obj_card_parent","path":"objects/obj_card_parent/obj_card_parent.yy",},

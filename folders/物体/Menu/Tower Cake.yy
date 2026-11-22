@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_closetowercake_btn","path":"objects/obj_closetowercake_btn/obj_closetowercake_btn.yy",},
     {"name":"obj_tower_cake_bg","path":"objects/obj_tower_cake_bg/obj_tower_cake_bg.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"0c28a5dd-c476-4ddc-9984-4f7f5ea155cf","path":"sprites/spr_houyi_god/spr_houyi_god.yy",},
     {"name":"cb2efb5a-ea7f-4613-b966-a35795bb0a08","path":"sprites/spr_houyi_god_1/spr_houyi_god_1.yy",},

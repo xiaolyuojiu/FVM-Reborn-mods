@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"youshen",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS/youshen.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"youshen",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

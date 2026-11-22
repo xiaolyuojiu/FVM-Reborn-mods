@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"0ed38db5-443b-49d6-9f88-ada9fcde17da","path":"sprites/spr_aquarius_elve/spr_aquarius_elve.yy",},
     {"name":"f4d5e831-3975-4745-ae12-85589a5ea821","path":"sprites/spr_aquarius_elve_1/spr_aquarius_elve_1.yy",},

@@ -5,7 +5,7 @@
         // 从头开始播放新实例
         global.audio.play(readyroom_music, 0, 0);
     }
-if keyboard_check_pressed(vk_escape) || mouse_check_button_pressed(mb_right){
+if ((!global.console_open && keyboard_check_pressed(vk_escape)) || mouse_check_button_pressed(mb_right)){
 	// 2026-11-16 用户口径：连点两次要停在「是否退出」框上，不能把框点没。
 	//   原来这里是 toggle（框已存在就 instance_destroy），右键/ESC 连点两次 =
 	//   弹出来又被自己关掉，玩家看到的就是「没框、直接离开」。
@@ -37,7 +37,7 @@ if (hover_card_index != -1 && !is_submenu_open && !instance_exists(obj_package_b
 	var _hot_card = global.player_deck[| _pool_index];
 	for (var _slot_key = 1; _slot_key <= deck_slot_max(); _slot_key++) {
 		var _key = global.keybind_map[? "卡槽" + string(_slot_key)];
-		if (_key == undefined || !keyboard_check_pressed(_key)) continue;
+		if (_key == undefined || global.console_open || !keyboard_check_pressed(_key)) continue;
 
 		var _slot = _slot_key - 1;
 		if ((_hot_card == "lihe" && !is_random_gift_mode())

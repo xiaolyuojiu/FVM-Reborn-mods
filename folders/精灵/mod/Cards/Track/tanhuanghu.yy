@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"497306db-6636-4d13-8df4-88c93992f5e6","path":"sprites/spr_tanhuanghu/spr_tanhuanghu.yy",},
     {"name":"7fcc6867-8efb-42ac-a146-613c49064be2","path":"sprites/spr_tanhuanghu_1/spr_tanhuanghu_1.yy",},

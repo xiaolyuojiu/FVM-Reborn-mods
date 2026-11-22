@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f4f1128c-5007-48eb-a518-13ee6af9a5f4","path":"sprites/spr_honglonglong_appear/spr_honglonglong_appear.yy",},
     {"name":"4bfbfdc1-3b1c-4966-899a-bc24e9b64ca3","path":"sprites/spr_honglonglong_death/spr_honglonglong_death.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_card_slot","path":"objects/obj_card_slot/obj_card_slot.yy",},
     {"name":"obj_shovel","path":"objects/obj_shovel/obj_shovel.yy",},

@@ -63,6 +63,7 @@ if (_code == "") {
 }
 
 // auth_bind：0 成功 / 1 码无效 / 2 这个码属于别的机器 / 3 已授权但写盘失败
+//            4 这个码绑的是旧版识别码（指纹 v1），需要重新领码
 var _r = auth_bind(_code);
 if (_r == 0) {
     msg = "授权成功，已绑定本机";
@@ -76,6 +77,10 @@ if (_r == 0) {
     msg_ok = false;
     closing = 90;
     input_box.blur();
+} else if (_r == 4) {
+    msg = "这是旧版识别码的授权码，请把上方本机识别码重新发给机器人领取";
+    msg_ok = false;
+    msg_timer = 300;
 } else if (_r == 2) {
     msg = "这个码是给另一台机器的，请用本机识别码重新领取";
     msg_ok = false;

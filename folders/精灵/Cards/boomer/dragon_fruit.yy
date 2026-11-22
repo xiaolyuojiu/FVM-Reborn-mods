@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"87189352-6316-46be-b211-a2040b9473a4","path":"sprites/spr_dragon_fruit/spr_dragon_fruit.yy",},
     {"name":"e2f2511a-ea4c-4f70-8fa8-9dc1c1f06b06","path":"sprites/spr_dragon_fruit_1/spr_dragon_fruit_1.yy",},

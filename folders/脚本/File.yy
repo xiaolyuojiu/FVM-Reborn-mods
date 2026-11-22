@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"card_info","path":"scripts/card_info/card_info.yy",},
     {"name":"edit_file","path":"scripts/edit_file/edit_file.yy",},

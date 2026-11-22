@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"array_deep_copy","path":"scripts/array_deep_copy/array_deep_copy.yy",},
     {"name":"auth_client","path":"scripts/auth_client/auth_client.yy",},

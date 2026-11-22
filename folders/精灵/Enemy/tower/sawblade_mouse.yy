@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"3eecaa09-bf7f-4ce2-aaf0-f21d89a1f9c4","path":"sprites/spr_sawblade_mouse/spr_sawblade_mouse.yy",},
     {"name":"599576b2-a622-4e62-99c4-d056bae7223e","path":"sprites/spr_sawblade_mouse_appear/spr_sawblade_mouse_appear.yy",},

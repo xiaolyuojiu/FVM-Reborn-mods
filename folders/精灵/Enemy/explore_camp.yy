@@ -1,0 +1,22 @@
+{
+  "$GMFolder":"",
+  "%Name":"explore_camp",
+  "folderPath":"folders/精灵/Enemy/explore_camp.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"explore_camp",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"BOSS","path":"folders/精灵/Enemy/explore_camp/BOSS.yy",},
+    {"name":"barrel_mouse","path":"folders/精灵/Enemy/explore_camp/barrel_mouse.yy",},
+    {"name":"carpet_mouse","path":"folders/精灵/Enemy/explore_camp/carpet_mouse.yy",},
+    {"name":"explore_mouse","path":"folders/精灵/Enemy/explore_camp/explore_mouse.yy",},
+    {"name":"face_cookie","path":"folders/精灵/Enemy/explore_camp/face_cookie.yy",},
+    {"name":"suv_mouse","path":"folders/精灵/Enemy/explore_camp/suv_mouse.yy",},
+    {"name":"tire_mouse","path":"folders/精灵/Enemy/explore_camp/tire_mouse.yy",},
+  ],
+  "listItems":[],
+}

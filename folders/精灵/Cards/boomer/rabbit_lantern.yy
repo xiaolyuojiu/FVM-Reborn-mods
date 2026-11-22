@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"46dcde77-ef09-4225-bd07-45d9ff97a332","path":"sprites/spr_rabbit_lantern/spr_rabbit_lantern.yy",},
     {"name":"2f6fdbef-0f43-4ce2-9cd4-c83a27f21e91","path":"sprites/spr_rabbit_lantern_1/spr_rabbit_lantern_1.yy",},

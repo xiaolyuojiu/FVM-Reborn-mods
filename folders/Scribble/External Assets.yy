@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"scribble_external_font_add","path":"scripts/scribble_external_font_add/scribble_external_font_add.yy",},
     {"name":"scribble_external_font_exists","path":"scripts/scribble_external_font_exists/scribble_external_font_exists.yy",},

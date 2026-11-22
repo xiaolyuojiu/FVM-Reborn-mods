@@ -1,6 +1,6 @@
 timer++
 
-if keyboard_check_pressed(vk_escape){
+if (!global.console_open && keyboard_check_pressed(vk_escape)){
 	// 不朽确认窗开着时，ESC 交给它自己处理（取消 = 回火山），别顺手把下面的设置页关掉
 	if (instance_exists(obj_immortal_confirm)){ }
 	// 🔴 合成屋演出中（融合 / 转职 / 进化）：ESC 直接吃掉，不许退出（2026-11-11 用户口径）
@@ -15,6 +15,10 @@ if keyboard_check_pressed(vk_escape){
 	}
 	else if instance_exists(obj_edit_menu){
 		panel_anim_close(obj_edit_menu)
+		obj_player_info_ui.menu_type = 0
+	}
+	else if instance_exists(obj_credits_menu){
+		panel_anim_close(obj_credits_menu)
 		obj_player_info_ui.menu_type = 0
 	}
 	else if instance_exists(obj_world_map_menu){

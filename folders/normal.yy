@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"undersea_vortex","path":"folders/normal/undersea_vortex.yy",}
+    {"name":"undersea_vortex","path":"folders/normal/undersea_vortex.yy",},
   ],
   "listItems":[
     {"name":"10ec4107-7206-42eb-91b8-5d978ac4ee10","path":"sprites/spr_catgun_bullet/spr_catgun_bullet.yy",},

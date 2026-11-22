@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"62ec226b-9d52-4f56-aaf8-fcd420d88c25","path":"sprites/spr_iron_man_mouse_bullet/spr_iron_man_mouse_bullet.yy",},
     {"name":"e8296ac6-0e12-4f4c-a92f-c52b54dcc2ce","path":"sprites/spr_iron_man_mouse_bullet_effect/spr_iron_man_mouse_bullet_effect.yy",},

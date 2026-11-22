@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e21b9dfd-0bd7-4bff-9f48-111edab54dcd","path":"sprites/spr_thor_body_death/spr_thor_body_death.yy",},
     {"name":"34ca799a-7c0e-4edb-a681-8ea9973f718a","path":"sprites/spr_thor_body_idle/spr_thor_body_idle.yy",},

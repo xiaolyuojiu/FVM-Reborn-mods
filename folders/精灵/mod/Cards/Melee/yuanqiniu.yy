@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"8c567afb-4171-4c45-8acd-eb337f739465","path":"sprites/spr_yuanqiniu/spr_yuanqiniu.yy",},
     {"name":"48db048e-8ecb-4802-b78d-e8c160a0ea02","path":"sprites/spr_yuanqiniu_1/spr_yuanqiniu_1.yy",},

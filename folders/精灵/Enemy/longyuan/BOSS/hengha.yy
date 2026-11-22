@@ -1,0 +1,18 @@
+{
+  "$GMFolder":"",
+  "%Name":"hengha",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS/hengha.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"hengha",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"bell","path":"folders/精灵/Enemy/longyuan/BOSS/hengha/bell.yy",},
+    {"name":"mamian","path":"folders/精灵/Enemy/longyuan/BOSS/hengha/mamian.yy",},
+    {"name":"niutou","path":"folders/精灵/Enemy/longyuan/BOSS/hengha/niutou.yy",},
+  ],
+  "listItems":[],
+}

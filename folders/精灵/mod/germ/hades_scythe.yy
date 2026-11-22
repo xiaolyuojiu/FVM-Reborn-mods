@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"hades_scythe",
+  "folderPath":"folders/精灵/mod/germ/hades_scythe.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"hades_scythe",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_beefhotpot_bullet","path":"objects/obj_beefhotpot_bullet/obj_beefhotpot_bullet.yy",},
     {"name":"obj_obstacle","path":"objects/obj_catgun_bullet/obj_catgun_bullet.yy",},

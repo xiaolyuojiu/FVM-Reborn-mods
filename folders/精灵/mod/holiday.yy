@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_holiday_panel","path":"sprites/spr_holiday_panel/spr_holiday_panel.yy",},
     {"name":"spr_holiday_tab_exchange","path":"sprites/spr_holiday_tab_exchange/spr_holiday_tab_exchange.yy",},

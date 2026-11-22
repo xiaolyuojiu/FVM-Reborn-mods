@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_buzz_wind","path":"objects/obj_buzz_wind/obj_buzz_wind.yy",},
     {"name":"obj_lieutenant_buzz","path":"objects/obj_lieutenant_buzz/obj_lieutenant_buzz.yy",}

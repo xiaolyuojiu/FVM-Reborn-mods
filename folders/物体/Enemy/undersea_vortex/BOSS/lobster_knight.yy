@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_lobster_knight","path":"objects/obj_lobster_knight/obj_lobster_knight.yy",},
     {"name":"obj_lobster_knight_bullet","path":"objects/obj_lobster_knight_bullet/obj_lobster_knight_bullet.yy",},

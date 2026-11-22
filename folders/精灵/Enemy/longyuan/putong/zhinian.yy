@@ -1,0 +1,16 @@
+{
+  "$GMFolder":"",
+  "%Name":"zhinian",
+  "folderPath":"folders/精灵/Enemy/longyuan/putong/zhinian.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"zhinian",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"hunti","path":"folders/精灵/Enemy/longyuan/putong/zhinian/hunti.yy",},
+  ],
+  "listItems":[],
+}

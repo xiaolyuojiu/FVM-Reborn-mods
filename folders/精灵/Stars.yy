@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f84dc5dc-cb38-43b1-a265-210ada076536","path":"sprites/spr_star_10/spr_star_10.yy",},
     {"name":"af8f00f1-7ec5-41d4-aa1c-ff51b516071b","path":"sprites/spr_star_11/spr_star_11.yy",},

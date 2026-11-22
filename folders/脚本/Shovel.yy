@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"deselect_shovel","path":"scripts/deselect_shovel/deselect_shovel.yy",},
     {"name":"select_shovel","path":"scripts/select_shovel/select_shovel.yy",}

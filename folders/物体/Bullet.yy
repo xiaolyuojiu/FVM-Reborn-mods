@@ -10,9 +10,9 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"bullet effect","path":"folders/物体/Bullet/bullet effect.yy",},
     {"name":"normal","path":"folders/物体/Bullet/normal.yy",},
     {"name":"throw","path":"folders/物体/Bullet/throw.yy",},
-    {"name":"bullet effect","path":"folders/物体/Bullet/bullet effect.yy",}
   ],
   "listItems":[
     {"name":"obj_bullet_parent","path":"objects/obj_bullet_parent/obj_bullet_parent.yy",},

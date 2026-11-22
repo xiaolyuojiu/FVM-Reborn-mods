@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"1777cff6-90c5-4144-a1f6-c6a69f2dd7ba","path":"sprites/spr_chocolate_cannon/spr_chocolate_cannon.yy",},
     {"name":"28a4bd3b-446f-4f1c-90ad-aa361b4f5f79","path":"sprites/spr_chocolate_cannon_1/spr_chocolate_cannon_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_closecookbook_btn","path":"objects/obj_closecookbook_btn/obj_closecookbook_btn.yy",},
     {"name":"obj_cookbook_bg","path":"objects/obj_cookbook_bg/obj_cookbook_bg.yy",},

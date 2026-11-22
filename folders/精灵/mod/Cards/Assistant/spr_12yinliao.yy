@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_12yinliao",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/spr_12yinliao.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_12yinliao",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

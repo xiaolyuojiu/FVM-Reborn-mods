@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"238847ea-2f8c-4de5-a31c-960917141c88","path":"sprites/spr_machine_beehive_mouse/spr_machine_beehive_mouse.yy",},
     {"name":"67c9e35c-2f69-442d-88cb-1815b79f1c69","path":"sprites/spr_machine_beehive_release_1/spr_machine_beehive_release_1.yy",},

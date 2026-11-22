@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"3651029c-f8a0-4a0d-9f0f-365177ebcf64","path":"sprites/spr_aircraft_carrier/spr_aircraft_carrier.yy",},
     {"name":"6a7ed369-fee2-4c8c-85fe-392916795323","path":"sprites/spr_aircraft_carrier_release_1/spr_aircraft_carrier_release_1.yy",},

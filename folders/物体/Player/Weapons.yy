@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_bubble_gun","path":"objects/obj_bubble_gun/obj_bubble_gun.yy",},
     {"name":"obj_cat_gun","path":"objects/obj_cat_gun/obj_cat_gun.yy",},

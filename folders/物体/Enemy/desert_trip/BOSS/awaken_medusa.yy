@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"awaken_medusa",
+  "folderPath":"folders/物体/Enemy/desert_trip/BOSS/awaken_medusa.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"awaken_medusa",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

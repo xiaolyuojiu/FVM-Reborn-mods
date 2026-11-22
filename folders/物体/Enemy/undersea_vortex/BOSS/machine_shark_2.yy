@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_machine_shark_2","path":"objects/obj_machine_shark_2/obj_machine_shark_2.yy",},
     {"name":"obj_machine_shark_2_wind","path":"objects/obj_machine_shark_2_wind/obj_machine_shark_2_wind.yy",}

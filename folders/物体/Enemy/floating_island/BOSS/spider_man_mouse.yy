@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_spider_man_mouse","path":"objects/obj_spider_man_mouse/obj_spider_man_mouse.yy",},
     {"name":"obj_spider_man_mouse_web","path":"objects/obj_spider_man_mouse_web/obj_spider_man_mouse_web.yy",}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"__scribble_class_element","path":"scripts/__scribble_class_element/__scribble_class_element.yy",},
     {"name":"__scribble_class_event","path":"scripts/__scribble_class_event/__scribble_class_event.yy",},

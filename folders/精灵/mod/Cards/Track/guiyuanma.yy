@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"guiyuanma",
+  "folderPath":"folders/精灵/mod/Cards/Track/guiyuanma.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"guiyuanma",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

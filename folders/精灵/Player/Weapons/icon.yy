@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"be2ec41b-5b37-4d90-a227-ba807cc9c6ff","path":"sprites/spr_bubble_gun_icon/spr_bubble_gun_icon.yy",},
     {"name":"2095c12f-2241-4e9e-9af6-ea8a68c7d9cc","path":"sprites/spr_cat_gun_icon/spr_cat_gun_icon.yy",},

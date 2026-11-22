@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_baibianshe","path":"objects/obj_baibianshe/obj_baibianshe.yy",}
   ],

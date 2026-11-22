@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"c412b4a9-d49e-4c84-ace6-05c2f2283323","path":"sprites/spr_egg_boiler_pult/spr_egg_boiler_pult.yy",},
     {"name":"bd71f40d-00a5-4eb6-b1c4-739dcba6c60a","path":"sprites/spr_egg_boiler_pult_1/spr_egg_boiler_pult_1.yy",},

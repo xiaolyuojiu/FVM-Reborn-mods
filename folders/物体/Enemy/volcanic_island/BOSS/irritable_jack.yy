@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_irritable_jack","path":"objects/obj_irritable_jack/obj_irritable_jack.yy",},
     {"name":"obj_irritable_jack_fire","path":"objects/obj_irritable_jack_fire/obj_irritable_jack_fire.yy",},

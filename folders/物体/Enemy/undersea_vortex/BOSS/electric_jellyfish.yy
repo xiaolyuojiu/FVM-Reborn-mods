@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_electric_jellyfish","path":"objects/obj_electric_jellyfish/obj_electric_jellyfish.yy",},
     {"name":"obj_electric_jellyfish_bullet","path":"objects/obj_electric_jellyfish_bullet/obj_electric_jellyfish_bullet.yy",}

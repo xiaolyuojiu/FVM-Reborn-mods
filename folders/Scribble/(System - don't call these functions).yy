@@ -10,11 +10,11 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"Shaders","path":"folders/Scribble/(System - don't call these functions)/Shaders.yy",},
+    {"name":"Classes","path":"folders/Scribble/(System - don't call these functions)/Classes.yy",},
+    {"name":"Deprecated","path":"folders/Scribble/(System - don't call these functions)/Deprecated.yy",},
     {"name":"Generator","path":"folders/Scribble/(System - don't call these functions)/Generator.yy",},
     {"name":"Initialization","path":"folders/Scribble/(System - don't call these functions)/Initialization.yy",},
-    {"name":"Classes","path":"folders/Scribble/(System - don't call these functions)/Classes.yy",},
-    {"name":"Deprecated","path":"folders/Scribble/(System - don't call these functions)/Deprecated.yy",}
+    {"name":"Shaders","path":"folders/Scribble/(System - don't call these functions)/Shaders.yy",},
   ],
   "listItems":[
     {"name":"scribble_fallback_font","path":"fonts/scribble_fallback_font/scribble_fallback_font.yy",},

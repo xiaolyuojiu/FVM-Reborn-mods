@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
 
     {"name":"zz_lottery_init","path":"scripts/zz_lottery_init/zz_lottery_init.yy",},    {"name":"craft_rule_init","path":"scripts/craft_rule_init/craft_rule_init.yy",},

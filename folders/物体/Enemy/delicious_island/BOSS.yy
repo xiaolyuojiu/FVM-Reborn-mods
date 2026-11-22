@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_abyss_pharaoh","path":"objects/obj_abyss_pharaoh/obj_abyss_pharaoh.yy",},
     {"name":"obj_arno","path":"objects/obj_arno/obj_arno.yy",},

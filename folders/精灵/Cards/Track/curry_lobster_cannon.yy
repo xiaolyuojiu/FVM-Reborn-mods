@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"bed955c5-e3d9-451b-8639-18439ccb1d58","path":"sprites/spr_curry_lobster_cannon/spr_curry_lobster_cannon.yy",},
     {"name":"b5b0a01e-5adb-4ea7-9cbd-82541d917025","path":"sprites/spr_curry_lobster_cannon_1/spr_curry_lobster_cannon_1.yy",},

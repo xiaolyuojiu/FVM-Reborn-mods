@@ -1,0 +1,16 @@
+{
+  "$GMFolder":"",
+  "%Name":"desert_trip",
+  "folderPath":"folders/物体/Enemy/desert_trip.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"desert_trip",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"BOSS","path":"folders/物体/Enemy/desert_trip/BOSS.yy",},
+  ],
+  "listItems":[],
+}

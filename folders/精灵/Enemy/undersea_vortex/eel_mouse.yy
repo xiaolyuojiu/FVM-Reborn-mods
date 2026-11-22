@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"1af49d0c-26f0-473d-b77e-b350a98611f2","path":"sprites/spr_eel_mouse/spr_eel_mouse.yy",},
     {"name":"6fb6b396-d2a6-4cfb-8f66-acaddb348c27","path":"sprites/spr_eel_mouse_bomb/spr_eel_mouse_bomb.yy",},

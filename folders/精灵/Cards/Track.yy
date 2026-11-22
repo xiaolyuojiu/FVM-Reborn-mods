@@ -10,9 +10,9 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"tang_hu_lu","path":"folders/精灵/Cards/Track/tang_hu_lu.yy",},
     {"name":"curry_lobster_cannon","path":"folders/精灵/Cards/Track/curry_lobster_cannon.yy",},
-    {"name":"takoyaki","path":"folders/精灵/Cards/Track/takoyaki.yy",}
+    {"name":"takoyaki","path":"folders/精灵/Cards/Track/takoyaki.yy",},
+    {"name":"tang_hu_lu","path":"folders/精灵/Cards/Track/tang_hu_lu.yy",},
   ],
   "listItems":[],
 }

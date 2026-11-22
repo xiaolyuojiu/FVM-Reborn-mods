@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"cde6b644-da05-411b-a778-e34da637f4a9","path":"sprites/spr_chili_powder_explode/spr_chili_powder_explode.yy",}
   ],

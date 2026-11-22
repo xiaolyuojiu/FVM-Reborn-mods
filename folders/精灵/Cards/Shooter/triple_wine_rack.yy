@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"1bdc139a-bc02-4666-9ff2-aaa42dbc29a8","path":"sprites/spr_triple_wine_rack/spr_triple_wine_rack.yy",},
     {"name":"403e326e-f95f-4888-8eeb-42e797df8504","path":"sprites/spr_triple_wine_rack_1/spr_triple_wine_rack_1.yy",},

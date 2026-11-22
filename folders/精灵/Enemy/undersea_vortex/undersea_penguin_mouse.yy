@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"784a8029-24bd-419a-9d27-b162812124f9","path":"sprites/spr_undersea_penguin_mouse/spr_undersea_penguin_mouse.yy",},
     {"name":"dc5708fd-709a-4409-a63a-0273a729d965","path":"sprites/spr_undersea_penguin_mouse_bomb/spr_undersea_penguin_mouse_bomb.yy",},

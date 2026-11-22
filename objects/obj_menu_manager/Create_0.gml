@@ -50,7 +50,8 @@ self.texture_to_load = [
 	"maps",
 	"enemy_floating",
 	"enemy_tower",
-	"pack_explore_camp"
+	"pack_explore_camp",
+	"pack_desert_trip"
 ]
 
 // Desktop dynamic groups are warmed by scene; do not fetch every enemy region at startup.

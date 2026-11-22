@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"5986e6f7-3443-4ff2-a728-9282a2800467","path":"sprites/spr_blonde_mary_appear/spr_blonde_mary_appear.yy",},
     {"name":"72e3319b-739f-41bb-9fa5-c3394cece54e","path":"sprites/spr_blonde_mary_boomerang/spr_blonde_mary_boomerang.yy",},

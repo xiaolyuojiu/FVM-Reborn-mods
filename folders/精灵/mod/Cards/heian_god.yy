@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"eb432f80-764a-4e1a-922c-7205c9173697","path":"sprites/spr_heian_god/spr_heian_god.yy",},
     {"name":"212d3e22-f73f-4fab-872d-5ce73be45ea9","path":"sprites/spr_heian_god_1/spr_heian_god_1.yy",},

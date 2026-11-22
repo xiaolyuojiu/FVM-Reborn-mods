@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_haiyang_god","path":"objects/obj_haiyang_god/obj_haiyang_god.yy",},
     {"name":"spr_haiyang_god","path":"sprites/spr_haiyang_god/spr_haiyang_god.yy",},

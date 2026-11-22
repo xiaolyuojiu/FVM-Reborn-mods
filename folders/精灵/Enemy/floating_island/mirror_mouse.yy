@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"7271428b-8fda-4dfe-a48e-5fe034ff83de","path":"sprites/spr_mirror_mouse/spr_mirror_mouse.yy",},
     {"name":"825f9ac8-b254-4eb1-b393-0fa2affff349","path":"sprites/spr_mirror_mouse_acting/spr_mirror_mouse_acting.yy",}

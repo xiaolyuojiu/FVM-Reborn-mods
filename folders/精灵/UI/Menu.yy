@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"fd27538b-9e31-499d-b0be-4f58039fefe1","path":"sprites/spr_battle_escape_menu/spr_battle_escape_menu.yy",},
     {"name":"284bb0fc-fa4a-473e-9fcb-12d71d40c4a4","path":"sprites/spr_closemenu_btn/spr_closemenu_btn.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_captain_america_mouse","path":"objects/obj_captain_america_mouse/obj_captain_america_mouse.yy",},
     {"name":"obj_captain_rainbow","path":"objects/obj_captain_rainbow/obj_captain_rainbow.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_chocolate_pult","path":"objects/obj_chocolate_pult/obj_chocolate_pult.yy",},
     {"name":"obj_egg_boiler_pult","path":"objects/obj_egg_boiler_pult/obj_egg_boiler_pult.yy",},

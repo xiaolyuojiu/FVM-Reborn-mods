@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"sound","path":"sounds/snd_chomp1/snd_chomp1.yy",},
     {"name":"sound","path":"sounds/snd_chomp2/snd_chomp2.yy",},

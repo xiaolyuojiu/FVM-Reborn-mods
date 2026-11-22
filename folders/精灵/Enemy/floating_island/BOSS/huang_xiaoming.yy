@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e2cdcebb-e5d7-4f99-aaf2-127f92caa6f1","path":"sprites/spr_huang_xiaoming_appear/spr_huang_xiaoming_appear.yy",},
     {"name":"3aae6934-e2a1-42b4-98dd-b85e0da7568f","path":"sprites/spr_huang_xiaoming_death/spr_huang_xiaoming_death.yy",},

@@ -10,11 +10,11 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"cap","path":"folders/精灵/Enemy/kuafu/zhuorediyu/boss/cap.yy",},
+    {"name":"jack","path":"folders/精灵/Enemy/kuafu/zhuorediyu/boss/jack.yy",},
     {"name":"mary","path":"folders/精灵/Enemy/kuafu/zhuorediyu/boss/mary.yy",},
     {"name":"shi","path":"folders/精灵/Enemy/kuafu/zhuorediyu/boss/shi.yy",},
-    {"name":"jack","path":"folders/精灵/Enemy/kuafu/zhuorediyu/boss/jack.yy",},
     {"name":"vajra","path":"folders/精灵/Enemy/kuafu/zhuorediyu/boss/vajra.yy",},
-    {"name":"cap","path":"folders/精灵/Enemy/kuafu/zhuorediyu/boss/cap.yy",},
   ],
   "listItems":[
   ],

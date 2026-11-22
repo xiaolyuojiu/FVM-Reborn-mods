@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"12aee76c-6f7e-4470-8cbd-275f7aec2a00","path":"sprites/spr_can_mouse/spr_can_mouse.yy",},
     {"name":"3c335804-37d5-4cf6-90a0-fa4c5e7f28a2","path":"sprites/spr_can_mouse_drop/spr_can_mouse_drop.yy",},

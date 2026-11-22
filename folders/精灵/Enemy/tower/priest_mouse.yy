@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2078c1a8-44a9-4132-b2a9-e7806812281d","path":"sprites/spr_priest_mouse/spr_priest_mouse.yy",},
     {"name":"4586efc7-2e80-4aa6-bacd-bb8f7b2f3407","path":"sprites/spr_priest_mouse_perform/spr_priest_mouse_perform.yy",}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_camp_shop_bg","path":"sprites/spr_camp_shop_bg/spr_camp_shop_bg.yy",},
     {"name":"spr_camp_shop_buy_btn","path":"sprites/spr_camp_shop_buy_btn/spr_camp_shop_buy_btn.yy",},

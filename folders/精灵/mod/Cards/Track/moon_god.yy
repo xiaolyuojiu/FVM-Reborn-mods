@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"moon_god",
+  "folderPath":"folders/精灵/mod/Cards/Track/moon_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"moon_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

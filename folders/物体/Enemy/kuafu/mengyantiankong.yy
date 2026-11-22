@@ -10,9 +10,8 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"xiaoguai","path":"folders/物体/Enemy/kuafu/mengyantiankong/xiaoguai.yy",},
     {"name":"boss","path":"folders/物体/Enemy/kuafu/mengyantiankong/boss.yy",},
-  
+    {"name":"xiaoguai","path":"folders/物体/Enemy/kuafu/mengyantiankong/xiaoguai.yy",},
   ],
   "listItems":[],
 }

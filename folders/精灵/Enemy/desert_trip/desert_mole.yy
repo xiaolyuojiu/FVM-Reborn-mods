@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"desert_mole",
+  "folderPath":"folders/精灵/Enemy/desert_trip/desert_mole.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"desert_mole",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

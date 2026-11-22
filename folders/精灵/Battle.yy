@@ -11,7 +11,7 @@
   "visible":true,
   "folders":[
     {"name":"boss_icon","path":"folders/精灵/Battle/boss_icon.yy",},
-    {"name":"timer_text","path":"folders/精灵/Battle/timer_text.yy",}
+    {"name":"timer_text","path":"folders/精灵/Battle/timer_text.yy",},
   ],
   "listItems":[
     {"name":"ed770b99-4025-4aed-9b4c-9312df7c6fe1","path":"sprites/spr_boss_hpbar_bar/spr_boss_hpbar_bar.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d761e1eb-6113-4764-96bd-d37c2d1a1828","path":"sprites/spr_clownfish_mouse/spr_clownfish_mouse.yy",},
     {"name":"6a21b13a-03d2-4a56-907e-9bd2d7f465d3","path":"sprites/spr_clownfish_mouse_skate/spr_clownfish_mouse_skate.yy",}

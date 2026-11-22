@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr-zhiyumiao",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/spr-zhiyumiao.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr-zhiyumiao",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

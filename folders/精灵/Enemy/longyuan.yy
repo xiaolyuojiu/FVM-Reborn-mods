@@ -1,0 +1,18 @@
+{
+  "$GMFolder":"",
+  "%Name":"longyuan",
+  "folderPath":"folders/精灵/Enemy/longyuan.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"longyuan",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"BOSS","path":"folders/精灵/Enemy/longyuan/BOSS.yy",},
+    {"name":"longzhu","path":"folders/精灵/Enemy/longyuan/longzhu.yy",},
+    {"name":"putong","path":"folders/精灵/Enemy/longyuan/putong.yy",},
+  ],
+  "listItems":[],
+}

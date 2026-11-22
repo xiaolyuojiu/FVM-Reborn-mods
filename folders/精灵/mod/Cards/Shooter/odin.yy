@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"odin",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/odin.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"odin",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

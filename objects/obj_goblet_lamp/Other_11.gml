@@ -1,7 +1,7 @@
 global.zodiac_flame_mult = 1;
 global.zodiac_query_card = id;
 with (obj_yanyantu) event_user(0);
-if grow_timer < 90*60{
+if grow_timer < grow_time{
 	var inst = instance_create_depth(x, y - 60, depth - 1000, obj_flame);
 	inst.value = floor((flame_produce - 10) * global.zodiac_flame_mult)
 	inst.sprite_index = spr_flame_small

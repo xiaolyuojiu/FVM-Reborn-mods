@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"b0a5bdbf-8108-4603-aa75-6d1260b4a60a","path":"sprites/spr_thug_submarine_mouse/spr_thug_submarine_mouse.yy",},
     {"name":"aa4dc32f-5079-46ee-9334-ee4df2013fab","path":"sprites/spr_thug_submarine_mouse_enter/spr_thug_submarine_mouse_enter.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"8a8490f0-ad04-4819-aa20-0cdae268fa39","path":"sprites/spr_youyu_god/spr_youyu_god.yy",},
     {"name":"907ce1c1-1df8-4f40-8565-94a21decf64a","path":"sprites/spr_youyu_god_1/spr_youyu_god_1.yy",},

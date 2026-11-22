@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"shuangyu",
+  "folderPath":"folders/精灵/mod/Cards/Pult/shuangyu.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"shuangyu",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

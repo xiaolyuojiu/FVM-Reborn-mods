@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"be127011-1df2-43ef-b20e-80d9ccce20d2","path":"sprites/spr_war_god_death/spr_war_god_death.yy",},
     {"name":"486fafcd-6689-4789-bc64-98bd03875a4e","path":"sprites/spr_war_god_duck/spr_war_god_duck.yy",},

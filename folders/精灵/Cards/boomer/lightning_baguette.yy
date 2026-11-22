@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"4f158e3c-6efc-435b-aa03-88a26e24e7b1","path":"sprites/spr_lightning_baguette/spr_lightning_baguette.yy",},
     {"name":"cdd400f0-4115-4be0-8573-40d8a1bae5dc","path":"sprites/spr_lightning_baguette_1/spr_lightning_baguette_1.yy",},

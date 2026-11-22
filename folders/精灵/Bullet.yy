@@ -10,8 +10,8 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"bullet effect","path":"folders/精灵/Bullet/bullet effect.yy",},
     {"name":"throw","path":"folders/精灵/Bullet/throw.yy",},
-    {"name":"bullet effect","path":"folders/精灵/Bullet/bullet effect.yy",}
   ],
   "listItems":[],
 }

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"11d0b69e-e3a4-429a-aead-1f36e7ad8b7f","path":"sprites/spr_clearance_icon/spr_clearance_icon.yy",},
     {"name":"02736cfc-d426-4729-8db9-8c41e557113a","path":"sprites/spr_clearance_icon_old/spr_clearance_icon_old.yy",},

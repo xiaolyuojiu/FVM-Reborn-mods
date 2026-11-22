@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"icon","path":"folders/精灵/Player/Weapons/icon.yy",}
+    {"name":"icon","path":"folders/精灵/Player/Weapons/icon.yy",},
   ],
   "listItems":[
     {"name":"c843049b-cc2a-48c7-89f8-7eec9aaf5c4c","path":"sprites/spr_bubble_gun/spr_bubble_gun.yy",},

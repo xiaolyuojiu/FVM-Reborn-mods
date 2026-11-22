@@ -74,3 +74,7 @@ else if (config_key == "boss_music_random"){
 	global.boss_music_random = state
 	boss_music_ensure_dir()
 }
+else if (config_key == "pause_filter"){
+	// 开启 = 暂停时不绘制黑色半透明遮罩
+	global.pause_filter = state
+}

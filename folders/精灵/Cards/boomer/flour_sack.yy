@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"45724524-2f25-4080-bd67-45bc9afebcd4","path":"sprites/spr_flour_sack/spr_flour_sack.yy",},
     {"name":"99821412-30a0-4fbc-adbd-8186d614a4eb","path":"sprites/spr_flour_sack_1/spr_flour_sack_1.yy",},

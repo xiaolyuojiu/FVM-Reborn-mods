@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f972d8f5-3a45-4914-be5e-18e13bc04bcc","path":"sprites/spr_chocolatecannon_bullet/spr_chocolatecannon_bullet.yy",},
     {"name":"878634ad-f1ec-46a7-9140-d7cec07e82bb","path":"sprites/spr_chocolatepult_bullet_large/spr_chocolatepult_bullet_large.yy",},

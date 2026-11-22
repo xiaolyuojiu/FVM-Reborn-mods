@@ -1,0 +1,22 @@
+{
+  "$GMFolder":"",
+  "%Name":"Flame Producer",
+  "folderPath":"folders/精灵/mod/Cards/Flame Producer.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"Flame Producer",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"shuangzi","path":"folders/精灵/mod/Cards/Flame Producer/shuangzi.yy",},
+    {"name":"spr_liehuohu","path":"folders/精灵/mod/Cards/Flame Producer/spr_liehuohu.yy",},
+    {"name":"spr_shegengbao","path":"folders/精灵/mod/Cards/Flame Producer/spr_shegengbao.yy",},
+    {"name":"sun_god","path":"folders/精灵/mod/Cards/Flame Producer/sun_god.yy",},
+    {"name":"warm_birds","path":"folders/精灵/mod/Cards/Flame Producer/warm_birds.yy",},
+    {"name":"yanyantu","path":"folders/精灵/mod/Cards/Flame Producer/yanyantu.yy",},
+    {"name":"yinghuoshe","path":"folders/精灵/mod/Cards/Flame Producer/yinghuoshe.yy",},
+  ],
+  "listItems":[],
+}

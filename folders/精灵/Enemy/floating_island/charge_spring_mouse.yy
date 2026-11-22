@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"af0386af-85b5-46bf-9a6f-31e6678124ca","path":"sprites/spr_charge_spring_mouse/spr_charge_spring_mouse.yy",},
     {"name":"046d90e1-29f7-4863-a56e-b0c9a6daffbe","path":"sprites/spr_charge_spring_mouse_place/spr_charge_spring_mouse_place.yy",},

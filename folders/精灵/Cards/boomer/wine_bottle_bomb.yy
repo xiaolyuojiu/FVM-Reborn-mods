@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ff55ef6d-afe1-41be-9986-791f40469513","path":"sprites/spr_wine_bottle_bomb/spr_wine_bottle_bomb.yy",},
     {"name":"339aeffb-ceff-4607-8023-dea5e0df5861","path":"sprites/spr_wine_bottle_bomb_1/spr_wine_bottle_bomb_1.yy",},

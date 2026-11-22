@@ -23,16 +23,7 @@ if y >= thrower_y {
     instance_destroy()
 	exit
 }
-if !atk_modified{
-	with obj_card_parent{
-		if plant_id == "fruit_tart"{
-			if grid_row == other.row && ((shape <= 1 && x >= other.x) || shape >= 2){
-				other.damage *= atk
-				other.atk_modified = true
-			}
-		}
-	}
-}
+// 水果塔增幅走增幅网格 thrower 通道（scripts/fruit_tart_buff），子弹侧不再重复结算。
 
 hit_tick++;
 if (hit_tick >= global.bullet_hit_interval)

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"37e30c47-57d4-491c-b462-7037c2e41aac","path":"sprites/spr_rotating_coffee_pot/spr_rotating_coffee_pot.yy",},
     {"name":"b11f0a38-cb23-4756-82a2-6e93a96a7183","path":"sprites/spr_rotating_coffee_pot_1/spr_rotating_coffee_pot_1.yy",},

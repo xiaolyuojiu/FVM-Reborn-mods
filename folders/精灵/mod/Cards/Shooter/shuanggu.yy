@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"8b159db3-c2e6-4a5d-9d32-449d3b104d15","path":"sprites/spr_shuanggu/spr_shuanggu.yy",},
     {"name":"e40b7b43-49a7-4f94-a545-5bf3f27ab075","path":"sprites/spr_shuanggu_1/spr_shuanggu_1.yy",},

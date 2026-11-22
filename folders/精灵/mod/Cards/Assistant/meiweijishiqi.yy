@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_meiweijishiqi","path":"sprites/spr_meiweijishiqi/spr_meiweijishiqi.yy",},
     {"name":"spr_meiweijishiqi_effect","path":"sprites/spr_meiweijishiqi_effect/spr_meiweijishiqi_effect.yy",},

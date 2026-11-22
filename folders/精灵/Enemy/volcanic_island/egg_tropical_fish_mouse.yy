@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e779a3f3-6e7b-49fd-8e95-96722d31c6bd","path":"sprites/spr_egg_tropical_fish_mouse/spr_egg_tropical_fish_mouse.yy",},
     {"name":"a07d70aa-4f48-46e6-a428-9f1e93f77126","path":"sprites/spr_egg_tropical_fish_mouse_enter/spr_egg_tropical_fish_mouse_enter.yy",},

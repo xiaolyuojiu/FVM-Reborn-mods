@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"war_god",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/war_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"war_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

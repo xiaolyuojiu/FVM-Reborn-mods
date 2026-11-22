@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"hit_effect","path":"shaders/hit_effect/hit_effect.yy",},
     {"name":"hit_effect_2","path":"shaders/hit_effect_2/hit_effect_2.yy",},

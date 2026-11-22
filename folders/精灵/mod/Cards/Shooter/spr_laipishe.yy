@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_laipishe",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/spr_laipishe.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_laipishe",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

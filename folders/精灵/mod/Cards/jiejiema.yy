@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_jiejiema_fx_inside","path":"sprites/spr_jiejiema_fx_inside/spr_jiejiema_fx_inside.yy",},
     {"name":"spr_jiejiema_fx_side","path":"sprites/spr_jiejiema_fx_side/spr_jiejiema_fx_side.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"5de83f6c-aeb6-4338-9626-0cc99342c936","path":"sprites/spr_salad_pult/spr_salad_pult.yy",},
     {"name":"04fa0a65-274b-4ca5-b727-9d6451e5bd8f","path":"sprites/spr_salad_pult_1/spr_salad_pult_1.yy",},

@@ -3,7 +3,7 @@
 // 这里仅在暂停管理器不存在时兜底（正常情况下不会执行）。
 if (variable_instance_exists(id, "pnl_closing") && pnl_closing) exit;
 if (!instance_exists(obj_battle_pause_manager)) {
-    if (keyboard_check_pressed(vk_escape)) {
+    if (!global.console_open && keyboard_check_pressed(vk_escape)) {
         if instance_exists(obj_config_menu){
             instance_destroy(obj_config_menu)
         }

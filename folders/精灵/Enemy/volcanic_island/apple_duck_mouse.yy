@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"efe9bb69-d429-4641-8d83-2492adc83023","path":"sprites/spr_apple_duck_mouse/spr_apple_duck_mouse.yy",},
     {"name":"55fcf07a-8ce6-4abe-9dda-da42aac7b935","path":"sprites/spr_apple_duck_mouse_enter/spr_apple_duck_mouse_enter.yy",},

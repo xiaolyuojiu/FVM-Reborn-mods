@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"feca1baa-066b-4cbc-b176-ee155f38d8c2","path":"sprites/spr_whisky_bomb/spr_whisky_bomb.yy",},
     {"name":"df96a1ff-419e-4712-9d8e-b0406e8624fa","path":"sprites/spr_whisky_bomb_1/spr_whisky_bomb_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"5e4cba2a-5751-497d-9946-f04a4f5ce03f","path":"sprites/spr_panduola_god/spr_panduola_god.yy",},
     {"name":"48722ae9-312d-4af5-aca4-537cbcf06e64","path":"sprites/spr_panduola_god_1/spr_panduola_god_1.yy",},

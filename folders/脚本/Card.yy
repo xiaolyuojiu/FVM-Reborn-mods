@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"cards_init","path":"scripts/cards_init/cards_init.yy",},
     {"name":"card_created","path":"scripts/card_created/card_created.yy",},

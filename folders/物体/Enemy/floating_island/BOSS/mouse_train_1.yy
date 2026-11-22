@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_mouse_train_1_body","path":"objects/obj_mouse_train_1_body/obj_mouse_train_1_body.yy",},
     {"name":"obj_mouse_train_1_bullet","path":"objects/obj_mouse_train_1_bullet/obj_mouse_train_1_bullet.yy",},

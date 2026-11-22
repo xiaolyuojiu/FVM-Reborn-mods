@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"juxie",
+  "folderPath":"folders/精灵/mod/Cards/Track/juxie.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"juxie",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

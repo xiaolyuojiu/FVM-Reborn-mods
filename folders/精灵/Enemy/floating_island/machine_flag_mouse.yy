@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e7e682b8-b794-4763-8996-209c5f9cd800","path":"sprites/spr_machine_flag_mouse_air/spr_machine_flag_mouse_air.yy",},
     {"name":"a7537bfa-4ee0-47c5-9d4f-0b7c560d3002","path":"sprites/spr_machine_flag_mouse_drop/spr_machine_flag_mouse_drop.yy",},

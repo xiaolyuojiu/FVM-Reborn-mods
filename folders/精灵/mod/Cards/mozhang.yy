@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"faf3ed20-1516-4297-b99e-7b42c32673ec","path":"sprites/spr_mozhang/spr_mozhang.yy",},
     {"name":"5ab16fcf-aee5-4c2a-91b0-58cc8a1b5663","path":"sprites/spr_mozhang_1/spr_mozhang_1.yy",},

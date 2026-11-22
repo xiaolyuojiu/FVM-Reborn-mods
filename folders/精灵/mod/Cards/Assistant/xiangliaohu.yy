@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_xiangliaohu","path":"sprites/spr_xiangliaohu/spr_xiangliaohu.yy",},
     {"name":"spr_xiangliaohu_1","path":"sprites/spr_xiangliaohu_1/spr_xiangliaohu_1.yy",},

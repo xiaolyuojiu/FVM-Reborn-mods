@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"attire_info","path":"scripts/attire_info/attire_info.yy",},
     {"name":"attire_init","path":"scripts/attire_init/attire_init.yy",}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_battlestart_button","path":"objects/obj_battlestart_button/obj_battlestart_button.yy",},
     {"name":"obj_levelselect_button","path":"objects/obj_levelselect_button/obj_levelselect_button.yy",},

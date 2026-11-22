@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"poseidon",
+  "folderPath":"folders/精灵/mod/Cards/Melee/poseidon.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"poseidon",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

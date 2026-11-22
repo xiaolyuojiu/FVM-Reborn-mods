@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"icon","path":"folders/精灵/Player/Gems/icon.yy",}
+    {"name":"icon","path":"folders/精灵/Player/Gems/icon.yy",},
   ],
   "listItems":[
     {"name":"598808eb-622a-4a20-9f94-3af1ca145785","path":"sprites/spr_bomb_gem/spr_bomb_gem.yy",},

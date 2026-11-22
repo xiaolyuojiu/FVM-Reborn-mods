@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"1dd3e8a6-89fd-4b34-a375-83ae659a8e14","path":"sprites/spr_brazier_taurus/spr_brazier_taurus.yy",},
     {"name":"abdecb45-ef32-4d10-af8f-d23f7b62e671","path":"sprites/spr_brazier_taurus_1/spr_brazier_taurus_1.yy",},

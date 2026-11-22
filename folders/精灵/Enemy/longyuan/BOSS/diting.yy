@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"diting",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS/diting.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"diting",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_camp_shop_bg","path":"objects/obj_camp_shop_bg/obj_camp_shop_bg.yy",},
     {"name":"obj_camp_shop_buy_btn","path":"objects/obj_camp_shop_buy_btn/obj_camp_shop_buy_btn.yy",},

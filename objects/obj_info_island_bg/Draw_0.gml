@@ -356,9 +356,10 @@ else if info_button_select == 2 {
             var card_y = y - 435 + row * 142*1.5-y_offset;
             var _cell_alpha = cell_reveal_alpha(row,col)
             
-            // 绘制敌人
-				
-                draw_sprite_ext(enemy_data.spr, 0, card_x, card_y+65, 1, 1, 0, c_white, _cell_alpha);
+            // 绘制敌人：先画进裁剪面再贴出，BOSS 大贴图不会盖住相邻格子。
+            // 缩放按「普通 / BOSS」两档固定值，不随画布大小变化（否则留白多的贴图会显得过小）
+				var _esc = enemy_is_boss(enemy_id) ? enemy_scale_boss : enemy_scale_normal
+				sprite_clip_draw("info_enemy", enemy_data.spr, 0, card_x, card_y+65, enemy_clip_w, enemy_clip_h, _esc, _cell_alpha)
 				draw_set_color(c_white);
 				draw_set_halign(fa_center);
 				draw_set_valign(fa_middle);

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_yinyangshe_fx_poison","path":"sprites/spr_yinyangshe_fx_poison/spr_yinyangshe_fx_poison.yy",},
     {"name":"spr_yinyangshe_bullet_yang","path":"sprites/spr_yinyangshe_bullet_yang/spr_yinyangshe_bullet_yang.yy",},

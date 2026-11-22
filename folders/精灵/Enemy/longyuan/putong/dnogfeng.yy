@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"dnogfeng",
+  "folderPath":"folders/精灵/Enemy/longyuan/putong/dnogfeng.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"dnogfeng",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_shuangrenshe",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/spr_shuangrenshe.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_shuangrenshe",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

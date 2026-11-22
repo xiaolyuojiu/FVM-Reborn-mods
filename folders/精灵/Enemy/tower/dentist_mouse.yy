@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"53360ddf-f829-4651-9509-85aa6a98e84b","path":"sprites/spr_dentist_mouse/spr_dentist_mouse.yy",},
     {"name":"5e834f07-61cd-466b-b555-8b80a0eabe8f","path":"sprites/spr_dentist_mouse_appear/spr_dentist_mouse_appear.yy",},

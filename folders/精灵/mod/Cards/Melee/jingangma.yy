@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"02095335-82a2-44c0-ac3f-6054df249f2c","path":"sprites/spr_jingangma/spr_jingangma.yy",},
     {"name":"5bacde48-d135-4ae6-8db9-2dfe15ef3946","path":"sprites/spr_jingangma_1/spr_jingangma_1.yy",},

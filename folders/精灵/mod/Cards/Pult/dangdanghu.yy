@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_dangdanghu","path":"sprites/spr_dangdanghu/spr_dangdanghu.yy",},
     {"name":"spr_dangdanghu_bullet","path":"sprites/spr_dangdanghu_bullet/spr_dangdanghu_bullet.yy",},

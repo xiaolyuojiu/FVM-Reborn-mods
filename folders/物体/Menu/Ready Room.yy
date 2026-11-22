@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_deck_clear_btn","path":"objects/obj_deck_clear_btn/obj_deck_clear_btn.yy",},
     {"name":"obj_deck_save_btn","path":"objects/obj_deck_save_btn/obj_deck_save_btn.yy",},

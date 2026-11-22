@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"a116bdcc-f3e8-4435-bae0-7b7867c51181","path":"sprites/spr_hamburger/spr_hamburger.yy",},
     {"name":"2c77ccdc-d1b4-4e82-b362-9242ac263bd4","path":"sprites/spr_hamburger_1/spr_hamburger_1.yy",},

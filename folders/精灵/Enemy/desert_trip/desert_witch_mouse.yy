@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"desert_witch_mouse",
+  "folderPath":"folders/精灵/Enemy/desert_trip/desert_witch_mouse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"desert_witch_mouse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_closeshop_btn","path":"objects/obj_closeshop_btn/obj_closeshop_btn.yy",},
     {"name":"obj_shop_bg","path":"objects/obj_shop_bg/obj_shop_bg.yy",},

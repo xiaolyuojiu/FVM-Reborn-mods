@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"b1f5ef11-461a-4568-a6b0-8cd5c7352991","path":"sprites/spr_little_magician/spr_little_magician.yy",},
     {"name":"ab147288-5f10-423c-ae7f-fc7f94441ee9","path":"sprites/spr_little_magician_throw/spr_little_magician_throw.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e139fde0-9cf0-4ff8-89d3-03f5c11ff97b","path":"sprites/spr_zombie_with_wallnut/spr_zombie_with_wallnut.yy",},
     {"name":"d0234ef9-064e-49fb-b189-c1e1cd61c521","path":"sprites/spr_zombie_with_wallnut_drop/spr_zombie_with_wallnut_drop.yy",},

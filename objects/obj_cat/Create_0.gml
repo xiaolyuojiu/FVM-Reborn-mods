@@ -36,10 +36,13 @@ ignore_list = ["mario_mouse","mario_pipeline","arno","pharaoh_coffin","temple_ph
 				// 杰克系技能2 的滚石（本体与变异版）：滚石是按行横扫的技能产物，
 				// 让它触发第 0 列猫会白丢一只猫（唤醒后被滚石碾掉 / 或反把滚石撞飞导致整行漏怪），
 				// 因此滚石对猫完全透明（2026-11-11）
-				"irritable_jack_rock","kf_zrb_jack_rock_skill_4"
+				"irritable_jack_rock","kf_zrb_jack_rock_skill_4",
+				// 3.1.0 沙漠 BOSS 与不可推物件
+				"witch_shaman_mouse","hermit_crab_mouse","medusa","awaken_medusa","tribal_chief_mouse","ufo_mouse","anubis_mouse",
+				"travel_record","beverage_machine","face_cookie"
 ]
 
 target_ignore = ["mole","bat_mouse","sawblade_mouse","dentist_mouse","baron_bats","paratrooper_mouse_shield","kamikaze_glider_mouse",
-				"sardine_mouse",
+				"sardine_mouse","desert_mole",
 				"kuafu_boss_baron_bats","kuafu_boss_buzz_para_shield"
 ]

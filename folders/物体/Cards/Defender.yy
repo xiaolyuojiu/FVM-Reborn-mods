@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_chocolate_bread","path":"objects/obj_chocolate_bread/obj_chocolate_bread.yy",},
     {"name":"obj_horseshoe_crab_bread","path":"objects/obj_horseshoe_crab_bread/obj_horseshoe_crab_bread.yy",},

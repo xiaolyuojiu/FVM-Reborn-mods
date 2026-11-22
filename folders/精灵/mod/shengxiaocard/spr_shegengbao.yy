@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"67a6d674-b88d-428b-9280-ab7cb439ab7b","path":"sprites/spr_shegengbao/spr_shegengbao.yy",},
     {"name":"4c7920b5-f450-4059-8dd8-32accec1b663","path":"sprites/spr_shegengbao_1/spr_shegengbao_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d6f61bbc-3c5f-4dc9-aaab-1317e51f25d1","path":"sprites/spr_baron_bats/spr_baron_bats.yy",},
     {"name":"0600439f-0faf-47bc-b3a3-58b7ae8bc7cf","path":"sprites/spr_baron_blade/spr_baron_blade.yy",},

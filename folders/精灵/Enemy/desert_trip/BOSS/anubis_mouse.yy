@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"anubis_mouse",
+  "folderPath":"folders/精灵/Enemy/desert_trip/BOSS/anubis_mouse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"anubis_mouse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

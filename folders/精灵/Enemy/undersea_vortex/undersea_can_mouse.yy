@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"761a5805-ee5d-473b-af35-4f861d3aabec","path":"sprites/spr_undersea_can/spr_undersea_can.yy",},
     {"name":"7d605b5a-b3a8-43c9-aac8-71f0e05ab359","path":"sprites/spr_undersea_can_mouse/spr_undersea_can_mouse.yy",},

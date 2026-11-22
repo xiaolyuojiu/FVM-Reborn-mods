@@ -12,12 +12,17 @@
 |---|---|---|
 | 跨服底图「格子/卡片错位」，想靠量周期/自相关定格距 | 用窄带缝检测定 pitch+phase，再钉到原生关系 `(698,199) mod (107,116)`；跑 `tools/cross_bg_align.py --verify` 目检 | B29 |
 | 想用 `Get-Content` 看 `.gml` 中文 | 用 `read` / `grep` 工具；pwsh 只用 `[IO.File]::ReadAllText($p,[Text.Encoding]::UTF8)` | A1 |
+| 想在 pwsh 里跑一段 Python（heredoc `python - <<'PY'`） | 落成临时 `.py` 文件再 `python 文件.py`，或用 `python -c` | A29 |
 | 想用 `Get-Content` 数行数 | 用 `read` 工具或数 LF；`Get-Content` 会把 283 行数成 171 | A2 |
 | 想把多行 python 塞进 `pwsh -Command` | 写 `.py` 文件再 `python x.py`，中文加 `PYTHONIOENCODING=utf-8` | A3 |
 | 要用 python 改 `.ps1`（CRLF + BOM） | 先 `if '\r\n' in s` 规范化再比较，改完跑 `verify_gml.ps1` 确认 BOM 还在 | A4 |
 | 改了 `Draw_0.gml` 画面毫无变化 | 先看该对象 `.yy` 的 `eventList` 有没有 `eventType:8` —— 没有就是孤儿事件，永不执行 | B1 |
 | 统计「谁继承了某对象」得到 0 / 某事件查不到 | `.yy` 是跨行 JSON，匹配前先 `replace('\n','')` 或用 `re.S`；反常为 0 的结论必须换写法复核 | B48 |
 | 点某个按钮却跳到别的页 / 被藏起来的按钮照样能点 | `visible = false` **只跳过 Draw**，Mouse 事件照样派发 → 在被藏对象的 `Mouse_4` 里 `if (!visible) exit` + 按页签再拦一道；别指望「藏起来就点不到」 | B39 |
+| 上游新敌人「卡片不攻击 / 子弹穿过去」 | 它有自己的 `Step` 且**没有真的**调用 `event_inherited()`（首行注释会骗人）→ 在 `Step_0` 最前面补 `obj_face_cookie/Step_0.gml:6-24` 那段 `enemy_by_type` 注册块 | C31 |
+| Draw Event 报 `Variable obj_x._yyy not set before reading it` | 合并搬进来的循环体引用了本作用域没定义的局部变量（`verify_gml` 查不出）→ `rg -n '_yyy\b' <文件>` 核对定义行在不在、在不在前面 | C32 |
+| 报 `local variable yyy not set before reading it` | 同一事件里别处写了 `var yyy`，整个事件的名字都成了局部 → 读实例字段改用 `variable_instance_get(id, "yyy")`；补挂钩代码前先 `rg 'var yyy'` | C33 |
+| 情报岛 / 地图预览里换皮敌人的立绘「完全看不见」 | 立绘包围盒表只扫了 `enemy_init` → mod 的换皮美术不在表里，退回整张画布贴底后被推出裁剪框 → 重跑 `tools/gen_sprite_trim.py`（已改为扫全部注册脚本）并给 `sprite_clip_draw` 加运行时包围盒兜底 | C34 |
 | 动画看起来播了两遍 | 先查 sprite 表里有没有重复段，别先怀疑代码重播 | B2 |
 | 新卡「待机动画里带着施法/张嘴姿势」「攻击姿势永远不播」 | 别靠 `ViewImage` 肉眼判断「这批帧全是待机」——去 SWF 里读 `FrameLabelTag` 定分段：`java -jar ffdec.jar -swf2xml out.xml x.swf`，在 `DefineSpriteTag/subTags` 里按 `ShowFrameTag` 累计帧号，看「待机 / 攻击 / 技能」各落在第几帧 | B46 |
 | 「子弹比动作先出来」/ 要定攻击段里哪一帧出弹 | 段标签只给段起点，不给吐弹帧：先逐帧像素差分找峰值（阴阳蛇 17→18 帧差 2960 px、右缘 77→91），再把候选帧头部放大 8~10 倍拼图看姿态；落到代码就盯 `image_index` 别再数固定帧 | B46 |
@@ -924,6 +929,51 @@
 - **证据**：`objects/obj_jiejiema_field/Step_0.gml:59-73`、`objects/obj_jiejiema_field/Create_0.gml:6-10`、
   `scripts/card_depth/card_depth.gml:6-31`、`objects/obj_battle/Create_0.gml:5`、2026-11-18 日志。
 
+### C31 上游新敌人「卡片打不到」→ 子对象 Step 不继承父事件，就不进 `enemy_by_type` 空间索引
+- **症状**：合并 v3.1.0 沙漠之旅后，滑板鼠、以及 `anubis_mouse` / `medusa` / `ufo_mouse` 等新 BOSS 站在场上，卡片不攻击、子弹穿过去不掉血；老敌人一切正常。
+- **错路**：先怀疑新敌人的 `target_type` 写成 `"land"`（注册表里的 `feature` 是 `"land"`），去改 `get_hittable_enemy_types`；也怀疑过 `enemy_map` 漏注册。两条都不成立 —— `get_hittable_enemy_types` 的键是 `target_type`（`"normal"`/`"air"`/`"obstacle"`…），跟 `feature` 无关。
+- **正确路径**：mod 的命中系统只认 `global.enemy_by_type`（`target_type` → 实例列表），而**这张表只有 `obj_enemy_parent/Step_0.gml` 开头那段注册代码在填**。上游敌人对象自带完整 `Step_0`、**不调用 `event_inherited()`**（文件第一行 `// Inherit the parent event` 只是注释，真正的调用在少数几个对象里才有）→ 父 Step 不执行 → 永不注册 → `obj_battle/Step_2` 建出来的 `enemy_sx` / `enemy_col_n` 里没有它，卡侧读列内敌人数为 0 干脆不开火。
+  照 `obj_face_cookie/Step_0.gml:6-24` 的既有写法，在每个「有自己 Step 且不继承父事件」的敌人 `Step_0` **最前面**补一段注册块（幂等：`enemy_registered` + `enemy_registered_type` 双守卫）。
+  判定要**先剥注释再找 `event_inherited()`**，否则会被那句注释骗过去（本次 24 只新敌人里 11 只被误判成已继承）。
+- **证据**：2026-11-22；`objects/obj_enemy_parent/Step_0.gml:6-26`（唯一注册点）、`objects/obj_face_cookie/Step_0.gml:6`、`objects/obj_battle/Step_2.gml:263-311`（索引建表）；本次补注册的 9 个：`obj_anubis_mouse`、`obj_awaken_medusa`、`obj_hermit_crab_mouse`、`obj_medusa`、`obj_sandboarding_mouse`、`obj_tribal_chief_mouse`、`obj_ufo_mouse`、`obj_witch_shaman_mouse`、`obj_cactus_mouse_bullet`。
+
+### C32 合并进来的绘制代码读「本作用域不存在的变量」→ Draw Event 每帧报 not set before reading it
+- **症状**：打开情报岛（敌人页签）立即报
+  `Variable obj_info_island_bg._ca(104644, -2147483648) not set before reading it. at gml_Object_obj_info_island_bg_Draw_0 (line 362)`。
+- **错路**：三方合并时上游那一行写的是 `sprite_clip_draw(..., _esc, _ca)`，把上游的 `_ca`（它在自己的循环里定义过）连同 mod 的 `_cell_alpha` 一起搬进了同一个 `for` 体；校验脚本只查 BOM 与括号配平，**查不出未定义变量**，直到运行时才炸。
+- **正确路径**：合并「整段取自上游」的绘制/循环体后，逐行核对它引用的局部变量在本作用域的赋值点（`rg -n '_ca\b' <文件>`）。这里改成传本循环已有的 `_cell_alpha`（格子淡入透明度）语义等价。
+  更通用的自检：合并后对改动行里的每个 `_xxx` 局部变量跑一次「定义行号 < 使用行号」的扫描，别等实机。
+- **证据**：2026-11-22；`objects/obj_info_island_bg/Draw_0.gml:357`（`var _cell_alpha = cell_reveal_alpha(row,col)` 定义）、`:362`（修复点）。
+
+### C33 同事件里别处写了 `var target_type` → 整个事件里的 `target_type` 都按局部解析，读实例字段要 `variable_instance_get`
+- **症状**：给 `obj_sandboarding_mouse` 的 `Step_0` 最前面补了敌人注册块，实机一进沙漠关就报
+  `local variable target_type(102436) not set before reading it. at gml_Object_obj_sandboarding_mouse_Step_0 (line 12) - var _reg_key = target_type;`
+  —— 注意报的是 **local variable**，不是 `Variable obj_x.target_type`。
+- **错路**：以为父对象 Create 没把 `target_type` 设上（它明明在 `obj_enemy_parent/Create_0.gml:42` 设了 `"normal"`），
+  还想过去补 `event_inherited()`。
+- **正确路径**：GML 里**同一事件作用域内只要出现过 `var target_type`，这个名字在整个事件里就都是局部变量** ——
+  `obj_sandboarding_mouse/Step_0.gml:137,214` 的 `var target_type = ds_list_find_value(global.eat_order, i);` 就是这么把实例字段遮住的。
+  读实例字段一律走 `variable_instance_get(id, "target_type")`（缺了给 `is_undefined` 兜底），别直接写名字。
+  补这类「前置挂钩代码」前，先 `rg -n 'var <变量名>' <文件>` 确认没被同名局部遮蔽。
+- **证据**：2026-11-22；`objects/obj_sandboarding_mouse/Step_0.gml:137,214`（遮蔽源）、`:5-9`（改用 `variable_instance_get`）、`objects/obj_enemy_parent/Create_0.gml:42`。
+
+### C34 立绘裁剪表只按「原版注册脚本」生成 → 本工程自有的换皮美术不在表里，退回整张画布后整个飘出裁剪框
+- **症状**：合并上游 3.1.0 的「情报岛立绘裁剪框 + 普通/BOSS 分级缩放」之后，原版老鼠正常，但本工程自己的换皮敌人
+  （感染鼠 `spr_infected_*`、跨服鼠 `spr_kuafu_*`、龙渊 BOSS `spr_longzhu_*_icon` 等）在情报岛**完全看不见**（用户 2026-11-22 报）。
+- **错路**：先怀疑「缩放太小 / 裁剪框太小」，去调 `enemy_scale_normal/boss` 与 `enemy_clip_w/h`；
+  也怀疑过 `sprite_get_bbox_*` 是自动包围盒不准。实际两者都不是 —— 缩放到 1.0 也照样看不见。
+- **正确路径**：`scripts/sprite_clip_draw` 的锚点是「内容包围盒水平居中 + 底边贴框底」，
+  而包围盒来自离线表 `scripts/sprite_trim_get`（`tools/gen_sprite_trim.py` 生成）。**那个脚本原来只扫
+  `scripts/enemy_init/enemy_init.gml`**，mod 的敌人注册在 `mod_enemy_init` / `longyuan_enemy_init` /
+  `shuihuo_enemy_init` / `zhuore_enemy_init` / `wudu_enemy_init` 里 → 表里缺 103 条 → 缺条目的精灵退回
+  **整张画布**贴底对齐；画布大、内容偏上的贴图（`spr_infected_submarine_mouse_land` 193×322、内容仅占 9%）
+  就被整个推到裁剪框上方，一个像素都看不见。
+  两条一起改：①生成脚本改为扫描 `scripts/` 下所有带 `spr` 字段的注册脚本（排除 `attire_init`，那是装扮），
+  表从 158 → 366 条；②`sprite_clip_draw` 的包围盒加运行时兜底（离线表 → `sprite_get_bbox_*` → 整张画布），
+  并把调用方给的缩放改成**上限**（内容超框时等比缩到刚好放得进）。
+- **证据**：2026-11-22；`tools/gen_sprite_trim.py`（扫描范围）、`scripts/sprite_clip_draw/sprite_clip_draw.gml:53-84`（三级回退 + `_fit`）、
+  `objects/obj_info_island_bg/Create_0.gml:39-51`、`objects/obj_mouse_preview/Create_0.gml:7-19`。
+
 ### C30 多边形特效「糊成一个方框」→ 贴图是方的，按包围盒拉伸裁不出斜边
 - **症状**：结界马 3 只以上围出的结界，内部雾铺成一个方框、跑到连线外面，还叠着每格一块的方块，
   观感是「一堆方格」而不是「一整片结界」（用户 2026-11-18 报，给了目标效果图）。
@@ -1238,6 +1288,14 @@
   对 `folders/**/*.yy` 逐个跑（BOM 用 `utf-8-sig` 读）。PR48 的
   `folders/物体/mod.yy` 第 26 行是 `],,` 双逗号，改回 `],` 即恢复。
 - **证据**：`folders/物体/mod.yy:26`（修复前 `],,`）、2026-11-21 日志。
+
+### A29 pwsh 里用 bash heredoc 写 Python，整段被当成 PowerShell 解析
+- **症状**：`pwsh` 调用 `python - <<'PY' … PY` 时，报一堆 `关键字「for」后面缺少左括号` /
+  `缺少文件规范`，Python 一行都没执行。
+- **错路**：把 bash 的 heredoc 习惯带进 pwsh；`-` 被当位置参数，`<<` 被当重定向。
+- **正确路径**：heredoc 在 pwsh 里不存在。写成临时 `.py` 文件（`write` 工具落盘，UTF-8 无 BOM）
+  再 `python tools\_tmp_xxx.py`，跑完删掉；一次性短脚本用 `python -c "…"`（注意引号转义）。
+- **证据**：2026-11-22 会话，md5 穷举脚本；`tools/_tmp_probe_md5.py`（用后即删）。
 
 ## 追加模板```
 ### X{n} <一句话症状>

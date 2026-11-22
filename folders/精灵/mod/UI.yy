@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ec8c67ad-185f-4874-bc13-ffed752fff44","path":"sprites/spr_aurora_icon/spr_aurora_icon.yy",},
     {"name":"a773998f-1a37-430d-ac38-f5677ca73c0d","path":"sprites/spr_aurora_icon_1/spr_aurora_icon_1.yy",},

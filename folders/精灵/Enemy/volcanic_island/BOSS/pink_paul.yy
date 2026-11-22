@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"a7fe3243-4e77-420d-b6e3-7af359c8bca3","path":"sprites/spr_pink_paul_appear/spr_pink_paul_appear.yy",},
     {"name":"5ddb7783-a400-4dc5-b9cf-6cf3b9a7e970","path":"sprites/spr_pink_paul_bullet/spr_pink_paul_bullet.yy",},

@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"sh",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/sh.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"sh",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

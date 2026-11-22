@@ -1,0 +1,22 @@
+{
+  "$GMFolder":"",
+  "%Name":"BOSS",
+  "folderPath":"folders/物体/Enemy/desert_trip/BOSS.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"BOSS",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"anubis_mouse","path":"folders/物体/Enemy/desert_trip/BOSS/anubis_mouse.yy",},
+    {"name":"awaken_medusa","path":"folders/物体/Enemy/desert_trip/BOSS/awaken_medusa.yy",},
+    {"name":"hermit_crab_mouse","path":"folders/物体/Enemy/desert_trip/BOSS/hermit_crab_mouse.yy",},
+    {"name":"medusa","path":"folders/物体/Enemy/desert_trip/BOSS/medusa.yy",},
+    {"name":"tribal_chief_mouse","path":"folders/物体/Enemy/desert_trip/BOSS/tribal_chief_mouse.yy",},
+    {"name":"ufo_mouse","path":"folders/物体/Enemy/desert_trip/BOSS/ufo_mouse.yy",},
+    {"name":"witch_shaman_mouse","path":"folders/物体/Enemy/desert_trip/BOSS/witch_shaman_mouse.yy",},
+  ],
+  "listItems":[],
+}

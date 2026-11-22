@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"mojie",
+  "folderPath":"folders/精灵/mod/Cards/defender/mojie.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"mojie",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

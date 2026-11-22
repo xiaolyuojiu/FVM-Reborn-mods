@@ -10,9 +10,15 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"star_wand","path":"folders/精灵/mod/germ/star_wand.yy",},
     {"name":"aladdin_lamp","path":"folders/精灵/mod/germ/aladdin_lamp.yy",},
-    {"name":"rose_shield","path":"folders/精灵/mod/germ/rose_shield.yy",}
+    {"name":"death_scythe","path":"folders/精灵/mod/germ/death_scythe.yy",},
+    {"name":"gods_shield","path":"folders/精灵/mod/germ/gods_shield.yy",},
+    {"name":"hades_scythe","path":"folders/精灵/mod/germ/hades_scythe.yy",},
+    {"name":"master_shield","path":"folders/精灵/mod/germ/master_shield.yy",},
+    {"name":"poseidon_dart_gun","path":"folders/精灵/mod/germ/poseidon_dart_gun.yy",},
+    {"name":"rose_shield","path":"folders/精灵/mod/germ/rose_shield.yy",},
+    {"name":"star_wand","path":"folders/精灵/mod/germ/star_wand.yy",},
+    {"name":"tianshen","path":"folders/精灵/mod/germ/tianshen.yy",},
   ],
   "listItems":[],
 }

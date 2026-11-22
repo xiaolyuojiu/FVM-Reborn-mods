@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"c174098b-d915-405e-b7c1-080f17dd87c1","path":"sprites/spr_tangchaolizi/spr_tangchaolizi.yy",},
     {"name":"65ce32f9-abbd-4b3d-85a9-fdd2e6e8d859","path":"sprites/spr_tangchaolizi_1/spr_tangchaolizi_1.yy",},

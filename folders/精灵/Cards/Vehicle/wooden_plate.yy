@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"3fc8f893-7349-4345-9d92-cbfee2b12b46","path":"sprites/spr_wooden_plate/spr_wooden_plate.yy",},
     {"name":"0206ffb9-cd94-4108-9a80-df13545f8220","path":"sprites/spr_wooden_plate_1/spr_wooden_plate_1.yy",},

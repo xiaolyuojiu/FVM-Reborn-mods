@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"026876eb-c405-4ff4-bae2-6950711a686f","path":"sprites/spr_pineapple_explosive_bread_0_0/spr_pineapple_explosive_bread_0_0.yy",},
     {"name":"b2e97ca6-c171-4829-b327-da144c57605e","path":"sprites/spr_pineapple_explosive_bread_0_1/spr_pineapple_explosive_bread_0_1.yy",},

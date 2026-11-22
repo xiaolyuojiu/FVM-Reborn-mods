@@ -15,7 +15,7 @@
     },
   },
   "conversionMode":0,
-  "duration":61.753468,
+  "duration":61.675102,
   "exportDir":"",
   "name":"mus_volcanic_tower_boss",
   "parent":{

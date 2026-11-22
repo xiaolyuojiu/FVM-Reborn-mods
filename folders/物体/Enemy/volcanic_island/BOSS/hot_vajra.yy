@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_hot_vajra","path":"objects/obj_hot_vajra/obj_hot_vajra.yy",},
     {"name":"obj_vajra_lava","path":"objects/obj_vajra_lava/obj_vajra_lava.yy",},

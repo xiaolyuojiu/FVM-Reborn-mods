@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"323ca3ca-da7c-4472-b741-f22659159b59","path":"sprites/spr_water_pipe_libra/spr_water_pipe_libra.yy",},
     {"name":"f38c430e-3597-46c2-9d96-47a4a2ab18b4","path":"sprites/spr_water_pipe_libra_1/spr_water_pipe_libra_1.yy",},

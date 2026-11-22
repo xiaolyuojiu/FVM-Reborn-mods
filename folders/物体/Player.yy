@@ -10,8 +10,8 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"Gems","path":"folders/物体/Player/Gems.yy",},
     {"name":"Weapons","path":"folders/物体/Player/Weapons.yy",},
-    {"name":"Gems","path":"folders/物体/Player/Gems.yy",}
   ],
   "listItems":[
     {"name":"obj_player_character","path":"objects/obj_player_character/obj_player_character.yy",}

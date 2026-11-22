@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"51093997-c9c3-4b03-b457-c10c8b137616","path":"sprites/spr_map_name_display/spr_map_name_display.yy",},
     {"name":"5b04482b-2cb5-4da8-b34c-d0ca84388298","path":"sprites/spr_world_map_btn/spr_world_map_btn.yy",},

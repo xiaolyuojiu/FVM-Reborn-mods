@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"4ee7fde6-c5d8-44ab-81b5-4b5acc8a178a","path":"sprites/spr_small_fire/spr_small_fire.yy",},
     {"name":"514aec24-e3e8-49a2-9688-c54566acffbe","path":"sprites/spr_small_fire_1/spr_small_fire_1.yy",},

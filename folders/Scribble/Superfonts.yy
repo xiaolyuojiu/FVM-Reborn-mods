@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"scribble_super_clear","path":"scripts/scribble_super_clear/scribble_super_clear.yy",},
     {"name":"scribble_super_create","path":"scripts/scribble_super_create/scribble_super_create.yy",},

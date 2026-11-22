@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
 
     {"name":"obj_zz_shop_bg","path":"objects/obj_zz_shop_bg/obj_zz_shop_bg.yy",},

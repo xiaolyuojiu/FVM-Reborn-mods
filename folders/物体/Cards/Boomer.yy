@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_aquarius_elve","path":"objects/obj_aquarius_elve/obj_aquarius_elve.yy",},
     {"name":"obj_bull_firework","path":"objects/obj_bull_firework/obj_bull_firework.yy",},

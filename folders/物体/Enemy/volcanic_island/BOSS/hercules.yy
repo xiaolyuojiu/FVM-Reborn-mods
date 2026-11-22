@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_hercules","path":"objects/obj_hercules/obj_hercules.yy",},
     {"name":"obj_hercules_laser","path":"objects/obj_hercules_laser/obj_hercules_laser.yy",}

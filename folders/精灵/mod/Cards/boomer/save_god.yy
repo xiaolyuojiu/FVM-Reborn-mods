@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"save_god",
+  "folderPath":"folders/精灵/mod/Cards/boomer/save_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"save_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"74f69157-6af7-448f-903d-92ff12726a48","path":"sprites/spr_wanpilong/spr_wanpilong.yy",},
     {"name":"4a8c5857-4b83-492e-800f-f83508523708","path":"sprites/spr_wanpilong_1/spr_wanpilong_1.yy",},

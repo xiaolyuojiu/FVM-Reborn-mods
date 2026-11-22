@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"tiancheng",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/tiancheng.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"tiancheng",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

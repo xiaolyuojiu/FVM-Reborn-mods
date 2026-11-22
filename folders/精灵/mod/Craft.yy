@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_gear_evo_label","path":"sprites/spr_gear_evo_label/spr_gear_evo_label.yy",},
     {"name":"d18a100f-5bdb-4c2f-ac44-3cd4f2a75945","path":"sprites/spr_evo_left_gem/spr_evo_left_gem.yy",},

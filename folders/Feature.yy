@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"Laboratory","path":"folders/Feature/Laboratory.yy",}
+    {"name":"Laboratory","path":"folders/Feature/Laboratory.yy",},
   ],
   "listItems":[],
 }

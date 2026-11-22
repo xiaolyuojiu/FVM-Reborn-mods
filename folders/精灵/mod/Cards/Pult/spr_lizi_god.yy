@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_lizi_god",
+  "folderPath":"folders/精灵/mod/Cards/Pult/spr_lizi_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_lizi_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

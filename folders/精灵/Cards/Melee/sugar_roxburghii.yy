@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_sugar_roxburghii","path":"sprites/spr_sugar_roxburghii/spr_sugar_roxburghii.yy",},
     {"name":"spr_sugar_roxburghii_1","path":"sprites/spr_sugar_roxburghii_1/spr_sugar_roxburghii_1.yy",},

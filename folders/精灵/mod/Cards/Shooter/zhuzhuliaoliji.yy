@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_zhuzhuliaoliji","path":"sprites/spr_zhuzhuliaoliji/spr_zhuzhuliaoliji.yy",},
     {"name":"spr_zhuzhuliaoliji_1","path":"sprites/spr_zhuzhuliaoliji_1/spr_zhuzhuliaoliji_1.yy",},

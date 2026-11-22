@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"rig",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/rig.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"rig",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

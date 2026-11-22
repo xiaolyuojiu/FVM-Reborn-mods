@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"80e9ce4b-f7cf-47fd-8667-8c32d6afe675","path":"sprites/spr_little_panda/spr_little_panda.yy",},
     {"name":"5b8b085c-a85e-492a-ab60-636eb4cd6386","path":"sprites/spr_little_panda_throw/spr_little_panda_throw.yy",},

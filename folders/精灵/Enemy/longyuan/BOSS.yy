@@ -1,0 +1,20 @@
+{
+  "$GMFolder":"",
+  "%Name":"BOSS",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"BOSS",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"diting","path":"folders/精灵/Enemy/longyuan/BOSS/diting.yy",},
+    {"name":"hengha","path":"folders/精灵/Enemy/longyuan/BOSS/hengha.yy",},
+    {"name":"mengpo","path":"folders/精灵/Enemy/longyuan/BOSS/mengpo.yy",},
+    {"name":"wuchang","path":"folders/精灵/Enemy/longyuan/BOSS/wuchang.yy",},
+    {"name":"youshen","path":"folders/精灵/Enemy/longyuan/BOSS/youshen.yy",},
+  ],
+  "listItems":[],
+}

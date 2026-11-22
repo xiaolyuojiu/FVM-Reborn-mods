@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_gods_hall_bag","path":"objects/obj_gods_hall_bag/obj_gods_hall_bag.yy",},
     {"name":"obj_gods_hall_bg","path":"objects/obj_gods_hall_bg/obj_gods_hall_bg.yy",},

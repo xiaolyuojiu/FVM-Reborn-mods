@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ae855154-27dc-48da-b3a4-c9fa7aad4589","path":"sprites/spr_orange_prince_mouse/spr_orange_prince_mouse.yy",},
     {"name":"aac5faf6-cbcb-477d-a605-aea1875ea8f7","path":"sprites/spr_orange_prince_mouse_enter/spr_orange_prince_mouse_enter.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_closetask_btn","path":"objects/obj_closetask_btn/obj_closetask_btn.yy",},
     {"name":"obj_task_bg","path":"objects/obj_task_bg/obj_task_bg.yy",},

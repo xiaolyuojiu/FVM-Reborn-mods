@@ -10,11 +10,11 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"pepper_floating_isle_platform_night","path":"folders/精灵/Map Object/platform/pepper_floating_isle_platform_night.yy",},
-    {"name":"pepper_floating_isle_platform_daytime","path":"folders/精灵/Map Object/platform/pepper_floating_isle_platform_daytime.yy",},
     {"name":"lilac_rainbow_platform_daytime","path":"folders/精灵/Map Object/platform/lilac_rainbow_platform_daytime.yy",},
     {"name":"lilac_rainbow_platform_night","path":"folders/精灵/Map Object/platform/lilac_rainbow_platform_night.yy",},
-    {"name":"spices_central_isle_platform","path":"folders/精灵/Map Object/platform/spices_central_isle_platform.yy",}
+    {"name":"pepper_floating_isle_platform_daytime","path":"folders/精灵/Map Object/platform/pepper_floating_isle_platform_daytime.yy",},
+    {"name":"pepper_floating_isle_platform_night","path":"folders/精灵/Map Object/platform/pepper_floating_isle_platform_night.yy",},
+    {"name":"spices_central_isle_platform","path":"folders/精灵/Map Object/platform/spices_central_isle_platform.yy",},
   ],
   "listItems":[
     {"name":"d609f69a-7565-43ab-9d07-e52249aa7cfe","path":"sprites/spr_bayleaf_airport_platform_daytime/spr_bayleaf_airport_platform_daytime.yy",},

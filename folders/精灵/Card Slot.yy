@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d686ebdc-5d2d-4023-8cd1-238191b1d637","path":"sprites/spr_copper_shovel/spr_copper_shovel.yy",},
     {"name":"8e55db93-68a5-4a3e-b2b7-bf7fc47c53cf","path":"sprites/spr_flame_indicator/spr_flame_indicator.yy",},

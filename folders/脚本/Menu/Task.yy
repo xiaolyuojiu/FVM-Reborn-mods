@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"task_edit","path":"scripts/task_edit/task_edit.yy",},
     {"name":"task_init","path":"scripts/task_init/task_init.yy",}

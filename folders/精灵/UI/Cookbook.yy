@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"3f6daf24-aa25-4d7a-9cd2-3aad126b3d10","path":"sprites/spr_cookbook_bg/spr_cookbook_bg.yy",},
     {"name":"7fb4227a-3f8d-4817-9b53-5c6c8eee392c","path":"sprites/spr_cookbook_cancel_btn/spr_cookbook_cancel_btn.yy",},

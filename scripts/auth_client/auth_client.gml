@@ -3,6 +3,8 @@
 /// 码格式：FVM4-<码ID>-<机器码>-<签名>
 ///   码ID   = 你预先准备在 tools/codes_pool.txt 里的固定码，机器人发放时挑一个
 ///   机器码 = 本机指纹的 md5 前 8 位（auth_hwid()，界面上叫「本机识别码」）
+///          指纹 v2 = 原生硬件 UUID（SMBIOS 主板级）；拿不到原生时退化为
+///          环境量 + 每份安装随机 ID。v1（只用环境量）仅兼容老玩家本地记录。
 ///   签名   = md5("FVM4|码ID|机器码|secret") 前 10 位大写十六进制
 ///
 /// 关键：签名把**机器码**一起签了。所以别人拿到你的码也用不了——
@@ -49,19 +51,172 @@ function auth_secret() {
     return kAuthSecretA + kAuthSecretB + kAuthSecretC;
 }
 
-/// 本机识别码：8 位大写十六进制。
-/// 只用系统名 + CPU 型号，**不掺用户名**——改个用户名就让码失效太坑玩家。
-/// 换电脑 / 重装系统 / 改计算机名 → 这个值会变，需要重新领码（换绑）。
+// ── 本机识别码（指纹 v2）──────────────────────────────────────
+// v1（≤ 3.0.2.15）只用 COMPUTERNAME | PROCESSOR_IDENTIFIER | NUMBER_OF_PROCESSORS。
+// 这三个量在 ghost 克隆镜像 / 同批装机 / 无盘网吧里完全一样，算出来的识别码会
+// 全服撞成同一个（现网出现过所有机器都是 E52D26F9，连带整串授权码都一致）。
+//
+// v2 的取值顺序：
+//   ① 原生硬件 UUID（SMBIOS 主板级，MachineUuid）→ "V2|<UUID>"
+//   ② 拿不到原生（旧 DLL）→ "V2E|<环境量>|<每份安装随机 ID>"
+// 只有 ② 才需要 install.id：随机值能把克隆镜像的两台机器拉开。
+// ① 不带 install.id —— 重装系统 / 删本地文件都不换码，玩家体验更好。
+//
+// 旧码兼容：auth_hwid_legacy() 保留 v1 算法，只在 auth_load() 里对「本地已存的
+// 那条记录」放行；新粘贴的码一律按 v2 校验（auth_bind 不走 legacy 分支），
+// 避免旧指纹的漏洞继续被用来换码。
+
+/// 读 install.id（16 位大写十六进制）。不存在/内容不合法返回 ""
+function auth_install_read(_path) {
+    if (!file_exists(_path)) {
+        return "";
+    }
+    var _f = file_text_open_read(_path);
+    if (_f == -1) {
+        return "";
+    }
+    var _text = "";
+    if (!file_text_eof(_f)) {
+        _text = file_text_read_string(_f);
+    }
+    file_text_close(_f);
+
+    var _s = string_upper(string(_text));
+    if (string_length(_s) != 16) {
+        return "";
+    }
+    for (var i = 1; i <= 16; i++) {
+        if (string_pos(string_char_at(_s, i), kAuthHwidChars) == 0) {
+            return "";
+        }
+    }
+    return _s;
+}
+
+function auth_install_write(_path, _id) {
+    var _dir = global.native_util.get_path_in_local_appdata("\\FVM_Reborn_makk");
+    if (!directory_exists(_dir)) {
+        directory_create(_dir);
+    }
+    var _f = file_text_open_write(_path);
+    if (_f == -1) {
+        return false;
+    }
+    file_text_write_string(_f, _id);
+    file_text_close(_f);
+    return true;
+}
+
+/// 每份安装的随机标识：首次运行生成后落盘，之后固定。
+/// 作用只有一个 —— 原生硬件 UUID 拿不到时，别让克隆镜像的两台机器算出同一个码。
+/// @returns {String} 16 位大写十六进制
+function auth_install_id() {
+    if (variable_global_exists("auth_install_id_cache")) {
+        return global.auth_install_id_cache;
+    }
+    var _path = global.native_util.get_path_in_local_appdata("\\FVM_Reborn_makk\\install.id");
+    var _id = auth_install_read(_path);
+    if (_id == "") {
+        var _seed = string(irandom(2147483647)) + "|" + string(current_time) + "|" +
+                    string(current_datetime()) + "|" + string(irandom(2147483647));
+        _id = string_upper(string_copy(md5_string_utf8(_seed), 1, 16));
+        auth_install_write(_path, _id);
+    }
+    global.auth_install_id_cache = _id;
+    return _id;
+}
+
+/// 原生硬件标识（SMBIOS System UUID，取不到时退化为网卡 MAC）。
+/// 需要 FvmNativeSupport.dll 里的 MachineUuid 导出；旧 DLL 没有这个符号时
+/// external_define 返回负数，这里返回 ""，调用方自动退化，绝不阻断启动。
+/// @returns {String} 拿不到返回 ""
+function auth_native_uuid() {
+    if (variable_global_exists("auth_native_uuid_cache")) {
+        return global.auth_native_uuid_cache;
+    }
+
+    var _value = "";
+    try {
+        if (!variable_global_exists("auth_native_uuid_fn")) {
+            var _library = "FvmNativeSupport.dll";
+            if (os_type == os_macosx) {
+                _library = "libFvmNativeSupport.dylib";
+            }
+            var _native = global.native_util.join_path(working_directory, "native/" + _library);
+            var _root = global.native_util.join_path(working_directory, _library);
+            if (file_exists(_native)) {
+                _library = _native;
+            } else if (file_exists(_root)) {
+                _library = _root;
+            }
+            global.auth_native_uuid_fn = external_define(_library, "MachineUuid", dll_cdecl, ty_string, 0);
+        }
+        if (global.auth_native_uuid_fn >= 0) {
+            _value = string_upper(string(external_call(global.auth_native_uuid_fn)));
+        }
+    } catch (_e) {
+        _value = "";
+        global.auth_native_uuid_fn = -1;
+    }
+
+    // 少于 8 个字符当作没拿到（空串 / 报错文本）
+    if (string_length(_value) < 8) {
+        _value = "";
+    }
+    global.auth_native_uuid_cache = _value;
+    return _value;
+}
+
+/// 本机识别码的原始输入。改这个函数等于换指纹代际，必须同时保留 v1 的
+/// auth_hwid_legacy()，否则所有已授权的玩家升级后全部掉授权。
+/// @returns {String}
+function auth_hwid_raw() {
+    var _uuid = auth_native_uuid();
+    if (_uuid != "") {
+        return "V2|" + _uuid;
+    }
+    return "V2E|" +
+        string_upper(environment_get_variable("COMPUTERNAME")) + "|" +
+        string_upper(environment_get_variable("USERPROFILE")) + "|" +
+        string_upper(environment_get_variable("PROCESSOR_IDENTIFIER")) + "|" +
+        string(environment_get_variable("NUMBER_OF_PROCESSORS")) + "|" +
+        auth_install_id();
+}
+
+/// 本机识别码：8 位大写十六进制（长度由 kAuthHwidLen 决定，协议要求是 8）。
+/// 换电脑 → 变；同镜像的另一台机器 → 也变（这就是 v2 要解决的问题）。
 /// @returns {String}
 function auth_hwid() {
+    return string_upper(string_copy(md5_string_utf8(auth_hwid_raw()), 1, kAuthHwidLen));
+}
+
+/// v1 指纹（≤ 3.0.2.15）。只为让老玩家的本地授权记录继续生效，
+/// 新码一律不认它 —— 旧指纹在克隆镜像里是同一个值，谁都能用。
+/// @returns {String}
+function auth_hwid_legacy() {
     var _name = string_upper(environment_get_variable("COMPUTERNAME"));
     var _cpu = string_upper(environment_get_variable("PROCESSOR_IDENTIFIER"));
     var _n = string(environment_get_variable("NUMBER_OF_PROCESSORS"));
     if (_name == "") {
         _name = "UNKNOWN";
     }
-    var _raw = _name + "|" + _cpu + "|" + _n;
-    return string_upper(string_copy(md5_string_utf8(_raw), 1, kAuthHwidLen));
+    return string_upper(string_copy(md5_string_utf8(_name + "|" + _cpu + "|" + _n), 1, kAuthHwidLen));
+}
+
+/// 指纹排查日志：%LOCALAPPDATA%\FVM_Reborn_makk\auth.log
+/// 出现「所有人识别码一样」时，先看这里的两行，比反推 md5 快得多。
+function auth_log(_text) {
+    var _dir = global.native_util.get_path_in_local_appdata("\\FVM_Reborn_makk");
+    if (!directory_exists(_dir)) {
+        directory_create(_dir);
+    }
+    var _f = file_text_open_append(_dir + "\\auth.log");
+    if (_f == -1) {
+        return;
+    }
+    file_text_write_string(_f, "[" + string(current_datetime()) + "] " + string(_text));
+    file_text_writeln(_f);
+    file_text_close(_f);
 }
 
 /// 本机识别码的展示形式（4-4 分开，方便玩家对着抄）
@@ -232,6 +387,7 @@ function auth_load() {
     global.auth_code_id = "";
     global.auth_code = "";
     global.auth_machine_changed = false;
+    global.auth_code_legacy = false;
 
     var _path = auth_file_path();
     if (!file_exists(_path)) {
@@ -282,13 +438,26 @@ function auth_load() {
     }
 
     var _verified = auth_verify_code(_data.code);
-    if (!_verified.ok) {
+    var _legacy_ok = false;
+    if (!_verified.ok && _verified.reason == "machine") {
+        // 指纹 v2 上线后，老玩家本地那条记录里绑的还是 v1 识别码。
+        // 只对「本地已经存下来的这条记录」放行 —— 新粘贴的码一律按 v2 校验，
+        // 因为旧指纹在克隆镜像里全同，谁都能用，不能再当凭证（见 auth_bind）。
+        if (_verified.hwid == auth_hwid_legacy()) {
+            _legacy_ok = true;
+        }
+    }
+    if (!_verified.ok && !_legacy_ok) {
         // 码本身没问题，只是不是这台机器的 —— 换机/重装系统后就是这种情形。
         // 界面据此提示「识别码变了，需要重新领码」，别让玩家以为存档坏了。
         if (_verified.reason == "machine") {
             global.auth_machine_changed = true;
         }
         return false;
+    }
+    if (_legacy_ok) {
+        global.auth_code_legacy = true;
+        auth_log("legacy-v1 放行 code_id=" + _verified.code_id + " hwid=" + _verified.hwid);
     }
 
     global.auth_code_id = _verified.code_id;
@@ -299,10 +468,16 @@ function auth_load() {
 /// 绑定授权码并落盘
 /// @param {String} _code
 /// @returns {Real} 0 = 成功，1 = 码无效/签名错，2 = 这个码是给另一台机器的，
-///                 3 = 本机已授权但写盘失败（下次启动可能要重输）
+///                 3 = 本机已授权但写盘失败（下次启动可能要重输），
+///                 4 = 这个码绑的是旧版识别码（v1），需要重新领码
 function auth_bind(_code) {
     var _verified = auth_verify_code(_code);
     if (_verified.reason == "machine") {
+        // 旧指纹（v1）的码：签名有效，但它绑的识别码在克隆镜像里是全服同一个值，
+        // 谁拿到都能用，不能再当凭证 —— 让玩家用 v2 识别码重新领。
+        if (_verified.hwid == auth_hwid_legacy()) {
+            return 4;
+        }
         return 2;
     }
     if (!_verified.ok) {
@@ -355,5 +530,11 @@ function auth_init() {
     if (!variable_global_exists("auth_machine_changed")) {
         global.auth_machine_changed = false;
     }
+    if (!variable_global_exists("auth_code_legacy")) {
+        global.auth_code_legacy = false;
+    }
+    // 排查用：识别码与它的原始输入都落 auth.log。
+    // 出「所有人识别码一样」时，看这一行就知道是原生 UUID 没拿到、还是环境量塌陷。
+    auth_log("start hwid=" + auth_hwid() + " raw=" + auth_hwid_raw() + " v1=" + auth_hwid_legacy());
     auth_load();
 }

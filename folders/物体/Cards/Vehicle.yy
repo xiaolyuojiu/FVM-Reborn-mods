@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_cotton_candy","path":"objects/obj_cotton_candy/obj_cotton_candy.yy",},
     {"name":"obj_soda_bubble","path":"objects/obj_soda_bubble/obj_soda_bubble.yy",},

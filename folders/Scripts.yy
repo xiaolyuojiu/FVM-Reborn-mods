@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"Scripts",
+  "folderPath":"folders/Scripts.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"Scripts",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

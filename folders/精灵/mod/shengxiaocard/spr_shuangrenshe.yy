@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"4191621c-3e59-47b5-bad2-f1f60c0487fa","path":"sprites/spr_shuangrenshe/spr_shuangrenshe.yy",},
     {"name":"e89546ca-5e69-49b9-8c6e-4f5e4342bd28","path":"sprites/spr_shuangrenshe_1/spr_shuangrenshe_1.yy",},

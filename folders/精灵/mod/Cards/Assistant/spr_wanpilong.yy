@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_wanpilong",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/spr_wanpilong.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_wanpilong",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

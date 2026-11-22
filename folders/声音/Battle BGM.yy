@@ -10,7 +10,9 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"undersea_vortex","path":"folders/声音/Battle BGM/undersea_vortex.yy",}
+    {"name":"explore_camp","path":"folders/声音/Battle BGM/explore_camp.yy",},
+    {"name":"longyuan","path":"folders/声音/Battle BGM/longyuan.yy",},
+    {"name":"undersea_vortex","path":"folders/声音/Battle BGM/undersea_vortex.yy",},
   ],
   "listItems":[
     {"name":"music","path":"sounds/mus_cross_server_night/mus_cross_server_night.yy",},

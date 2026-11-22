@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"clotho",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/clotho.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"clotho",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

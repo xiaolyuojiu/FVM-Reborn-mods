@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"hspeed_juicer",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/hspeed_juicer.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"hspeed_juicer",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"0dc3c7b2-f1e9-4297-8996-6df13418e226","path":"sprites/spr_pizza_oven/spr_pizza_oven.yy",},
     {"name":"1c508a5a-3af3-4fb9-ba3b-fb6657e5a12d","path":"sprites/spr_pizza_oven_1/spr_pizza_oven_1.yy",},

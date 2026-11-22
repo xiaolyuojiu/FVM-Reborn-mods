@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"1bea2cbd-f3dd-44cf-b319-54160163c629","path":"sprites/spr_mario_cave_land/spr_mario_cave_land.yy",},
     {"name":"7eb3e990-deac-4caf-997c-151b1b552b16","path":"sprites/spr_mario_cave_water/spr_mario_cave_water.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_fangkongmiao","path":"sprites/spr_fangkongmiao/spr_fangkongmiao.yy",},
     {"name":"spr_fangkongmiao_1","path":"sprites/spr_fangkongmiao_1/spr_fangkongmiao_1.yy",},

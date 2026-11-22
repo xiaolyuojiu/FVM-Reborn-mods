@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_fashishe","path":"sprites/spr_fashishe/spr_fashishe.yy",},
     {"name":"spr_fashishe_1","path":"sprites/spr_fashishe_1/spr_fashishe_1.yy",},

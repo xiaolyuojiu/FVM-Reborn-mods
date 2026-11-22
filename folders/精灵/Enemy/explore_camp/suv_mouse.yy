@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"suv_mouse",
+  "folderPath":"folders/精灵/Enemy/explore_camp/suv_mouse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"suv_mouse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

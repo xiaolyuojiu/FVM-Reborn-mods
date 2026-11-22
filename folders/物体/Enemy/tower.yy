@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_airbrone_explosive_mouse","path":"objects/obj_airbrone_explosive_mouse/obj_airbrone_explosive_mouse.yy",},
     {"name":"obj_dentist_mouse","path":"objects/obj_dentist_mouse/obj_dentist_mouse.yy",},

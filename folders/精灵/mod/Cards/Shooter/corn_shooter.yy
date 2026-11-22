@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"corn_shooter",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/corn_shooter.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"corn_shooter",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

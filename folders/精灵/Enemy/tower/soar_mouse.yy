@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"c3e9b1ef-9265-4383-b122-a9c37875d881","path":"sprites/spr_soar_mouse/spr_soar_mouse.yy",},
     {"name":"7900244f-ae5f-454c-ab92-d5dea98db304","path":"sprites/spr_soar_mouse_drop/spr_soar_mouse_drop.yy",},

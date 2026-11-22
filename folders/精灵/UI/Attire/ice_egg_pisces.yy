@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"260eb604-d086-4667-9d2b-cd2efffdeeb9","path":"sprites/spr_ice_egg_pisces/spr_ice_egg_pisces.yy",},
     {"name":"20636f50-29d1-4fbe-b9ad-6fce68af7327","path":"sprites/spr_ice_egg_pisces_1/spr_ice_egg_pisces_1.yy",},

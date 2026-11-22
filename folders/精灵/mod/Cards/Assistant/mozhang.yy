@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"mozhang",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/mozhang.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"mozhang",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"cba5da85-5aa8-445f-9143-4a297abc6c07","path":"sprites/spr_angelababy_appear/spr_angelababy_appear.yy",},
     {"name":"cd1264f4-889e-4c4a-8051-cd57ee23dc39","path":"sprites/spr_angelababy_death/spr_angelababy_death.yy",},

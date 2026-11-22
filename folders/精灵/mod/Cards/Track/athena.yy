@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"athena",
+  "folderPath":"folders/精灵/mod/Cards/Track/athena.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"athena",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

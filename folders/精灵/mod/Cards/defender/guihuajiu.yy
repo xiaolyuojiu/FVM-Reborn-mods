@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"28f6555a-ddd0-4c3d-8b59-df120b9cfcd4","path":"sprites/spr_guihuajiu/spr_guihuajiu.yy",},
     {"name":"d5a779d7-06e9-4db2-a23c-79a0d673924b","path":"sprites/spr_guihuajiu_1/spr_guihuajiu_1.yy",},

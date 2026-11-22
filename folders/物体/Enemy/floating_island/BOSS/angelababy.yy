@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_angelababy","path":"objects/obj_angelababy/obj_angelababy.yy",},
     {"name":"obj_angelababy_diamond","path":"objects/obj_angelababy_diamond/obj_angelababy_diamond.yy",},

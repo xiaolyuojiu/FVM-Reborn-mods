@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_curry_lobster_cannon","path":"objects/obj_curry_lobster_cannon/obj_curry_lobster_cannon.yy",},
     {"name":"obj_takoyaki","path":"objects/obj_takoyaki/obj_takoyaki.yy",},

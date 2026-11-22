@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"21024efe-5467-4dc3-be7a-a6bb21ffb068","path":"sprites/spr_horseshoe_crab_bread_0_0/spr_horseshoe_crab_bread_0_0.yy",},
     {"name":"b648e62e-c58d-4ca9-810d-38449e6dd41f","path":"sprites/spr_horseshoe_crab_bread_0_1/spr_horseshoe_crab_bread_0_1.yy",},

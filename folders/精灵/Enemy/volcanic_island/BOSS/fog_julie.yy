@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e6aad882-048b-4aad-bf19-5ed525a29269","path":"sprites/spr_fog_julie_death/spr_fog_julie_death.yy",},
     {"name":"306ff74b-637b-4c76-9d0e-9389739f0736","path":"sprites/spr_fog_julie_idle/spr_fog_julie_idle.yy",},

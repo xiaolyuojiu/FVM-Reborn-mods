@@ -11,14 +11,16 @@
   "visible":true,
   "folders":[
     {"name":"brazier","path":"folders/精灵/Cards/Assistant/brazier.yy",},
-    {"name":"ventilation_fan","path":"folders/精灵/Cards/Assistant/ventilation_fan.yy",},
-    {"name":"fruit_tart","path":"folders/精灵/Cards/Assistant/fruit_tart.yy",},
-    {"name":"ice_cream","path":"folders/精灵/Cards/Assistant/ice_cream.yy",},
-    {"name":"coffee_grounds","path":"folders/精灵/Cards/Assistant/coffee_grounds.yy",},
-    {"name":"cat_chest","path":"folders/精灵/Cards/Assistant/cat_chest.yy",},
-    {"name":"oil_lamp","path":"folders/精灵/Cards/Assistant/oil_lamp.yy",},
     {"name":"cat_box","path":"folders/精灵/Cards/Assistant/cat_box.yy",},
-    {"name":"cherry_pudding","path":"folders/精灵/Cards/Assistant/cherry_pudding.yy",}
+    {"name":"cat_chest","path":"folders/精灵/Cards/Assistant/cat_chest.yy",},
+    {"name":"cherry_pudding","path":"folders/精灵/Cards/Assistant/cherry_pudding.yy",},
+    {"name":"coffee_grounds","path":"folders/精灵/Cards/Assistant/coffee_grounds.yy",},
+    {"name":"fruit_tart","path":"folders/精灵/Cards/Assistant/fruit_tart.yy",},
+    {"name":"fushengcha","path":"folders/精灵/Cards/Assistant/fushengcha.yy",},
+    {"name":"ice_cream","path":"folders/精灵/Cards/Assistant/ice_cream.yy",},
+    {"name":"oil_lamp","path":"folders/精灵/Cards/Assistant/oil_lamp.yy",},
+    {"name":"parsnip_salad","path":"folders/精灵/Cards/Assistant/parsnip_salad.yy",},
+    {"name":"ventilation_fan","path":"folders/精灵/Cards/Assistant/ventilation_fan.yy",},
   ],
   "listItems":[
     {"name":"850896cb-a0c7-4639-baad-19ae8a76395b","path":"sprites/spr_magic_chicken/spr_magic_chicken.yy",},

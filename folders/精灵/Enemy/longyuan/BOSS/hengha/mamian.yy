@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"mamian",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS/hengha/mamian.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"mamian",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -10,13 +10,14 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"abyss_pharaoh","path":"folders/精灵/Enemy/delicious_island/BOSS/abyss_pharaoh.yy",},
     {"name":"arno","path":"folders/精灵/Enemy/delicious_island/BOSS/arno.yy",},
+    {"name":"honglonglong","path":"folders/精灵/Enemy/delicious_island/BOSS/honglonglong.yy",},
     {"name":"ice_residue","path":"folders/精灵/Enemy/delicious_island/BOSS/ice_residue.yy",},
     {"name":"infected_bingzha","path":"folders/精灵/Enemy/delicious_island/BOSS/infected_bingzha.yy",},
-    {"name":"pharaoh","path":"folders/精灵/Enemy/delicious_island/BOSS/pharaoh.yy",},
     {"name":"mario_mouse","path":"folders/精灵/Enemy/delicious_island/BOSS/mario_mouse.yy",},
-    {"name":"abyss_pharaoh","path":"folders/精灵/Enemy/delicious_island/BOSS/abyss_pharaoh.yy",},
-    {"name":"rumble","path":"folders/精灵/Enemy/delicious_island/BOSS/rumble.yy",}
+    {"name":"pharaoh","path":"folders/精灵/Enemy/delicious_island/BOSS/pharaoh.yy",},
+    {"name":"rumble","path":"folders/精灵/Enemy/delicious_island/BOSS/rumble.yy",},
   ],
   "listItems":[],
 }

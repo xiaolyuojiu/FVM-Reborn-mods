@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_machine_shark_1","path":"objects/obj_machine_shark_1/obj_machine_shark_1.yy",},
     {"name":"obj_shark_1_bullet","path":"objects/obj_shark_1_bullet/obj_shark_1_bullet.yy",}

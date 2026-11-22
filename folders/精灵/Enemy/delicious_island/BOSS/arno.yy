@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"afaf17cb-7ca1-42a4-b63a-1ab08929acb5","path":"sprites/spr_arno_appear/spr_arno_appear.yy",},
     {"name":"db2d8268-4224-4dd3-9fd8-99dede6ca185","path":"sprites/spr_arno_bullet/spr_arno_bullet.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"deb0368f-13bb-4468-9919-7292a427a53a","path":"sprites/spr_star_wand/spr_star_wand.yy",},
     {"name":"0d37dbee-57e7-4336-be91-7867a674ef9a","path":"sprites/spr_star_wand_bullet/spr_star_wand_bullet.yy",},

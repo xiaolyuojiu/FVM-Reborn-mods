@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"ufo_mouse",
+  "folderPath":"folders/物体/Enemy/desert_trip/BOSS/ufo_mouse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"ufo_mouse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

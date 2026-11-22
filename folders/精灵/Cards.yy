@@ -10,15 +10,15 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"defender","path":"folders/精灵/Cards/defender.yy",},
-    {"name":"Vehicle","path":"folders/精灵/Cards/Vehicle.yy",},
-    {"name":"Track","path":"folders/精灵/Cards/Track.yy",},
+    {"name":"Assistant","path":"folders/精灵/Cards/Assistant.yy",},
     {"name":"Flame Producer","path":"folders/精灵/Cards/Flame Producer.yy",},
     {"name":"Melee","path":"folders/精灵/Cards/Melee.yy",},
-    {"name":"Assistant","path":"folders/精灵/Cards/Assistant.yy",},
     {"name":"Pult","path":"folders/精灵/Cards/Pult.yy",},
     {"name":"Shooter","path":"folders/精灵/Cards/Shooter.yy",},
-    {"name":"boomer","path":"folders/精灵/Cards/boomer.yy",}
+    {"name":"Track","path":"folders/精灵/Cards/Track.yy",},
+    {"name":"Vehicle","path":"folders/精灵/Cards/Vehicle.yy",},
+    {"name":"boomer","path":"folders/精灵/Cards/boomer.yy",},
+    {"name":"defender","path":"folders/精灵/Cards/defender.yy",},
   ],
   "listItems":[],
 }

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_iron_man","path":"objects/obj_iron_man/obj_iron_man.yy",},
     {"name":"obj_iron_man_bullet","path":"objects/obj_iron_man_bullet/obj_iron_man_bullet.yy",},

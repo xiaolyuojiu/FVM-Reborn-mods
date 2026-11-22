@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"0d74df72-dae1-40ad-a846-31a114db30bb","path":"sprites/spr_arson_mouse/spr_arson_mouse.yy",},
     {"name":"410b917e-1f9a-46b0-953a-6be0936a7cfb","path":"sprites/spr_arson_mouse_bomb/spr_arson_mouse_bomb.yy",},

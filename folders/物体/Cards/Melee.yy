@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_fishbone","path":"objects/obj_fishbone/obj_fishbone.yy",},
     {"name":"obj_hamburger","path":"objects/obj_hamburger/obj_hamburger.yy",},

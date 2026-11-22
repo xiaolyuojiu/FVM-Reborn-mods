@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"ghost_god",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/ghost_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"ghost_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

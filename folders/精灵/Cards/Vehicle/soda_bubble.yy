@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"189014ac-ce01-45e9-a67f-305f41b5aae7","path":"sprites/spr_soda_bubble_0_0/spr_soda_bubble_0_0.yy",},
     {"name":"e65391b0-ffef-4973-a2b6-d47a35a1e82a","path":"sprites/spr_soda_bubble_0_1/spr_soda_bubble_0_1.yy",},

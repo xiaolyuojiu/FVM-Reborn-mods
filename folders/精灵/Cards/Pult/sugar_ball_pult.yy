@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"85da7b05-2590-496f-ac46-f58ef84e5158","path":"sprites/spr_sugar_ball_pult/spr_sugar_ball_pult.yy",},
     {"name":"44ee3b2d-c712-40a2-9b2e-27482476cb1c","path":"sprites/spr_sugar_ball_pult_1/spr_sugar_ball_pult_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"0a4f3c11-6d2b-4e8a-9b71-1c5d8e2f7a30","path":"sprites/spr_eightcake/spr_eightcake.yy",},
     {"name":"1b5e4d22-7e3c-4f9b-8c82-2d6e9f3a8b41","path":"sprites/spr_eightcake_1/spr_eightcake_1.yy",},

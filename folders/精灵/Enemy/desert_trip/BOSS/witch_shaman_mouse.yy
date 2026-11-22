@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"witch_shaman_mouse",
+  "folderPath":"folders/精灵/Enemy/desert_trip/BOSS/witch_shaman_mouse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"witch_shaman_mouse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

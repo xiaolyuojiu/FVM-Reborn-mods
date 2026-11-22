@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"fe4b4a79-6f43-49d9-947b-d2f5c5fcfc2b","path":"sprites/spr_shy_landlady_mouse/spr_shy_landlady_mouse.yy",},
     {"name":"034d2692-bdd2-4b9e-9989-7c1a35404b58","path":"sprites/spr_shy_landlady_mouse_shield/spr_shy_landlady_mouse_shield.yy",}

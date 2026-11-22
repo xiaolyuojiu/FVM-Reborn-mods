@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"13f22078-34e4-41e9-9336-ca0df6265dba","path":"sprites/spr_chocolate_bread/spr_chocolate_bread.yy",},
     {"name":"81c135a8-f7fc-4560-9fc1-589f47d6ec4f","path":"sprites/spr_chocolate_bread_1/spr_chocolate_bread_1.yy",}

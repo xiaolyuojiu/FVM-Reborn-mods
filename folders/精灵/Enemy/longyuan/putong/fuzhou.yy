@@ -1,0 +1,17 @@
+{
+  "$GMFolder":"",
+  "%Name":"fuzhou",
+  "folderPath":"folders/精灵/Enemy/longyuan/putong/fuzhou.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"fuzhou",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"bullet","path":"folders/精灵/Enemy/longyuan/putong/fuzhou/bullet.yy",},
+    {"name":"zhaohuan","path":"folders/精灵/Enemy/longyuan/putong/fuzhou/zhaohuan.yy",},
+  ],
+  "listItems":[],
+}

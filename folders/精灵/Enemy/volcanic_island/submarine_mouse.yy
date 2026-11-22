@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"065a4b05-a331-40f1-8ace-8c61d77ad64f","path":"sprites/spr_submarine_mouse/spr_submarine_mouse.yy",},
     {"name":"9a80b8f7-1937-4806-9dd8-893ba9599b91","path":"sprites/spr_submarine_mouse_enter/spr_submarine_mouse_enter.yy",},

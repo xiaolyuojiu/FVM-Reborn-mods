@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"09743fb8-a694-477a-b521-ed61160b9d4c","path":"sprites/spr_wine_rack_sagittarius/spr_wine_rack_sagittarius.yy",},
     {"name":"4e5258c2-219a-45c8-86ea-4fb0a65a9826","path":"sprites/spr_wine_rack_sagittarius_1/spr_wine_rack_sagittarius_1.yy",},

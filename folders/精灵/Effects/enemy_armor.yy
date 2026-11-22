@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"fef52239-7497-4654-bb22-df5d32844789","path":"sprites/spr_can/spr_can.yy",},
     {"name":"257f6d98-a441-434c-9fa8-040c279eea29","path":"sprites/spr_football_helmet/spr_football_helmet.yy",},

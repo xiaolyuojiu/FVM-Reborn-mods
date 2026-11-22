@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"BOSS","path":"folders/物体/Enemy/volcanic_island/BOSS.yy",}
+    {"name":"BOSS","path":"folders/物体/Enemy/volcanic_island/BOSS.yy",},
   ],
   "listItems":[
     {"name":"obj_apple_duck_mouse","path":"objects/obj_apple_duck_mouse/obj_apple_duck_mouse.yy",},

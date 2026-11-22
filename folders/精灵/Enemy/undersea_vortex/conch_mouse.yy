@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"6d3f7383-5c0d-4a5a-9056-ec6211d658b0","path":"sprites/spr_conch_mouse/spr_conch_mouse.yy",},
     {"name":"7ed961b6-bb0a-4fe1-b05d-d1008460780e","path":"sprites/spr_conch_mouse_act/spr_conch_mouse_act.yy",},

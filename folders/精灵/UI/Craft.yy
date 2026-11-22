@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"bf664fbf-1a64-48bb-bdea-b03eb107f798","path":"sprites/spr_craft_bg/spr_craft_bg.yy",},
     {"name":"b34186fd-5c67-4dfb-9260-96df1e53c87c","path":"sprites/spr_craft_card_text/spr_craft_card_text.yy",},

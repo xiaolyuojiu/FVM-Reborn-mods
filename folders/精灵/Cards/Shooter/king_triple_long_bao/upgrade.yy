@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"da01fe91-3873-4abe-8e3d-e9e019766b82","path":"sprites/spr_king_triple_long_bao_0_upgrade_1/spr_king_triple_long_bao_0_upgrade_1.yy",},
     {"name":"63445e0c-fda4-461d-b98f-b5ba0e7d6f7f","path":"sprites/spr_king_triple_long_bao_0_upgrade_2/spr_king_triple_long_bao_0_upgrade_2.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"28191360-781b-4bce-ac12-c4abafb76747","path":"sprites/spr_sheshejiu/spr_sheshejiu.yy",},
     {"name":"8bffed60-fb98-4439-a000-0a374fc67782","path":"sprites/spr_sheshejiu_1/spr_sheshejiu_1.yy",},

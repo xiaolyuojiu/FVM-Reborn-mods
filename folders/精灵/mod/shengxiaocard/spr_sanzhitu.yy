@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"a4e23d9d-f90d-4e9e-b7a6-240c980d8d46","path":"sprites/spr_sanzhitu/spr_sanzhitu.yy",},
     {"name":"d8b05c17-6967-482f-bfdf-be68185ff459","path":"sprites/spr_sanzhitu_1/spr_sanzhitu_1.yy",},

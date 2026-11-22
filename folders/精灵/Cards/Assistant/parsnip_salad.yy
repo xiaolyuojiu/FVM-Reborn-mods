@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"parsnip_salad",
+  "folderPath":"folders/精灵/Cards/Assistant/parsnip_salad.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"parsnip_salad",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

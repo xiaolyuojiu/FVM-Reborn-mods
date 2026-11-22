@@ -50,12 +50,15 @@ if (variable_global_exists("enemy_by_type"))
     && precise_bbox_collision(id, _e))
 			{
 				var _hit_id = _e.id
+				// 边路强化（3.1.0）：火焰位于第 0 行或最后一行时，本路伤害翻倍，相邻行不变
+				var _dmg = damage
+				if ((row == 0 || row == global.grid_rows - 1) && _e.grid_row == row) _dmg *= 2
 				with (_e)
 				{
-					if hp > other.damage
+					if hp > _dmg
 					{
 						audio_play_sound(snd_fire_hit, 0, 0)
-						damage_amount = other.damage
+						damage_amount = _dmg
 						damage_type = other.damage_type
 						if (variable_instance_exists(id, "ly_dig_hittable")) ly_dig_hittable = true;
 						event_user(0)

@@ -10,14 +10,14 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"coke_bomb","path":"folders/精灵/Effects/coke_bomb.yy",},
-    {"name":"mouse_clip","path":"folders/精灵/Effects/mouse_clip.yy",},
-    {"name":"kettle_bomb","path":"folders/精灵/Effects/kettle_bomb.yy",},
+    {"name":"appendage","path":"folders/精灵/Effects/appendage.yy",},
     {"name":"bottom_line","path":"folders/精灵/Effects/bottom_line.yy",},
     {"name":"chili_powder","path":"folders/精灵/Effects/chili_powder.yy",},
+    {"name":"coke_bomb","path":"folders/精灵/Effects/coke_bomb.yy",},
     {"name":"enemy_armor","path":"folders/精灵/Effects/enemy_armor.yy",},
-    {"name":"appendage","path":"folders/精灵/Effects/appendage.yy",},
-    {"name":"ice_bucket_bomb","path":"folders/精灵/Effects/ice_bucket_bomb.yy",}
+    {"name":"ice_bucket_bomb","path":"folders/精灵/Effects/ice_bucket_bomb.yy",},
+    {"name":"kettle_bomb","path":"folders/精灵/Effects/kettle_bomb.yy",},
+    {"name":"mouse_clip","path":"folders/精灵/Effects/mouse_clip.yy",},
   ],
   "listItems":[
     {"name":"f4641d65-3dcd-4492-880e-5b0625a899b7","path":"sprites/spr_card_heal_effect/spr_card_heal_effect.yy",},

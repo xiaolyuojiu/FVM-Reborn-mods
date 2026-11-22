@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e72235b0-b535-4349-b503-3a2c28a5b206","path":"sprites/spr_buzz_bullet_effect/spr_buzz_bullet_effect.yy",},
     {"name":"be79575d-c2ea-4efc-9458-41269fe2f75f","path":"sprites/spr_buzz_wind/spr_buzz_wind.yy",},

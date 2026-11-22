@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"871de8da-7914-40db-89f3-d4c2b1b98023","path":"sprites/spr_fruit_tart/spr_fruit_tart.yy",},
     {"name":"7405b0b1-a977-4779-9e66-b4146c56c989","path":"sprites/spr_fruit_tart_1/spr_fruit_tart_1.yy",},

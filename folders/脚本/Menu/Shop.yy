@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"goods_registry","path":"scripts/goods_registry/goods_registry.yy",},
     {"name":"shop_init","path":"scripts/shop_init/shop_init.yy",}

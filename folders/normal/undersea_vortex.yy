@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"6447c202-ff91-4088-ac0a-cc68fc6854d6","path":"sprites/spr_coalstarfish_bullet/spr_coalstarfish_bullet.yy",},
     {"name":"aa550672-2878-4f74-809c-a4122e6c4ca2","path":"sprites/spr_coalstarfish_bullet_1/spr_coalstarfish_bullet_1.yy",},

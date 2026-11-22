@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e5dc388f-e7bb-4f8f-9870-6c9581ea0dda","path":"sprites/spr_zhiyumiao/spr_zhiyumiao.yy",},
     {"name":"2de119bf-4fb1-4153-867e-833f04304110","path":"sprites/spr_zhiyumiao_1/spr_zhiyumiao_1.yy",},

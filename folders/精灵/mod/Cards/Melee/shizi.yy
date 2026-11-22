@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"shizi",
+  "folderPath":"folders/精灵/mod/Cards/Melee/shizi.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"shizi",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

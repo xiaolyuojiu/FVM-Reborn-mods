@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_huang_xiaoming","path":"objects/obj_huang_xiaoming/obj_huang_xiaoming.yy",},
     {"name":"obj_xiaoming_text","path":"objects/obj_xiaoming_text/obj_xiaoming_text.yy",}

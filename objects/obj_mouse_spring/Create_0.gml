@@ -22,7 +22,9 @@ ignore_list = ["mario_mouse","mario_pipeline","arno","pharaoh_coffin","temple_ph
 				// 跨服·灼热地域 变异僵尸 BOSS 与其技能产物：原版同名对象（pete / hot_vajra / captain_rainbow 等）
 				// 本来就在豁免表里，弹簧不该把它们弹晕（2026-11-05）
 				"kf_zrb_mary","kf_zrb_shi","kf_zrb_jack","kf_zrb_vajra","kf_zrb_cap",
-				"kf_zrb_cap_rainbow","kf_zrb_shi_mace","kf_zrb_shi_poop","kf_zrb_vajra_spike"
+				"kf_zrb_cap_rainbow","kf_zrb_shi_mace","kf_zrb_shi_poop","kf_zrb_vajra_spike",
+				"travel_record","beverage_machine","face_cookie","witch_shaman_mouse","hermit_crab_mouse","medusa",
+				"tribal_chief_mouse","awaken_medusa","ufo_mouse","anubis_mouse"
 ]
 
 left_use_times = 5

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"81b571ee-c7f5-47a7-985c-811b87e66d3d","path":"sprites/spr_non_mainstream_mouse/spr_non_mainstream_mouse.yy",},
     {"name":"9f35502d-47c5-4770-80b6-683aa1844aa7","path":"sprites/spr_non_mainstream_mouse_dance_1/spr_non_mainstream_mouse_dance_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"3b03d86d-b977-4082-9fc5-2db4c095c7d9","path":"sprites/spr_option_common_button/spr_option_common_button.yy",},
     {"name":"706b3cba-09e9-4a9c-8ab1-faa6eebd786e","path":"sprites/spr_option_menu_bg_1/spr_option_menu_bg_1.yy",},

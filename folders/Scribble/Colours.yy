@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"scribble_color_get","path":"scripts/scribble_color_get/scribble_color_get.yy",},
     {"name":"scribble_color_set","path":"scripts/scribble_color_set/scribble_color_set.yy",}

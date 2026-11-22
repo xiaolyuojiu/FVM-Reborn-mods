@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_baobaoji","path":"objects/obj_baobaoji/obj_baobaoji.yy",}
   ],

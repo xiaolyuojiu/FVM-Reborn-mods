@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"fc102b7c-3ae0-4004-bbd7-ea67a1a87fc6","path":"sprites/spr_nizhuanniu/spr_nizhuanniu.yy",},
     {"name":"27dfd30a-0713-4d84-9578-d8bcd4eaf4c9","path":"sprites/spr_nizhuanniu_1/spr_nizhuanniu_1.yy",},

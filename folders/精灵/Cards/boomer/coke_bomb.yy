@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"dc0ecc2e-d020-4602-b0e9-aba1a2d220b8","path":"sprites/spr_coke_bomb/spr_coke_bomb.yy",},
     {"name":"46871745-fe15-49ca-8efc-23ad414bc9dc","path":"sprites/spr_coke_bomb_1/spr_coke_bomb_1.yy",},

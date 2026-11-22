@@ -3957,7 +3957,7 @@
             "interval": 30.0,
             "cookie_amount": 1.0,
             "start_time": 60.0,
-            "time_type": "daytime"
+            "time_type": "night"
         }
     ],
     "desc": "这是一个什么都没有的新关卡",

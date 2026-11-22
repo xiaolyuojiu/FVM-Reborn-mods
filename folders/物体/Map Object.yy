@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_cloud","path":"objects/obj_cloud/obj_cloud.yy",},
     {"name":"obj_fog","path":"objects/obj_fog/obj_fog.yy",},

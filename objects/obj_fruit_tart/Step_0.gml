@@ -2,15 +2,10 @@ if global.is_paused{
 	exit
 }
 event_inherited(); 
-if (!buff_cells_refreshed)
+// 2026-11-22：增幅源登记 + 按形态铺格子（倍率直接取 atk，见 scripts/fruit_tart_buff）。
+//   atk 被海克斯 / 生肖 / 海洋女神等乘区改过之后也要重铺，所以比较一下 buff_value 再决定。
+if (!buff_cells_refreshed || abs(buff_value - atk) > 0.0001)
 {
-    buff_value = atk / 100;
     mod_buff_source_add(id);
-    buff_cells = [];
-    var _left = (shape >= 2) ? 0 : grid_col - 1;
-    for (var _col = _left; _col >= 0; _col--)
-        array_push(buff_cells, [_col, grid_row, buff_value]);
-    global.buff_dirty = true;
-    buff_cells_refreshed = true;
+    fruit_tart_refresh_cells();
 }
-
