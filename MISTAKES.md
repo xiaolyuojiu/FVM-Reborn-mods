@@ -27,6 +27,7 @@
 | 新卡「待机动画里带着施法/张嘴姿势」「攻击姿势永远不播」 | 别靠 `ViewImage` 肉眼判断「这批帧全是待机」——去 SWF 里读 `FrameLabelTag` 定分段：`java -jar ffdec.jar -swf2xml out.xml x.swf`，在 `DefineSpriteTag/subTags` 里按 `ShowFrameTag` 累计帧号，看「待机 / 攻击 / 技能」各落在第几帧 | B46 |
 | 「子弹比动作先出来」/ 要定攻击段里哪一帧出弹 | 段标签只给段起点，不给吐弹帧：先逐帧像素差分找峰值（阴阳蛇 17→18 帧差 2960 px、右缘 77→91），再把候选帧头部放大 8~10 倍拼图看姿态；落到代码就盯 `image_index` 别再数固定帧 | B46 |
 | 子弹过火了：伤害和倍率都对，但**看起来还是原来那颗弹** | 换贴图**不是** `bullet_hazard_fire` 干的（普通火源分支只改倍率 / 尺寸 / 音效）→ 子弹自己的 Step 里写 `if (burnt > 0 && !冰弹) { sprite_index = spr_fire_bullet; image_speed = 0; image_index = (life div 4) mod 4; 放大 1.8 }`；融盆二转冰弹要让路（`brazier_list` 有 `-9999` 就跳过） | B47 |
+| 合并外部 PR 后对象改了名，代码能用但 IDE 资源树里找不到 | 改名 PR 常只删旧 `listItems` 条目、不补新条目 → 用新 `path` 在 `folders/**/*.yy` 反查，0 命中就按原文件夹补一行 | D8 |
 | 新加的不占格（gridless）卡能同一格无限叠 | 去 `place_mutex_class` 加一行 `case "<card_id>": return "<类名>";`；别改 `can_place_at_position` 的 gridless 分支（`return true` 是故意的） | C28 |
 | 新卡特效糊在卡片前面 / 反而看不见 | depth **越小越靠前**：卡片是 `-10-45*row-5*col-层偏移`（全在 -10~-330）→ 要压卡片之下取 `-10-45*row_min+1`，别超过 `obj_battle` 的 `+50` | C29 |
 | 多边形/区域特效「糊成一个方框」，跑到边线外面 | 方形贴图按包围盒拉伸裁不出斜边（四角也带 alpha）→ 用 `draw_primitive_begin_texture(pr_trianglefan)` 自己造几何：顶点=凸包、扇心=质心、uv 走 `sprite_get_uvs` 按包围盒映射，越界的地方没有三角形就不会被画 | C30 |
@@ -1288,6 +1289,18 @@
   对 `folders/**/*.yy` 逐个跑（BOM 用 `utf-8-sig` 读）。PR48 的
   `folders/物体/mod.yy` 第 26 行是 `],,` 双逗号，改回 `],` 即恢复。
 - **证据**：`folders/物体/mod.yy:26`（修复前 `],,`）、2026-11-21 日志。
+
+### D8 外部 PR 把对象改名，只删旧 `listItems` 条目、没补新条目
+
+- **症状**：合并后对象在 yyp `resources` 里（能编译、代码引用也对），但 IDE 资源树里看不到它；
+  全仓 `folders/**/*.yy` 搜新名字 0 命中。
+- **错路**：只查「旧名字有没有残留」（0 残留就以为干净）、只看 yyp 的 `resources` + `Folders`
+  （两者都通过），漏掉「新名字要重新进某个文件夹的 `listItems`」这一步。
+- **正确路径**：合并后对每个状态为 `A` 的对象/脚本/精灵，用它的 `path` 在
+  `folders/**/*.yy` 的 `listItems` 里做一次反查；0 命中就按原文件夹补一行
+  （`{"name":"<名>","path":"<path>",}`）。PR49 的 `obj_immortal_pick` → `obj_immortal_confirm`
+  就是只删了 `folders/物体/mod/UI.yy` 里的旧行，已补回。
+- **证据**：`folders/物体/mod/UI.yy`（补入前 listItems 6 条、无新对象）、2026-11-22 日志。
 
 ### A29 pwsh 里用 bash heredoc 写 Python，整段被当成 PowerShell 解析
 - **症状**：`pwsh` 调用 `python - <<'PY' … PY` 时，报一堆 `关键字「for」后面缺少左括号` /
