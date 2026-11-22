@@ -1,4 +1,13 @@
 // obj_battle_pause_manager - Step Event
+// 兜底：上游新 BOSS 可能不走 battle_finish_win，自己创建胜利界面 → 抽卡 / 欧皇模式在此转成礼盒。
+//   放最前面是因为 Step 早于 Draw，转换当场完成，玩家看不到胜利界面闪一帧。
+//   走正常路径（battle_finish_win）时抽卡模式根本不会创建 obj_game_over，这里不会触发。
+if (is_eternal_gacha_mode() && !instance_exists(obj_gacha_drop)
+    && instance_exists(obj_game_over) && obj_game_over.sprite_index == spr_win) {
+    instance_create_depth(room_width / 2, room_height / 2, -3001, obj_gacha_drop);
+    with (obj_game_over) instance_destroy();
+}
+
 // 抽卡模式：礼盒动画帧推进（每帧执行）
 if (is_eternal_gacha_mode() && instance_exists(obj_gacha_drop)) {
     if (obj_gacha_drop.state == 1) {

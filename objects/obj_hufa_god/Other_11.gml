@@ -1,4 +1,4 @@
-var _hittable = (shape < 2) ? ["normal", "air", "invisible"] : ["normal", "air", "underground", "invisible"];
+var _hittable = (shape < 2) ? ["normal", "air", "invisible"] : ["normal", "air", "underground", "invisible"];   // 追踪卡：不含障碍
 
 var _target = noone;
 var _best_score = -infinity;

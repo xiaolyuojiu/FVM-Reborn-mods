@@ -8,9 +8,13 @@ plant_id = "caihongshe";
 obj_type = object_index;
 event_user(0);
 
-if (shape == 0)      sprite_index = spr_caihongshe;
-else if (shape == 1) sprite_index = spr_caihongshe_1;
-else                 sprite_index = spr_caihongshe_2;
+// 本体只画「前半层」（蛇头 + 下盘）；蛇身上半弧在 obj_caihongshe_back 里画（shield_inner 层）
+if (shape == 0)      sprite_index = spr_caihongshe_front;
+else if (shape == 1) sprite_index = spr_caihongshe_1_front;
+else                 sprite_index = spr_caihongshe_2_front;
+
+back_inst = instance_create_depth(x, y, depth + 2, obj_caihongshe_back);
+back_inst.parent_plant = id;
 
 plant_type = "shield_outer";
 feature_type = "normal";
@@ -18,17 +22,18 @@ target_type = "normal";
 is_slowdown = false;
 image_speed = 0;
 
-// ── 动画分段（2026-11-06 用户给的分段；下面写的是 image_index，0 起算，括号里=编辑器显示的第几帧）──
-//   健康待机  0~13  (1~14)
-//   虚弱待机 14~27  (15~28)
-//   健康开火 28~40  (29~41)   第 29 帧和待机第 1 帧**像素完全相同**，是美术给开火段起的头
-//   虚弱开火 41~54  (42~55)
-//   爆炸     55~63  (56~64)   只有死亡时用，待机和开火都不碰它
+// ── 动画分段（下面写的是 image_index，0 起算，括号里=编辑器显示的第几帧）──
+//   新素材（2026-11-22 前后分层版）是 60 帧连续循环 + 尾部爆炸，按比例切成旧的四段：
+//   健康待机  0~14  (1~15)
+//   虚弱待机 15~29  (16~30)
+//   健康开火 30~44  (31~45)
+//   虚弱开火 45~59  (46~60)
+//   爆炸     60~68  (61~69)   只有死亡时用，待机和开火都不碰它
 // 🔴 父对象只会「IDLE 0~idle_anim / ATTACK idle_anim+1 ~ +attack_anim」两段，
 //    做不到健康/虚弱各一套，所以帧由本对象自己推（见 Step 的帧机，每帧覆盖 image_index）。
 //    idle_anim / attack_anim 只当父对象的兜底用（保证它自己推也不会推到爆炸帧）。
-idle_anim   = 13;      // 父对象 IDLE 兜底：只走健康待机前 14 帧
-attack_anim = 13;      // 父对象 ATTACK 兜底：只走 14~26（虚弱待机段），不会碰爆炸帧
+idle_anim   = 14;      // 父对象 IDLE 兜底：只走健康待机前 15 帧
+attack_anim = 14;      // 父对象 ATTACK 兜底：只走 15~29（虚弱待机段），不会碰爆炸帧
 flash_speed = 5;
 
 cai_idle_t = 0;        // 待机动画计时

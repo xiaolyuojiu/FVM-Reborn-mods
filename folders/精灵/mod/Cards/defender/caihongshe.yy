@@ -13,6 +13,12 @@
   ],
   "listItems":[
     {"name":"spr_caihongshe","path":"sprites/spr_caihongshe/spr_caihongshe.yy",},
+    {"name":"spr_caihongshe_front","path":"sprites/spr_caihongshe_front/spr_caihongshe_front.yy",},
+    {"name":"spr_caihongshe_1_front","path":"sprites/spr_caihongshe_1_front/spr_caihongshe_1_front.yy",},
+    {"name":"spr_caihongshe_2_front","path":"sprites/spr_caihongshe_2_front/spr_caihongshe_2_front.yy",},
+    {"name":"spr_caihongshe_back","path":"sprites/spr_caihongshe_back/spr_caihongshe_back.yy",},
+    {"name":"spr_caihongshe_1_back","path":"sprites/spr_caihongshe_1_back/spr_caihongshe_1_back.yy",},
+    {"name":"spr_caihongshe_2_back","path":"sprites/spr_caihongshe_2_back/spr_caihongshe_2_back.yy",},
     {"name":"spr_caihongshe_shield","path":"sprites/spr_caihongshe_shield/spr_caihongshe_shield.yy",},
     {"name":"spr_caihongshe_bullet","path":"sprites/spr_caihongshe_bullet/spr_caihongshe_bullet.yy",},
     {"name":"spr_caihongshe_1","path":"sprites/spr_caihongshe_1/spr_caihongshe_1.yy",},

@@ -1,6 +1,6 @@
 // 开火：全屏索敌最近目标，发射追踪穿透的红柳肉串
 // 可命中：陆（normal）/ 空（air）/ 幽灵类（invisible）
-var _hittable = ["normal", "air", "invisible"];
+var _hittable = ["normal", "diver", "air", "invisible"];   // 追踪卡：不含障碍
 
 var _target = noone;
 var _best_score = -infinity;

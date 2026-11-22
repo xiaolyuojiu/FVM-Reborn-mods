@@ -22,7 +22,7 @@ jj_atk       = 0;
 jj_use_mult  = false;
 jj_mult      = [1];
 jj_mult_tail = 1;
-jj_can_hit_types = ["normal", "air", "underground"];
+jj_can_hit_types = get_hittable_enemy_types("land_air_ug");   // 与本体同口径
 
 jj_anim = 0;             // 特效帧推进（两张 20 帧 / 一张 10 帧，统一按 20 帧循环）
 jj_count = 0;            // 场上马的数量（决定画哪种形状）

@@ -52,4 +52,4 @@ jg_kill_normal = (shape >= 2);
 //   卡面「攻击沿途陆、空鼠军」+ 通用「可直接攻击幽灵鼠」= 普通陆鼠 / 空军 / 幽灵鼠。
 //   2026-11-13 用户报「金刚马能打到非主流」：`pierce` 自带 dance(非主流·高跷) / 障碍 / 钻地，太宽，
 //   所以伤害侧手写这份名单 —— 别再改回 get_hittable_enemy_types("pierce")。
-jg_hittable = ["normal", "air", "invisible"];
+jg_hittable = ["normal", "diver", "air", "invisible"];   // 追踪卡：不含障碍

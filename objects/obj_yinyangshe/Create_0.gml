@@ -50,9 +50,9 @@ yy_charge     = 0;       // > 0 = 已起手，还等着「吐」的那一下
 
 plant_type   = "normal";
 feature_type = "normal";
-// 卡片侧索敌用穿透口径（= 陆鼠 + 非主流 + 障碍 + 未显形幽灵），
-// 「阴蛇能打幽灵」就靠这一行；阳蛇子弹在子弹对象里自己收窄成 normal
-target_type  = "pierce";
+// 索敌走直射口径（陆 + 障碍）；「阴蛇能打幽灵」由 yy_has_target 单独放行 invisible。
+// 官方口径：阴阳蛇没有非主流，二转阳蛇的「穿透」是子弹效果（yy_pierce），不是攻击类型。
+target_type  = "normal";
 
 // ── 弹序 / 伤害口径 ───────────────────────────────────────────────────────
 yy_shot_count_yin = 5;                          // 阴蛇每轮 5 发
@@ -82,7 +82,7 @@ yy_has_target = function()
             && grid_row == other.grid_row
             && grid_col >= other.grid_col
             && grid_col <= global.grid_cols + 1
-            && can_target_on(other.target_type, target_type))
+            && (can_target_on(other.target_type, target_type) || other.target_type == "invisible"))
         {
             _hit = true;
             break;
@@ -113,8 +113,9 @@ yy_fire = function(_kind, _poison)
     _b.damage        = atk;
     _b.move_speed    = yy_bullet_speed;
     _b.end_col       = yy_end_col;
-    // 阴蛇穿透口径（含未显形幽灵）；阳蛇按官方口径只打常规目标
-    _b.target_type   = (_kind == 0) ? "pierce" : "normal";
+    // 两种弹体都是直射口径；「阴蛇能打幽灵」靠 yy_ghost 单独放行
+    _b.target_type   = "normal";
+    _b.yy_ghost      = (_kind == 0);
     _b.yy_pierce     = (_kind == 1 && yy_pierce_yang);
     _b.yy_poison     = _poison;
     _b.yy_poison_mult = yy_poison_mult;

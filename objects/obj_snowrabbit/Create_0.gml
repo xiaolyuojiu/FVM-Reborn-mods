@@ -16,7 +16,7 @@ else                 sprite_index = spr_snowrabbit_2;
 plant_type   = "normal";
 feature_type = "normal";
 // 陆 / 空 / 地鼠（全屏打击口径）：不含 潜水·非主流·幽灵·障碍；钻地中的龙渊地精由 scatter_target_blocked 另排
-target_type  = "land_air_ug";
+target_type  = "track_under";
 is_slowdown  = false;
 image_speed  = 0;
 flash_speed  = 5;

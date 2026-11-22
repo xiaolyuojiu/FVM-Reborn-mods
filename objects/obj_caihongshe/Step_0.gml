@@ -43,12 +43,12 @@ with (obj_enemy_parent){
 }
 
 // 分段（image_index 0 起算，括号=编辑器第几帧）——见 Create_0 的注释
-//   健康待机 0~13 / 虚弱待机 14~27 / 健康开火 28~40 / 虚弱开火 41~54 / 爆炸 55~63
+//   健康待机 0~14 / 虚弱待机 15~29 / 健康开火 30~44 / 虚弱开火 45~59 / 爆炸 60~68
 var _weak    = (hp <= max_hp * 0.5);
-var _idle_s  = _weak ? 14 : 0;          // 待机段起点
-var _atk_s   = _weak ? 41 : 28;         // 开火段起点
-var _atk_len = _weak ? 14 : 13;         // 开火段帧数
-var _fire_step = 7;                     // 开火段第 8 帧张嘴出弹（健康 = 第 36 帧 / 虚弱 = 第 49 帧）
+var _idle_s  = _weak ? 15 : 0;          // 待机段起点
+var _atk_s   = _weak ? 45 : 30;         // 开火段起点
+var _atk_len = 15;                      // 开火段帧数
+var _fire_step = 7;                     // 开火段第 8 帧张嘴出弹（健康 = 第 37 帧 / 虚弱 = 第 52 帧）
 
 // 冷却照常攒（没敌人也攒，出弹节奏不会乱）
 shoot_timer = min(shoot_timer + 1, 600);
@@ -85,7 +85,7 @@ if (cai_atk_t >= 0){
 else{
     // 待机：健康 0~13 / 虚弱 14~27 各自循环，永远不走进开火段和爆炸段
     cai_idle_t++;
-    image_index = _idle_s + ((cai_idle_t div _fs) mod 14);
+    image_index = _idle_s + ((cai_idle_t div _fs) mod 15);
     external_animation_sync_native(id, _fs, cai_idle_t, "cai_idle_t");
 }
 

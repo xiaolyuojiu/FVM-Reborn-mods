@@ -12,7 +12,7 @@ with (obj_enemy_parent){
     if (hp <= 0) continue;
     // 钻地中的龙渊地精鼠按「不攻击类型」直接跳过（散点不该锁它，也不该为它耗一发）
     if (scatter_target_blocked(id)) continue;
-    // 障碍 / 潜水 / 非主流 / 幽灵都由 target_type（land_air_ug）挡掉，不用再单独判
+    // 非主流 / 幽灵 / 障碍都由 target_type（track_under）挡掉；潜水已放行，不用再单独判
     if (!can_target_on(other.target_type, target_type)) continue;
     // 越靠前（grid_col 越小）越优先，BOSS 加权
     var _score = grid_col * 1000 + random(99);

@@ -38,7 +38,7 @@ if (!attacking)
     with (obj_enemy_parent)
     {
         if (hp > 0 && y > 0 && grid_col <= (global.grid_cols + 1)
-            && can_hit_ash(other.target_type, target_type))
+            && can_target_on(other.target_type, target_type))
         {
             if (maxhp > _best_hp || (maxhp == _best_hp && x < _best_x))
             {

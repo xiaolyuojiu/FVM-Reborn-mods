@@ -14,7 +14,7 @@ else                 sprite_index = spr_tanhuanghu_2;
 
 plant_type   = "normal";
 feature_type = "normal";
-target_type  = "air";            // 2026-11-17：陆空兼备 = 普通 + 空军；障碍只穿不打，所以不用 pierce_air
+target_type  = "air";            // 陆空兼备 = 陆军 + 空军；障碍只穿不打
 is_slowdown  = false;
 attack_type  = ATTACK_TYPE.SHOOTER;
 image_speed  = 0;

@@ -13,7 +13,7 @@ if (is_slowdown)
     current_flash_speed *= 2;
 
 // 喷壶类可命中钻地中的地精鼠
-var _hittable = (shape < 2) ? ["normal", "air", "invisible", "underground"] : ["normal", "air", "underground", "invisible"];
+var _hittable = (shape < 2) ? ["normal", "air", "invisible"] : ["normal", "air", "underground", "invisible"];
 
 var has_enemy = false;
 

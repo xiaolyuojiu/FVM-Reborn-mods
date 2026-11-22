@@ -24,7 +24,7 @@ if (!attacking)
 {
     with (obj_enemy_parent)
     {
-        if ((target_type == "normal" || target_type == "air" || target_type == "underground" || target_type == "diver")
+        if (can_target_on(other.target_type, target_type)
             && grid_row == other.grid_row && hp > 0)
         {
             other.attacking = true;

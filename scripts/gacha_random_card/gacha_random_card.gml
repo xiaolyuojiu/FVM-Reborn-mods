@@ -147,7 +147,7 @@ function random_gift_spawn_card(_x, _y, _col, _row, _level) {
 }
 
 /// @function gacha_get_excluded_cards()
-/// @desc 获取「本体不走抽卡」的卡片：初始赠送 / 关卡首通奖励 / 商城独占，共 19 张。
+/// @desc 获取「本体不走抽卡」的卡片：初始赠送 / 关卡首通奖励 / 商城独占，共 20 张。
 ///       抽卡、欧皇、随机礼盒三条路都不可获得这些卡的本体（2026-11-12 与 gacha_is_map_unlock_card 合并）。
 /// @return {array}
 function gacha_get_excluded_cards() {
@@ -173,7 +173,8 @@ function gacha_get_excluded_cards() {
         "huagao",             // 灯影花糕（松露大厅（夜）首通奖励）
         "fushengcha",         // 浮生茶（松露大厅（夜）首通奖励）
         "hongliukaochuan",    // 烤串机（百味关首通奖励）
-        "chunsun"             // 泡椒春笋（赤霞渡（日）首通奖励）
+        "chunsun",            // 泡椒春笋（赤霞渡（日）首通奖励）
+        "parsnip_salad"       // 防风草沙拉（芦荟沙丘（日）首通奖励）；同时被 _map_only 排除在抽卡池外，不在这里登记就永远拿不到
     ];
 }
 
@@ -232,11 +233,12 @@ function gacha_is_zodiac_card(card_id) {
     if (is_fusion_card(card_id)) return false;
     if (gacha_is_map_unlock_card(card_id)) return false;
 
-    // 普通卡池名单：与 docs/抽卡概率与卡池总表.md 2.5 一一对应，共 75 张
+    // 普通卡池名单：与 docs/抽卡概率与卡池总表.md 2.5 一一对应，共 76 张
     var _normal = [
-        // MOD 普通卡 13 张
+        // MOD 普通卡 14 张
         "chunsun", "mixian", "corn_shooter", "12yinliao", "anranxiaohunfan",
         "qingse_shishi", "pufferfish", "yeziguo", "bbq", "eightcake", "maiya", "guihuajiu", "honeytrap",
+        "cactus_sashimi",
         // 原版普通卡 62 张（scripts/slots_init/slots_init.gml 注册）
         "beef_hotpot", "brazier", "cat_box", "cat_chest", "cherry_pudding",
         "chili_powder", "chocolate_bread", "chocolate_cannon", "chocolate_pult",

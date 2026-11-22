@@ -23,7 +23,7 @@ flash_speed = 5;
 
 plant_type  = "normal";
 is_slowdown = false;
-target_type = "air";
+target_type = "track_under";   // 可打 陆军 / 潜水 / 空军 / 地鼠（与手写名单同口径，换类型省掉名单）
 cooldown    = cycle;
 attacking   = false;
 

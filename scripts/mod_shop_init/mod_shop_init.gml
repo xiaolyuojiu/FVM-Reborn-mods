@@ -5,15 +5,15 @@ function mod_shop_init()
         type: "card",
         cost: "40000",
         unlock_item_id: "warm_birds",
-        description: "暖暖鸡：一次生产3朵火苗",
+        description: "暖暖鸡：可以大量生产火苗",
         display_name: "暖暖鸡"
     });
     register_goods("cold_drew",
     {
         type: "card",
-        cost: "90000",
+        cost: "100000",
         unlock_item_id: "cold_drew",
-        description: "冰块冷萃机：对全屏敌人发射至多4颗追踪冰块",
+        description: "冰块冷萃机：发射冰块攻击全屏老鼠",
         display_name: "冰块冷萃机"
     });
     register_goods("berry_dessert", 
@@ -21,7 +21,7 @@ function mod_shop_init()
         type: "card",
         cost: "60000",
         unlock_item_id: "berry_dessert",
-        description: "莓果点心：为3x3范围内追踪类卡片提供增伤",
+        description: "莓果点心：为周围卡片增加攻击力",
         display_name: "莓果点心"
     });
     register_goods("grilled_lizard_pult", 
@@ -45,15 +45,15 @@ function mod_shop_init()
         type: "card",
         cost: "150000",
         unlock_item_id: "zhuzhujiaqiang",
-        description: "猪猪加强器：为本行投掷类卡片增加攻击力",
+        description: "猪猪加强器：使投掷类子弹攻击力提高",
         display_name: "猪猪加强器"
     });
     register_goods("donut", 
     {
         type: "card",
-        cost: "100000",
+        cost: "120000",
         unlock_item_id: "donut",
-        description: "梦幻多拿滋：连续攻击本行鼠军，优先空军",
+        description: "梦幻多拿滋：连续攻击本行鼠军，优先空中",
         display_name: "梦幻多拿滋"
     });
     register_goods("spoon_rabbit", 
@@ -69,7 +69,7 @@ function mod_shop_init()
         type: "card",
         cost: "80000",
         unlock_item_id: "hspeed_juicer",
-        description: "加速榨汁机：为3x3范围内喷壶类卡片提供增伤",
+        description: "加速榨汁机：给周围旋转喷射类卡片提高攻击力",
         display_name: "加速榨汁机"
     });
     register_goods("shiliu_baobao_bing",
@@ -77,7 +77,7 @@ function mod_shop_init()
         type: "card",
         cost: "75000",            // 数据表：本体商城；魔塔层数比玉兔灯笼高 1~2 层、威望 1.5 倍（50000 × 1.5）
         unlock_item_id: "shiliu_baobao_bing",
-        description: "石榴爆爆冰：落地灰烬爆炸并附加冰冻减速，同时对范围内最近的地面目标碾压",
+        description: "石榴爆爆冰：爆炸冰冻伤害老鼠，飞出石榴籽碾压",
         display_name: "石榴爆爆冰"
     });
     register_goods("master_shield", 
@@ -329,7 +329,7 @@ function mod_shop_init()
         type: "card",
         cost: "40000",
         unlock_item_id: "shuangzi",
-        description: "双子座精灵：一次性产出4朵火苗",
+        description: "双子座精灵：可以大量生产火苗",
         display_name: "双子座精灵"
     });
     register_goods("sheshou", 
@@ -337,7 +337,7 @@ function mod_shop_init()
         type: "card",
         cost: "30000",
         unlock_item_id: "sheshou",
-        description: "射手座精灵：向前方三行射出4发强力子弹",
+        description: "射手座精灵：可以同时攻击三行老鼠",
         display_name: "射手座精灵"
     });
     register_goods("tiancheng", 
@@ -345,7 +345,7 @@ function mod_shop_init()
         type: "card",
         cost: "30000",
         unlock_item_id: "tiancheng",
-        description: "天秤座精灵：向前后各射出3发比较强力的子弹",
+        description: "天秤座精灵：可以同时前后攻击老鼠",
         display_name: "天秤座精灵"
     });
     register_goods("shuangyu", 
@@ -353,7 +353,7 @@ function mod_shop_init()
         type: "card",
         cost: "40000",
         unlock_item_id: "shuangyu",
-        description: "双鱼座精灵：投掷两颗带有减速的冰鱼",
+        description: "双鱼座精灵：强力抛射攻击武器",
         display_name: "双鱼座精灵"
     });
     register_goods("juxie", 
@@ -361,7 +361,7 @@ function mod_shop_init()
         type: "card",
         cost: "30000",
         unlock_item_id: "juxie",
-        description: "巨蟹座精灵：发射4发强力钳子，全屏跟踪，海陆两栖",
+        description: "巨蟹座精灵：全屏跟踪攻击",
         display_name: "巨蟹座精灵"
     });
     register_goods("shizi", 
@@ -369,7 +369,7 @@ function mod_shop_init()
         type: "card",
         cost: "30000",
         unlock_item_id: "shizi",
-        description: "狮子座精灵：5×5范围穿透打击",
+        description: "狮子座精灵：可以攻击范围5x5内的老鼠",
         display_name: "狮子座精灵"
     });
     register_goods("jinniu", 
@@ -377,7 +377,7 @@ function mod_shop_init()
         type: "card",
         cost: "25000",
         unlock_item_id: "jinniu",
-        description: "金牛座精灵：点燃子弹",
+        description: "金牛座精灵：子弹穿过后火力加强",
         display_name: "金牛座精灵"
     });
     register_goods("chunv", 
@@ -385,7 +385,7 @@ function mod_shop_init()
         type: "card",
         cost: "20000",
         unlock_item_id: "chunv",
-        description: "处女座精灵：保护卡牌，并反弹伤害",
+        description: "处女座精灵：体力大，可以保护被罩住的卡片",
         display_name: "处女座精灵"
     });
     register_goods("baiyang", 
@@ -393,7 +393,7 @@ function mod_shop_init()
         type: "card",
         cost: "10000",
         unlock_item_id: "baiyang",
-        description: "白羊座精灵：冲撞清除一行鼠军",
+        description: "白羊座精灵：奔腾的小白羊，清除整行老鼠",
         display_name: "白羊座精灵"
     });
     register_goods("mojie", 
@@ -401,7 +401,7 @@ function mod_shop_init()
         type: "card",
         cost: "10000",
         unlock_item_id: "mojie",
-        description: "摩羯座精灵：3×3范围内持续伤害并减速",
+        description: "摩羯座精灵：范围内的老鼠在一定时间内都会受到持续伤害",
         display_name: "摩羯座精灵"
     });
     register_goods("athena", 
@@ -409,7 +409,7 @@ function mod_shop_init()
         type: "card",
         cost: "30000",
         unlock_item_id: "athena",
-        description: "雅典娜守护：全屏轰击，造成3×3范围伤害",
+        description: "雅典娜守护：黄道十二宫相聚，拥有战争与智慧的化身，展现神一样的力量。",
         display_name: "雅典娜守护"
     });
     register_goods("corn_shooter",
@@ -417,7 +417,7 @@ function mod_shop_init()
         type: "card",
         cost: "20000",
         unlock_item_id: "corn_shooter",
-        description: "玉蜀黍：发射三颗玉米",
+        description: "玉蜀黍：发射子弹攻击老鼠",
         display_name: "玉蜀黍"
     });
     register_goods("star_wand",
@@ -570,7 +570,7 @@ function mod_shop_init()
         type: "card",
         cost: "10000",
         unlock_item_id: "anranxiaohunfan",
-        description: "黯然销魂饭：复活3*3范围内死亡的美食",
+        description: "黯然销魂饭：复活一定范围内的卡片",
         display_name: "黯然销魂饭"
     });
 
@@ -589,7 +589,7 @@ function mod_shop_init()
         type: "card",
         cost: "10000",
         unlock_item_id: "dandantu",
-        description: "蛋蛋兔：储存3x3范围内子弹伤害，死亡时释放穿透型子弹攻击整行老鼠",
+        description: "蛋蛋兔：储存周围直线子弹伤害，消失后释放",
         display_name: "蛋蛋兔"
     });
     register_goods("zhiyumiao",
@@ -597,7 +597,7 @@ function mod_shop_init()
         type: "card",
         cost: "12500",
         unlock_item_id: "zhiyumiao",
-        description: "治愈喵：为范围内卡片瞬间恢复5点体力，一转增加3秒补血Buff，二转全屏补血",
+        description: "治愈喵：为范围内卡片补充5点体力",
         display_name: "治愈喵"
     });
     register_goods("nizhuanniu",
@@ -605,7 +605,7 @@ function mod_shop_init()
         type: "card",
         cost: "50000",
         unlock_item_id: "nizhuanniu",
-        description: "逆转牛：将3*3范围内普通老鼠与地鼠逆转到其所在行的出生位置",
+        description: "逆转牛：逆转范围内普通老鼠的位置",
         display_name: "逆转牛"
     });
     register_goods("wanpilong",
@@ -613,7 +613,7 @@ function mod_shop_init()
         type: "card",
         cost: "12500",
         unlock_item_id: "wanpilong",
-        description: "顽皮龙：选择一张己方卡片，将其移动到周围5x5范围内的空格；瓜皮护罩、赫拉、春女可移动到已有卡片的格子",
+        description: "顽皮龙：移动卡片",
         display_name: "顽皮龙"
     });
     register_goods("baobaoji",
@@ -621,7 +621,7 @@ function mod_shop_init()
         type: "card",
         cost: "15000",
         unlock_item_id: "baobaoji",
-        description: "爆爆鸡：部署时清除3×3范围内的路障、梯子和鼠洞",
+        description: "爆爆鸡：清除范围内的路障、梯子和鼠洞，无伤害",
         display_name: "爆爆鸡"
     });
     register_goods("qingse_shishi",
@@ -629,7 +629,7 @@ function mod_shop_init()
         type: "card",
         cost: "60000",
         unlock_item_id: "qingse_shishi",
-        description: "青涩柿柿：向前方一定范围内的老鼠发起重击",
+        description: "青涩柿柿：重击前方范围内老鼠",
         display_name: "青涩柿柿"
     });
     // 红柳烤串机（本体 / 茴香·一转 / 星火·二转）不在这里注册：
@@ -640,49 +640,49 @@ function mod_shop_init()
         type: "card",
         cost: "6666",
         unlock_item_id: "pufferfish",
-        description: "爆辣河豚：种卡后清除全屏老鼠，或清除部分卡片",
+        description: "爆辣河豚：要么享受美味，要么中毒",
         display_name: "爆辣河豚"
     });
 
-    register_goods("shuanggu", { type: "card", cost: "20000", unlock_item_id: "shuanggu", description: "蚝油双菇：同时向前方发射对陆与对空子弹", display_name: "蚝油双菇" });
+    register_goods("shuanggu", { type: "card", cost: "20000", unlock_item_id: "shuanggu", description: "蚝油双菇：同时攻击本行空中和陆地的敌人", display_name: "蚝油双菇" });
 
-    register_goods("yeziguo", { type: "card", cost: "55000", unlock_item_id: "yeziguo", description: "椰子果：跳起碾压前方鼠军", display_name: "椰子果" });
+    register_goods("yeziguo", { type: "card", cost: "55000", unlock_item_id: "yeziguo", description: "椰子果：跳起秒杀前方单格鼠军", display_name: "椰子果" });
     // 椰子果一 / 二转凭证在威望商店（credit_yeziguo_1/_2），这里不注册
 
     // 牛油果：本体这条由 cross_server_shop_init 改价成白银页 2030（同战旗马）；
     //   一 / 二转凭证只在威望商店（credit_niuyouguo_1/_2），这里不注册。
-    register_goods("bbq", { type: "card", cost: "35000", unlock_item_id: "bbq", description: "街头烤肉大师：沿本行发射穿透串串子弹", display_name: "街头烤肉大师" });
-    register_goods("eightcake", { type: "card", cost: "20000", unlock_item_id: "eightcake", description: "8周年蛋糕：投掷蛋糕子弹，每3次攻击附带灼烧", display_name: "8周年蛋糕" });
-    register_goods("tangchaolizi", { type: "card", cost: "60000", unlock_item_id: "tangchaolizi", description: "糖炒栗子：向前方喷出持续灼烧老鼠的滚烫栗子（3×3 十字灼烧）", display_name: "糖炒栗子" });
+    register_goods("bbq", { type: "card", cost: "35000", unlock_item_id: "bbq", description: "街头烤肉大师：向前发射固定轨迹穿透子弹", display_name: "街头烤肉大师" });
+    register_goods("eightcake", { type: "card", cost: "20000", unlock_item_id: "eightcake", description: "8周年蛋糕：投掷不同功能子弹", display_name: "8周年蛋糕" });
+    register_goods("tangchaolizi", { type: "card", cost: "160000", unlock_item_id: "tangchaolizi", description: "糖炒栗子：向前方喷射高温栗子", display_name: "糖炒栗子" });
 
-    register_goods("nengliangmiao", { type: "card", cost: "100000", unlock_item_id: "nengliangmiao", description: "能量喵：本行投掷类卡片加攻，直线子弹经其变为火子弹", display_name: "能量喵" });
-    register_goods("maiya", { type: "card", cost: "20000", unlock_item_id: "maiya", description: "麦芽糖：可在海水与岩浆上承载卡片", display_name: "麦芽糖" });
-    register_goods("guihuajiu", { type: "card", cost: "40000", unlock_item_id: "guihuajiu", description: "桂花酒：阻挡老鼠，被咬破时炸伤周围老鼠", display_name: "桂花酒" });
-    register_goods("budingwang", { type: "card", cost: "50000", unlock_item_id: "budingwang", description: "布丁汪：把穿过自己的子弹弹回去", display_name: "布丁汪" });
-    register_goods("caihongshe", { type: "card", cost: "30000", unlock_item_id: "caihongshe", description: "彩虹蛇：保护被罩住的卡片并发射子弹", display_name: "彩虹蛇" });
-    register_goods("meiweijishiqi", { type: "card", cost: "50000", unlock_item_id: "meiweijishiqi", description: "美味计时器：持续缩短本格卡片的冷却", display_name: "美味计时器" });
-    register_goods("dangdanghu", { type: "card", cost: "60000", unlock_item_id: "dangdanghu", description: "铛铛虎：投掷高温糕饼，落点持续灼烧", display_name: "铛铛虎" });
-    register_goods("dianman", { type: "card", cost: "80000", unlock_item_id: "dianman", description: "美味电鳗：范围内持续放电并定身", display_name: "美味电鳗" });
-    register_goods("tanchitu", { type: "card", cost: "70000", unlock_item_id: "tanchitu", description: "贪吃兔：召唤一列兔子向前冲撞", display_name: "贪吃兔" });
-    register_goods("tunshilong", { type: "card", cost: "50000", unlock_item_id: "tunshilong", description: "吞噬龙：吞掉周围的地面老鼠", display_name: "吞噬龙" });
-    register_goods("xiangliaohu", { type: "card", cost: "150000", unlock_item_id: "xiangliaohu", description: "香料虎：为周围追踪卡片提升攻击力", display_name: "香料虎" });
-    register_goods("zhuanzhuanji", { type: "card", cost: "40000", unlock_item_id: "zhuanzhuanji", description: "转转鸡：连续快速向周边攻击", display_name: "转转鸡" });
+    register_goods("nengliangmiao", { type: "card", cost: "100000", unlock_item_id: "nengliangmiao", description: "能量喵：为本行投掷和直线子弹增加攻击", display_name: "能量喵" });
+    register_goods("maiya", { type: "card", cost: "40000", unlock_item_id: "maiya", description: "麦芽糖：可在果汁上承载美食卡片，在空中变身棉花糖", display_name: "麦芽糖" });
+    register_goods("guihuajiu", { type: "card", cost: "50000", unlock_item_id: "guihuajiu", description: "桂花酒：阻挡进攻，咬破后可炸伤老鼠", display_name: "桂花酒" });
+    register_goods("budingwang", { type: "card", cost: "60000", unlock_item_id: "budingwang", description: "布丁汪：反弹子弹并增加攻击力", display_name: "布丁汪" });
+    register_goods("caihongshe", { type: "card", cost: "30000", unlock_item_id: "caihongshe", description: "彩虹蛇：保护被罩卡片同时攻击老鼠", display_name: "彩虹蛇" });
+    register_goods("meiweijishiqi", { type: "card", cost: "90000", unlock_item_id: "meiweijishiqi", description: "美味计时器：为范围内卡片缩减冷却", display_name: "美味计时器" });
+    register_goods("dangdanghu", { type: "card", cost: "70000", unlock_item_id: "dangdanghu", description: "铛铛虎：燃烧前方区域，持续伤害老鼠", display_name: "铛铛虎" });
+    register_goods("dianman", { type: "card", cost: "80000", unlock_item_id: "dianman", description: "美味电鳗：一段时间内持续伤害", display_name: "美味电鳗" });
+    register_goods("tanchitu", { type: "card", cost: "70000", unlock_item_id: "tanchitu", description: "贪吃兔：贪吃的兔子，撞飞整列老鼠", display_name: "贪吃兔" });
+    register_goods("tunshilong", { type: "card", cost: "100000", unlock_item_id: "tunshilong", description: "吞噬龙：吞噬周围老鼠", display_name: "吞噬龙" });
+    register_goods("xiangliaohu", { type: "card", cost: "150000", unlock_item_id: "xiangliaohu", description: "香料虎：为周围特定卡片增加攻击", display_name: "香料虎" });
+    register_goods("zhuanzhuanji", { type: "card", cost: "40000", unlock_item_id: "zhuanzhuanji", description: "转转鸡：连续快速向周边发出猛烈攻击，海陆空兼顾", display_name: "转转鸡" });
     register_goods("fangkongmiao", { type: "card", cost: "75000", unlock_item_id: "fangkongmiao", description: "防空喵：高伤害轰炸空中鼠军", display_name: "防空喵" });
     register_goods("huojianzhu", { type: "card", cost: "80000", unlock_item_id: "huojianzhu", description: "火箭猪：全屏追踪攻击", display_name: "火箭猪" });
     register_goods("doumaobang", { type: "card", cost: "90000", unlock_item_id: "doumaobang", description: "逗猫棒：撞伤整行老鼠", display_name: "逗猫棒" });
-    register_goods("honeytrap", { type: "card", cost: "110000", unlock_item_id: "honeytrap", description: "蜜糖陷阱：吸引强力蜜蜂集火攻击鼠军", display_name: "蜜糖陷阱" });
-    register_goods("yinghuoshe", { type: "card", cost: "45000", unlock_item_id: "yinghuoshe", description: "萤火蛇：产火并照亮全场，伤害3*3范围内老鼠", display_name: "萤火蛇" });
-    register_goods("guiyuanma", { type: "card", cost: "350000", unlock_item_id: "guiyuanma", description: "归元马：将前方3行范围内距离最近的普通老鼠送回起点并初始还原，斩杀低血量百分比精英", display_name: "归元马" });
-    register_goods("xingqiongma", { type: "card", cost: "85000", unlock_item_id: "xingqiongma", description: "星穹马：复活5*5范围内1张死亡的卡片", display_name: "星穹马" });
-    register_goods("tianxie", { type: "card", cost: "100000", unlock_item_id: "tianxie", description: "天蝎座精灵：猩红毒针，一行连续4格穿透伤害（无视障碍）", display_name: "天蝎座精灵" });
-    register_goods("yuansushe", { type: "card", cost: "95000", unlock_item_id: "yuansushe", description: "元素蛇：向本行前方发射1发带不同效果的子弹（黄定身 / 紫毒气 / 蓝冰冻减速 / 红暴击），可穿过障碍物但不穿透老鼠", display_name: "元素蛇" });
-    register_goods("galaxy_horse", { type: "card", cost: "115000", unlock_item_id: "galaxy_horse", description: "银河马：召唤1颗陨石对本行老鼠进行海陆空全方位打击，击杀灰烬", display_name: "银河马" });
-    register_goods("jiejiema", { type: "card", cost: "95000", unlock_item_id: "jiejiema", description: "结界马：单独在场时攻击本格与前方1格，多只在场时围成结界攻击内部空陆地鼠军", display_name: "结界马" });
-    register_goods("yinyangshe", { type: "card", cost: "105000", unlock_item_id: "yinyangshe", description: "阴阳蛇：阴蛇发射5连子弹，每5发的第1发附带毒伤，可攻击未照明幽灵鼠", display_name: "阴阳蛇" });
-    register_goods("qiedanlong", { type: "card", cost: "100000", unlock_item_id: "qiedanlong", description: "窃蛋龙：向前方3行投掷带溅射的龙蛋，未命中也会爆炸", display_name: "窃蛋龙" });
-    register_goods("qishui", { type: "card", cost: "80000", unlock_item_id: "qishui", description: "弹珠汽水：直线弹命中后产生2倍伤害的弹射子弹，向周围3*3最近目标弹射，共3只", display_name: "弹珠汽水" });
-    register_goods("shiguangji", { type: "card", cost: "80000", unlock_item_id: "shiguangji", description: "13周年时光机：随机为本格卡片升星或者降星", display_name: "13周年时光机" });
-    register_goods("snowrabbit", { type: "card", cost: "180000", unlock_item_id: "snowrabbit", description: "雪球兔：召唤雪球同时攻击全屏最多5只老鼠", display_name: "雪球兔" });
-    register_goods("tanhuanghu", { type: "card", cost: "200000", unlock_item_id: "tanhuanghu", description: "弹簧虎：连续发射2发带溅射的子弹攻击本行，优先空中，子弹可穿过岩浆和障碍", display_name: "弹簧虎" });
-    register_goods("yuanqiniu", { type: "card", cost: "50000", unlock_item_id: "yuanqiniu", description: "元气牛：连续散发全方位伤害气泡波，场上每多1张同类卡伤害提升1次", display_name: "元气牛" });
+    register_goods("honeytrap", { type: "card", cost: "250000", unlock_item_id: "honeytrap", description: "蜜糖陷阱：吸引强力蜜蜂集火攻击鼠军", display_name: "蜜糖陷阱" });
+    register_goods("yinghuoshe", { type: "card", cost: "45000", unlock_item_id: "yinghuoshe", description: "萤火蛇：照亮全场同时产火，并且防萤火虫", display_name: "萤火蛇" });
+    register_goods("guiyuanma", { type: "card", cost: "350000", unlock_item_id: "guiyuanma", description: "归元马：利用时空回溯之力攻击范围内鼠军", display_name: "归元马" });
+    register_goods("xingqiongma", { type: "card", cost: "85000", unlock_item_id: "xingqiongma", description: "星穹马：复活范围内卡片", display_name: "星穹马" });
+    register_goods("tianxie", { type: "card", cost: "100000", unlock_item_id: "tianxie", description: "天蝎座精灵：射出超高攻击的穿透毒针", display_name: "天蝎座精灵" });
+    register_goods("yuansushe", { type: "card", cost: "95000", unlock_item_id: "yuansushe", description: "元素蛇：向前发射穿透元素子弹", display_name: "元素蛇" });
+    register_goods("galaxy_horse", { type: "card", cost: "115000", unlock_item_id: "galaxy_horse", description: "银河马：召唤陨石全方位打击鼠军", display_name: "银河马" });
+    register_goods("jiejiema", { type: "card", cost: "95000", unlock_item_id: "jiejiema", description: "结界马：对结界内老鼠造成巨额伤害", display_name: "结界马" });
+    register_goods("yinyangshe", { type: "card", cost: "105000", unlock_item_id: "yinyangshe", description: "阴阳蛇：向前连续发射直线子弹", display_name: "阴阳蛇" });
+    register_goods("qiedanlong", { type: "card", cost: "110000", unlock_item_id: "qiedanlong", description: "窃蛋龙：向前方3行投掷龙蛋", display_name: "窃蛋龙" });
+    register_goods("qishui", { type: "card", cost: "80000", unlock_item_id: "qishui", description: "弹珠汽水：向前喷射可弹射攻击的弹珠", display_name: "弹珠汽水" });
+    register_goods("shiguangji", { type: "card", cost: "80000", unlock_item_id: "shiguangji", description: "13周年时光机：随机为格子内卡片升星或者降星", display_name: "13周年时光机" });
+    register_goods("snowrabbit", { type: "card", cost: "200000", unlock_item_id: "snowrabbit", description: "雪球兔：召唤雪球攻击全屏老鼠", display_name: "雪球兔" });
+    register_goods("tanhuanghu", { type: "card", cost: "220000", unlock_item_id: "tanhuanghu", description: "弹簧虎：连续攻击本行敌人，优先伤害空中", display_name: "弹簧虎" });
+    register_goods("yuanqiniu", { type: "card", cost: "60000", unlock_item_id: "yuanqiniu", description: "元气牛：全方位攻击范围内的老鼠", display_name: "元气牛" });
 }

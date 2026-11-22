@@ -1,18 +1,20 @@
 /// @function can_target_on(card_target_type, enemy_target_type)
 /// @desc 类型命中口径，全工程唯一。合法取值只有 11 个：
-///   normal / throw / pierce / track / air / air_only / pierce_air / rotate / d_fruit / land_air_ug / all
+///   normal / throw / pierce / track / air / air_only / rotate / d_fruit / land_air_ug / track_under / all
+///   track_under = track + 地鼠（全屏散点那三张：雪球兔 / 冰块冷萃机 / 典伊神使）；牛油果飞镖走 air（穿透是子弹属性，与类型无关）。
 ///   新增类型必须同步改三处：本函数、get_hittable_enemy_types、external_mod_system.gml:320 白名单。
 function can_target_on(card_target_type,enemy_target_type){
-	// "pierce_air" = 穿透 + 对空（牛油果飞镖）：**只认普通 / 空军 / 障碍**
-	//   🔴 不能再转成 "pierce" —— pierce 额外含 dance（非主流、龙王高跷）和 invisible（幽灵鼠），
-	//      那两类不吃「穿透」，牛油果飞镖不该顺路打中它们（2026-10-29 用户口径：只有穿透功能）
-	if (card_target_type == "pierce_air"){
-		return (enemy_target_type == "normal" || enemy_target_type == "air" || enemy_target_type == "obstacle")
-	}
-	// "land_air_ug" = 陆地 + 空中 + 地下（underground）：全屏打击类的通用口径
-	//   不含 潜水(diver) / 非主流(dance) / 幽灵(invisible) / 障碍(obstacle)
+	// "land_air_ug" = 陆地 + 空中 + 地下 + 障碍：全屏打击类的通用口径
+	//   不含 潜水(diver) / 非主流(dance) / 幽灵(invisible)
+	//   2026-11-23 起**障碍也可索敌**（用户口径：索敌与命中都按 target_type 走，不再拆开）
 	if (card_target_type == "land_air_ug"){
-		return (enemy_target_type == "normal" || enemy_target_type == "air" || enemy_target_type == "underground")
+		return (enemy_target_type == "normal" || enemy_target_type == "air" || enemy_target_type == "underground" || enemy_target_type == "obstacle")
+	}
+	// "track_under" = track + 地鼠（陆/潜/空/地下），全屏散点类：雪球兔 / 冰块冷萃机 / 典伊神使
+	//   只比 track 多「地下」这一项（陌路 9.追踪：地鼠是逐卡写明的额外能力，不跟着 track 走）
+	//   不含 非主流(dance) / 幽灵(invisible) / 障碍(obstacle)
+	if (card_target_type == "track_under"){
+		return (enemy_target_type == "normal" || enemy_target_type == "diver" || enemy_target_type == "air" || enemy_target_type == "underground")
 	}
 	if enemy_target_type == "normal"{
 		if card_target_type != "air_only"{
@@ -120,11 +122,10 @@ function get_hittable_enemy_types(bullet_target_type){
 	var _types = [];
 	if (bullet_target_type == "all") return ["normal", "diver", "air", "dance", "obstacle", "underground", "invisible"];
 	// "land_air_ug" = 陆地 + 空中 + 地下（全屏打击类），与 can_target_on 同口径
-	//   2026-11-21：**伤害名单补 obstacle** —— 障碍不索敌（can_target_on 仍为 false，不会为了障碍开火、
-	//   也不会被障碍拦子弹），但平射/落点弹扫到障碍时照样掉血。神农四转是第一个平射用它的卡。
+	//   障碍：2026-11-21 先进了伤害名单（扫到掉血），2026-11-23 起**索敌也放行**（用户口径：索敌与命中统一）。
 	if (bullet_target_type == "land_air_ug") return ["normal", "air", "underground", "obstacle"];
-	// "pierce_air" = 穿透 + 对空（牛油果飞镖）：普通 + 空军 + 障碍，**不含 dance / invisible**
-	if (bullet_target_type == "pierce_air") return ["normal", "air", "obstacle"];
+	// "track_under" = 陆 + 潜 + 空 + 地（与 can_target_on 同口径，不含障碍）
+	if (bullet_target_type == "track_under") return ["normal", "diver", "air", "underground"];
 
 	if (bullet_target_type != "air_only") array_push(_types, "normal");
 	if (bullet_target_type == "throw" || bullet_target_type == "track") array_push(_types, "diver");

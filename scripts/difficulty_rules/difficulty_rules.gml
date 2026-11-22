@@ -193,7 +193,7 @@ function difficulty_reward_item_amount(_item_id, _base_amount, _multiplier) {
 
 // ── 开局奖励：永恒 / 不朽 互斥，发奖前必须先弹 obj_start_reward ──
 //   自选一张卡（三选一）整套下线，暖暖鸡也不再送；
-//   抽卡 / 欧皇（play_mode 1 / 2）额外送一张花火龙，其余模式只发金币。
+//   只有「不朽 + 抽卡 / 欧皇」额外送一张花火龙，其余一律只发金币。
 
 /// @function difficulty_start_reward_table()
 /// @desc 开局奖励表：键 = 难度号（4 永恒 / 5 不朽）
@@ -206,10 +206,9 @@ function difficulty_start_reward_table() {
 
 /// @function difficulty_start_reward_extra_card(_difficulty)
 /// @desc 开局奖励附带的卡片，没有就返回 ""。
-///       **不朽不看模式都给**（锁难度的补偿），永恒只在抽卡 / 欧皇给。
+///       **只有「不朽 + 抽卡 / 欧皇」给**（两个条件必须同时成立）；永恒、以及不朽的其它模式都不给。
 function difficulty_start_reward_extra_card(_difficulty) {
-    if (_difficulty == 5) return "firework_dragon";
-    if (global.play_mode == 1 || global.play_mode == 2) return "firework_dragon";
+    if (_difficulty == 5 && is_gacha_mode()) return "firework_dragon";
     return "";
 }
 
@@ -312,7 +311,7 @@ function difficulty_start_reward_grant(_difficulty) {
     global.save_data.player.gold += _row.gold;
     show_notice("已领取" + _row.name + "开局奖励：+" + difficulty_start_reward_gold_text(_row.gold) + " 金币", 90);
 
-    // 抽卡 / 欧皇额外送一张花火龙本体；其余模式（普通 / 海克斯 / 礼盒）只发金币。
+    // 只有「不朽 + 抽卡 / 欧皇」额外送一张花火龙本体；其余（不朽的普通 / 礼盒 / 海克斯、所有永恒）只发金币。
     //   暖暖鸡 + 三选一自选卡 已整体下线。
     var _extra_card = difficulty_start_reward_extra_card(_difficulty);
     if (_extra_card != "") unlock_card(_extra_card, 0, 0, 0);

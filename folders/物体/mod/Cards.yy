@@ -132,6 +132,7 @@
     {"name":"obj_zhuzhuliaoliji","path":"objects/obj_zhuzhuliaoliji/obj_zhuzhuliaoliji.yy",},
     {"name":"obj_budingwang","path":"objects/obj_budingwang/obj_budingwang.yy",},
     {"name":"obj_caihongshe","path":"objects/obj_caihongshe/obj_caihongshe.yy",},
+    {"name":"obj_caihongshe_back","path":"objects/obj_caihongshe_back/obj_caihongshe_back.yy",},
     {"name":"obj_meiweijishiqi","path":"objects/obj_meiweijishiqi/obj_meiweijishiqi.yy",},
     {"name":"obj_dangdanghu","path":"objects/obj_dangdanghu/obj_dangdanghu.yy",},
     {"name":"obj_dianman","path":"objects/obj_dianman/obj_dianman.yy",},

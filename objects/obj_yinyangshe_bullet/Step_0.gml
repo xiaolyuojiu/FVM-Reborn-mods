@@ -49,7 +49,8 @@ with (obj_enemy_parent)
     if (grid_row != other.row) continue;
     if (grid_col != other.yy_col_now) continue;
     if (ds_list_find_index(other.hitted, id) != -1) continue;
-    if (!can_hit(other.target_type, target_type)) continue;
+    // 阴蛇（yy_ghost）额外放行未显形幽灵；阳蛇只打常规目标
+    if (!can_hit(other.target_type, target_type) && !(yy_ghost && other.target_type == "invisible")) continue;
 
     ds_list_add(other.hitted, id);
 

@@ -85,7 +85,7 @@ if (is_top_attacker)
             else                 _vb.sprite_index = spr_shennong_god_bullet_3;
             if (shape >= 2) {
                 _vb.target_type = "land_air_ug";   // 四转起：陆 + 空 + 地（不含潜水 / 非主流 / 幽灵）
-                // 障碍不索敌，但竖落弹扫到仍掉血（名单统一走类型）
+                // 障碍可索敌也可命中（名单统一走类型）
                 _vb.hittable_types = get_hittable_enemy_types("land_air_ug");
             } else {
                 _vb.target_type = "normal";

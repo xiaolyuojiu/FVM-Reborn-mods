@@ -2,7 +2,7 @@
 // 一行直线弹：向本行右方飞，出界消散。
 //   · 可过火 / 可被反弹 —— 由父对象 obj_bullet_parent 的两个 Collision 事件统一处理，
 //     这里只声明 hazard_fire / hazard_rebound 与 fire_mult；
-//   · 阴蛇弹 target_type = "pierce"（含未显形幽灵），阳蛇弹 = "normal"；
+//   · 两种弹体都是 normal（陆 + 障碍）；阴蛇用 yy_ghost 单独放行未显形幽灵；
 //   · 2 转阳蛇是穿透弹（yy_pierce = true）：命中后继续飞，靠 hitted 保证同一只只吃一次。
 event_inherited();
 
@@ -15,7 +15,8 @@ yy_poison    = false;    // 这一发是否附毒
 yy_poison_mult = 3;
 damage       = 0;
 damage_type  = "normal";
-target_type  = "pierce";
+target_type  = "normal";
+yy_ghost     = false;    // 阴蛇弹：可命中未显形幽灵（yy_fire 里按 kind 置 true）
 move_speed   = 10;
 end_col      = global.grid_cols + 1;
 yy_col_now   = 0;        // 当前列（按 x 反算，判定与精灵尺寸/缩放解耦）

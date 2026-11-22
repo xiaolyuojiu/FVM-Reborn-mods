@@ -1,11 +1,11 @@
 /// =====================================================================
-/// card_attack_target —— 情报岛「伤害范围」行（原「可以攻击」）的数据源（白名单制）
+/// card_attack_target —— 情报岛「攻击对象」行（官服叫法；原「可以攻击」→「伤害范围」）的数据源（白名单制）
 ///   ① card_attack_target_data()    白名单：卡片 → target_type（形态差异写成数组）
 ///      只在表里（或例外区）的卡才显示这一行，没列出的一律不显示。
 ///   ② card_attack_target_exclude() 生成了也不显示的卡（写了 target_type 但实际不出伤害）
 ///   ③ card_attack_target_override() 口径与 target_type 对不上的卡，手写覆盖（按形态）
 ///      写了这里的卡不再写进 ①，显示只读这里
-///   ④ card_attack_text()           拼成「陆地丨潜水丨空中」；障碍默认不显示
+///   ④ card_attack_text()           拼成「陆军丨地鼠丨潜水丨空军丨幽灵鼠丨非主流丨障碍」（官服名字与顺序）
 ///   ①② 由 桌面/fvm的ai/生成卡牌可攻击表.py 维护，③ 手写脚本不动。
 ///   判定口径的唯一真相仍是 scripts/can_target_on。
 /// =====================================================================
@@ -15,6 +15,7 @@ function card_attack_target_data()
     static _d = {
         "aquarius_elve": "normal",
         "athena": "track",
+        "bbq": "normal",
         "beef_hotpot": "pierce",
         "brahma": "normal",
         "bull_firework": "normal",
@@ -22,13 +23,14 @@ function card_attack_target_data()
         "cat_box": "normal",
         "cat_chest": "normal",
         "chili_powder": "normal",
+        "chocolate_cannon": "all",
         "chocolate_pult": "throw",
         "chunsun": "all",
         "coal_starfish": "normal",
         "coffee_cup": "normal",
         "coffee_pot": "pierce",
         "coke_bomb": "all",
-        "cold_drew": "land_air_ug",
+        "cold_drew": "track_under",
         "corn_shooter": "normal",
         "curry_lobster_cannon": "track",
         "dandantu": "normal",
@@ -46,10 +48,11 @@ function card_attack_target_data()
         "egg_boiler_pult": "throw",
         "eightcake": "throw",
         "fangkongmiao": "air_only",
+        "fashishe": "normal",
         "fenjima": "normal",
         "fishbone": "pierce",
         "flour_sack": "normal",
-        "gaia": "normal",
+        "gaia": "track",
         "galaxy_horse": "all",
         "gatlin_ice_long_bao": "normal",
         "gatlin_long_bao": "normal",
@@ -61,7 +64,7 @@ function card_attack_target_data()
         "hamburger": "throw",
         "heian_god": "all",
         "hera": "normal",
-        "honeytrap": "land_air_ug",
+        "honeytrap": "all",
         "hotdog_cannon": "air",
         "houyi_god": "normal",
         "huagao": "normal",
@@ -70,10 +73,11 @@ function card_attack_target_data()
         "huojianzhu": "track",
         "ice_bucket_bomb": "normal",
         "ice_egg_boiler_pult": "throw",
-        "ice_god": "land_air_ug",
+        "ice_god": "track_under",
         "ice_long_bao": "normal",
         "iron_fishbone": "pierce",
         "jiejiema": "land_air_ug",
+        "joker": "track_under",
         "juxie": "track",
         "kettle_bomb": "normal",
         "king_long_bao": "normal",
@@ -86,7 +90,7 @@ function card_attack_target_data()
         "mixian": "all",
         "mojie": "normal",
         "moon_god": "track",
-        "niuyouguo": "pierce_air",
+        "niuyouguo": "air",
         "nizhuanniu": "all",
         "nut_frier": "normal",
         "oden_pot": "pierce",
@@ -103,6 +107,7 @@ function card_attack_target_data()
         "rabbit_lantern": "all",
         "rig": "normal",
         "ronghedan_god": "throw",
+        "ronghedapao": "all",
         "ronghehaixing": "track",
         "ronghehuopen": "normal",
         "ronghekafei": "normal",
@@ -118,7 +123,7 @@ function card_attack_target_data()
         "shuanggu": "air",
         "shuangyu": "throw",
         "skewer_bomb": "normal",
-        "snowrabbit": "land_air_ug",
+        "snowrabbit": "track_under",
         "spicy_pot": "pierce",
         "spoon_rabbit": "throw",
         "starrabbit": "normal",
@@ -144,7 +149,7 @@ function card_attack_target_data()
         "whisky_bomb": "normal",
         "wine_bottle_bomb": "normal",
         "wugushe": "all",
-        "xiandima": "land_air_ug",
+        "xiandima": "all",
         "xiao_long_bao": "normal",
         "xinjiang_fried_noodles": "normal",
         "xuanzhuan_ronghe": "rotate",
@@ -153,7 +158,6 @@ function card_attack_target_data()
         "yinghuoshe": "all",
         "ymir": "throw",
         "youyu_god": "normal",
-        "yinyangshe": "pierce",
         "yuanqiniu": "rotate",
         "yuansushe": "normal",
         "yufengma": "normal",
@@ -176,17 +180,14 @@ function card_attack_target_exclude()
 function card_attack_target_override()
 {
     static _o = {
-        "bbq": "陆地",
-        "fashishe": "陆地",
-        "tianxie": "陆地",
-        "sheng_huo": ["陆地丨非主流丨幽灵", "陆地丨非主流丨幽灵", "陆地丨空中丨非主流丨地下丨幽灵", "陆地丨空中丨非主流丨地下丨幽灵"],
-        "joker": "陆地丨空中丨潜水丨地下",
-        "chocolate_cannon": "陆地丨潜水丨空中丨非主流丨地下丨幽灵",
-        "ronghedapao": "陆地丨潜水丨空中丨非主流丨地下丨幽灵",
-        "jingangma": "陆地丨空中丨幽灵",
-        "hongliukaochuan": "陆地丨空中丨幽灵",
-        "hufa_god": ["陆地丨空中丨幽灵", "陆地丨空中丨幽灵",
-                     "陆地丨空中丨幽灵丨地下", "陆地丨空中丨幽灵丨地下"]
+        "tianxie": "陆军",
+        "yinyangshe": "陆军丨幽灵鼠丨障碍",   // 阴蛇可打未显形幽灵；无「非主流」（穿透是二转阳蛇的子弹属性）
+        "sheng_huo": ["陆军丨幽灵鼠丨非主流丨障碍", "陆军丨幽灵鼠丨非主流丨障碍", "陆军丨地鼠丨空军丨幽灵鼠丨非主流丨障碍", "陆军丨地鼠丨空军丨幽灵鼠丨非主流丨障碍"],
+        "jingangma": "陆军丨潜水丨空军丨幽灵鼠",
+        "hongliukaochuan": "陆军丨潜水丨空军丨幽灵鼠",
+        "hufa_god": ["陆军丨潜水丨空军丨幽灵鼠", "陆军丨潜水丨空军丨幽灵鼠",
+                     "陆军丨潜水丨空军丨幽灵鼠丨地鼠", "陆军丨潜水丨空军丨幽灵鼠丨地鼠"],
+        "gaia": "陆军丨地鼠丨潜水丨空军丨障碍"
     };
     return _o;
 }
@@ -209,21 +210,21 @@ function card_attack_text(_id, _shape)
         return _ov;
     }
     static _m = {
-        "normal":     "陆地",
-        "throw":      "陆地丨潜水",
-        "track":      "陆地丨潜水丨空中",
-        "air":        "陆地丨空中",
-        "air_only":   "空中",
-        "pierce":     "陆地丨非主流丨幽灵",
-        "pierce_air": "陆地丨空中",
-        "rotate":     "陆地丨空中丨非主流丨地下丨幽灵",
-        "d_fruit":    "陆地丨空中丨非主流丨地下丨幽灵",
-        "land_air_ug": "陆地丨空中丨地下",
-        "all":        "陆地丨潜水丨空中丨非主流丨地下丨幽灵"
+        "normal":     "陆军丨障碍",
+        "throw":      "陆军丨潜水",
+        "track":      "陆军丨潜水丨空军",
+        "air":        "陆军丨空军",
+        "air_only":   "空军",
+        "pierce":     "陆军丨幽灵鼠丨非主流丨障碍",
+        "rotate":     "陆军丨地鼠丨空军丨幽灵鼠丨非主流丨障碍",
+        "d_fruit":    "陆军丨地鼠丨空军丨幽灵鼠丨非主流丨障碍",
+        "land_air_ug": "陆军丨地鼠丨空军丨障碍",
+        "track_under": "陆军丨地鼠丨潜水丨空军",
+        "all":        "陆军丨地鼠丨潜水丨空军丨幽灵鼠丨非主流丨障碍"
     };
     var _t = card_attack_target_of(_id, _shape);
     if (variable_struct_exists(_m, _t)) return _m[$ _t];
-    return "陆地";
+    return "陆军";
 }
 
 function card_attack_shown(_id)

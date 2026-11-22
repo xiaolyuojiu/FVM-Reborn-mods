@@ -64,7 +64,7 @@ jj_life = jj_duration;
 
 // ── 结算口径（结界对象照抄这几个字段，改口径只改这里）──────────────────
 // 卡面「攻击内部空、陆、地鼠军」：**不含**潜水 / 非主流 / 未显形幽灵
-jj_can_hit_types = ["normal", "air", "underground"];
+jj_can_hit_types = get_hittable_enemy_types("land_air_ug");   // 陆军 / 空军 / 地鼠 / 障碍
 // 一转起的逐次递增；0 转恒定 1 倍
 jj_mult      = [1, 1.2, 1.4, 1.6, 1.8, 2, 2.5];
 jj_mult_tail = 3;

@@ -28,10 +28,10 @@ plant_type = "normal"
 feature_type = "normal"
 is_slowdown = false
 attack_type = ATTACK_TYPE.SHOOTER
-// 对空 + 穿透：pierce 打不到空军、air 会丢障碍，所以用组合类型 pierce_air
+// 对空：air = 陆军 + 空军（穿透是子弹自己的属性，和 target_type 无关 —— 2026-11-23 用户口径）
 // （见 scripts/can_target_on：**只认 normal + air + obstacle**，不含 dance/invisible ——
 //   非主流、幽灵鼠这类特殊老鼠不吃穿透，牛油果飞镖不该顺路打中）
-target_type = "pierce_air"
+target_type = "air"
 
 // 每个方向几条飞镖：本体 / 一转 1 条，二转 2 条
 shots_per_side = (shape >= 2) ? 2 : 1

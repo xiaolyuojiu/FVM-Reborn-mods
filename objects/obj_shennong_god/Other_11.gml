@@ -45,7 +45,7 @@ if (shape == 3)
         _inst.ash_kill = true;
         if (shape >= 2) {
             _inst.target_type = "land_air_ug";   // 四转起：陆 + 空 + 地（不含潜水 / 非主流 / 幽灵）
-            // 名单统一走类型（`land_air_ug` 含 obstacle）：障碍不索敌，扫到仍掉血
+            // 名单统一走类型（`land_air_ug` 含 obstacle）：障碍可索敌也可命中
             _inst.hittable_types = get_hittable_enemy_types("land_air_ug");
         } else {
             _inst.target_type = "normal";
@@ -105,7 +105,7 @@ for (var i = 0; i < array_length(bullet_gaps); i++)
     inst.ash_kill = ash_kill;
     if (shape >= 2) {
         inst.target_type = "land_air_ug";   // 四转起：陆 + 空 + 地（不含潜水 / 非主流 / 幽灵）
-        // 名单统一走类型（2026-11-21 起 `land_air_ug` 含 obstacle）：障碍不索敌，扫到仍掉血
+        // 名单统一走类型（`land_air_ug` 含 obstacle）：障碍可索敌也可命中
         inst.hittable_types = get_hittable_enemy_types("land_air_ug");
     } else {
         inst.target_type = "normal";

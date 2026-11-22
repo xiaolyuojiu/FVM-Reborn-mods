@@ -1,5 +1,5 @@
 // 1 转起的溅射：同行 ±1 行 + 横向 1.5 格（与冷萃机 / 雪球兔同口径，不写死像素）
-// 只打主目标以外的、与卡片 target_type 同类的敌人（land_air_ug）
+// 只打主目标以外的、与卡片 target_type 同类的敌人（track_under）
 if (shape >= 1)
 {
     var _x = x;

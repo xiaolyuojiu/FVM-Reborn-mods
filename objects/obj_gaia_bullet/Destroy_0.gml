@@ -4,6 +4,8 @@ var row_offset = (shape_bullet >= 3) ? 2 : 1;
 
 with (obj_enemy_parent)
 {
+    // 盖亚（2026-11-23 用户口径）：除 非主流 / 幽灵 外全能打 —— 这两类直接跳过
+    if (target_type == "dance" || target_type == "invisible") continue;
     if (abs(x - _x) < _range && grid_row >= (other.row - row_offset) && grid_row <= (other.row + row_offset))
     {
         if (array_get_index(other.can_mouse_list, mouse_id) != -1 && !can_dropped)
