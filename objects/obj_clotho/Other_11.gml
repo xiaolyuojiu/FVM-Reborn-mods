@@ -14,8 +14,10 @@ with (obj_card_parent)
     var dx = abs(grid_col - other.grid_col);
     var dy = abs(grid_row - other.grid_row);
     
-    if (!card_no_entity(plant_id)
-        && dx <= col_offset && dy <= row_offset)
+    // 玩家不是卡片，不参与变星
+    if (plant_id == "" || plant_id == "player") continue;
+    if (card_has_flag(plant_id, "star_changer")) continue;   // 变星类之间不互相变星（其余卡都能变）
+    if (dx <= col_offset && dy <= row_offset)
     {
         var new_level = clamp(current_level + level_offset, 0, 16 + max_level_offset);
         

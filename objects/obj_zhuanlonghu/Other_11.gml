@@ -8,7 +8,7 @@ var _rr = zl_range_row;
 
 var _ids = ds_list_create();
 with (obj_card_parent){
-    if (card_cd_target_ok(plant_id)
+    if (card_cd_target_ok(plant_id, other.plant_id, plant_type == "gridless")
         && abs(grid_col - _mc) <= _rc && abs(grid_row - _mr) <= _rr){
         if (ds_list_find_index(_ids, plant_id) == -1) ds_list_add(_ids, plant_id);
     }

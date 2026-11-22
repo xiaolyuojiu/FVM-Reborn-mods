@@ -2230,15 +2230,15 @@
             "gold": 4000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 100.0
-                },
-                {
                     "id": "middle_crystal",
                     "amount": 75.0
                 },
                 {
-                    "id": "clover_1",
+                    "id": "warcard_5",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
                     "amount": 1.0
                 }
             ]
@@ -2248,12 +2248,16 @@
             "gold": 4000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 100.0
-                },
-                {
                     "id": "middle_crystal",
                     "amount": 75.0
+                },
+                {
+                    "id": "warcard_5",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "less_camp_coin",

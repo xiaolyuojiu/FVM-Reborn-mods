@@ -122,7 +122,9 @@ for (var i = 0; i < array_length(enemies); i++) {
     if (kind == "return" && e.object_index == obj_kuileima_decoy) continue; // 归元马忽略傀儡马，绝不攻击傀儡马代理
     // 2026-11-11：归元马(return)额外放行 dance —— 高跷鼠 / 非主流鼠走行虽然不可被普通攻击锁定，
     //   但属于「陆地上真实存在的鼠」，应能被归元马回收转化（原版机制）。
-    if (e.target_type != "normal" && e.target_type != "air" && !(kind == "return" && e.target_type == "dance")) continue;
+    if (e.target_type != "normal" && e.target_type != "air"
+        && !(kind == "return" && e.target_type == "dance")
+        && !(kind == "flute" && e.target_type == "underground")) continue;   // 飞马（flute）可打地下
     // 星弹只打地面：五星弹是扇形发出去的，原逻辑会顺路打空军（卡片本身不对空）
     if (kind == "star" && e.target_type != "normal") continue;
     var collision = false;

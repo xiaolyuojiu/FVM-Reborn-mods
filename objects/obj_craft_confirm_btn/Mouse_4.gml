@@ -140,7 +140,7 @@ if target_id != ""{
 			if display_crystal_amount >= craft_rule_info.crystal_amount &&
 			global.save_data.player.gold >= craft_rule_info.gold_amount
 			{
-				// 2026-11-22 防护：**宝石强化固定必成**，这里不掷骰、也没有失败分支。
+				// 防护：宝石强化固定必成，这里不掷骰、也没有失败分支。
 				//   强化概率只属于卡片；宝石一旦接了概率就会「莫名其妙失败」，别再往回接。
 				for(var i = 0 ; i < array_length(crystal_use_order) ; i++){
 					if crystal_list[i] > 0 add_material_amount(crystal_use_order[i],-ceil(crystal_list[i]))

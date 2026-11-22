@@ -65,7 +65,8 @@ if (exec_count < max_exec)
 
         with (obj_card_parent)
         {
-            if (card_cd_target_ok(plant_id))
+            // 时间神的额外白名单写在事实表 cd_extra 里（蜜糖陷阱 / 仙笛马），由函数内部查
+            if (card_cd_target_ok(plant_id, other.plant_id, plant_type == "gridless"))
             {
                 var dx = abs(grid_col - my_col);
                 var dy = abs(grid_row - my_row);

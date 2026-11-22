@@ -118,7 +118,7 @@ function auth_install_id() {
     var _id = auth_install_read(_path);
     if (_id == "") {
         var _seed = string(irandom(2147483647)) + "|" + string(current_time) + "|" +
-                    string(current_datetime()) + "|" + string(irandom(2147483647));
+                    string(date_current_datetime()) + "|" + string(irandom(2147483647));
         _id = string_upper(string_copy(md5_string_utf8(_seed), 1, 16));
         auth_install_write(_path, _id);
     }
@@ -214,7 +214,7 @@ function auth_log(_text) {
     if (_f == -1) {
         return;
     }
-    file_text_write_string(_f, "[" + string(current_datetime()) + "] " + string(_text));
+    file_text_write_string(_f, "[" + string(date_current_datetime()) + "] " + string(_text));
     file_text_writeln(_f);
     file_text_close(_f);
 }

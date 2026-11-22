@@ -92,7 +92,7 @@ for (var _t = 0; _t < array_length(hittable_types); _t++)
             damage_source_card_id = _soul_ok ? "shennong_god" : "";
             event_user(0);
             // 击杀化灰：先让本体隐去（ash_death + image_alpha = 0）再放灰烬，
-            //   否则死亡动画和灰烬会同时出现（2026-11-22 用户报的老问题），与横排朱雀 / 金刚马同款。
+            //   否则死亡动画和灰烬会同时出现，与横排朱雀 / 金刚马同款。
             if (other.ash_kill && hp <= 0)
             {
                 ash_death   = true;

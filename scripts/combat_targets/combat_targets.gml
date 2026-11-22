@@ -63,6 +63,18 @@ function combat_enemy_nearest_in_row(_card, _type) {
     return _best;
 }
 
+/// @func combat_plant_eat_priority(_plant_type, _plant_id)
+/// @desc 这张卡在「老鼠啃食优先级」里的档位（-1 = 不会被啃）
+///   常规只看 eat_order（shield / shield_outer / normal / lilypad，按 plant_type 命中）；
+///   例外：**不占格但原版能被啃**的卡（蜜糖陷阱 / 仙笛马）——它们 plant_type = gridless
+///   进不了 eat_order，靠事实表 card_special_flags 的 `eatable` 按 normal 档参与。
+function combat_plant_eat_priority(_plant_type, _plant_id) {
+    var _p = ds_list_find_index(global.eat_order, _plant_type);
+    if (_p < 0 && card_has_flag(_plant_id, "eatable"))
+        _p = ds_list_find_index(global.eat_order, "normal");
+    return _p;
+}
+
 function combat_enemy_find_plant(_enemy) {
     var _order = [noone, noone, noone, noone];
     var _ladder_hosts = [];
@@ -77,7 +89,7 @@ function combat_enemy_find_plant(_enemy) {
             : (_dx > 0 && _dx < -_enemy.attack_range);
         if (!_in_front || (feature_type == "dwarf" && !_enemy.giant_type)
             || array_contains(_ladder_hosts, id)) continue;
-        var _priority = ds_list_find_index(global.eat_order, plant_type);
+        var _priority = combat_plant_eat_priority(plant_type, plant_id);
         if (_priority >= 0 && _priority < 4) _order[_priority] = id;
     }
     for (var _i = 0; _i < 4; _i++) if (_order[_i] != noone) return _order[_i];
@@ -86,7 +98,7 @@ function combat_enemy_find_plant(_enemy) {
 
 /// @func combat_enemy_body_y(_enemy)
 /// @desc 敌人「身体中部」的 y 坐标。敌人精灵原点在脚底，所以按精灵高度往上抬。
-///   2026-11-22 统一口径：卡片的瞄准方向、命中特效定位都取这个值，别再各写一个固定偏移
+///   卡片的瞄准方向、命中特效定位都取这个值，别各写一个固定偏移
 ///   （固定偏移在贴身 / 不同体型的老鼠身上会算歪）。
 function combat_enemy_body_y(_enemy) {
     if (!instance_exists(_enemy)) return 0;

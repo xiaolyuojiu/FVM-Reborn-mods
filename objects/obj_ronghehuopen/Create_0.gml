@@ -28,7 +28,7 @@ attack_anim = 0
 flash_speed = 6
 plant_type = "normal"
 is_slowdown = false
-// 攻击口径：寒气只打陆地鼠军（父类默认也是 normal，这里显式写一份，
+// 攻击口径：寒气只打陆地（父类默认也是 normal，这里显式写一份，
 //   让 桌面/fvm的ai/生成卡牌可攻击表.py 能按 ①「卡片自己的 target_type」取到，不用走 override）
 target_type = "normal";
 

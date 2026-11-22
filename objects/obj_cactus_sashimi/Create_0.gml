@@ -20,4 +20,6 @@ idle_anim = 12
 flash_speed = 5
 plant_type = "normal"
 is_slowdown = false
+// 攻击口径 = 陆地 + 障碍（与直射类同口径）；空中 / 地下 / 幽灵都不打
+target_type = "normal"
 

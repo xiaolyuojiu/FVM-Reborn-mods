@@ -43,7 +43,7 @@ function mod_fusion_table(){
         ronghehaixing: {
             prereq: "coal_starfish",                          // 芥末海星刺身
             cards: [
-                { main:{ id:"coal_starfish",     need:2 }, sub:{ id:"melon_shield",      need:2 } },  // 锋芒瓜皮护罩（官方仙人掌花刺身的顶替）
+                { main:{ id:"coal_starfish",     need:2 }, sub:{ id:"cactus_sashimi",    need:2 } },  // 仙人掌花刺身
                 { main:{ id:"ronghehaixing",     need:0 }, sub:{ id:"eightcake",         need:2 } },  // 8周年红丝绒
                 { main:{ id:"ronghehaixing",     need:1 }, sub:{ id:"honeytrap",        need:2 } }   // 王冠蜜糖陷阱（2026-11-08 用户指定：换回购蜜糖陷阱当副卡，可可糖全能投手移出）
             ]

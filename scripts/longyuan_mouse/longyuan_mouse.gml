@@ -463,7 +463,7 @@ function longyuan_find_plant(_heavy_only = false) {
         if (grid_row != other.grid_row || !_in_front) continue;
         if (_heavy_only && plant_id != "chocolate_bread" && !(variable_instance_exists(id, "blocks_vault") && blocks_vault)) continue;
         if (feature_type == "dwarf" && !other.giant_type) continue;
-        var _order = ds_list_find_index(global.eat_order, plant_type);
+        var _order = combat_plant_eat_priority(plant_type, plant_id);
         if (_order < 0) continue;
         if (_order < _priority || (_order == _priority && _dx < _distance)) {
             _best = id; _priority = _order; _distance = _dx;

@@ -34,10 +34,21 @@ function fruit_tart_build_cells(_col, _row, _shape, _value) {
     return _cells;
 }
 
+/// @func fruit_tart_mult(_shape, _level, _skill, _fallback_atk)
+/// @desc 水果塔的增幅倍率（1.5 ~ 3.0），**从注册表取**，不读实例 atk。
+///   🔴 倍率取注册表，不取实例 atk：实例 atk 会被地形 / 宝石 / 海克斯 / 生肖逐层放大。
+///   注册表里的 atk 本身就是倍率（不是百分数），所以这里不做 /100。
+function fruit_tart_mult(_shape, _level, _skill, _fallback_atk) {
+    var _d = get_plant_data_with_skill("fruit_tart", _shape, clamp(_level, 0, 16), _skill);
+    if (_d != undefined && ds_map_exists(_d, "atk")) return _d[? "atk"];
+    return _fallback_atk;
+}
+
 /// @func fruit_tart_refresh_cells()
 /// @desc 重铺自己的 buff_cells（只在实例里调用，直接写实例变量）
 function fruit_tart_refresh_cells() {
-    buff_value = atk;
+    buff_value = fruit_tart_mult(shape, current_level,
+        variable_instance_exists(id, "skill") ? skill : 0, atk);
     buff_cells = fruit_tart_build_cells(grid_col, grid_row, shape, buff_value);
     global.buff_dirty = true;
     buff_cells_refreshed = true;

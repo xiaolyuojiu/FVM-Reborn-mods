@@ -34,7 +34,9 @@ if (instance_exists(target_id) && target_id.hp > 0)
     x += lengthdir_x(move_speed, _dir);
     y += lengthdir_y(move_speed, _dir);
 
-    if (precise_bbox_collision(id, target_id))
+    // 先用点距离粗判，近了才做精确蒙版碰撞（precise 每帧每只都调太贵）
+    if (point_distance(x, y, target_id.x, target_id.y - 30) < 40
+        && precise_bbox_collision(id, target_id))
     {
         var _e    = target_id;
         var _dmg  = damage;
@@ -58,17 +60,31 @@ if (instance_exists(target_id) && target_id.hp > 0)
 }
 else
 {
-    // 目标没了：重新锁一只（先 BOSS 再最高血）；同卡口径 track = 普通 / 潜水 / 空军
-    var _t = noone;
-    with (obj_enemy_parent)
+    // 目标没了：重新锁一只（先 BOSS 再最高血）；口径 = 卡自己的 target_type（陆空地）
+    // 重索敌节流：每 relock_gap 帧才扫一次 obj_enemy_parent；
+    //   连续 relock_fail_max 次锁不到就退场（3 只/卡 × N 张时不会每帧全扫）。
+    relock_timer++;
+    if (relock_timer >= relock_gap)
     {
-        if (hp <= 0) continue;
-        if (!can_target_on(other.target_type, target_type)) continue;
-        if (!instance_exists(_t) || (is_boss && !_t.is_boss)
-            || (is_boss == _t.is_boss && hp > _t.hp))
-            _t = id;
+        relock_timer = 0;
+        var _t = noone;
+        with (obj_enemy_parent)
+        {
+            if (hp <= 0) continue;
+            if (!can_target_on(other.target_type, target_type)) continue;
+            if (!instance_exists(_t) || (is_boss && !_t.is_boss)
+                || (is_boss == _t.is_boss && hp > _t.hp))
+                _t = id;
+        }
+        target_id = _t;
+
+        if (!instance_exists(target_id))
+        {
+            relock_fail++;
+            if (relock_fail >= relock_fail_max) instance_destroy();   // 锁不到就退场，不再空转
+        }
+        else relock_fail = 0;
     }
-    target_id = _t;
 
     if (!instance_exists(target_id))
     {

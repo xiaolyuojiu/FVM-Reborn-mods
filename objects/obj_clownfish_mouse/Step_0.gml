@@ -131,15 +131,9 @@ switch(state) {
 				
             // 检查是否在攻击范围内
             if (is_in_front && zombie_grid.row == grid_row && (feature_type!="dwarf" || (feature_type=="dwarf" && other.giant_type))) {
-                // 按铲除顺序优先选择
-                for (var i = 0; i < ds_list_size(global.eat_order); i++) {
-                    var _eat_type = ds_list_find_value(global.eat_order, i);
-                    
-                    if (plant_type == _eat_type) {
-                        plant_order_list[i] = id;
-                        break;
-                    }
-                }
+                // 按啃食优先级选择（蜜糖陷阱 / 仙笛马 这类不占格但可被啃的卡走 card_special_flags 的 eatable）
+                var _pp = combat_plant_eat_priority(plant_type, plant_id);
+                if (_pp >= 0 && _pp < 4) plant_order_list[_pp] = id;
 				
                 
                 if (plant_in_range != noone) break;

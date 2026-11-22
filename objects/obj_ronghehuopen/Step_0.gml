@@ -68,7 +68,7 @@ if (shape >= 1){
 			cold_field_timer = cold_tick_sec * 60;
 			cold_field_ticks--;
 			with (obj_enemy_parent){
-				// 5*5 范围，只打陆地鼠军（空军 / 潜水 / 非主流 / 地鼠 / 幽灵都不打）
+				// 5*5 范围，只打陆地（空中 / 潜水 / 非主流 / 地下 / 幽灵都不打）
 				if (hp > 0
 					&& grid_row >= other.grid_row - 2 && grid_row <= other.grid_row + 2
 					&& grid_col >= other.grid_col - 2 && grid_col <= other.grid_col + 2

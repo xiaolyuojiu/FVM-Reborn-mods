@@ -3605,15 +3605,15 @@
             "gold": 7000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 400.0
-                },
-                {
                     "id": "middle_crystal",
                     "amount": 300.0
                 },
                 {
-                    "id": "clover_2",
+                    "id": "warcard_6",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
                     "amount": 1.0
                 }
             ]
@@ -3622,19 +3622,25 @@
             "gold": 7000.0,
             "items": [
                 {
-                    "id": "secret_spices",
-                    "amount": 400.0
-                },
-                {
                     "id": "middle_crystal",
                     "amount": 300.0
+                },
+                {
+                    "id": "warcard_6",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "less_camp_coin",
                     "amount": 1.0
                 }
             ],
-            "card_unlock": ["cactus_sashimi"],
+            "card_unlock": [
+                "cactus_sashimi"
+            ],
             "weapon_unlock": [],
             "gem_unlock": [],
             "player_level": 0.0,

@@ -12,7 +12,7 @@ is_boss = false          // 由 obj_level_preview 的 BOSS 行置 true，决定�
 //   scale_normal             普通鼠军统一缩放（**上限**）
 //   scale_boss               BOSS 统一缩放（**上限**；BOSS 区格子更大、裁剪框 300×250，所以不用压太小）
 // 缩放作用在**裁掉透明留白后的内容**上（见 sprite_trim_get），同类贴图看起来大小一致。
-// 🔴 2026-11-22：超框时 scripts/sprite_clip_draw 会等比缩到刚好放进框（不再裁掉半只），
+// 🔴 超框时 scripts/sprite_clip_draw 会等比缩到刚好放进框（不再裁掉半只），
 //   包围盒改成「离线表 → 运行时 sprite_get_bbox_*」两级，本工程自有的换皮美术也能正常显示。
 clip_box_w   = 160
 clip_box_h   = 210

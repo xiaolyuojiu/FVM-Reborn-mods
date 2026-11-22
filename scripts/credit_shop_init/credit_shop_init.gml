@@ -781,17 +781,23 @@ function credit_shop_init()
         description: "一转凭证\n在合成屋-卡片转职中使用"
     });
 
-    // ── 3.1.0 沙漠之旅新卡的一转凭证（2026-11-22 合并补入；价位与同档卡对齐）──
+    // ── 3.1.0 沙漠之旅新卡的一转凭证（价位与同档卡对齐）──
     register_goods("credit_parsnip_salad_1", {
-        type: "credit", cost: "1900", coin_type: "prestige", credit_shape: 1,
-        tower_floor: "2-2",
+        type: "credit", cost: "900", coin_type: "prestige", credit_shape: 1,
+        tower_floor: "1-1",
         unlock_item_id: transfer_credit_id("parsnip_salad", 1),
         description: "一转凭证\n在合成屋-卡片转职中使用"
     });
     register_goods("credit_cactus_sashimi_1", {
-        type: "credit", cost: "1900", coin_type: "prestige", credit_shape: 1,
-        tower_floor: "3-1",
+        type: "credit", cost: "2280", coin_type: "prestige", credit_shape: 1,
+        tower_floor: "4-1",
         unlock_item_id: transfer_credit_id("cactus_sashimi", 1),
+        description: "一转凭证\n在合成屋-卡片转职中使用"
+    });
+    register_goods("credit_fruit_tart_1", {
+        type: "credit", cost: "4500", coin_type: "prestige", credit_shape: 1,
+        tower_floor: "9-2",
+        unlock_item_id: transfer_credit_id("fruit_tart", 1),
         description: "一转凭证\n在合成屋-卡片转职中使用"
     });
 
@@ -898,6 +904,13 @@ function credit_shop_init()
         type: "credit", cost: "27000", coin_type: "prestige", credit_shape: 2,
         tower_floor: "21-1",
         unlock_item_id: transfer_credit_id("brazier", 2),
+        description: "二转凭证\n在合成屋-卡片转职中使用"
+    });
+
+    register_goods("credit_fruit_tart_2", {
+        type: "credit", cost: "16200", coin_type: "prestige", credit_shape: 2,
+        tower_floor: "21-2",
+        unlock_item_id: transfer_credit_id("fruit_tart", 2),
         description: "二转凭证\n在合成屋-卡片转职中使用"
     });
 
@@ -1543,10 +1556,10 @@ function credit_shop_init()
         description: "二转凭证\n在合成屋-卡片转职中使用"
     });
 
-    // ── 3.1.0 沙漠之旅新卡的二转凭证（2026-11-22 合并补入；parsnip_salad 只有两形态，无二转）──
+    // ── 3.1.0 沙漠之旅新卡的二转凭证（parsnip_salad 只有两形态，无二转）──
     register_goods("credit_cactus_sashimi_2", {
-        type: "credit", cost: "11700", coin_type: "prestige", credit_shape: 2,
-        tower_floor: "7-2",
+        type: "credit", cost: "14040", coin_type: "prestige", credit_shape: 2,
+        tower_floor: "9-1",
         unlock_item_id: transfer_credit_id("cactus_sashimi", 2),
         description: "二转凭证\n在合成屋-卡片转职中使用"
     });

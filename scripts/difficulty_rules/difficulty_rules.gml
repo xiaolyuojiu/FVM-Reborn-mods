@@ -124,7 +124,7 @@ function random_gift_prepare_selected_deck() {
 }
 
 /// @function difficulty_reward_progress_tier()
-/// @desc 通关进度决定能吃到几倍（2026-11-22 用户口径）：
+/// @desc 通关进度决定能吃到几倍：
 ///       打通神殿 = 2 / 深渊 = 3 / 雪顶火山 = 4 / 卤料花园 = 5；都没打通 = 1。
 ///       这只是**进度侧的上限**，实际倍率还要跟难度自己的上限取小。
 function difficulty_reward_progress_tier() {
@@ -149,7 +149,7 @@ function difficulty_reward_cap(_difficulty) {
 /// @function difficulty_get_reward_multiplier_for(_difficulty)
 /// @desc 给定难度号的奖励倍率。与玩法模式无关：抽卡版 / 欧皇版 / 随机礼盒 / 海克斯
 ///       一律按"实际基础难度"结算，不按模式给固定值。
-///       2026-11-22 最终版：**上限看难度、实际看通关进度，取两者较小值**
+///       口径：**上限看难度、实际看通关进度，取两者较小值**
 ///         难度上限：美味 1 / 火山 1 / 浮空 2 / 星际 3 / 永恒 4 / 不朽 5
 ///         进度解锁：打通神殿 2 / 深渊 3 / 雪顶火山 4 / 卤料花园 5（都没打通 = 1）
 ///       海克斯倍率另外叠加，不在这里。
@@ -192,7 +192,7 @@ function difficulty_reward_item_amount(_item_id, _base_amount, _multiplier) {
 }
 
 // ── 开局奖励：永恒 / 不朽 互斥，发奖前必须先弹 obj_start_reward ──
-//   2026-11-22 用户口径：**自选一张卡（三选一）整套下线**，暖暖鸡也不再送；
+//   自选一张卡（三选一）整套下线，暖暖鸡也不再送；
 //   抽卡 / 欧皇（play_mode 1 / 2）额外送一张花火龙，其余模式只发金币。
 
 /// @function difficulty_start_reward_table()
@@ -206,8 +206,7 @@ function difficulty_start_reward_table() {
 
 /// @function difficulty_start_reward_extra_card(_difficulty)
 /// @desc 开局奖励附带的卡片，没有就返回 ""。
-///       2026-11-22：统一成花火龙本体，不再分「普通模式送暖暖鸡」；
-///       同日追加：**不朽不看模式都给**（锁难度的补偿），永恒只在抽卡 / 欧皇给。
+///       **不朽不看模式都给**（锁难度的补偿），永恒只在抽卡 / 欧皇给。
 function difficulty_start_reward_extra_card(_difficulty) {
     if (_difficulty == 5) return "firework_dragon";
     if (global.play_mode == 1 || global.play_mode == 2) return "firework_dragon";
@@ -239,7 +238,7 @@ function difficulty_start_reward_claimed() {
 
 /// @function difficulty_start_reward_available(_difficulty)
 /// @desc 这一档现在能不能领：新档（**没通关过曲奇岛**）+ 没领过任何一档
-///       2026-11-22 用户口径：判定改成看曲奇岛——「打过曲奇岛就不能领了」
+///       判定看曲奇岛：「打过曲奇岛就不能领了」
 function difficulty_start_reward_available(_difficulty) {
     if (is_undefined(difficulty_start_reward_of(_difficulty))) return false;
     if (array_get_index(global.save_data.completed_levels, "cookie_island")      != -1) return false;
@@ -249,7 +248,7 @@ function difficulty_start_reward_available(_difficulty) {
 
 /// @function difficulty_set_value(_difficulty)
 /// @desc 切难度唯一出口：改全局 + 写 config + 把设置页那两个箭头的 state 对齐。
-///       2026-11-22：不朽确认窗「取消」时也要走这里（回火山级），别在别处手写 ini。
+///       不朽确认窗「取消」时也走这里（回火山级），别在别处手写 ini。
 function difficulty_set_value(_difficulty) {
     var _d = clamp(round(_difficulty), 0, 5);
     global.difficulty = _d;
@@ -313,7 +312,7 @@ function difficulty_start_reward_grant(_difficulty) {
     global.save_data.player.gold += _row.gold;
     show_notice("已领取" + _row.name + "开局奖励：+" + difficulty_start_reward_gold_text(_row.gold) + " 金币", 90);
 
-    // 2026-11-22 用户口径：抽卡 / 欧皇 额外送一张花火龙本体；其余模式（普通 / 海克斯 / 礼盒）只发金币。
+    // 抽卡 / 欧皇额外送一张花火龙本体；其余模式（普通 / 海克斯 / 礼盒）只发金币。
     //   暖暖鸡 + 三选一自选卡 已整体下线。
     var _extra_card = difficulty_start_reward_extra_card(_difficulty);
     if (_extra_card != "") unlock_card(_extra_card, 0, 0, 0);

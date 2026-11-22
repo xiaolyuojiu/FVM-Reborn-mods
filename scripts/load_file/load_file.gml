@@ -160,7 +160,7 @@ function ensure_save_data() {
     if !variable_struct_exists(global.save_data, "unlocked_gems") || !is_array(global.save_data.unlocked_gems) {
         global.save_data.unlocked_gems = []
     }
-    // 2026-11-22：宝石强化改回固定 100%，这两个旧概率字段（失败连击 / 失败加成）已无任何读写，
+    // 宝石强化固定 100%，这两个旧概率字段（失败连击 / 失败加成）已无读写，
     //   老存档里留着只会让存档变长 —— 加载时原地删掉。卡片的 craft_fail_streak / craft_rate_bonus 不动。
     for (var _lg = 0; _lg < array_length(global.save_data.unlocked_gems); _lg++) {
         var _lgem = global.save_data.unlocked_gems[_lg];

@@ -8338,16 +8338,16 @@
             "gold": 24000.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 1600
-                },
-                {
                     "id": "middle_crystal",
                     "amount": 1400
                 },
                 {
-                    "id": "clover_3",
+                    "id": "warcard_7",
                     "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 }
             ]
         },
@@ -8356,12 +8356,16 @@
             "gold": 24000.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 1600
-                },
-                {
                     "id": "middle_crystal",
                     "amount": 1400
+                },
+                {
+                    "id": "warcard_7",
+                    "amount": 6.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 2.0
                 },
                 {
                     "id": "less_camp_coin",

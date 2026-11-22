@@ -256,8 +256,8 @@ function get_card_craft_rate(card_id, target_level, bonus, fail_streak){
 	return 100
 }
 
-// 2026-11-22 用户口径：**宝石强化固定 100%**（卡片的「强化概率」只管卡片，不许波及宝石）。
-//   之前宝石沿用强化概率（分段衰减 + 浮动 + 保底），表现为「宝石也会失败」，属回归。
+// 宝石强化固定 100%：卡片的「强化概率」只管卡片，不许波及宝石。
+//   🔴 别把宝石接回强化概率（分段衰减 + 浮动 + 保底）—— 那会表现成「宝石也会失败」。
 function get_gem_craft_rate(gem_id, target_level, bonus, fail_streak){
 	return 100
 }

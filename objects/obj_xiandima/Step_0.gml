@@ -35,11 +35,14 @@ if (zodiac_timer >= cycle/3) {
         var xd_list = [];
         for (var xd_i = 0; xd_i < instance_number(obj_enemy_parent); xd_i++) {
             var xd_e = instance_find(obj_enemy_parent,xd_i);
-            if (instance_exists(xd_e) && xd_e.hp > 0) array_push(xd_list,xd_e);
+            // 索敌按自家 target_type 过滤（陆地 / 空中 / 地下），不锁打不到的类型
+            if (instance_exists(xd_e) && xd_e.hp > 0 && can_target_on(target_type, xd_e.target_type))
+                array_push(xd_list,xd_e);
         }
         for (var xd_i = 0; xd_i < instance_number(obj_kuileima_decoy); xd_i++) {
             var xd_d = instance_find(obj_kuileima_decoy,xd_i);
-            if (instance_exists(xd_d) && xd_d.hp > 0 && !array_contains(xd_list,xd_d)) array_push(xd_list,xd_d);
+            if (instance_exists(xd_d) && xd_d.hp > 0 && !array_contains(xd_list,xd_d)
+                && can_target_on(target_type, xd_d.target_type)) array_push(xd_list,xd_d);
         }
         var t = noone;
         for (var xd_i = 0; xd_i < array_length(xd_list); xd_i++) {

@@ -64,8 +64,8 @@ function mod_evo_table(){
                                         {id:"small_fire", slot:1, need:2} ] },  // 阿波罗神使 ← 双子座星宿 + 太阳能高效炉
         heian_god:               { cards:[ {id:"mojie", slot:0, need:2},
                                         {id:"durian", slot:1, need:2} ] },  // 黑暗神使 ← 摩羯座战将（星座槽）+ 冰河世纪榴莲
-        aurora:                  { cards:[ {id:"zhuzhujiaqiang", slot:0, need:2},
-                                        {id:"blueberry_tower", slot:1, need:2} ] },  // 欧若拉神使 ← 猪猪发射站 + 蓝莓信号塔塔（这卡只注册到本体，按上限兜底）
+        aurora:                  { cards:[ {id:"fruit_tart", slot:0, need:2},
+                                        {id:"zhuzhujiaqiang", slot:1, need:2} ] },  // 欧若拉神使 ← 巧克力风车塔（主槽）+ 猪猪发射站
         houyi_god:               { cards:[ {id:"bbq", slot:0, need:2},
                                         {id:"fashishe", slot:1, need:2} ] },  // 后羿神使 ← BBQ烤肉大师 + 奥术法师蛇（2026-11-08 用户指定副卡）
         joker:                   { cards:[ {id:"donut", slot:0, need:2},

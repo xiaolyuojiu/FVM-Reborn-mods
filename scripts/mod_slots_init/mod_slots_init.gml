@@ -1655,7 +1655,7 @@ function mod_slots_init()
         sprite: spr_baiyang_icon,
         cost: 200,
         cooldown: 3000,
-        description: "白羊座战将：奔腾的小白羊，清除整行老鼠",
+        description: "白羊座战将：冲撞清除一行鼠军，且无需格子放置",
         plant_type: "coffee",
         feature_type: "normal",
         target_card: "none",
@@ -1666,7 +1666,7 @@ function mod_slots_init()
         sprite: spr_baiyang_icon,
         cost: 200,
         cooldown: 3000,
-        description: "白羊座星宿：奔腾的小白羊，清除整行老鼠",
+        description: "白羊座星宿：冲撞清除三行鼠军，且无需格子放置",
         plant_type: "coffee",
         feature_type: "normal",
         target_card: "none",
@@ -1688,7 +1688,7 @@ function mod_slots_init()
         sprite: spr_mojie_1,
         cost: 300,
         cooldown: 3000,
-        description: "摩羯座战将：范围内的老鼠在一定时间内都会受到持续伤害",
+        description: "摩羯座战将：3×3范围内持续伤害并减速",
         plant_type: "normal",
         feature_type: "normal",
         target_card: "none"
@@ -1698,7 +1698,7 @@ function mod_slots_init()
         sprite: spr_mojie_2,
         cost: 300,
         cooldown: 3000,
-        description: "摩羯座星宿：范围内的老鼠在一定时间内都会受到持续伤害",
+        description: "摩羯座星宿：5×5范围内持续伤害并减速",
         plant_type: "normal",
         feature_type: "normal",
         target_card: "none"
@@ -3462,7 +3462,7 @@ register_card("rongheshuanggu", obj_rongheshuanggu, [
     register_card("tianxie", obj_tianxie, [
     { shape: 0, sprite: spr_tianxie, cost: 200, cooldown: 420, description: "天蝎座精灵：射出超高攻击的穿透毒针", plant_type: "normal", feature_type: "normal", target_card: "none", is_gold: 0, place_preview: spr_tianxie },
     { shape: 1, sprite: spr_tianxie_1, cost: 200, cooldown: 420, description: "天蝎座战将：射出超高攻击的穿透毒针", plant_type: "normal", feature_type: "normal", target_card: "none", is_gold: 0, place_preview: spr_tianxie_1 },
-    { shape: 2, sprite: spr_tianxie_2, cost: 200, cooldown: 420, description: "天蝎座主宰：射出超高攻击的穿透毒针", plant_type: "normal", feature_type: "normal", target_card: "none", is_gold: 0, place_preview: spr_tianxie_2 }]);
+    { shape: 2, sprite: spr_tianxie_2, cost: 200, cooldown: 420, description: "天蝎座主宰：猩红毒针，一行连续4格穿透伤害（无视障碍）", plant_type: "normal", feature_type: "normal", target_card: "none", is_gold: 0, place_preview: spr_tianxie_2 }]);
 
     // ── 2026-11-13 新卡（桌面\皮特\11月份做卡11.12）────────────────────
     register_card("yuansushe", obj_yuansushe, [

@@ -14,7 +14,8 @@ else                 sprite_index = spr_honeytrap_2;
 
 plant_type   = "gridless";
 feature_type = "normal";
-target_type  = "track";
+// 攻击类型 = 陆空地（陆地 / 空中 / 地下；不含潜水·非主流·幽灵·障碍）
+target_type  = "land_air_ug";
 is_slowdown  = false;
 image_speed  = 0;
 flash_speed  = 5;

@@ -34,7 +34,7 @@ if (mouse_check_button_pressed(mb_left)) {
         instance_destroy();
     }
     else if (ic_hover == 1) {
-        // 取消 = 不选不朽 → 难度回火山级（2026-11-22 用户口径）
+        // 取消 = 不选不朽 → 难度回火山级
         ic_done = true;
         audio_play_sound(snd_button, 0, 0);
         difficulty_set_value(1);

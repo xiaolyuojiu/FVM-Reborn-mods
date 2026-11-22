@@ -80,11 +80,12 @@ function info_island_starts_block(_s) {
 
 
 /// @function info_island_is_title_line(_s)
-/// @description 来源 / 卡片分类 / 可以攻击 / 可用增幅 这几行只说一件事，后面必须换行。
+/// @description 来源 / 卡片分类 / 伤害范围（原「可以攻击」）/ 可用增幅 这几行只说一件事，后面必须换行。
 function info_island_is_title_line(_s) {
 	if (string_copy(_s, 1, 2) == "来源") return true;
 	if (string_copy(_s, 1, 4) == "卡片分类") return true;
 	if (string_copy(_s, 1, 4) == "可以攻击") return true;
+	if (string_copy(_s, 1, 4) == "伤害范围") return true;
 	return (string_copy(_s, 1, 4) == "可用增幅");
 }
 
@@ -315,7 +316,7 @@ function info_island_recipe_text(_id) {
 
 
 /// @function info_island_compose(_id, _txt)
-/// @description 情报岛版式统一：来源 → 卡片分类 → 可以攻击（自动生成）→ 可用增幅 → 空行 → 正文。
+/// @description 情报岛版式统一：来源 → 卡片分类 → 伤害范围（自动生成）→ 可用增幅 → 空行 → 正文。
 ///   先删文案里手写的分类行 / 增幅行再按上面结构插回；幂等（重复调用结果不变）。
 function info_island_compose(_id, _txt) {
 	if (!is_string(_txt)) return _txt;
@@ -363,7 +364,7 @@ function info_island_compose(_id, _txt) {
 
 	var _head = [];
 	if (_cat  != "") array_push(_head, _cat);
-	if (card_attack_shown(_id)) array_push(_head, "可以攻击：{可以攻击}");
+	if (card_attack_shown(_id)) array_push(_head, "伤害范围：{可以攻击}");
 	if (_buff != "") array_push(_head, _buff);
 	if (array_length(_head) == 0) return info_island_join_lines(_kept);
 

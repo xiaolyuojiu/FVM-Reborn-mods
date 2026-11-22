@@ -10,7 +10,8 @@ var _n       = array_length(sg_off);
 sg_touched = 0;
 
 with (obj_card_parent){
-    if (card_no_entity(plant_id)) continue;
+    // 变星对所有卡生效，只有变星类施放者之间不能互变（事实表 star_changer）
+    if (card_has_flag(plant_id, "star_changer")) continue;
     if (abs(grid_col - _mc) > _rc) continue;
     if (abs(grid_row - _mr) > _rc) continue;
     if (!variable_instance_exists(id, "current_level")) continue;

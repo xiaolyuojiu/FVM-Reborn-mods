@@ -3979,15 +3979,15 @@
             "gold": 12000.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 800
-                },
-                {
                     "id": "middle_crystal",
                     "amount": 700
                 },
                 {
-                    "id": "clover_2",
+                    "id": "warcard_7",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
                     "amount": 1.0
                 }
             ]
@@ -3997,19 +3997,25 @@
             "gold": 12000.0,
             "items": [
                 {
-                    "id": "royal_spices",
-                    "amount": 800
-                },
-                {
                     "id": "middle_crystal",
                     "amount": 700
+                },
+                {
+                    "id": "warcard_7",
+                    "amount": 3.0
+                },
+                {
+                    "id": "clover_4",
+                    "amount": 1.0
                 },
                 {
                     "id": "less_camp_coin",
                     "amount": 1.0
                 }
             ],
-            "card_unlock": ["grilled_lizard_pult"],
+            "card_unlock": [
+                "grilled_lizard_pult"
+            ],
             "weapon_unlock": [],
             "gem_unlock": [],
             "player_level": 0.0

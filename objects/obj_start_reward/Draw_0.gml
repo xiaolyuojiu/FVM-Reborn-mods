@@ -2,7 +2,7 @@
 var _row = difficulty_start_reward_of(sr_diff);
 if (is_undefined(_row)) exit;
 
-// 2026-11-22：不朽一律送花火龙；永恒只在抽卡 / 欧皇送；其余模式只写金币
+// 不朽一律送花火龙；永恒只在抽卡 / 欧皇送；其余模式只写金币
 var _extra = "";
 if (difficulty_start_reward_extra_card(sr_diff) != "") _extra = " + 花火龙";
 

@@ -5,6 +5,8 @@ event_user(0);
 
 // 不占格
 plant_type = "gridless";
+// 攻击类型 = 陆空地（陆地 / 空中 / 地下）
+target_type = "land_air_ug";
 feature_type = "normal";
 sprite_index = spr_xiandima;
 if (shape == 1) sprite_index = spr_xiandima_1;

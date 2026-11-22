@@ -209,7 +209,8 @@ function gacha_is_map_unlock_card(card_id) {
         "small_fire", "toast_bread", "xiao_long_bao", "flour_sack",   // 初始四张
         "wooden_plate", "wooden_cork", "cotton_candy", "sausage",     // 关卡内解锁
         "oil_lamp", "soda_bubble", "tang_hu_lu", "double_water_pipe",
-        "aquarius_elve", "coffee_grounds"
+        "aquarius_elve", "coffee_grounds",
+        "parsnip_salad"                                               // 沙漠之旅：地图必给，不进抽卡池
     ];
     return array_get_index(_map_only, card_id) != -1;
 }
