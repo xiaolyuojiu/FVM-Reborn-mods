@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"bdc0bd42-4955-480d-bd4e-38cf3ff0898c","path":"sprites/spr_little_wrestler/spr_little_wrestler.yy",},
     {"name":"a8a2fd00-c667-4924-bfb1-0f64c2e0ea70","path":"sprites/spr_little_wrestler_throw/spr_little_wrestler_throw.yy",},

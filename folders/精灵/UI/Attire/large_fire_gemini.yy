@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"6af049d7-e78e-468e-9165-c57d9c5e3619","path":"sprites/spr_large_fire_gemini/spr_large_fire_gemini.yy",},
     {"name":"0b46ac4f-e457-48ad-8f5a-893bbfa3cf51","path":"sprites/spr_large_fire_gemini_1/spr_large_fire_gemini_1.yy",},

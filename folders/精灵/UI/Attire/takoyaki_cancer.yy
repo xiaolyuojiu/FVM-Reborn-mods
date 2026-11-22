@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"66c2d7d3-4f03-46a5-9965-126f0c7a6950","path":"sprites/spr_takoyaki_cancer/spr_takoyaki_cancer.yy",},
     {"name":"990eec6f-13ed-4645-9644-d024bb6ab78a","path":"sprites/spr_takoyaki_cancer_1/spr_takoyaki_cancer_1.yy",},

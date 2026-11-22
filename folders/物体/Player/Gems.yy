@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_bomb_gem","path":"objects/obj_bomb_gem/obj_bomb_gem.yy",},
     {"name":"obj_bomb_gem_effect","path":"objects/obj_bomb_gem_effect/obj_bomb_gem_effect.yy",},

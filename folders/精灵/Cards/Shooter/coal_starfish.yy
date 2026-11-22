@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2723a4eb-e698-43ad-8a99-f99f5527fd6c","path":"sprites/spr_coal_starfish/spr_coal_starfish.yy",},
     {"name":"a53684a1-4ac1-4516-97e2-421d4b8ae857","path":"sprites/spr_coal_starfish_1/spr_coal_starfish_1.yy",},

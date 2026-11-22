@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"6dbb7a36-b13b-41ed-ab91-b247121516cb","path":"sprites/spr_dandantu/spr_dandantu.yy",},
     {"name":"3015c63e-e913-47bc-aa43-d85b0d503658","path":"sprites/spr_dandantu_1/spr_dandantu_1.yy",},

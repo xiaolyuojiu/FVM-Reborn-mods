@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_firework_dragon","path":"objects/obj_firework_dragon/obj_firework_dragon.yy",},
     {"name":"obj_goblet_lamp","path":"objects/obj_goblet_lamp/obj_goblet_lamp.yy",},

@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"kuileima",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/kuileima.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"kuileima",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

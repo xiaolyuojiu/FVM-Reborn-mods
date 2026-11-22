@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ff353c0e-2822-4914-a6d7-e49bf69c1066","path":"sprites/spr_brazier/spr_brazier.yy",},
     {"name":"9d708b03-9637-467e-8a3b-fd4acd2b2680","path":"sprites/spr_brazier_1/spr_brazier_1.yy",},

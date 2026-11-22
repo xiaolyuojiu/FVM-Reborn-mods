@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"4f7b8c4a-b2b9-4b3b-82f0-bce0f72300bc","path":"sprites/spr_burn_effect/spr_burn_effect.yy",},
     {"name":"45f6e1b4-355e-4fb7-a310-93ffdb221d5a","path":"sprites/spr_coke_bomb_explode/spr_coke_bomb_explode.yy",},

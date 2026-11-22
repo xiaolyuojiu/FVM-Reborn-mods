@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_baron_bats","path":"objects/obj_baron_bats/obj_baron_bats.yy",},
     {"name":"obj_baron_blade","path":"objects/obj_baron_blade/obj_baron_blade.yy",},

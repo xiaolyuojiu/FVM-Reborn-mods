@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"59666e87-14c5-4564-939d-ab9b097307cd","path":"sprites/spr_ice_bucket_bomb/spr_ice_bucket_bomb.yy",},
     {"name":"e764e300-c822-488f-adc6-933b84bb81fd","path":"sprites/spr_ice_bucket_bomb_1/spr_ice_bucket_bomb_1.yy",},

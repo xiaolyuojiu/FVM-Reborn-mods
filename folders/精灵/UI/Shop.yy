@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"products","path":"folders/精灵/UI/Shop/products.yy",}
+    {"name":"products","path":"folders/精灵/UI/Shop/products.yy",},
   ],
   "listItems":[
     {"name":"36a177cd-47fc-4063-92cc-8de14b60cf86","path":"sprites/spr_shop_bg/spr_shop_bg.yy",},

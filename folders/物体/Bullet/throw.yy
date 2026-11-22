@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_chocolatecannon_bullet","path":"objects/obj_chocolatecannon_bullet/obj_chocolatecannon_bullet.yy",},
     {"name":"obj_chocolatepult_bullet","path":"objects/obj_chocolatepult_bullet/obj_chocolatepult_bullet.yy",},

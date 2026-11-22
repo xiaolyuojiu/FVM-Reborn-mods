@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"545fba55-983d-4494-8495-98f29dd1b9bf","path":"sprites/spr_iron_diver_helmet/spr_iron_diver_helmet.yy",},
     {"name":"c6fb48c5-6ab2-4767-87ec-1384a7d30e7e","path":"sprites/spr_iron_diver_mouse/spr_iron_diver_mouse.yy",},

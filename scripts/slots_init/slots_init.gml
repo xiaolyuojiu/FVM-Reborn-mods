@@ -309,9 +309,9 @@ function slots_init(){
 		{"shape":2, "sprite":spr_beef_hotpot_2, "cost":250, "cooldown":7*60, "description":"海鲜肥牛锅：穿透攻击5格敌人","plant_type":"normal","feature_type":"normal","target_card":"none"}
 	])
 	register_card("spicy_pot",obj_spicy_pot,[
-	    {"shape":0, "sprite":spr_spicy_pot, "cost":300, "cooldown":7*60, "description":"麻辣香锅：穿透攻击前方三行4格内的敌人","plant_type":"normal","feature_type":"normal","target_card":"none"},
-	    {"shape":1, "sprite":spr_spicy_pot_1, "cost":325, "cooldown":7*60, "description":"孜然羊肉锅：穿透攻击前方三行5格内的敌人","plant_type":"normal","feature_type":"normal","target_card":"none"},
-		{"shape":2, "sprite":spr_spicy_pot_2, "cost":375, "cooldown":7*60, "description":"酱香鱿鱼锅：穿透攻击前方三行5格内的敌人","plant_type":"normal","feature_type":"normal","target_card":"none"}
+	    {"shape":0, "sprite":spr_spicy_pot, "cost":200, "cooldown":7*60, "description":"麻辣香锅：穿透攻击前方三行4格内的敌人","plant_type":"normal","feature_type":"normal","target_card":"none"},
+	    {"shape":1, "sprite":spr_spicy_pot_1, "cost":225, "cooldown":7*60, "description":"孜然羊肉锅：穿透攻击前方三行5格内的敌人","plant_type":"normal","feature_type":"normal","target_card":"none"},
+		{"shape":2, "sprite":spr_spicy_pot_2, "cost":275, "cooldown":7*60, "description":"酱香鱿鱼锅：穿透攻击前方三行5格内的敌人","plant_type":"normal","feature_type":"normal","target_card":"none"}
 	])
 	register_card("pan_fried_bun",obj_pan_fried_bun,[
 	    {"shape":0, "sprite":spr_pan_fried_bun, "cost":150, "cooldown":7*60, "description":"生煎锅：投掷十字范围灼烧的生煎包","plant_type":"normal","feature_type":"normal","target_card":"none"},
@@ -356,11 +356,6 @@ function slots_init(){
 	    {"shape":1, "sprite":spr_delicacy_firework_1, "cost":200, "cooldown":60*60, "description":"美食爆竹：3*4范围爆炸，命中老鼠产生火苗","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_delicacy_firework_1},
 		{"shape":2, "sprite":spr_delicacy_firework_2, "cost":250, "cooldown":60*60, "description":"美食礼花：5*5范围爆炸，命中老鼠产生火苗","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_delicacy_firework_2}
 	]);
-	register_card("fruit_tart", obj_fruit_tart, [
-	    {"shape":0, "sprite":spr_fruit_tart, "cost":150, "cooldown":14*60, "description":"美味水果塔：为本行左侧的投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart},
-	    {"shape":1, "sprite":spr_fruit_tart_1, "cost":150, "cooldown":7*60, "description":"风车水果塔：为本行左侧的投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart_1},
-		{"shape":2, "sprite":spr_fruit_tart_2, "cost":150, "cooldown":7*60, "description":"巧克力水果塔：为本行投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart_2}
-	]);
 	register_card("sugar_roxburghii", obj_sugar_roxburghii, [
 	    {"shape":0, "sprite":spr_sugar_roxburghii, "cost":125, "cooldown":7*60, "description":"糖渍刺梨：伤害接触到的老鼠，概率眩晕","plant_type":"normal","feature_type":"dwarf","target_card":"none","place_preview":spr_sugar_roxburghii},
 	    {"shape":1, "sprite":spr_sugar_roxburghii_1, "cost":125, "cooldown":7*60, "description":"烟熏刺梨：伤害接触到的老鼠，概率眩晕","plant_type":"normal","feature_type":"dwarf","target_card":"none","place_preview":spr_sugar_roxburghii_1},
@@ -371,9 +366,20 @@ function slots_init(){
 	    {"shape":1, "sprite":spr_nut_frier_1, "cost":300, "cooldown":7*60, "description":"橡子搅拌机：向前方5个方向发射子弹","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_nut_frier_1},
 		{"shape":2, "sprite":spr_nut_frier_2, "cost":300, "cooldown":7*60, "description":"松塔爆破机：向前方5个方向发射子弹","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_nut_frier_2}
 	]);
-	//register_card("fruit_tart", obj_fruit_tart, [
-	//    {"shape":0, "sprite":spr_fruit_tart, "cost":150, "cooldown":14*60, "description":"美味水果塔：为本行左侧的投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart},
-	//    {"shape":1, "sprite":spr_fruit_tart_1, "cost":150, "cooldown":7*60, "description":"风车水果塔：为本行左侧的投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart_1},
-	//	{"shape":2, "sprite":spr_fruit_tart_2, "cost":150, "cooldown":7*60, "description":"巧克力水果塔：为本行投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart_2}
-	//]);
+	register_card("parsnip_salad",obj_parsnip_salad,[
+	    {"shape":0, "sprite":spr_parsnip_salad, "cost":125, "cooldown":7*60, "description":"防风草沙拉：为5*5范围内卡片抵御龙卷风，3*3范围回血","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_parsnip_salad},
+	    {"shape":1, "sprite":spr_parsnip_salad_1, "cost":125, "cooldown":7*60, "description":"蛋黄酱防风草：为5*5范围内卡片抵御龙卷风和回血","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_parsnip_salad_1},
+	])
+	// fruit_tart 是 mod 既有卡（3.0.x 就在），按用户口径「已有的卡片不动」保留 mod 原注册：
+	// 描述与图标沿用 mod 版本，不用 3.1.0 的 _1_icon/_2_icon 与「为三行」文案
+	register_card("fruit_tart", obj_fruit_tart, [
+	    {"shape":0, "sprite":spr_fruit_tart, "cost":150, "cooldown":14*60, "description":"美味水果塔：为本行左侧的投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart},
+	    {"shape":1, "sprite":spr_fruit_tart_1, "cost":150, "cooldown":7*60, "description":"风车水果塔：为本行左侧的投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart_1},
+		{"shape":2, "sprite":spr_fruit_tart_2, "cost":150, "cooldown":7*60, "description":"巧克力水果塔：为本行投掷类卡片增加伤害","plant_type":"normal","feature_type":"normal","target_card":"none","place_preview":spr_fruit_tart_2}
+	]);
+	register_card("cactus_sashimi",obj_cactus_sashimi,[
+	    {"shape":0, "sprite":spr_cactus_sashimi, "cost":275, "cooldown":7*60, "description":"仙人掌刺身：向前方三行和后方一行发射尖刺","plant_type":"normal","feature_type":"normal","target_card":"none"},
+	    {"shape":1, "sprite":spr_cactus_sashimi_1_icon, "cost":275, "cooldown":7*60, "description":"仙人球刺身：向前方三行和后方一行发射尖刺","plant_type":"normal","feature_type":"normal","target_card":"none"},
+		{"shape":2, "sprite":spr_cactus_sashimi_2_icon, "cost":275, "cooldown":7*60, "description":"仙人掌花刺身：向前方三行和后方一行发射尖刺","plant_type":"normal","feature_type":"normal","target_card":"none"}
+	])
 }

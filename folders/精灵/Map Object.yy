@@ -10,7 +10,8 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"platform","path":"folders/精灵/Map Object/platform.yy",}
+    {"name":"naigaiqiao","path":"folders/精灵/Map Object/naigaiqiao.yy",},
+    {"name":"platform","path":"folders/精灵/Map Object/platform.yy",},
   ],
   "listItems":[
     {"name":"24423218-2a37-4ec6-a3ac-45cb1c7abb4b","path":"sprites/spr_cloud_daytime/spr_cloud_daytime.yy",},

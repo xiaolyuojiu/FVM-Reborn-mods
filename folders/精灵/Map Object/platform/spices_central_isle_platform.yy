@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ddc4e8c6-a634-4835-80d6-7a818fea00a3","path":"sprites/spr_spices_central_isle_platform_1/spr_spices_central_isle_platform_1.yy",},
     {"name":"7c575f95-d28d-464f-9f08-f0e5aa6ccd8c","path":"sprites/spr_spices_central_isle_platform_2/spr_spices_central_isle_platform_2.yy",},

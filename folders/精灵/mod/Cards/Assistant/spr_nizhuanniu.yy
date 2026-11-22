@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_nizhuanniu",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/spr_nizhuanniu.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_nizhuanniu",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

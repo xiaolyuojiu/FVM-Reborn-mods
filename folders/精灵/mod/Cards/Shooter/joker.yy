@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"joker",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/joker.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"joker",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

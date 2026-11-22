@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"travel_record",
+  "folderPath":"folders/物体/Enemy/explore_camp/BOSS/travel_record.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"travel_record",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

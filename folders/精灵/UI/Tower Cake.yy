@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"289294b2-0cb3-4d20-ad9f-93fbbd5d0341","path":"sprites/spr_tower_cake_bg/spr_tower_cake_bg.yy",},
     {"name":"71f0a2cf-f834-4fc5-adea-13754be31cb5","path":"sprites/spr_tower_cake_level_btn/spr_tower_cake_level_btn.yy",},

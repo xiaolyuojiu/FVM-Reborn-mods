@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_huanyingshe","path":"sprites/spr_huanyingshe/spr_huanyingshe.yy",},
     {"name":"spr_huanyingshe_1","path":"sprites/spr_huanyingshe_1/spr_huanyingshe_1.yy",},

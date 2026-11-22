@@ -55,6 +55,16 @@ if (variable_instance_exists(id,"zodiac_guard_time") && zodiac_guard_time > 0) {
     }
     zodiac_guard_hp = hp;
 }
+// 美杜莎石化：计时结束后恢复原样
+if medusa_statue_timer > 0{
+	medusa_statue_timer--
+	if medusa_statue_timer <= 0{
+		is_medusa_statue = false
+	}
+}
+if is_medusa_statue{
+	medusa_statue_anim ++
+}
 if hp <= 0{
 	instance_destroy()
 }
@@ -274,21 +284,29 @@ if (is_slowdown != b3_slow_prev) {
         global.buff_apply_id += 1;
     }
 }
-if timer < current_flash_speed - 1 {
-    timer++;
-} else {
-    switch (state) {
-        case CARD_STATE.IDLE:
-            if image_index < idle_anim image_index++;
-            else image_index = 0;
-            break;
-            
-        case CARD_STATE.ATTACK:
-            if (image_index >= (idle_anim+1) && image_index <= (idle_anim) + attack_anim) image_index++;
-            else image_index = (idle_anim+1);
-            break;
-		
-    }
-    timer = 0;
+// 动画控制：子对象把 card_anim_override 置 true 后可自行接管动画
+// （酒杯灯：成长段动画；土司面包：按血量切换受损外形）
+if !card_anim_override {
+	// 动画计时器
+	var current_flash_speed = flash_speed
+	if is_slowdown{
+		current_flash_speed *= 2
+	}
+	if timer < current_flash_speed - 1 {
+		timer++;
+	} else {
+		switch (state) {
+			case CARD_STATE.IDLE:
+				if image_index < idle_anim image_index++;
+				else image_index = 0;
+				break;
+
+			case CARD_STATE.ATTACK:
+				if (image_index >= (idle_anim+1) && image_index <= (idle_anim) + attack_anim) image_index++;
+				else image_index = (idle_anim+1);
+				break;
+		}
+		timer = 0;
+	}
 }
 external_animation_sync(id, current_flash_speed);

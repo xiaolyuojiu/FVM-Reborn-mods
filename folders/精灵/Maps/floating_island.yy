@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"fef38e50-d0b7-4213-b95d-a2d237768fee","path":"sprites/spr_bayleaf_airport_daytime/spr_bayleaf_airport_daytime.yy",},
     {"name":"e919b6e0-f81b-4c88-a399-c3b9e33da24a","path":"sprites/spr_bayleaf_airport_night/spr_bayleaf_airport_night.yy",},

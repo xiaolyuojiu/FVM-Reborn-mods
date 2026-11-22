@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2eddcf16-e659-4416-8cbb-3e04ddf718bb","path":"sprites/spr_flight_barrier_mouse_air/spr_flight_barrier_mouse_air.yy",},
     {"name":"fe98f230-57ea-428e-96fe-077bd438fff4","path":"sprites/spr_flight_barrier_mouse_air_without_pig/spr_flight_barrier_mouse_air_without_pig.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2d6bedb5-1dcd-4171-b3b0-9355f6ba5583","path":"sprites/spr_little_undersea_panda_mouse/spr_little_undersea_panda_mouse.yy",},
     {"name":"7e4a689e-7363-4636-b94a-4139e4e605d3","path":"sprites/spr_little_undersea_panda_mouse_throw/spr_little_undersea_panda_mouse_throw.yy",},

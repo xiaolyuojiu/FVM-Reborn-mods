@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"96a0af1a-9865-4ee0-92c2-a02099de0c1f","path":"sprites/spr_airbrone_explosive_mouse_air/spr_airbrone_explosive_mouse_air.yy",},
     {"name":"7a9f678b-181b-4835-9a40-5c1b16663e1e","path":"sprites/spr_airbrone_explosive_mouse_drop/spr_airbrone_explosive_mouse_drop.yy",},

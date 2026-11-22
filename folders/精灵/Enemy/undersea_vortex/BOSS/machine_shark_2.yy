@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"0f846c43-fb88-41ae-ac71-7a5942c24bcc","path":"sprites/spr_machine_shark_2_skill_1/spr_machine_shark_2_skill_1.yy",},
     {"name":"628939ec-dd69-499a-9f5a-3b6ce3a5e7f5","path":"sprites/spr_machine_shark_2_skill_2/spr_machine_shark_2_skill_2.yy",},

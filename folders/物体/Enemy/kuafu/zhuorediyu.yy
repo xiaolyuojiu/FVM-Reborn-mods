@@ -10,8 +10,8 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"xiaoguai","path":"folders/物体/Enemy/kuafu/zhuorediyu/xiaoguai.yy",},
     {"name":"boss","path":"folders/物体/Enemy/kuafu/zhuorediyu/boss.yy",},
+    {"name":"xiaoguai","path":"folders/物体/Enemy/kuafu/zhuorediyu/xiaoguai.yy",},
   ],
   "listItems":[
   ],

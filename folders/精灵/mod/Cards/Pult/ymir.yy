@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"ymir",
+  "folderPath":"folders/精灵/mod/Cards/Pult/ymir.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"ymir",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

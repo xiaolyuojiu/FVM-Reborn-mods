@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f9341935-76f8-4d72-bf85-b919b34246d0","path":"sprites/spr_bull_firework/spr_bull_firework.yy",},
     {"name":"09548f26-4df6-465a-83ed-df4e307af1ee","path":"sprites/spr_bull_firework_1/spr_bull_firework_1.yy",},

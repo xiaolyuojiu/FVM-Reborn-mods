@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_yinyangshe_bullet","path":"objects/obj_yinyangshe_bullet/obj_yinyangshe_bullet.yy",},
     {"name":"obj_shiliu_bullet","path":"objects/obj_shiliu_bullet/obj_shiliu_bullet.yy",},

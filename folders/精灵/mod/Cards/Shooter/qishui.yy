@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"335db743-f322-439e-830a-4ebde00334e5","path":"sprites/spr_qishui/spr_qishui.yy",},
     {"name":"bee05043-67b8-4a21-92b6-27e4a76577f7","path":"sprites/spr_qishui_1/spr_qishui_1.yy",},

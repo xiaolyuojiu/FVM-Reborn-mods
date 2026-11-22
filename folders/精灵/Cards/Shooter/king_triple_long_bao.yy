@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"upgrade","path":"folders/精灵/Cards/Shooter/king_triple_long_bao/upgrade.yy",}
+    {"name":"upgrade","path":"folders/精灵/Cards/Shooter/king_triple_long_bao/upgrade.yy",},
   ],
   "listItems":[
     {"name":"a5c094ac-b0c2-48c3-87d0-fe16761b19f1","path":"sprites/spr_king_triple_long_bao_0_0/spr_king_triple_long_bao_0_0.yy",},

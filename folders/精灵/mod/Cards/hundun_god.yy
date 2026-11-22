@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"eb0b5f47-18b5-4daf-9e7c-0c3dd0dc0d16","path":"sprites/spr_hundun_god/spr_hundun_god.yy",},
     {"name":"74979975-e206-47bf-a5ee-d696023aa8b2","path":"sprites/spr_hundun_god_1/spr_hundun_god_1.yy",},

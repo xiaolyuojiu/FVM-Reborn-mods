@@ -10,14 +10,16 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"mouse_bullet","path":"folders/精灵/Enemy/mouse_bullet.yy",},
-    {"name":"floating_island","path":"folders/精灵/Enemy/floating_island.yy",},
-    {"name":"tower","path":"folders/精灵/Enemy/tower.yy",},
-    {"name":"volcanic_island","path":"folders/精灵/Enemy/volcanic_island.yy",},
-    {"name":"undersea_vortex","path":"folders/精灵/Enemy/undersea_vortex.yy",},
     {"name":"delicious_island","path":"folders/精灵/Enemy/delicious_island.yy",},
+    {"name":"desert_trip","path":"folders/精灵/Enemy/desert_trip.yy",},
+    {"name":"explore_camp","path":"folders/精灵/Enemy/explore_camp.yy",},
+    {"name":"floating_island","path":"folders/精灵/Enemy/floating_island.yy",},
     {"name":"kuafu","path":"folders/精灵/Enemy/kuafu.yy",},
-  
+    {"name":"longyuan","path":"folders/精灵/Enemy/longyuan.yy",},
+    {"name":"mouse_bullet","path":"folders/精灵/Enemy/mouse_bullet.yy",},
+    {"name":"tower","path":"folders/精灵/Enemy/tower.yy",},
+    {"name":"undersea_vortex","path":"folders/精灵/Enemy/undersea_vortex.yy",},
+    {"name":"volcanic_island","path":"folders/精灵/Enemy/volcanic_island.yy",},
   ],
   "listItems":[],
 }

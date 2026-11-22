@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"498daa71-20dc-46e0-8579-cc532b333067","path":"sprites/spr_gods_hall_bag/spr_gods_hall_bag.yy",},
     {"name":"91ba9a5a-41c5-407d-afae-47fd943896c2","path":"sprites/spr_gods_hall_bg/spr_gods_hall_bg.yy",},

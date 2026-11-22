@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"jinniu",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/jinniu.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"jinniu",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

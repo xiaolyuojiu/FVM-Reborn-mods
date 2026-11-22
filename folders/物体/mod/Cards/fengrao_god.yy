@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_fengrao_god","path":"objects/obj_fengrao_god/obj_fengrao_god.yy",},
     {"name":"6e690649-0e98-42b1-b4c9-cd99d5a87a95","path":"sprites/spr_fengrao_god/spr_fengrao_god.yy",},

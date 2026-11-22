@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d0b43128-2a85-43bf-94fb-414f7bfe6b6e","path":"sprites/spr_naruto_minion_mouse/spr_naruto_minion_mouse.yy",},
     {"name":"8f65c5a8-d021-4993-94a4-f0160762d9f6","path":"sprites/spr_naruto_minion_mouse_summon/spr_naruto_minion_mouse_summon.yy",},

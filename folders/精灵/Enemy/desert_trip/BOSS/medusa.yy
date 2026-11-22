@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"medusa",
+  "folderPath":"folders/精灵/Enemy/desert_trip/BOSS/medusa.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"medusa",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"042f11bc-b1d0-4c3e-8eff-f04832def550","path":"sprites/spr_hot_vajra_appear/spr_hot_vajra_appear.yy",},
     {"name":"84eebfbb-5937-4f6d-bfa7-fecca596e988","path":"sprites/spr_hot_vajra_death/spr_hot_vajra_death.yy",},

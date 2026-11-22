@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2632041d-17ca-4339-b5ca-f7b109ff1d8a","path":"sprites/spr_lilac_rainbow_platform_daytime_1/spr_lilac_rainbow_platform_daytime_1.yy",},
     {"name":"d9a65082-7d29-4fd7-9607-cc00f1990562","path":"sprites/spr_lilac_rainbow_platform_daytime_2/spr_lilac_rainbow_platform_daytime_2.yy",},

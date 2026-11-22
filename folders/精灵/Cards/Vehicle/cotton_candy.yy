@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"0bc3945c-b021-4e33-8895-87899cc9f409","path":"sprites/spr_cotton_candy_0_0/spr_cotton_candy_0_0.yy",},
     {"name":"46dead2c-c3eb-407d-99da-5e9c6b8982f8","path":"sprites/spr_cotton_candy_0_1/spr_cotton_candy_0_1.yy",},

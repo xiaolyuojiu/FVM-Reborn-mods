@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"8aae7dcb-c329-4ceb-9ccc-dd8b4e9924cc","path":"sprites/spr_undersea_submarine/spr_undersea_submarine.yy",},
     {"name":"c78f8ecc-1649-4f61-b6a7-c1e0c86c9135","path":"sprites/spr_undersea_submarine_release_1/spr_undersea_submarine_release_1.yy",},

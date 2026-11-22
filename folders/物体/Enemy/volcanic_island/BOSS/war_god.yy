@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_war_god","path":"objects/obj_war_god/obj_war_god.yy",},
     {"name":"obj_war_god_duck","path":"objects/obj_war_god_duck/obj_war_god_duck.yy",},

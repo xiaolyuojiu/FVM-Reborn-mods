@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e0cebae3-16ce-4fa0-8fb8-09036601d23b","path":"sprites/spr_cat/spr_cat.yy",},
     {"name":"fa32c8a1-6a5d-43ae-9e5c-dcfaf9abd07e","path":"sprites/spr_crab/spr_crab.yy",},

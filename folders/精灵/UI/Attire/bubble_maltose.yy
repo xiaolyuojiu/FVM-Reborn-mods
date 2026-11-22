@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"abbdfcf0-84d7-423b-87c6-a5e7450fdbe7","path":"sprites/spr_bubble_maltose_0_0/spr_bubble_maltose_0_0.yy",},
     {"name":"bf8dfffd-1c58-4a7d-bf1a-8010d8c929bd","path":"sprites/spr_bubble_maltose_0_1/spr_bubble_maltose_0_1.yy",},

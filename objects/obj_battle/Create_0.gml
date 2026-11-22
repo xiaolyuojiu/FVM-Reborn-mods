@@ -1,6 +1,10 @@
-surface_set_target(application_surface);
-draw_clear_alpha(c_black, 0);
-surface_reset_target();
+// 强制清除application_surface，避免上一房间图像残留
+// ⚠️ application_surface 可能短暂失效（值为 -1），直接用会抛 surface target does not exist
+if (surface_exists(application_surface)){
+	surface_set_target(application_surface);
+	draw_clear_alpha(c_black, 0); // 用透明黑色清除surface，alpha值0表示完全透明
+	surface_reset_target();
+}
 
 depth = 50
 
@@ -55,6 +59,7 @@ global.test_info_island_mode = (global.level_id == "test_level");
 
 // 爆辣河豚：每局战斗重置放置次数计数
 global.pufferfish_place_count = 0;
+global.enemy_damage_reduction = 0
 
 chomp_sound_list = ds_list_create()
 battle_time = 0

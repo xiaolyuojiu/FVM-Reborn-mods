@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"96d9ecf6-bce0-4dd9-bd75-34802b8f9ff0","path":"sprites/spr_pharaoh_bandage/spr_pharaoh_bandage.yy",},
     {"name":"fad36b7c-58f1-4a55-8b57-e1d452d12276","path":"sprites/spr_pharaoh_coffin/spr_pharaoh_coffin.yy",},

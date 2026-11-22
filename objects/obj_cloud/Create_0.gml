@@ -23,5 +23,7 @@ ignore_list = ["mario_mouse","mario_pipeline","arno","pharaoh_coffin","temple_ph
 				"huang_xiaoming","angelababy","mouse_train_1","captain_america_mouse","captain_rainbow","iron_man_mouse","mouse_train_2",
 				"iron_man","spider_man_mouse","hulk_mouse","mouse_train_3","mermaid_mary","mermaid_wave","machine_shark_1",
 				"lobster_knight","electric_jellyfish","jellyfish_bullet","war_god","war_god_duck","war_god_wood","hercules","thor",
-				"kuafu_boss_buzz","kuafu_boss_julie","kuafu_boss_pete","kuafu_boss_baron","kuafu_boss_xiaoming","kuafu_boss_pete_claw","kuafu_boss_pete_spike"
+				"kuafu_boss_buzz","kuafu_boss_julie","kuafu_boss_pete","kuafu_boss_baron","kuafu_boss_xiaoming","kuafu_boss_pete_claw","kuafu_boss_pete_spike",
+				"travel_record","beverage_machine","face_cookie","witch_shaman_mouse","hermit_crab_mouse","medusa",
+				"tribal_chief_mouse","awaken_medusa","ufo_mouse","anubis_mouse"
 ]

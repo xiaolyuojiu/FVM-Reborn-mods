@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ad747c27-2277-4013-ab3b-c805e07739f8","path":"sprites/spr_apple_football_fan_mouse/spr_apple_football_fan_mouse.yy",},
     {"name":"b2f47f61-7f22-4379-a485-c265b028c71e","path":"sprites/spr_apple_football_fan_mouse_helmet/spr_apple_football_fan_mouse_helmet.yy",}

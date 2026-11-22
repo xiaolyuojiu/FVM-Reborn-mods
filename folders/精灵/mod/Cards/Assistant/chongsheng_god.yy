@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"chongsheng_god",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/chongsheng_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"chongsheng_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

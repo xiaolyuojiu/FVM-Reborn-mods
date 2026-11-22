@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2ecc17e5-c1f2-445b-b615-8ca628980a9f","path":"sprites/spr_ventilation_fan/spr_ventilation_fan.yy",},
     {"name":"96a43895-af2d-4cd2-9715-0572a60d9921","path":"sprites/spr_ventilation_fan_1/spr_ventilation_fan_1.yy",},

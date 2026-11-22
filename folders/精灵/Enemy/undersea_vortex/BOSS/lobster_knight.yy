@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"329ea6ed-3b72-4807-bcd0-9b14a3a85ade","path":"sprites/spr_lobster_knight_bubble_destroy/spr_lobster_knight_bubble_destroy.yy",},
     {"name":"1537877e-7241-4ec9-a6c6-5e0fe23a73d6","path":"sprites/spr_lobster_knight_bullet/spr_lobster_knight_bullet.yy",},

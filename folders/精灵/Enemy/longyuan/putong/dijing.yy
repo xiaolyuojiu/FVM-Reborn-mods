@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"dijing",
+  "folderPath":"folders/精灵/Enemy/longyuan/putong/dijing.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"dijing",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

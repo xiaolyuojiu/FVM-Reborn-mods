@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"cbbb4a13-6281-4d95-9122-f6cb1ac0df0a","path":"sprites/spr_infected_bingzha_appear/spr_infected_bingzha_appear.yy",},
     {"name":"54701edc-06e6-414b-96cb-a4d2b08812f0","path":"sprites/spr_infected_bingzha_ball/spr_infected_bingzha_ball.yy",},

@@ -10,11 +10,15 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"fengrao_god","path":"folders/物体/mod/Cards/fengrao_god.yy",},
-    {"name":"save_god","path":"folders/物体/mod/Cards/save_god.yy",},
+    {"name":"New zodiac","path":"folders/物体/mod/Cards/New zodiac.yy",},
     {"name":"baibianshe","path":"folders/物体/mod/Cards/baibianshe.yy",},
+    {"name":"baobaoji","path":"folders/物体/mod/Cards/baobaoji.yy",},
+    {"name":"fengrao_god","path":"folders/物体/mod/Cards/fengrao_god.yy",},
+    {"name":"haiyang_god","path":"folders/物体/mod/Cards/haiyang_god.yy",},
+    {"name":"save_god","path":"folders/物体/mod/Cards/save_god.yy",},
+    {"name":"shennong_god","path":"folders/物体/mod/Cards/shennong_god.yy",},
     {"name":"xiangshui_god","path":"folders/物体/mod/Cards/xiangshui_god.yy",},
-    {"name":"haiyang_god","path":"folders/物体/mod/Cards/haiyang_god.yy",},{"name":"zhanqima","path":"folders/物体/mod/Cards/zhanqima.yy",},
+    {"name":"zhanqima","path":"folders/物体/mod/Cards/zhanqima.yy",},
   ],
   "listItems":[
     {"name":"obj_yinyangshe","path":"objects/obj_yinyangshe/obj_yinyangshe.yy",},

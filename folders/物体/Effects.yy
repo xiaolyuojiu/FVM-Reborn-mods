@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"appendage","path":"folders/物体/Effects/appendage.yy",}
+    {"name":"appendage","path":"folders/物体/Effects/appendage.yy",},
   ],
   "listItems":[
     {"name":"obj_gem_cooldown_flash","path":"objects/obj_gem_cooldown_flash/obj_gem_cooldown_flash.yy",},

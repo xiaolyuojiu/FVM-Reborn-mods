@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"OnlineStageDetail","path":"objects/OnlineStageDetail/OnlineStageDetail.yy",},
     {"name":"OnlineStageItem","path":"objects/OnlineStageItem/OnlineStageItem.yy",},

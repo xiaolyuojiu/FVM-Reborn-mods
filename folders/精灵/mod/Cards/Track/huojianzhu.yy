@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_huojianzhu","path":"sprites/spr_huojianzhu/spr_huojianzhu.yy",},
     {"name":"spr_huojianzhu_1","path":"sprites/spr_huojianzhu_1/spr_huojianzhu_1.yy",},

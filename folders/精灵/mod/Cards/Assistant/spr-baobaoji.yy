@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr-baobaoji",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/spr-baobaoji.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr-baobaoji",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_dianman","path":"sprites/spr_dianman/spr_dianman.yy",},
     {"name":"spr_dianman_effect","path":"sprites/spr_dianman_effect/spr_dianman_effect.yy",},

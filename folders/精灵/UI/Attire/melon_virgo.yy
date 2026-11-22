@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d32b3441-0555-42ac-8271-9d68907262d5","path":"sprites/spr_melon_virgo_1_outer_1/spr_melon_virgo_1_outer_1.yy",},
     {"name":"fab07612-4080-4bf8-8f25-d2bb25cba0e4","path":"sprites/spr_melon_virgo_1_outer_2/spr_melon_virgo_1_outer_2.yy",},

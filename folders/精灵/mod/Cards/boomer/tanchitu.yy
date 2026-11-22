@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_tanchitu","path":"sprites/spr_tanchitu/spr_tanchitu.yy",},
     {"name":"spr_tanchitu_bullet","path":"sprites/spr_tanchitu_bullet/spr_tanchitu_bullet.yy",},

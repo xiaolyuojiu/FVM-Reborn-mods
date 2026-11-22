@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_nut_frier","path":"sprites/spr_nut_frier/spr_nut_frier.yy",},
     {"name":"spr_nut_frier_1","path":"sprites/spr_nut_frier_1/spr_nut_frier_1.yy",},

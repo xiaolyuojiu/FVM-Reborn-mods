@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_chocolatecannon_bullet_effect","path":"objects/obj_chocolatecannon_bullet_effect/obj_chocolatecannon_bullet_effect.yy",},
     {"name":"obj_coffeecup_bullet_effect","path":"objects/obj_coffeecup_bullet_effect/obj_coffeecup_bullet_effect.yy",},

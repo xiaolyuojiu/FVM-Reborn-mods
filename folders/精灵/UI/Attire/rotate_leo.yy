@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"908bce14-b192-45cd-a1c3-7b2634d009fe","path":"sprites/spr_rotate_leo/spr_rotate_leo.yy",},
     {"name":"0b9bf64b-0821-42bc-b59c-3c09b59a7400","path":"sprites/spr_rotate_leo_1/spr_rotate_leo_1.yy",},

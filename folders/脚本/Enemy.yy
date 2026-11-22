@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"boss_init","path":"scripts/boss_init/boss_init.yy",},
     {"name":"boss_registry","path":"scripts/boss_registry/boss_registry.yy",},

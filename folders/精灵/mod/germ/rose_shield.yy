@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"113bc3f9-9c2c-4416-835d-78d859ef979b","path":"sprites/spr_rose_shield/spr_rose_shield.yy",},
     {"name":"6d6dab1d-d9a7-4669-a68b-264f837ab5ec","path":"sprites/spr_rose_shield_bullet/spr_rose_shield_bullet.yy",},

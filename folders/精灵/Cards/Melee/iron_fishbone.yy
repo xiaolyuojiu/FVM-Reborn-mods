@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"aa945e3e-39dd-4f66-8a41-b487e74bc004","path":"sprites/spr_iron_fishbone/spr_iron_fishbone.yy",},
     {"name":"b34f68b1-ac40-47b0-88f4-d8530ae03d01","path":"sprites/spr_iron_fishbone_1/spr_iron_fishbone_1.yy",},

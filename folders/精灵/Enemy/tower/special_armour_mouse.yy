@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e17f7269-3391-47ee-827f-ef61e6534d69","path":"sprites/spr_little_armour_mouse/spr_little_armour_mouse.yy",},
     {"name":"e1ece4ef-7733-4fa8-8ef8-46bcf5601b97","path":"sprites/spr_little_armour_mouse_throw/spr_little_armour_mouse_throw.yy",},

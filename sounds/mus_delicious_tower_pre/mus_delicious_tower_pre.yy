@@ -15,7 +15,7 @@
     },
   },
   "conversionMode":0,
-  "duration":138.7102,
+  "duration":69.459595,
   "exportDir":"",
   "name":"mus_delicious_tower_pre",
   "parent":{
@@ -26,6 +26,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"mus_delicious_tower_pre.MP3",
+  "soundFile":"mus_delicious_tower_pre.mp3",
   "volume":1.0,
 }

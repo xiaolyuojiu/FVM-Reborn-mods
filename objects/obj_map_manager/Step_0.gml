@@ -1,4 +1,4 @@
-if keyboard_check_pressed(vk_escape){
+if (!global.console_open && keyboard_check_pressed(vk_escape)){
 	// 🔴 合成屋演出中（融合 / 转职 / 进化）：ESC 直接吃掉，不许退出（2026-11-11 用户口径，与 obj_menu_manager 同一条）
 	if (instance_exists(obj_craft_bg) && obj_craft_bg.craft_anim_lock()){ }
 	else if instance_exists(obj_mod_menu){
@@ -10,6 +10,10 @@ if keyboard_check_pressed(vk_escape){
 	}
 	else if instance_exists(obj_edit_menu){
 		panel_anim_close(obj_edit_menu)
+		obj_player_info_ui.menu_type = 0
+	}
+	else if instance_exists(obj_credits_menu){
+		panel_anim_close(obj_credits_menu)
 		obj_player_info_ui.menu_type = 0
 	}
 	else if instance_exists(obj_world_map_menu){
@@ -70,6 +74,16 @@ if keyboard_check_pressed(vk_escape){
 			obj_player_info_ui.menu_type = 0
 			obj_world_map_button.world_map = 0
 		}
+	}
+	else if instance_exists(obj_camp_shop_bg){
+		panel_anim_close(obj_camp_shop_bg)
+		obj_player_info_ui.menu_type = 0
+		obj_world_map_button.world_map = 0
+	}
+	else if instance_exists(obj_camp_port_menu){
+		panel_anim_close(obj_camp_port_menu)
+		obj_player_info_ui.menu_type = 0
+		obj_world_map_button.world_map = 0
 	}
 	else{
 		global.gui_stack.to(room_menu)

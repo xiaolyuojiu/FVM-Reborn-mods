@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"96fdbacb-a874-4ff3-8604-c3c60f64dfd6","path":"sprites/spr_niuyouguo/spr_niuyouguo.yy",},
     {"name":"17498b4a-e684-4b14-95df-94cdcef44ee2","path":"sprites/spr_niuyouguo_1/spr_niuyouguo_1.yy",},

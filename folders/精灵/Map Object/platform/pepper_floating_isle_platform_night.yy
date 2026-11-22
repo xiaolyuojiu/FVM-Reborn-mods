@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"6f2aa777-1852-4231-84f1-6f948a75d1df","path":"sprites/spr_pepper_floating_isle_platform_night_1/spr_pepper_floating_isle_platform_night_1.yy",},
     {"name":"96e57bfb-515a-4f1e-85e8-e3381760e1eb","path":"sprites/spr_pepper_floating_isle_platform_night_2/spr_pepper_floating_isle_platform_night_2.yy",},

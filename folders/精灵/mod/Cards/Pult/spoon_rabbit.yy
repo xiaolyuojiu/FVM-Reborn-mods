@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spoon_rabbit",
+  "folderPath":"folders/精灵/mod/Cards/Pult/spoon_rabbit.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spoon_rabbit",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

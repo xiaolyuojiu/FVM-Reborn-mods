@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"42949398-b34d-4e17-adfb-1048b4f107cc","path":"sprites/spr_water_penguin_mouse/spr_water_penguin_mouse.yy",},
     {"name":"7e3f587b-56ab-4a0c-861c-0594370e1af2","path":"sprites/spr_water_penguin_mouse_enter/spr_water_penguin_mouse_enter.yy",},

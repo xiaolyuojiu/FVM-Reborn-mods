@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"mixian",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/mixian.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"mixian",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"cold_drew_machine",
+  "folderPath":"folders/精灵/mod/Cards/Track/cold_drew_machine.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"cold_drew_machine",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

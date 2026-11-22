@@ -10,8 +10,8 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"Battle BGM","path":"folders/声音/Battle BGM.yy",},
     {"name":"Sound Effect","path":"folders/声音/Sound Effect.yy",},
-    {"name":"Battle BGM","path":"folders/声音/Battle BGM.yy",}
   ],
   "listItems":[],
 }

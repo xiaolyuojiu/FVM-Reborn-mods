@@ -10,10 +10,13 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"floating_island","path":"folders/精灵/Maps/floating_island.yy",},
     {"name":"delicious_island","path":"folders/精灵/Maps/delicious_island.yy",},
+    {"name":"desert_trip","path":"folders/精灵/Maps/desert_trip.yy",},
+    {"name":"explore_camp","path":"folders/精灵/Maps/explore_camp.yy",},
+    {"name":"floating_island","path":"folders/精灵/Maps/floating_island.yy",},
+    {"name":"longyuan","path":"folders/精灵/Maps/longyuan.yy",},
     {"name":"undersea_vortex","path":"folders/精灵/Maps/undersea_vortex.yy",},
-    {"name":"volcanic_island","path":"folders/精灵/Maps/volcanic_island.yy",}
+    {"name":"volcanic_island","path":"folders/精灵/Maps/volcanic_island.yy",},
   ],
   "listItems":[
     {"name":"0479487e-1bc9-4792-9c03-7cf6dd327a84","path":"sprites/spr_reday_room/spr_reday_room.yy",},

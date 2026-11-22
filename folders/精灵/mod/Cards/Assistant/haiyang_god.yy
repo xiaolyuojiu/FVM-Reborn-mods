@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"haiyang_god",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/haiyang_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"haiyang_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

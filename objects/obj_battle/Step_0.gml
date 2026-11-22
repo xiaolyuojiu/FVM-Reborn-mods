@@ -216,10 +216,10 @@ if (_frame_rate_scaled) {
 
 battle_time += time_ticks_this_step
 // obj_controller STEP 事件
-if global.debug{
+if global.debug && !global.console_open{
 	if keyboard_check_pressed(ord("M")){
 		var grid_pos = get_grid_position_from_world(mouse_x,mouse_y)
-		var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_sawblade_mouse)
+		var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_desert_witch_mouse)
 		inst.grid_row = grid_pos.row
 		inst.grid_col = grid_pos.col
 		inst.frozen_timer = 0000
@@ -227,7 +227,7 @@ if global.debug{
 	if keyboard_check_pressed(ord("N")){
 		var enemy_row = irandom_range(0,global.grid_rows-1)
 		var enemy_pos = get_world_position_from_grid(10,enemy_row)
-		instance_create_depth(enemy_pos.x-80,enemy_pos.y+33,-200,obj_blonde_mary)
+		instance_create_depth(enemy_pos.x-80,enemy_pos.y+33,-200,obj_anubis_mouse)
 		boss_count++
 		//var grid_pos = get_grid_position_from_world(mouse_x,mouse_y)
 		//var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_mario_mouse)
@@ -237,21 +237,21 @@ if global.debug{
 	}
 	if keyboard_check_pressed(ord("L")){
 		var grid_pos = get_grid_position_from_world(mouse_x,mouse_y)
-		var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_war_god_soldier)
+		var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_cactus_mouse)
 		inst.grid_row = grid_pos.row
 		inst.grid_col = grid_pos.col
 		inst.frozen_timer = 0000
 	}
 	if keyboard_check_pressed(ord("K")){
 		var grid_pos = get_grid_position_from_world(mouse_x,mouse_y)
-		var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_war_god_summon)
+		var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_javelin_giant_mouse)
 		inst.grid_row = grid_pos.row
 		inst.grid_col = grid_pos.col
 		inst.frozen_timer = 0000
 	}
 	if keyboard_check_pressed(ord("B")){
 		var grid_pos = get_grid_position_from_world(mouse_x,mouse_y)
-		var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_conch_mouse)
+		var inst = instance_create_depth(grid_pos.x,grid_pos.y+38,0,obj_hot_ballon_mouse)
 		inst.grid_row = grid_pos.row
 		inst.grid_col = grid_pos.col
 		inst.frozen_timer = 0000
@@ -318,7 +318,7 @@ if time_limit > 0{
 }
 
 
-if keyboard_check_pressed(vk_shift) || keyboard_check_pressed(vk_lshift){
+if !global.console_open && (keyboard_check_pressed(vk_shift) || keyboard_check_pressed(vk_lshift)){
 	speed_up = not speed_up
 	if speed_up{
 		game_set_speed(120,gamespeed_fps)
@@ -387,7 +387,7 @@ if wave_timer <= 0 && level_stage == "boss"{
 	}
 }
 
-if global.debug{
+if global.debug && !global.console_open{
 	if keyboard_check_pressed(ord("V")){
 		if level_stage == "ready"{
 			battle_time = (global.level_file.first_wave_delay * 60)

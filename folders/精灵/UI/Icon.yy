@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"9af8e7e2-dce8-429f-870d-7cb77853c149","path":"sprites/spr_chocolate_bread_icon_1/spr_chocolate_bread_icon_1.yy",},
     {"name":"19651486-202c-4388-a192-88f9cb9f1943","path":"sprites/spr_chocolate_pult_icon/spr_chocolate_pult_icon.yy",},

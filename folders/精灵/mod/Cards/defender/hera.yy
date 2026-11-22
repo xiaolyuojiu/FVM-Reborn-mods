@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"hera",
+  "folderPath":"folders/精灵/mod/Cards/defender/hera.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"hera",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

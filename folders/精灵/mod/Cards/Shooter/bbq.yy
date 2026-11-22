@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"4285be13-9eca-4304-9a5a-4c9ff0d91e10","path":"sprites/spr_bbq/spr_bbq.yy",},
     {"name":"23d9edfd-81e4-4adf-9542-a0fa1ee4a78b","path":"sprites/spr_bbq_1/spr_bbq_1.yy",},

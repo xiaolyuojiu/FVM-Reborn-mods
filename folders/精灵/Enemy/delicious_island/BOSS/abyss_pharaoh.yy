@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"63109cb9-a322-4201-ae98-4a29a6a0bd41","path":"sprites/spr_abyss_pharaoh_appear/spr_abyss_pharaoh_appear.yy",},
     {"name":"1d40f6bf-0c4b-439d-a416-b988e6229a92","path":"sprites/spr_abyss_pharaoh_death/spr_abyss_pharaoh_death.yy",},

@@ -15,7 +15,7 @@
     },
   },
   "conversionMode":0,
-  "duration":120.79021,
+  "duration":60.107754,
   "exportDir":"",
   "name":"mus_delicious_tower_elite",
   "parent":{
@@ -26,6 +26,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"mus_delicious_tower_elite.MP3",
+  "soundFile":"mus_delicious_tower_elite.mp3",
   "volume":1.0,
 }

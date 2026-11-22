@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_xuanfengniu","path":"sprites/spr_xuanfengniu/spr_xuanfengniu.yy",},
     {"name":"spr_xuanfengniu_1","path":"sprites/spr_xuanfengniu_1/spr_xuanfengniu_1.yy",},

@@ -10,17 +10,17 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"Fonts","path":"folders/Scribble/Fonts.yy",},
-    {"name":"Superfonts","path":"folders/Scribble/Superfonts.yy",},
     {"name":"(System - don't call these functions)","path":"folders/Scribble/(System - don't call these functions).yy",},
+    {"name":"Animation","path":"folders/Scribble/Animation.yy",},
+    {"name":"Colours","path":"folders/Scribble/Colours.yy",},
+    {"name":"Configuration - Please edit these!","path":"folders/Scribble/Configuration - Please edit these!.yy",},
     {"name":"External Assets","path":"folders/Scribble/External Assets.yy",},
     {"name":"Font Modification","path":"folders/Scribble/Font Modification.yy",},
-    {"name":"Configuration - Please edit these!","path":"folders/Scribble/Configuration - Please edit these!.yy",},
-    {"name":"Animation","path":"folders/Scribble/Animation.yy",},
+    {"name":"Fonts","path":"folders/Scribble/Fonts.yy",},
     {"name":"Legacy","path":"folders/Scribble/Legacy.yy",},
-    {"name":"Colours","path":"folders/Scribble/Colours.yy",},
     {"name":"Miscellaneous","path":"folders/Scribble/Miscellaneous.yy",},
-    {"name":"Quick Functions","path":"folders/Scribble/Quick Functions.yy",}
+    {"name":"Quick Functions","path":"folders/Scribble/Quick Functions.yy",},
+    {"name":"Superfonts","path":"folders/Scribble/Superfonts.yy",},
   ],
   "listItems":[
     {"name":"scribble","path":"scripts/scribble/scribble.yy",},

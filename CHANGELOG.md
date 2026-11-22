@@ -1,3 +1,96 @@
+# v3.1.0
+> 上游 3.1.0（`D:\gameProject\FVM-Reborn-main`）三方合并进 mod 分支。合并口径：mod 自建架构（子弹 Step/空间索引、
+# 营地转职凭证、羁绊/海克斯/龙渊/跨服、情报岛富文本）优先，上游只贡献语义与数值；冲突逐块裁决，见下。
+## 新内容
+- **沙漠之旅**：新增地图 `desert_trip`（`scripts/maps_init/maps_init.gml`）+ 9 关 ×（普通/困难）共 18 个关卡 JSON
+  （`datafiles/level_data/desert/`：`aloe_dune_daytime/night`、`hippophae_oasis`、`cactus_basin_daytime/night`、
+  `lizard_gobi`、`fishbone_desert_daytime/night`、`cucur_pyramid`），关卡哈希表已随之重算。
+- **2 张新卡**：仙人掌刺身 `cactus_sashimi`、防风草沙拉 `parsnip_salad`
+  （数值在 `scripts/cards_init`，槽位/费用在 `scripts/slots_init`，情报岛文案在 `scripts/info_island_init`）。
+- **上游 3.1.0 的另外 2 张卡不采用**：
+  - 烤蜥蜴投手 `roast_lizard_pult` 与 mod 既有卡重复 —— mod 早已有同名的「烤蜥蜴投手」`grilled_lizard_pult`
+    （`scripts/mod_cards_init:1934` / `mod_slots_init:1835` / `mod_skill_init:35` / `mod_shop_init:27` /
+    `mod_info_island_init:30` / `credit_shop_init` 一、二转凭证 / `obj_grilled_lizard_pult`），按用户口径全部撤除
+    （槽位、数值、技能、营地商品、情报岛文案、魔塔转职凭证、任务分组、`test_save` 解锁、
+    `fishbone_desert_daytime(_hard)` 首通 `card_unlock` 一并改指 `grilled_lizard_pult`；
+    对象 `obj_roast_lizard_pult` / `obj_roastlizardpult_bullet` 与 9 张 `spr_roast_lizard_pult*` 精灵已删除并同步 yyp / folders）。
+  - 水果塔 `fruit_tart` 是 mod 既有卡，保留 mod 原注册（cost 150、`spr_fruit_tart*`、原描述），不采用上游改动。
+  - **水果塔增幅范围修正（2026-11-22，用户 m01976）**：水果塔的 `atk` 本身就是倍率（1.5~3.0），但增幅格子写成 `buff_value = atk / 100`，
+    网格里恒为 0.015 被 `max()` 吃掉，所以此前只有 8 个子弹的内联判定真正吃到增幅。现改走 thrower 通道的增幅网格
+    （新脚本 `scripts/fruit_tart_buff`：零转本行左侧 / 一转整行 / 二转三行），投掷类全类按 `card_buff_channels` 名单统一生效，
+    以后新增的投掷类卡片自动覆盖；`obj_bullet_parent/BeginStep_0` 与 8 个子弹 Step 里的内联判定全部撤除，避免同一份增幅结算两次。
+- **7 个新 BOSS + 24 个新敌人**：`witch_shaman_mouse`、`hermit_crab_mouse`、`medusa`、`awaken_medusa`、
+  `tribal_chief_mouse`、`ufo_mouse`、`anubis_mouse`（`scripts/boss_init` / `scripts/enemy_init` 成对注册）；
+  常规兵：部落鼠、骷髅鼠、图腾盾鼠、沙板鼠、沙鼹鼠、萨满鼠、特洛伊木马、原始巨鼠、小怪物鼠、仙人掌鼠、
+  沙漠女巫鼠、热气球鼠、标枪巨鼠等（含各自子弹/召唤物对象）。
+- **营地港口**：`obj_camp_port_menu`（+ `obj_camp_port_choose_btn` / `obj_camp_port_close_btn`），
+  入口在 `scripts/maps_init` 的 `camp_port` 关卡，经 `objects/obj_levelselect_button/Mouse_4.gml` 打开；
+  沙漠之旅已开放（20 级），雪原/雷城/幻境按钮保持未开放提示。
+- **调试控制台**：`obj_console` + `scripts/console_commands`（默认 `~` 键，`config.ini → [settings] console_enabled`
+  默认关闭），`global.console_open` 在展开期间屏蔽其它对象的按键（卡槽热键 / 空格暂停 / ESC 返回）。
+- **画面设置**：新增「禁用暂停滤镜」开关（`global.pause_filter`，`config.ini → [settings] pause_filter`），
+  开启后空格暂停不再叠半透明黑遮罩（`objects/obj_battle_pause_manager/Draw_0.gml`）。
+- **暂停时可操作卡片**：暂停期间允许放置与铲除卡片；卡片冷却在暂停时不推进
+  （`objects/obj_card_slot/Step_0.gml` 的 `!global.is_paused` 与 mod 的无常鼠锁链冻结合并为同一条件）。
+- **存档 / 关卡读取失败提示**：`scripts/save_file` 保存失败、`scripts/level_integrity` + `scripts/level_hashes`
+  关卡哈希校验失败都会弹提示（`global.level_hash_verify = true`，哈希表由 `tools/gen_level_hashes.py` 生成）。
+## 优化与修复
+- **本机识别码全服撞车（指纹 v2）**：`scripts/auth_client/auth_client.gml` 的 `auth_hwid()`
+  原来只用 `COMPUTERNAME | PROCESSOR_IDENTIFIER | NUMBER_OF_PROCESSORS`，这三个量在 ghost 克隆镜像 /
+  同批装机 / 无盘网吧里完全相同，导致所有机器算出同一个识别码（现网 `E52D26F9`），
+  连带机器人账本按 hwid 去重 → 整串授权码逐字节一致。
+  现改为：优先用原生硬件 UUID（`FvmNativeSupport` 新增导出 `MachineUuid`，取 SMBIOS System UUID，
+  退化到首块物理网卡 MAC）→ `V2|<UUID>`；拿不到原生时退化为
+  `V2E|<环境量>|<每份安装随机 ID>`（首次运行生成 `install.id` 落盘）。
+  旧码兼容：保留 `auth_hwid_legacy()`，仅对本地已存的授权记录放行（`auth_load`），
+  新粘贴的旧指纹码由 `auth_bind` 返回 4，界面提示重新领码。
+  新增 `/FVM_Reborn_makk/auth.log`，每次启动记录 `hwid / raw / v1` 三个值，便于排查同类问题。
+- 修复使用 ESC 关闭营地商店后世界地图按钮失效（`objects/obj_map_manager/Step_0.gml` 补 `obj_camp_shop_bg` /
+  `obj_camp_port_menu` 的关闭分支）。
+- 修复营地商店购买转职后星级可能被降低：mod 侧营地档本就是「只发转职凭证」（`transfer_credit_id` /
+  `camp_credit_mark_bought`），保留 mod 实现，不引入上游直接 `unlock_card` 的旧写法。
+- 修复酒杯灯食谱不生效（`objects/obj_goblet_lamp/Other_11.gml` 的硬编码 `90*60` 改为 `grow_time`；
+  `scripts/cookbook_init` 补狗不理包子食谱的 `cycle` 修正）。
+- 地图老鼠预览与情报岛立绘互相遮挡：`objects/obj_mouse_preview` 与 `objects/obj_info_island_bg`
+  改用立绘裁剪框（`enemy_clip_w/h = 176`）+ 普通鼠军/ BOSS 分级缩放（`enemy_scale_normal` 1.0 /
+  `enemy_scale_boss` 0.55，配合 `scripts/sprite_trim_get` 裁透明留白）。
+- **立绘适配本工程全部美术（2026-11-22，用户 m02229）**：上游那套「裁剪框 + 固定比例」只覆盖原版美术，
+  本工程自有的换皮敌人（感染鼠 `spr_infected_*`、跨服鼠 `spr_kuafu_*`、龙渊 BOSS `spr_longzhu_*_icon` 等）
+  不在 `scripts/sprite_trim_get` 的离线包围盒表里，于是退回整张画布贴底对齐 —— 画布大且内容偏上的贴图
+  （如 `spr_infected_submarine_mouse_land` 193×322、内容仅占 9%）会被整个推出裁剪框，情报岛里**完全看不见**。
+  两处修正：
+  - `tools/gen_sprite_trim.py` 改为扫描 `scripts/` 下所有带 `spr` 字段的注册脚本（原先只扫 `enemy_init`，
+    漏掉 `mod_enemy_init` / `longyuan_enemy_init` / `shuihuo_enemy_init` / `zhuore_enemy_init` /
+    `wudu_enemy_init`；`attire_init` 是装扮，排除），表从 158 条补到 **366 条**；
+  - `scripts/sprite_clip_draw` 的包围盒改成「离线表 → 运行时 `sprite_get_bbox_*` → 整张画布」三级回退，
+    并且固定缩放改为**上限**（内容超出裁剪框时等比缩到刚好放得进），不再把立绘裁掉半只。
+    两处调用方（情报岛 `enemy_scale_*`、地图预览 `scale_*`）的注释同步说明「这是上限」。
+- 关卡预览支持滚轮翻页，BOSS 行自动排在当前页普通敌人下方；血量提示改为显示乘完关卡倍率的实际血量
+  （`objects/obj_level_preview/{Create_0,Step_0,Draw_0}`）。
+- 关闭情报岛偶发报错：`objects/obj_info_island_bg` 不再在 `Destroy` 里动 `application_surface`。
+- **情报岛正文排版不合并**：公告中「情报岛正文改用新文本排版系统」一条按要求跳过，继续用 mod 自己的
+  `info_island_text_draw_rich()`；只吸收新卡/新敌人的文案条目（`scripts/info_island_init`、
+  `scripts/enemy_info_island_init` 走 `append_new_ids`，既有文案保持硬折行版本）。
+- 中文补字：三套字体补 `骷`(U+9AB7) / `髅`(U+9AC5) 两个字（`fonts/font_yuan`、`font_hei`、`font_pixel`）。
+- 修正上游 3.1.0 自带的括号错位：`objects/obj_level_preview/Step_0.gml` 的 ESC 判定补一层括号。
+## 平衡性调整
+- **煮蛋器投手**：基础溅射比例 50%（`objects/obj_eggboilerpult_bullet/Destroy_0.gml` 的 `_splash = 0.5`），
+  一转攻击力 +30%（`scripts/cards_init` 的 `egg_boiler_pult` shape1）。
+- **冰煮蛋器投手**：攻击力 = 煮蛋器投手零转 × 1.6（`ice_egg_boiler_pult` 从 50 提到 80 起）。
+- **生煎锅 / 麻辣香锅**：新增「边路补偿」——火焰位于第 0 行或最后一行时本路伤害翻倍，相邻行不变
+  （`objects/obj_panfriedbun_bullet_effect/Other_10.gml`、`objects/obj_spicypot_bullet/Step_0.gml` 的 `_dmg *= 2`）。
+- **麻辣香锅**：能量消耗 -100（mod 的 `scripts/mod_cards_init` 里三形态 cost 300 → 200；攻击力沿用 mod 自建数值）。
+- **肥牛火锅 / 咖啡喷壶 / 关东煮喷锅**：全星级攻击力提升（数值随 `scripts/cards_init` 上游改动落地）。
+## 合并技术说明
+- 子弹系统保持 mod 自建（每颗子弹自带 Step + `bullet_sap_type_list` 空间索引 + `precise_bbox_collision`），
+  不引入上游 3.1.0 的 `obj_bullet_parent` 钩子框架；上游新增的两颗子弹
+  （`obj_cactussashimi_bullet`、`obj_roastlizardpult_bullet`）已按 mod 架构重写。
+- 上游 3.1.0 删除的 82 个子弹逻辑文件（Step/Collision/Destroy）在 mod 中**保留**，因为 mod 用的是自建循环。
+- 新增纹理组 `pack_desert_trip`（yyp + `scripts/ResourceResidency` 的动态组与场景预热、`obj_menu_manager` 预载列表）。
+- `global.enemy_damage_reduction`（飞碟鼠技能 3：全场非 BOSS 减伤）已接入
+  `objects/obj_enemy_parent/Other_10.gml` 与 `objects/obj_barrel_mouse/Other_10.gml`。
+- 版本号置 `3.1.0.1`（`objects/obj_game_init/Create_0.gml`，末位是 mod 补丁位）。
+
 # v2.9.0
 ## 优化与修复
 - **肥牛火锅二转凭证门槛改到 31-2（2026-11-21）**：

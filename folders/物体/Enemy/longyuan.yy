@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"longyuan",
+  "folderPath":"folders/物体/Enemy/longyuan.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"longyuan",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

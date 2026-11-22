@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"17e1d51a-d5bf-4bb1-a12e-7b354d291d24","path":"sprites/spr_double_water_pipe/spr_double_water_pipe.yy",},
     {"name":"24bf7f5e-a5e3-4b04-b92c-05548f78fee4","path":"sprites/spr_double_water_pipe_1/spr_double_water_pipe_1.yy",},

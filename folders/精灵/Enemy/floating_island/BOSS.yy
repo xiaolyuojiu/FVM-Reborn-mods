@@ -10,15 +10,15 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"mouse_train_3","path":"folders/精灵/Enemy/floating_island/BOSS/mouse_train_3.yy",},
+    {"name":"angelababy","path":"folders/精灵/Enemy/floating_island/BOSS/angelababy.yy",},
     {"name":"captain_america_mouse","path":"folders/精灵/Enemy/floating_island/BOSS/captain_america_mouse.yy",},
-    {"name":"hulk_mouse","path":"folders/精灵/Enemy/floating_island/BOSS/hulk_mouse.yy",},
-    {"name":"mouse_train_1","path":"folders/精灵/Enemy/floating_island/BOSS/mouse_train_1.yy",},
-    {"name":"spider_man_mouse","path":"folders/精灵/Enemy/floating_island/BOSS/spider_man_mouse.yy",},
     {"name":"huang_xiaoming","path":"folders/精灵/Enemy/floating_island/BOSS/huang_xiaoming.yy",},
-    {"name":"mouse_train_2","path":"folders/精灵/Enemy/floating_island/BOSS/mouse_train_2.yy",},
+    {"name":"hulk_mouse","path":"folders/精灵/Enemy/floating_island/BOSS/hulk_mouse.yy",},
     {"name":"iron_man_mouse","path":"folders/精灵/Enemy/floating_island/BOSS/iron_man_mouse.yy",},
-    {"name":"angelababy","path":"folders/精灵/Enemy/floating_island/BOSS/angelababy.yy",}
+    {"name":"mouse_train_1","path":"folders/精灵/Enemy/floating_island/BOSS/mouse_train_1.yy",},
+    {"name":"mouse_train_2","path":"folders/精灵/Enemy/floating_island/BOSS/mouse_train_2.yy",},
+    {"name":"mouse_train_3","path":"folders/精灵/Enemy/floating_island/BOSS/mouse_train_3.yy",},
+    {"name":"spider_man_mouse","path":"folders/精灵/Enemy/floating_island/BOSS/spider_man_mouse.yy",},
   ],
   "listItems":[],
 }

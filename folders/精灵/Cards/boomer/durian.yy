@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ca72c28a-e596-4005-b11a-1dc6bba99b9f","path":"sprites/spr_durian/spr_durian.yy",},
     {"name":"1f33dae3-f897-457c-b0da-d634d90a92a1","path":"sprites/spr_durian_1/spr_durian_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"04be48fc-3c18-4ac7-8a76-a6044860485d","path":"sprites/spr_fire_residue_appear/spr_fire_residue_appear.yy",},
     {"name":"84cd7cb7-ffcc-425e-a0a1-2668acabe34f","path":"sprites/spr_fire_residue_ball/spr_fire_residue_ball.yy",},

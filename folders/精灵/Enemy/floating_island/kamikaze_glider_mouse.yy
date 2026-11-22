@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f8f2fe4a-b823-490b-b94f-c1d901231746","path":"sprites/spr_kamikaze_glider_mouse_air/spr_kamikaze_glider_mouse_air.yy",},
     {"name":"75ce7acb-5002-4bf8-9662-f9a2ae5feeb0","path":"sprites/spr_kamikaze_glider_mouse_drop/spr_kamikaze_glider_mouse_drop.yy",},

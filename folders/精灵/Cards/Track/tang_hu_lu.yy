@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"e14c46fe-e863-45b3-a98a-2a89da7207e1","path":"sprites/spr_tang_hu_lu/spr_tang_hu_lu.yy",},
     {"name":"a0e233d9-f590-4f87-ba0c-c2990b0684bd","path":"sprites/spr_tang_hu_lu_1/spr_tang_hu_lu_1.yy",},

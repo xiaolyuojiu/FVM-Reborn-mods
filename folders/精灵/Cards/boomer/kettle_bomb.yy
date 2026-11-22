@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"784a5f6a-d2f7-4afa-ab53-78633cd4f7b9","path":"sprites/spr_kettle_bomb/spr_kettle_bomb.yy",},
     {"name":"233fb684-1c3f-4c8a-836c-4aed5350685b","path":"sprites/spr_kettle_bomb_1/spr_kettle_bomb_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"21fe5e0f-53a8-47bc-b371-e824d4d13fac","path":"sprites/spr_hells_messenger_appear/spr_hells_messenger_appear.yy",},
     {"name":"49188ddf-f11c-4790-87ca-6e082d3f892e","path":"sprites/spr_hells_messenger_death/spr_hells_messenger_death.yy",},

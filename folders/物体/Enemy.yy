@@ -10,14 +10,16 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"delicious_island","path":"folders/物体/Enemy/delicious_island.yy",},
+    {"name":"desert_trip","path":"folders/物体/Enemy/desert_trip.yy",},
+    {"name":"explore_camp","path":"folders/物体/Enemy/explore_camp.yy",},
     {"name":"floating_island","path":"folders/物体/Enemy/floating_island.yy",},
+    {"name":"kuafu","path":"folders/物体/Enemy/kuafu.yy",},
+    {"name":"longyuan","path":"folders/物体/Enemy/longyuan.yy",},
+    {"name":"mouse_bullet","path":"folders/物体/Enemy/mouse_bullet.yy",},
+    {"name":"tower","path":"folders/物体/Enemy/tower.yy",},
     {"name":"undersea_vortex","path":"folders/物体/Enemy/undersea_vortex.yy",},
     {"name":"volcanic_island","path":"folders/物体/Enemy/volcanic_island.yy",},
-    {"name":"delicious_island","path":"folders/物体/Enemy/delicious_island.yy",},
-    {"name":"tower","path":"folders/物体/Enemy/tower.yy",},
-    {"name":"mouse_bullet","path":"folders/物体/Enemy/mouse_bullet.yy",},
-    {"name":"kuafu","path":"folders/物体/Enemy/kuafu.yy",},
-  
   ],
   "listItems":[
     {"name":"obj_enemy_parent","path":"objects/obj_enemy_parent/obj_enemy_parent.yy",}

@@ -1,0 +1,18 @@
+{
+  "$GMFolder":"",
+  "%Name":"wuchang",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS/wuchang.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"wuchang",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"bai","path":"folders/精灵/Enemy/longyuan/BOSS/wuchang/bai.yy",},
+    {"name":"hei","path":"folders/精灵/Enemy/longyuan/BOSS/wuchang/hei.yy",},
+    {"name":"yuanbao","path":"folders/精灵/Enemy/longyuan/BOSS/wuchang/yuanbao.yy",},
+  ],
+  "listItems":[],
+}

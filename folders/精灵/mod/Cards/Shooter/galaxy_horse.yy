@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"galaxy_horse",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/galaxy_horse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"galaxy_horse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

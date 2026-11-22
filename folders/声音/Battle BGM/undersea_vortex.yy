@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"music","path":"sounds/mus_undersea_vortex_boss/mus_undersea_vortex_boss.yy",},
     {"name":"music","path":"sounds/mus_undersea_vortex_daytime/mus_undersea_vortex_daytime.yy",},

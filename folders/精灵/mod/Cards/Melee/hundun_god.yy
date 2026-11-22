@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"hundun_god",
+  "folderPath":"folders/精灵/mod/Cards/Melee/hundun_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"hundun_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"003fc80b-d03c-4990-81aa-a17dc6241324","path":"sprites/spr_delicacy_firework/spr_delicacy_firework.yy",},
     {"name":"eb658c1d-c0d4-47f8-b6b4-4bfba0ba0875","path":"sprites/spr_delicacy_firework_1/spr_delicacy_firework_1.yy",},

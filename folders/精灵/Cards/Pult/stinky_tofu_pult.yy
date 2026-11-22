@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"5143a96d-7fc2-467c-87dd-abc5187ccd7a","path":"sprites/spr_stinky_tofu_pult/spr_stinky_tofu_pult.yy",},
     {"name":"5c7c2791-66d4-4158-8ad3-e6fa06690875","path":"sprites/spr_stinky_tofu_pult_1/spr_stinky_tofu_pult_1.yy",},

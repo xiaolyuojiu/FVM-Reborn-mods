@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"fbfd5724-8e9b-4613-a456-2f2f5af9c3e6","path":"sprites/spr_ronghekafei/spr_ronghekafei.yy",},
     {"name":"11bacd53-b1a5-4d69-8a51-5081d18c1f86","path":"sprites/spr_ronghekafei_1/spr_ronghekafei_1.yy",},

@@ -9,7 +9,15 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+    {"name":"ancient_castle","path":"folders/精灵/mod/Cross Server/ancient_castle.yy",},
+    {"name":"bingfengyiji","path":"folders/精灵/mod/Cross Server/bingfengyiji.yy",},
+    {"name":"mengyantiankong","path":"folders/精灵/mod/Cross Server/mengyantiankong.yy",},
+    {"name":"mouse","path":"folders/精灵/mod/Cross Server/mouse.yy",},
+    {"name":"shuihuozhijian","path":"folders/精灵/mod/Cross Server/shuihuozhijian.yy",},
+    {"name":"wuduyanjiusuo","path":"folders/精灵/mod/Cross Server/wuduyanjiusuo.yy",},
+    {"name":"zhuorediyu","path":"folders/精灵/mod/Cross Server/zhuorediyu.yy",},
+  ],
   "listItems":[
     {"name":"1a4d27fe-230b-4463-8cd9-44a14d9cbdaa","path":"sprites/spr_mod_cs_enter/spr_mod_cs_enter.yy",},
     {"name":"49a7a3b6-868f-4a8e-88fb-230458c20e09","path":"sprites/spr_mod_cs_bg/spr_mod_cs_bg.yy",},

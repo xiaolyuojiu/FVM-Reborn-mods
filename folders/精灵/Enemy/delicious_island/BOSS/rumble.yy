@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"dc98c727-eecd-4077-a83e-7c075722c6de","path":"sprites/spr_rumble_appear/spr_rumble_appear.yy",},
     {"name":"f785d13c-1362-4288-8994-628a19c21d57","path":"sprites/spr_rumble_death/spr_rumble_death.yy",},

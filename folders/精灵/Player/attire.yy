@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_player_attire_xingzhiyao_nv_b_icon","path":"sprites/spr_player_attire_xingzhiyao_nv_b_icon/spr_player_attire_xingzhiyao_nv_b_icon.yy",},
     {"name":"spr_player_attire_xingzhiyao_nv_b","path":"sprites/spr_player_attire_xingzhiyao_nv_b/spr_player_attire_xingzhiyao_nv_b.yy",},

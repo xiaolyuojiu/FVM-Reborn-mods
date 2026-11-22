@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"51471a7f-cae1-437f-be61-1d18e02dbeb5","path":"sprites/spr_windmill_fish_mouse_air/spr_windmill_fish_mouse_air.yy",},
     {"name":"955abed4-f289-42e3-8e88-8f3479eabd4c","path":"sprites/spr_windmill_fish_mouse_drop/spr_windmill_fish_mouse_drop.yy",},

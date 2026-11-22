@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"tianshen",
+  "folderPath":"folders/精灵/mod/germ/tianshen.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"tianshen",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

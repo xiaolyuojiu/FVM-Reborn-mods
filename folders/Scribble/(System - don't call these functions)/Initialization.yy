@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"__scribble_class_generator_state","path":"scripts/__scribble_class_generator_state/__scribble_class_generator_state.yy",},
     {"name":"__scribble_glyph_data_initialize","path":"scripts/__scribble_glyph_data_initialize/__scribble_glyph_data_initialize.yy",},

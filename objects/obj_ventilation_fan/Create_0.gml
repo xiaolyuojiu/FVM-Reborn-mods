@@ -33,6 +33,9 @@ ignore_list = ["mario_mouse","mario_pipeline","arno","pharaoh_coffin","temple_ph
 				"captain_rainbow","iron_man_mouse","mouse_train_2","iron_man","machine_bomb_mouse","spider_man_mouse","hulk_mouse","mouse_train_3",
 				"mermaid_mary","mermaid_wave","machine_shark_1","undersea_submarine","lobster_knight","electric_jellyfish","jellyfish_bullet","war_god",
 				"war_god_duck","war_god_wood","hercules","thor","honglonglong",
+				"travel_record","beverage_machine","beverage_bullet","travel_record_moon","face_cookie",
+				// 2026-11-22 v3.1.0：沙漠之旅的 BOSS 也不能被换气扇吹退
+				"witch_shaman_mouse","hermit_crab_mouse","medusa","tribal_chief_mouse","awaken_medusa","ufo_mouse","anubis_mouse",
 				// 2026-11-20 用户口径：跨服的变异美队 / 变异钢铁侠 / 美队彩虹
 				// 都是「重量级 BOSS」，换气扇及其一转、二转一律不吹不退。
 				"kf_zrb_cap","kf_zrb_cap_rainbow","kf_zrb_cap_shield","kf_sh_iron_man"

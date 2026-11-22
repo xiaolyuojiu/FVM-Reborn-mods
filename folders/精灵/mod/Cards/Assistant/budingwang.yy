@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_budingwang","path":"sprites/spr_budingwang/spr_budingwang.yy",},
     {"name":"spr_budingwang_1","path":"sprites/spr_budingwang_1/spr_budingwang_1.yy",},

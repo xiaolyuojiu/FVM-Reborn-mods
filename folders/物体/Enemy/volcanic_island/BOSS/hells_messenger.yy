@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_hells_messenger","path":"objects/obj_hells_messenger/obj_hells_messenger.yy",},
     {"name":"obj_messenger_ignis_fatuus","path":"objects/obj_messenger_ignis_fatuus/obj_messenger_ignis_fatuus.yy",},

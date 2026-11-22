@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"chunsun",
+  "folderPath":"folders/精灵/mod/Cards/Melee/chunsun.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"chunsun",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

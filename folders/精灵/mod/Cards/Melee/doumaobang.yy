@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_doumaobang","path":"sprites/spr_doumaobang/spr_doumaobang.yy",},
     {"name":"spr_doumaobang_1","path":"sprites/spr_doumaobang_1/spr_doumaobang_1.yy",},

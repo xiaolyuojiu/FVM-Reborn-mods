@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"775a6880-0578-4724-8b0b-c6f7fe8f3f2d","path":"sprites/spr_athena_bullet/spr_athena_bullet.yy",},
     {"name":"5c82eacf-254e-41a5-820f-df9845f9a074","path":"sprites/spr_cold_drew_bullet/spr_cold_drew_bullet.yy",},
@@ -139,7 +140,7 @@
     {"name":"695927e5-958c-45c1-8d55-3e2011180c13","path":"sprites/spr_zhurong_bullet_effect1/spr_zhurong_bullet_effect1.yy",},
     {"name":"858060f3-209c-4969-9ae5-ab538649e963","path":"sprites/spr_zhurong_bullet_effect_1/spr_zhurong_bullet_effect_1.yy",},
     {"name":"ba52de3b-999d-4acd-9b53-0445c98729ec","path":"sprites/spr_zhurong_bullet_effect_2/spr_zhurong_bullet_effect_2.yy",},
-    {"name":"677ea0d8-ddea-4996-abf0-ca920b266e15","path":"sprites/spr_zhurong_bullet_effect_3/spr_zhurong_bullet_effect_3.yy",}
+    {"name":"677ea0d8-ddea-4996-abf0-ca920b266e15","path":"sprites/spr_zhurong_bullet_effect_3/spr_zhurong_bullet_effect_3.yy",},
     {"name":"2b32893b-3c84-459f-bd07-39064996ae1b","path":"sprites/spr_jingangma_hit/spr_jingangma_hit.yy",},
   ],
 }

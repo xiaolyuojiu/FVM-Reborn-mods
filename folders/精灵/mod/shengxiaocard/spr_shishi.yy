@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"b66781b6-37f3-4752-9ce0-da1aa03da38b","path":"sprites/spr_shishi/spr_shishi.yy",},
     {"name":"8dc1ed97-6e3e-4cac-bd24-6d9a16ff7c67","path":"sprites/spr_shishi_1/spr_shishi_1.yy",},

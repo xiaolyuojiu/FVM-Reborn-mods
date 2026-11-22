@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"452d93bd-36dd-4c15-82e4-30f5574ac6b3","path":"sprites/spr_pete_appear/spr_pete_appear.yy",},
     {"name":"d78897d9-cf5e-4794-847f-a94f6f61bf6d","path":"sprites/spr_pete_bullet/spr_pete_bullet.yy",},

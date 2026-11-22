@@ -67,4 +67,13 @@ function level_info_island_init(){
 	register_level_info_island("chixiadu_night",{"name":"赤霞渡（夜））","icon":spr_levelselect_button_longyuan,"spr":spr_chixiadu_ye,"description":"符咒鼠出没在赤霞渡夜晚，多多携带对空卡片。\n药罐鼠会持续提供大量体力，灯影花糕等可击破其魂火","spr_index":4})
 	register_level_info_island("naigaiqiao_night",{"name":"奶盖桥（夜））","icon":spr_levelselect_button_longyuan,"spr":spr_naigaiqiao,"description":"观察外观不同的浮块，在安全的位置安排卡片阵容。\n记得携带高体型卡片阻挡高跷鼠。","spr_index":5})
 		
+	register_level_info_island("aloe_dune_daytime",{"name":"芦荟沙丘（日）","icon":spr_levelselect_button_desert,"spr":spr_aloe_dune_daytime,"description":"本关会掉落防风草沙拉。","spr_index":0})
+	register_level_info_island("aloe_dune_night",{"name":"芦荟沙丘（夜）","icon":spr_levelselect_button_desert,"spr":spr_aloe_dune_night,"description":"沙漠之旅关卡。","spr_index":1})
+	register_level_info_island("hippophae_oasis",{"name":"沙棘绿洲","icon":spr_levelselect_button_desert,"spr":spr_hippophae_oasis,"description":"本关会掉落美味水果塔。","spr_index":2})
+	register_level_info_island("cactus_basin_daytime",{"name":"仙人掌盆地（日）","icon":spr_levelselect_button_desert,"spr":spr_cactus_basin_daytime,"description":"沙漠之旅关卡。","spr_index":3})
+	register_level_info_island("cactus_basin_night",{"name":"仙人掌盆地（夜）","icon":spr_levelselect_button_desert,"spr":spr_cactus_basin_night,"description":"本关会掉落仙人掌刺身。","spr_index":4})
+	register_level_info_island("lizard_gobi",{"name":"蜥蜴戈壁","icon":spr_levelselect_button_desert,"spr":spr_lizard_gobi,"description":"沙漠之旅关卡。","spr_index":5})
+	register_level_info_island("fishbone_desert_daytime",{"name":"鱼骨沙漠（日）","icon":spr_levelselect_button_desert,"spr":spr_fishbone_desert_daytime,"description":"本关会掉落烤蜥蜴投手。","spr_index":6})
+	register_level_info_island("fishbone_desert_night",{"name":"鱼骨沙漠（夜）","icon":spr_levelselect_button_desert,"spr":spr_fishbone_desert_night,"description":"沙漠之旅关卡。","spr_index":7})
+	register_level_info_island("cucur_pyramid",{"name":"库库尔金字塔","icon":spr_levelselect_button_desert,"spr":spr_cucur_pyramid,"description":"沙漠之旅关卡。","spr_index":8})
 }

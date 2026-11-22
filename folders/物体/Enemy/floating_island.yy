@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"BOSS","path":"folders/物体/Enemy/floating_island/BOSS.yy",}
+    {"name":"BOSS","path":"folders/物体/Enemy/floating_island/BOSS.yy",},
   ],
   "listItems":[
     {"name":"obj_aircraft_carrier","path":"objects/obj_aircraft_carrier/obj_aircraft_carrier.yy",},

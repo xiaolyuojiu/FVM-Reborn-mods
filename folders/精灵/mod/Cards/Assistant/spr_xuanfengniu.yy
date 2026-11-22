@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_xuanfengniu",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/spr_xuanfengniu.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_xuanfengniu",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

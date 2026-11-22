@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"6ea4940d-c138-4683-b7c2-5e8d82a6dae2","path":"sprites/spr_electric_jellyfish_bullet/spr_electric_jellyfish_bullet.yy",},
     {"name":"fd4cd8a4-9f19-4e42-ba3b-a6db92e51de3","path":"sprites/spr_electric_jellyfish_death/spr_electric_jellyfish_death.yy",},

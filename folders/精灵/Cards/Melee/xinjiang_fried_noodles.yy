@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ffe11b9f-db62-4909-9776-1fd7e1cd4ee6","path":"sprites/spr_xinjiang_fried_noodles/spr_xinjiang_fried_noodles.yy",},
     {"name":"9a172240-5fea-4958-ae97-be00f2132c1d","path":"sprites/spr_xinjiang_fried_noodles_1/spr_xinjiang_fried_noodles_1.yy",},

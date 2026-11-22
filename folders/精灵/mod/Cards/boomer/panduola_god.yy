@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"panduola_god",
+  "folderPath":"folders/精灵/mod/Cards/boomer/panduola_god.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"panduola_god",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

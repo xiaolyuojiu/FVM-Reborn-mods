@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"7985396c-ae85-4117-aee9-982fe0130861","path":"sprites/spr_melon_shield_1_outer_1/spr_melon_shield_1_outer_1.yy",},
     {"name":"c7aa3af0-ebd5-4e38-8937-4ea489322892","path":"sprites/spr_melon_shield_1_outer_2/spr_melon_shield_1_outer_2.yy",},

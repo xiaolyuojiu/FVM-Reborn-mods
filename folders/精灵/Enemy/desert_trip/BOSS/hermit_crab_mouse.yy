@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"hermit_crab_mouse",
+  "folderPath":"folders/精灵/Enemy/desert_trip/BOSS/hermit_crab_mouse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"hermit_crab_mouse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

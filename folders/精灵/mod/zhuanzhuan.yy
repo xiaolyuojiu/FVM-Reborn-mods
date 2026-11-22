@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"zhuanzhuan",
+  "folderPath":"folders/精灵/mod/zhuanzhuan.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"zhuanzhuan",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

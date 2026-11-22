@@ -11,7 +11,7 @@
   "visible":true,
   "folders":[
     {"name":"BOSS","path":"folders/精灵/Enemy/delicious_island/BOSS.yy",},
-    {"name":"mouse_bullet","path":"folders/精灵/Enemy/delicious_island/mouse_bullet.yy",}
+    {"name":"mouse_bullet","path":"folders/精灵/Enemy/delicious_island/mouse_bullet.yy",},
   ],
   "listItems":[
     {"name":"90cd3c55-28b1-42e2-a40c-8f37f3671b34","path":"sprites/spr_assault_mouse/spr_assault_mouse.yy",},

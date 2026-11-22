@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"55a011f4-515b-44b4-bf3c-09daedd01853","path":"sprites/spr_firework_dragon/spr_firework_dragon.yy",},
     {"name":"4fec9d30-e0c7-4304-abaf-c2edecae9e0d","path":"sprites/spr_firework_dragon_1/spr_firework_dragon_1.yy",},

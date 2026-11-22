@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f5b1e2c5-af78-489b-82b4-aee7ddf6815e","path":"sprites/spr_swordfish_mouse/spr_swordfish_mouse.yy",},
     {"name":"78db8370-580a-47d4-abee-ba6f93aa1266","path":"sprites/spr_swordfish_mouse_dash/spr_swordfish_mouse_dash.yy",},

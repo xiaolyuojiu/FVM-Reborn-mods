@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"Menu","path":"folders/物体/Battle/Menu.yy",}
+    {"name":"Menu","path":"folders/物体/Battle/Menu.yy",},
   ],
   "listItems":[
     {"name":"obj_battle","path":"objects/obj_battle/obj_battle.yy",},

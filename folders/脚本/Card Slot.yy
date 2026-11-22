@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"add_to_deck","path":"scripts/add_to_deck/add_to_deck.yy",},
     {"name":"create_battle_slots","path":"scripts/create_battle_slots/create_battle_slots.yy",},

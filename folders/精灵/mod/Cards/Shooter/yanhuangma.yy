@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"yanhuangma",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/yanhuangma.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"yanhuangma",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

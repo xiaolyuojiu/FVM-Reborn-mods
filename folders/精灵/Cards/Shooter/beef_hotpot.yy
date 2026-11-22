@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"39a1714d-0279-4854-bd27-e9c7aed0fe03","path":"sprites/spr_beef_hotpot/spr_beef_hotpot.yy",},
     {"name":"b9598a25-44a3-4e61-98a4-0ccaef100538","path":"sprites/spr_beef_hotpot_1/spr_beef_hotpot_1.yy",},

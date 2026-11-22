@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"bb77f762-7fa8-4e84-83d0-f60e6d532dee","path":"sprites/spr_seahorse_mouse/spr_seahorse_mouse.yy",},
     {"name":"b67c66ca-5c38-4ee5-976e-804c214fde52","path":"sprites/spr_seahorse_mouse_jump/spr_seahorse_mouse_jump.yy",}

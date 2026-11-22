@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"face_cookie",
+  "folderPath":"folders/精灵/Enemy/explore_camp/face_cookie.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"face_cookie",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

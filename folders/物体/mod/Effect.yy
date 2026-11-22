@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_yinyangshe_poison","path":"objects/obj_yinyangshe_poison/obj_yinyangshe_poison.yy",},
     {"name":"obj_jiejiema_field","path":"objects/obj_jiejiema_field/obj_jiejiema_field.yy",},

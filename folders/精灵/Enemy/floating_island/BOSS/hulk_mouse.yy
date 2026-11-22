@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"1caee501-0640-44be-b319-178c862e2a57","path":"sprites/spr_hulk_mouse_appear/spr_hulk_mouse_appear.yy",},
     {"name":"fb48f178-5ffe-4a25-8cd4-84ebb167b4da","path":"sprites/spr_hulk_mouse_death/spr_hulk_mouse_death.yy",},

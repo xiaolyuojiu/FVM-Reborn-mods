@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f171c1a8-c351-4c26-8edb-4d60fe089435","path":"sprites/spr_paratrooper_mouse/spr_paratrooper_mouse.yy",},
     {"name":"feb8dc27-3300-4e79-844e-3cd433153234","path":"sprites/spr_paratrooper_mouse_air/spr_paratrooper_mouse_air.yy",},

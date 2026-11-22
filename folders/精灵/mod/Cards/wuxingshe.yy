@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_wuxingshe","path":"sprites/spr_wuxingshe/spr_wuxingshe.yy",},
     {"name":"spr_wuxingshe_1","path":"sprites/spr_wuxingshe_1/spr_wuxingshe_1.yy",},

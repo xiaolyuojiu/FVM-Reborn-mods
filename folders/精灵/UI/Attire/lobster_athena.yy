@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"134244bd-b2bc-4a4a-921d-ea4f88853d2d","path":"sprites/spr_lobster_athena/spr_lobster_athena.yy",},
     {"name":"3a7d7bfe-69d3-430f-928b-aa03e270ea8c","path":"sprites/spr_lobster_athena_1/spr_lobster_athena_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"8addc2f5-3515-42c2-ba1d-485f4499d7a2","path":"sprites/spr_spicy_pot/spr_spicy_pot.yy",},
     {"name":"6dd1cecc-88d1-4a8a-ad3c-78a6c618f7f5","path":"sprites/spr_spicy_pot_1/spr_spicy_pot_1.yy",},

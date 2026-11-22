@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"brahma",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/brahma.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"brahma",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

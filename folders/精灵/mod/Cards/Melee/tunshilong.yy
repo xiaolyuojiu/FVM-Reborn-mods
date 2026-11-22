@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_tunshilong","path":"sprites/spr_tunshilong/spr_tunshilong.yy",},
     {"name":"spr_tunshilong_1","path":"sprites/spr_tunshilong_1/spr_tunshilong_1.yy",},

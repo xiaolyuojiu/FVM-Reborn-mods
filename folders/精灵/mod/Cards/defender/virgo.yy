@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"virgo",
+  "folderPath":"folders/精灵/mod/Cards/defender/virgo.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"virgo",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

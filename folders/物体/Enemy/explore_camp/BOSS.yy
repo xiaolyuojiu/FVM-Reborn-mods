@@ -1,0 +1,17 @@
+{
+  "$GMFolder":"",
+  "%Name":"BOSS",
+  "folderPath":"folders/物体/Enemy/explore_camp/BOSS.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"BOSS",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"beverage_machine","path":"folders/物体/Enemy/explore_camp/BOSS/beverage_machine.yy",},
+    {"name":"travel_record","path":"folders/物体/Enemy/explore_camp/BOSS/travel_record.yy",},
+  ],
+  "listItems":[],
+}

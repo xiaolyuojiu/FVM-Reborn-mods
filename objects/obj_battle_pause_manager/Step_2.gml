@@ -510,7 +510,7 @@ if (keyboard_check_pressed(vk_escape)) {
     }
 }
 
-if (keyboard_check_pressed(ord("R"))) {
+if (!global.console_open && keyboard_check_pressed(ord("R"))) {
 	if global.game_over{
 		if instance_exists(obj_game_over) && obj_game_over.sprite_index == spr_lose{
 			room_transition_start(room)

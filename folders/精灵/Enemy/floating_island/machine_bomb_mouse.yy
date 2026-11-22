@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ec29813e-a24e-4aa5-9d86-5b86c5de8691","path":"sprites/spr_machine_bomb_mouse_air/spr_machine_bomb_mouse_air.yy",},
     {"name":"829baf3b-39af-46f4-90ef-a134e2fec9b8","path":"sprites/spr_machine_bomb_mouse_air_nobomb/spr_machine_bomb_mouse_air_nobomb.yy",},

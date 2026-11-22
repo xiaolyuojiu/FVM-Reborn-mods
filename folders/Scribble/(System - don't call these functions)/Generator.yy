@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"__scribble_gen_10_write_vbuffs","path":"scripts/__scribble_gen_10_write_vbuffs/__scribble_gen_10_write_vbuffs.yy",},
     {"name":"__scribble_gen_11_set_padding_flags","path":"scripts/__scribble_gen_11_set_padding_flags/__scribble_gen_11_set_padding_flags.yy",},

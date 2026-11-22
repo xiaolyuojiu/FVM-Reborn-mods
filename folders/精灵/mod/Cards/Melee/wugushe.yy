@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"wugushe",
+  "folderPath":"folders/精灵/mod/Cards/Melee/wugushe.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"wugushe",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"a268339e-2f74-4e66-bc2b-2e22c80b2853","path":"sprites/spr_jet_mouse/spr_jet_mouse.yy",},
     {"name":"5abc6ca4-4505-4760-b8cf-d7cb009dcba1","path":"sprites/spr_jet_mouse_drop/spr_jet_mouse_drop.yy",},

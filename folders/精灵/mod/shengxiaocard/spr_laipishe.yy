@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"7c859edf-6d09-4248-a62c-1c457621c4f3","path":"sprites/spr_laipishe/spr_laipishe.yy",},
     {"name":"034f0baf-6ef2-4234-85ff-58c9bbf4ceda","path":"sprites/spr_laipishe_1/spr_laipishe_1.yy",},

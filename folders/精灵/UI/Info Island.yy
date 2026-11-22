@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"4c1fcec0-c155-4205-bf8d-58559f993756","path":"sprites/spr_info_island_bg_1/spr_info_island_bg_1.yy",},
     {"name":"3ecea665-9571-492b-a8f3-75323a68bdde","path":"sprites/spr_info_island_bg_2/spr_info_island_bg_2.yy",},

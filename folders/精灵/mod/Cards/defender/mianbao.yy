@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ac002c27-de45-4cae-a998-b635d68667e8","path":"sprites/spr_mianbao/spr_mianbao.yy",},
     {"name":"1fe80e1a-fba7-4a99-9b54-dcdd9594e243","path":"sprites/spr_mianbao_1/spr_mianbao_1.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"scribble_font_bake_outline_and_shadow","path":"scripts/scribble_font_bake_outline_and_shadow/scribble_font_bake_outline_and_shadow.yy",},
     {"name":"scribble_font_bake_shader","path":"scripts/scribble_font_bake_shader/scribble_font_bake_shader.yy",},

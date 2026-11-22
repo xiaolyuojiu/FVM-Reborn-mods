@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_closecraft_btn","path":"objects/obj_closecraft_btn/obj_closecraft_btn.yy",},
     {"name":"obj_craft_bg","path":"objects/obj_craft_bg/obj_craft_bg.yy",},

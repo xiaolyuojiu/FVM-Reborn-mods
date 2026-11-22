@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ddc173ad-b253-4db9-9da9-ae29a9d064a5","path":"sprites/spr_mouse_train_1_body_death/spr_mouse_train_1_body_death.yy",},
     {"name":"ea29a2d8-2548-4aa9-83b3-4bf8159ee9a1","path":"sprites/spr_mouse_train_1_body_idle/spr_mouse_train_1_body_idle.yy",},

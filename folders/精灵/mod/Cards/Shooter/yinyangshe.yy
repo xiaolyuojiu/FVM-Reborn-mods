@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"yinyangshe",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/yinyangshe.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"yinyangshe",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

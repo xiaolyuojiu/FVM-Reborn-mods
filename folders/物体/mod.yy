@@ -10,15 +10,16 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"Bullet","path":"folders/物体/mod/Bullet.yy",},
+    {"name":"Cards","path":"folders/物体/mod/Cards.yy",},
+    {"name":"Cross Server","path":"folders/物体/mod/Cross Server.yy",},
+    {"name":"Effect","path":"folders/物体/mod/Effect.yy",},
+    {"name":"Gods Shop","path":"folders/物体/mod/Gods Shop.yy",},
+    {"name":"UI","path":"folders/物体/mod/UI.yy",},
+    {"name":"germ","path":"folders/物体/mod/germ.yy",},
+    {"name":"lihe","path":"folders/物体/mod/lihe.yy",},
     {"name":"zhuanzhuan","path":"folders/物体/mod/zhuanzhuan.yy",},
     {"name":"金马盛典","path":"folders/物体/mod/金马盛典.yy",},
-    {"name":"Cards","path":"folders/物体/mod/Cards.yy",},
-    {"name":"Effect","path":"folders/物体/mod/Effect.yy",},
-    {"name":"UI","path":"folders/物体/mod/UI.yy",},
-    {"name":"Bullet","path":"folders/物体/mod/Bullet.yy",},
-    {"name":"Gods Shop","path":"folders/物体/mod/Gods Shop.yy",},
-    {"name":"Cross Server","path":"folders/物体/mod/Cross Server.yy",},
-    {"name":"germ","path":"folders/物体/mod/germ.yy",}
   ],
   "listItems":[
     {"name":"obj_holiday_exchange","path":"objects/obj_holiday_exchange/obj_holiday_exchange.yy",},

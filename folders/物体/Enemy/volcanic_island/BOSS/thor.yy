@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_thor_body","path":"objects/obj_thor_body/obj_thor_body.yy",},
     {"name":"obj_thor_head","path":"objects/obj_thor_head/obj_thor_head.yy",}

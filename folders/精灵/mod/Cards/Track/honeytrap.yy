@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_honeytrap","path":"sprites/spr_honeytrap/spr_honeytrap.yy",},
     {"name":"spr_honeytrap_1","path":"sprites/spr_honeytrap_1/spr_honeytrap_1.yy",},

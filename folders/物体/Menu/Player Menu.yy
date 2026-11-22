@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_attire_fx_help","path":"objects/obj_attire_fx_help/obj_attire_fx_help.yy",},
     {"name":"obj_card_attire_menu","path":"objects/obj_card_attire_menu/obj_card_attire_menu.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"21dc62b1-483a-48a6-adb4-0fb648fe4fc1","path":"sprites/spr_waste_flying_mouse_air/spr_waste_flying_mouse_air.yy",},
     {"name":"2f6d85ba-98c4-4f14-813d-b8ffb7199239","path":"sprites/spr_waste_flying_mouse_drop/spr_waste_flying_mouse_drop.yy",},

@@ -6263,6 +6263,8 @@
     "39121":{"character":39121,"h":28,"offset":0,"shift":21,"w":20,"x":1367,"y":1922,},
     "39751":{"character":39751,"h":28,"offset":0,"shift":21,"w":20,"x":1390,"y":1922,},
     "34615":{"character":34615,"h":28,"offset":0,"shift":21,"w":20,"x":1413,"y":1922,},
+    "39607":{"character":39607,"h":28,"offset":0,"shift":21,"w":19,"x":1436,"y":1922,},
+    "39621":{"character":39621,"h":28,"offset":0,"shift":21,"w":20,"x":1458,"y":1922,},
   },
   "hinting":0,
   "includeTTF":false,
@@ -6279,6 +6281,8 @@
   },
   "pointRounding":0,
   "ranges":[
+    {"lower":39607,"upper":39607,},
+    {"lower":39621,"upper":39621,},
     {"lower":34615,"upper":34615,},
     {"lower":39751,"upper":39751,},
     {"lower":164,"upper":164,},

@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"mogu",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS/mengpo/mogu.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"mogu",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

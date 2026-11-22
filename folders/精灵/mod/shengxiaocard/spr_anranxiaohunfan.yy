@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2e2e7418-25c7-4760-a0a6-b36660611b7f","path":"sprites/spr_anranxiaohunfan/spr_anranxiaohunfan.yy",},
     {"name":"ded94799-6b57-4896-a9f3-0ae25a4207db","path":"sprites/spr_anranxiaohunfan_1/spr_anranxiaohunfan_1.yy",},

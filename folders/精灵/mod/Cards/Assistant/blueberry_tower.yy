@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"blueberry_tower",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/blueberry_tower.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"blueberry_tower",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

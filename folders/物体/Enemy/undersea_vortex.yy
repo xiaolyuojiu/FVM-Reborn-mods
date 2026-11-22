@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"BOSS","path":"folders/物体/Enemy/undersea_vortex/BOSS.yy",}
+    {"name":"BOSS","path":"folders/物体/Enemy/undersea_vortex/BOSS.yy",},
   ],
   "listItems":[
     {"name":"obj_clownfish_mouse","path":"objects/obj_clownfish_mouse/obj_clownfish_mouse.yy",},

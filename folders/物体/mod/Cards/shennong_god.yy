@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_shennong_god","path":"objects/obj_shennong_god/obj_shennong_god.yy",}
   ],

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"502c4ef7-4eb9-493f-bcdf-a7df9c32dea8","path":"sprites/spr_guangming_god/spr_guangming_god.yy",},
     {"name":"4c30ad0c-306a-47fc-af35-7010c5308589","path":"sprites/spr_guangming_god_1/spr_guangming_god_1.yy",},

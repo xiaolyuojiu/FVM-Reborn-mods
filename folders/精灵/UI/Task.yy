@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"da978b16-34be-40bf-b27d-4f943afded72","path":"sprites/spr_task_bg/spr_task_bg.yy",},
     {"name":"3ac16ae1-e57d-443f-9fe5-ea28d2f998a7","path":"sprites/spr_task_claim_btn/spr_task_claim_btn.yy",},

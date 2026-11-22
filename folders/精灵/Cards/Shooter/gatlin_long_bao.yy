@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"033cacc6-1bdd-44f5-bd25-f555a719e2b7","path":"sprites/spr_gatlin_long_bao/spr_gatlin_long_bao.yy",},
     {"name":"038223f6-716f-4c37-a7c1-8250279187a2","path":"sprites/spr_gatlin_long_bao_1/spr_gatlin_long_bao_1.yy",},

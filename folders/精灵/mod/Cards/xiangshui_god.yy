@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d0ef007c-7350-468b-af81-41c09db9dd8f","path":"sprites/spr_xiangshui_god/spr_xiangshui_god.yy",},
     {"name":"d6ae5578-72bf-4ef5-bf7e-b67bb896085b","path":"sprites/spr_xiangshui_god_1/spr_xiangshui_god_1.yy",},

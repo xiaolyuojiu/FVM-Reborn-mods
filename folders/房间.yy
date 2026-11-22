@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"inst_66EA97A","path":"rooms/room_battle/room_battle.yy",},
     {"name":"inst_46082EB4","path":"rooms/room_init/room_init.yy",},

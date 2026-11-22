@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"bd4d8642-3671-457c-9386-85096f3f978e","path":"sprites/spr_machine_shark_1_appear/spr_machine_shark_1_appear.yy",},
     {"name":"127aeda1-ca33-4d61-b3a0-c70489cf7427","path":"sprites/spr_machine_shark_1_bullet/spr_machine_shark_1_bullet.yy",},

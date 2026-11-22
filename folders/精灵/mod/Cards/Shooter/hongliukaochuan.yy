@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"hongliukaochuan",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/hongliukaochuan.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"hongliukaochuan",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

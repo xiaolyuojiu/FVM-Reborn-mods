@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"gaoqiao",
+  "folderPath":"folders/精灵/Enemy/longyuan/putong/gaoqiao.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"gaoqiao",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

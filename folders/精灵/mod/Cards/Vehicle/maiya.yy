@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"2641c545-f641-4401-913e-6e68b9635f76","path":"sprites/spr_maiya/spr_maiya.yy",},
     {"name":"9d8747c1-4f12-4622-84a7-999c61827e2f","path":"sprites/spr_maiya_1/spr_maiya_1.yy",}

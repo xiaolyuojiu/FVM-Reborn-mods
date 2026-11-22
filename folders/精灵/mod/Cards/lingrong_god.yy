@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"3662d055-c309-4cbb-bc13-fe680b02cb2a","path":"sprites/spr_lingrong_god_nowater/spr_lingrong_god_nowater.yy",},
     {"name":"27e48261-c5ad-4d95-8f4d-e16f104287a7","path":"sprites/spr_lingrong_god_water/spr_lingrong_god_water.yy",},

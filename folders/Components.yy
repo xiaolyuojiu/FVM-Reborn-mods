@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"Basic","path":"folders/Components/Basic.yy",}
+    {"name":"Basic","path":"folders/Components/Basic.yy",},
   ],
   "listItems":[
     {"name":"EventEntranceList","path":"objects/EventEntranceList/EventEntranceList.yy",}

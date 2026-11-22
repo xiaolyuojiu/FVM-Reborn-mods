@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"7b6575df-92fc-44e1-9831-ff401f29b4cd","path":"sprites/spr_takoyaki/spr_takoyaki.yy",},
     {"name":"a3944512-fd68-4e74-832f-db2ebf2adb5b","path":"sprites/spr_takoyaki_1/spr_takoyaki_1.yy",},

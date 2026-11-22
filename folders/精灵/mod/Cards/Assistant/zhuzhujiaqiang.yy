@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"zhuzhujiaqiang",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/zhuzhujiaqiang.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"zhuzhujiaqiang",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

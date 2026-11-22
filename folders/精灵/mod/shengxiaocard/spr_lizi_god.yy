@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f29ee582-dd00-4511-be68-dadc399f2af5","path":"sprites/spr_lizi_god/spr_lizi_god.yy",},
     {"name":"97666d78-a3d3-4d9d-9649-fe34903cd27f","path":"sprites/spr_lizi_god_1/spr_lizi_god_1.yy",},

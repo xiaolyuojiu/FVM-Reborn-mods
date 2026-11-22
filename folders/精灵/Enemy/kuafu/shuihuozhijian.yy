@@ -10,8 +10,8 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"xiaoguai","path":"folders/精灵/Enemy/kuafu/shuihuozhijian/xiaoguai.yy",},
     {"name":"boss","path":"folders/精灵/Enemy/kuafu/shuihuozhijian/boss.yy",},
+    {"name":"xiaoguai","path":"folders/精灵/Enemy/kuafu/shuihuozhijian/xiaoguai.yy",},
   ],
   "listItems":[
   ],

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"4c9baa7c-5a7b-404b-b032-8ceb6b56fca8","path":"sprites/spr_arctic_bay_turbulence/spr_arctic_bay_turbulence.yy",},
     {"name":"752a2ce6-0ba8-4fb1-8ef9-e1eb0872ec13","path":"sprites/spr_coral_current_daytime/spr_coral_current_daytime.yy",},

@@ -10,11 +10,11 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
+    {"name":"baron","path":"folders/物体/Enemy/kuafu/mengyantiankong/boss/baron.yy",},
     {"name":"buzz","path":"folders/物体/Enemy/kuafu/mengyantiankong/boss/buzz.yy",},
-    {"name":"xiaoming","path":"folders/物体/Enemy/kuafu/mengyantiankong/boss/xiaoming.yy",},
     {"name":"julie","path":"folders/物体/Enemy/kuafu/mengyantiankong/boss/julie.yy",},
     {"name":"pete","path":"folders/物体/Enemy/kuafu/mengyantiankong/boss/pete.yy",},
-    {"name":"baron","path":"folders/物体/Enemy/kuafu/mengyantiankong/boss/baron.yy",},
+    {"name":"xiaoming","path":"folders/物体/Enemy/kuafu/mengyantiankong/boss/xiaoming.yy",},
   ],
   "listItems":[],
 }

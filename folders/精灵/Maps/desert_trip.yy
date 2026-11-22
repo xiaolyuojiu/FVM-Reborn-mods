@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"desert_trip",
+  "folderPath":"folders/精灵/Maps/desert_trip.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"desert_trip",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

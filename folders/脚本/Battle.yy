@@ -11,7 +11,7 @@
   "visible":true,
   "folders":[
     {"name":"Map Object","path":"folders/脚本/Battle/Map Object.yy",},
-    {"name":"battle_event","path":"folders/脚本/Battle/battle_event.yy",}
+    {"name":"battle_event","path":"folders/脚本/Battle/battle_event.yy",},
   ],
   "listItems":[],
 }

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d596e720-2725-4c39-a0ef-630f09ccc6ad","path":"sprites/spr_mermaid_mary_bullet/spr_mermaid_mary_bullet.yy",},
     {"name":"1ca278b0-4302-42bd-b8dc-7c6e79932d08","path":"sprites/spr_mermaid_mary_dash/spr_mermaid_mary_dash.yy",},

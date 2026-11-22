@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"tire_mouse",
+  "folderPath":"folders/精灵/Enemy/explore_camp/tire_mouse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"tire_mouse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

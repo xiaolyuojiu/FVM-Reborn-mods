@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"1fc57c48-cba0-40e6-92bd-45d53b233e1f","path":"sprites/spr_hotdog_cannon/spr_hotdog_cannon.yy",},
     {"name":"5919044b-46b3-4de5-8574-86d377c2d0b9","path":"sprites/spr_hotdog_cannon_1/spr_hotdog_cannon_1.yy",},

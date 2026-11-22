@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"4efc30ff-64bc-411f-8594-6b6105f2798a","path":"sprites/spr_tar_sprayer/spr_tar_sprayer.yy",},
     {"name":"c93796c5-7ea3-4ba1-996b-36d2b77df64e","path":"sprites/spr_tar_sprayer_1/spr_tar_sprayer_1.yy",},

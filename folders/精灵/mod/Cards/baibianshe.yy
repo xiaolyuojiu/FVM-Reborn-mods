@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"9c04abca-8739-492c-9f56-207c5d8d8e76","path":"sprites/spr_baibianshe/spr_baibianshe.yy",},
     {"name":"f5a49e81-bca3-442c-af24-fe94e58c656c","path":"sprites/spr_baibianshe_1/spr_baibianshe_1.yy",},

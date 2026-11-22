@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_aladdin_lamp_enter","path":"objects/obj_aladdin_lamp_enter/obj_aladdin_lamp_enter.yy",},
     {"name":"obj_hades_scythe_enter","path":"objects/obj_hades_scythe_enter/obj_hades_scythe_enter.yy",},

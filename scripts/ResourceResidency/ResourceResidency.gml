@@ -19,7 +19,7 @@ function resource_memory_enabled() {
 function resource_dynamic_groups() {
     static _groups = ["cards", "player", "maps", "bullet", "effects", "time_god",
         "enemy_delicious", "enemy_volcanic", "enemy_floating", "enemy_tower",
-        "pack_undersea_vortex", "pack_explore_camp", "enemy_longyuan", "battle_misc", "cards_ui"];
+        "pack_undersea_vortex", "pack_explore_camp", "pack_desert_trip", "enemy_longyuan", "battle_misc", "cards_ui"];
     return _groups;
 }
 
@@ -189,6 +189,7 @@ function resource_scene_groups(_room) {
     if (_room == room_map && variable_global_exists("map_id")) {
         if (global.map_id == "undersea_vortex") _groups = resource_add_group(_groups, "pack_undersea_vortex");
         if (global.map_id == "explore_camp") _groups = resource_add_group(_groups, "pack_explore_camp");
+        if (global.map_id == "desert_trip") _groups = resource_add_group(_groups, "pack_desert_trip");
     }
     if (_room != room_ready && _room != room_battle) return _groups;
 

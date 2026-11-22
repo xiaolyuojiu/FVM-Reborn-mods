@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"Camera_Shock","path":"scripts/Camera_Shock/Camera_Shock.yy",}
   ],

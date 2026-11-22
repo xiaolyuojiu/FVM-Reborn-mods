@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_world_map_button","path":"objects/obj_world_map_button/obj_world_map_button.yy",},
     {"name":"obj_world_map_choose_btn","path":"objects/obj_world_map_choose_btn/obj_world_map_choose_btn.yy",},

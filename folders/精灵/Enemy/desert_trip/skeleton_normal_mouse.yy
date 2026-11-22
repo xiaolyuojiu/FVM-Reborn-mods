@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"skeleton_normal_mouse",
+  "folderPath":"folders/精灵/Enemy/desert_trip/skeleton_normal_mouse.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"skeleton_normal_mouse",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

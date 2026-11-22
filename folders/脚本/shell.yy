@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_pool","path":"scripts/obj_pool/obj_pool.yy",},
     {"name":"obj_pool_deck","path":"scripts/obj_pool_deck/obj_pool_deck.yy",},

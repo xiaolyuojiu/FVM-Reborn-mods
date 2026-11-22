@@ -137,13 +137,4 @@ if (!hit_enemy && y >= thrower_y){
 }
 
 // 水果挞增幅
-if !atk_modified{
-    with obj_card_parent{
-        if plant_id == "fruit_tart"{
-            if grid_row == other.row && ((shape <= 1 && x >= other.x) || shape >= 2){
-                other.damage *= atk
-                other.atk_modified = true
-            }
-        }
-    }
-}
+// 水果塔增幅走增幅网格 thrower 通道（scripts/fruit_tart_buff），子弹侧不再重复结算。

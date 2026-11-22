@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"428d1ecd-0acd-47f2-9fe5-5322fa91348e","path":"sprites/spr_card_attire_menu/spr_card_attire_menu.yy",},
     {"name":"8d2c2628-52d3-4e0d-b757-8f051feb5021","path":"sprites/spr_cookbook_btn/spr_cookbook_btn.yy",},

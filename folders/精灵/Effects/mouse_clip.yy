@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"38312660-5189-4f22-96a6-5ee4c505b283","path":"sprites/spr_mouse_clip_explode/spr_mouse_clip_explode.yy",},
     {"name":"6a92614e-8f6d-4f61-a684-13251ec02718","path":"sprites/spr_mouse_clip_explode_1/spr_mouse_clip_explode_1.yy",},

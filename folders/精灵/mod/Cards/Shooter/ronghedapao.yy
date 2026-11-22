@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"fb9c5db5-9fa7-4903-a6c6-760dac7c3b32","path":"sprites/spr_ronghedapao/spr_ronghedapao.yy",},
     {"name":"8d127122-0ccc-46dc-a52e-ac6d7494650f","path":"sprites/spr_ronghedapao_1/spr_ronghedapao_1.yy",},

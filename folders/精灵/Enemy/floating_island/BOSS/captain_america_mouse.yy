@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ae1287fd-3417-4d51-8501-780b4302e95e","path":"sprites/spr_captain_america_mouse_appear1/spr_captain_america_mouse_appear1.yy",},
     {"name":"10e63ad9-855f-48af-a71f-b827028123b8","path":"sprites/spr_captain_america_mouse_appear2/spr_captain_america_mouse_appear2.yy",},

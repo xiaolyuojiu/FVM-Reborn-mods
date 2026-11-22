@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"cd14cd47-7532-4c8c-9533-85b35a74799c","path":"sprites/spr_chocolatecannon_bullet_effect/spr_chocolatecannon_bullet_effect.yy",},
     {"name":"7b84fa8a-2eb2-4471-bba6-02c7a2b5d9a3","path":"sprites/spr_chocolatepult_bullet_effect/spr_chocolatepult_bullet_effect.yy",},

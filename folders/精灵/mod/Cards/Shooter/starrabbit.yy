@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"starrabbit",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/starrabbit.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"starrabbit",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"5e970c21-99a4-4027-8b83-69bdf3480198","path":"sprites/spr_mouse_train_2_body_appear1/spr_mouse_train_2_body_appear1.yy",},
     {"name":"6e3f0ad2-23ea-46e1-857e-23b96b9c3ac6","path":"sprites/spr_mouse_train_2_body_appear2/spr_mouse_train_2_body_appear2.yy",},

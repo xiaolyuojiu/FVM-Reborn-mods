@@ -1,0 +1,17 @@
+{
+  "$GMFolder":"",
+  "%Name":"Vehicle",
+  "folderPath":"folders/精灵/mod/Cards/Vehicle.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"Vehicle",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"lingrong_god","path":"folders/精灵/mod/Cards/Vehicle/lingrong_god.yy",},
+    {"name":"maiya","path":"folders/精灵/mod/Cards/Vehicle/maiya.yy",},
+  ],
+  "listItems":[],
+}

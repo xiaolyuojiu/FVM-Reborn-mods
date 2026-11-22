@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_sanzhitu",
+  "folderPath":"folders/精灵/mod/Cards/defender/spr_sanzhitu.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_sanzhitu",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

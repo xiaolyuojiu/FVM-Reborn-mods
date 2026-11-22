@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"spr_caihongshe","path":"sprites/spr_caihongshe/spr_caihongshe.yy",},
     {"name":"spr_caihongshe_shield","path":"sprites/spr_caihongshe_shield/spr_caihongshe_shield.yy",},

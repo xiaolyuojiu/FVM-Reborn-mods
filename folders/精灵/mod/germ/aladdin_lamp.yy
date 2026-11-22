@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"b32baebd-4846-49e7-80c4-b38db737384e","path":"sprites/spr_aladdin_lamp/spr_aladdin_lamp.yy",},
     {"name":"6b0be2d1-f8f3-4cce-b5e5-916b4490b1e1","path":"sprites/spr_aladdin_lamp_1/spr_aladdin_lamp_1.yy",},

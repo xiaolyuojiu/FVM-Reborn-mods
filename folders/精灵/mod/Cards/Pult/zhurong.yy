@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"zhurong",
+  "folderPath":"folders/精灵/mod/Cards/Pult/zhurong.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"zhurong",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_arno_bullet","path":"objects/obj_arno_bullet/obj_arno_bullet.yy",},
     {"name":"obj_arno_bullet_effect","path":"objects/obj_arno_bullet_effect/obj_arno_bullet_effect.yy",},

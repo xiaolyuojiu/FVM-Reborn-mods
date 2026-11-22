@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"f318b3f9-72cc-4953-8d37-d14566a1fa02","path":"sprites/spr_slot_19/spr_slot_19.yy",},
     {"name":"b7757843-672a-4311-8949-bdf981f0eacd","path":"sprites/spr_slot_20/spr_slot_20.yy",},

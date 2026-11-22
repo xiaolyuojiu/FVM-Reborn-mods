@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_hulk_destroy_effect","path":"objects/obj_hulk_destroy_effect/obj_hulk_destroy_effect.yy",},
     {"name":"obj_hulk_mouse","path":"objects/obj_hulk_mouse/obj_hulk_mouse.yy",}

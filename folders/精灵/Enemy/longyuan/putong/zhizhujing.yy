@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"zhizhujing",
+  "folderPath":"folders/精灵/Enemy/longyuan/putong/zhizhujing.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"zhizhujing",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

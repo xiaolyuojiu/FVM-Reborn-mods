@@ -1,0 +1,16 @@
+{
+  "$GMFolder":"",
+  "%Name":"explore_camp",
+  "folderPath":"folders/物体/Enemy/explore_camp.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"explore_camp",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"BOSS","path":"folders/物体/Enemy/explore_camp/BOSS.yy",},
+  ],
+  "listItems":[],
+}

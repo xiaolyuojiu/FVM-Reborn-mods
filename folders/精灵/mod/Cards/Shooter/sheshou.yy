@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"sheshou",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/sheshou.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"sheshou",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_brazier","path":"objects/obj_brazier/obj_brazier.yy",},
     {"name":"obj_cat_box","path":"objects/obj_cat_box/obj_cat_box.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"font_hei","path":"fonts/font_hei/font_hei.old.yy",},
     {"name":"font_hei","path":"fonts/font_hei/font_hei.yy",},

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"b029a41c-e397-4951-aa03-561152c41924","path":"sprites/spr_chili_powder/spr_chili_powder.yy",},
     {"name":"02273d36-06e4-4fa2-aa22-fbaf471bd522","path":"sprites/spr_chili_powder_1/spr_chili_powder_1.yy",},

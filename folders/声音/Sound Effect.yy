@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"Chomp","path":"folders/声音/Sound Effect/Chomp.yy",}
+    {"name":"Chomp","path":"folders/声音/Sound Effect/Chomp.yy",},
   ],
   "listItems":[
     {"name":"sound","path":"sounds/snd_bottle_explode/snd_bottle_explode.yy",},

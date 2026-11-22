@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_closemenu_btn","path":"objects/obj_closemenu_btn/obj_closemenu_btn.yy",},
     {"name":"obj_config_btn","path":"objects/obj_config_btn/obj_config_btn.yy",},

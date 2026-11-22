@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_pete","path":"objects/obj_pete/obj_pete.yy",},
     {"name":"obj_pete_claw","path":"objects/obj_pete_claw/obj_pete_claw.yy",},

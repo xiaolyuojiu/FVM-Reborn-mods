@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"ronghesanxian",
+  "folderPath":"folders/精灵/mod/Cards/Shooter/ronghesanxian.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"ronghesanxian",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

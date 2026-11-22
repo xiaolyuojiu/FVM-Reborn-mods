@@ -10,7 +10,7 @@
   "viewLocked":false,
   "visible":true,
   "folders":[
-    {"name":"BOSS","path":"folders/物体/Enemy/delicious_island/BOSS.yy",}
+    {"name":"BOSS","path":"folders/物体/Enemy/delicious_island/BOSS.yy",},
   ],
   "listItems":[
     {"name":"obj_assault_mouse","path":"objects/obj_assault_mouse/obj_assault_mouse.yy",},

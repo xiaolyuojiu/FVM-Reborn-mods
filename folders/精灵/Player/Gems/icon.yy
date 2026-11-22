@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"7933d470-a3d8-4572-8b01-2a6883d0f21a","path":"sprites/spr_attack_gem_icon/spr_attack_gem_icon.yy",},
     {"name":"1263d6ab-2547-4f10-9bb4-9aa563ba05c1","path":"sprites/spr_bleed_gem_icon/spr_bleed_gem_icon.yy",},

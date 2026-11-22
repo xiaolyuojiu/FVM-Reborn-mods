@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"mod_craft_evo_table","path":"scripts/mod_craft_evo_table/mod_craft_evo_table.yy",},
     {"name":"mod_craft_fusion_table","path":"scripts/mod_craft_fusion_table/mod_craft_fusion_table.yy",},

@@ -11,8 +11,8 @@
   "visible":true,
   "folders":[
     {"name":"Gems","path":"folders/精灵/Player/Gems.yy",},
+    {"name":"Weapons","path":"folders/精灵/Player/Weapons.yy",},
     {"name":"attire","path":"folders/精灵/Player/attire.yy",},
-    {"name":"Weapons","path":"folders/精灵/Player/Weapons.yy",}
   ],
   "listItems":[
     {"name":"72c7a302-e21b-4431-ac6f-8f7879410c6f","path":"sprites/spr_place_player_tip/spr_place_player_tip.yy",},

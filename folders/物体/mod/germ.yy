@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_aladdin_lamp_gem_1","path":"objects/obj_aladdin_lamp_gem_1/obj_aladdin_lamp_gem_1.yy",},
     {"name":"obj_aladdin_lamp_gem_2","path":"objects/obj_aladdin_lamp_gem_2/obj_aladdin_lamp_gem_2.yy",},

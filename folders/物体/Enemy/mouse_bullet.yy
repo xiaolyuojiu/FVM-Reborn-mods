@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_arson_bullet","path":"objects/obj_arson_bullet/obj_arson_bullet.yy",},
     {"name":"obj_bat_mouse_target","path":"objects/obj_bat_mouse_target/obj_bat_mouse_target.yy",},

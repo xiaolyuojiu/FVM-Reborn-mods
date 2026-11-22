@@ -22,9 +22,9 @@ is_slowdown = false
 card_id_list = ["egg_boiler_pult"]
 enhance_card_list = []
 buffer_type = "thrower";
-buff_value = atk / 100;
-buff_cells = [];
-var _left = (shape >= 2) ? 0 : grid_col - 1;
-for (var _col = _left; _col >= 0; _col--)
-    array_push(buff_cells, [_col, grid_row, buff_value]);
+// 2026-11-22：增幅范围交给 scripts/fruit_tart_buff 统一铺格子
+//   零转本行左侧 / 一转整行 / 二转三行；倍率直接取 atk（水果塔的 atk 本身就是 1.5~3.0）
+buff_value = atk;
+buff_cells = fruit_tart_build_cells(grid_col, grid_row, shape, buff_value);
+// 留给 Step_0 第一帧登记到 global.buff_sources（登记与铺格子都在那边做，和极光同构）
 buff_cells_refreshed = false;

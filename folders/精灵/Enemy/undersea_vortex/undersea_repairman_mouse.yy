@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"9535a1e8-8dd8-4684-8e26-0da4df317091","path":"sprites/spr_undersea_repairman_ladder/spr_undersea_repairman_ladder.yy",},
     {"name":"9bed4a11-e9b0-4c3f-ae27-b0eb2a3be774","path":"sprites/spr_undersea_repairman_ladder_1/spr_undersea_repairman_ladder_1.yy",},

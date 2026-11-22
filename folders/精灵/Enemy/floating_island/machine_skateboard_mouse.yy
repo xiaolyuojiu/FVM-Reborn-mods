@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"8430970a-b9b9-4172-9927-2a24c95f7f47","path":"sprites/spr_machine_skateboard_mouse/spr_machine_skateboard_mouse.yy",},
     {"name":"1fa1ff27-2188-4c1d-9466-3612d8f1a20e","path":"sprites/spr_machine_skateboard_mouse_skate/spr_machine_skateboard_mouse_skate.yy",}

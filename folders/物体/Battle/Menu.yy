@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_pause_menu","path":"objects/obj_pause_menu/obj_pause_menu.yy",},
     {"name":"obj_quit_confirm","path":"objects/obj_quit_confirm/obj_quit_confirm.yy",},

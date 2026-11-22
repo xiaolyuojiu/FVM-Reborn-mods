@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"af475195-9a70-4055-a6f6-4317cb660c7d","path":"sprites/spr_hercules_death/spr_hercules_death.yy",},
     {"name":"bfb4c4bb-55f9-46e1-9946-515a8dab1ea4","path":"sprites/spr_hercules_idle/spr_hercules_idle.yy",},

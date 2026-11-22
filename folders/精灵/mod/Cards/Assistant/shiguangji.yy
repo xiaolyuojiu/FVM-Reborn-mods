@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"a22ba9e4-b0b2-4c15-89e9-1f92660bfbfe","path":"sprites/spr_shiguangji/spr_shiguangji.yy",},
     {"name":"dfb64bc7-c084-4b08-bb85-d3945e9861d4","path":"sprites/spr_shiguangji_1/spr_shiguangji_1.yy",},

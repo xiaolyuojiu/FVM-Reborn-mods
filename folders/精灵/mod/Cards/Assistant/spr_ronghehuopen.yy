@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"spr_ronghehuopen",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/spr_ronghehuopen.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"spr_ronghehuopen",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

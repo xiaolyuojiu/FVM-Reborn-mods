@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"yinhema",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/yinhema.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"yinhema",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

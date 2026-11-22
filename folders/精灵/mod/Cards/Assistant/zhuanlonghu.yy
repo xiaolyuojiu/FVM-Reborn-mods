@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"cc17b0dd-b254-4765-82db-0c65746a3c54","path":"sprites/spr_zhuanlonghu/spr_zhuanlonghu.yy",},
     {"name":"ee581dfb-93fb-470d-907e-fe4b97fe2783","path":"sprites/spr_zhuanlonghu_1/spr_zhuanlonghu_1.yy",},

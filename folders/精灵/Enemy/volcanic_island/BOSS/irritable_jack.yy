@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"01f38e51-cf0c-455d-a1f4-5a8812a3acdc","path":"sprites/spr_irritable_jack_appear/spr_irritable_jack_appear.yy",},
     {"name":"74079a28-e722-4026-bad6-1aa4caa1b067","path":"sprites/spr_irritable_jack_body_skill_3/spr_irritable_jack_body_skill_3.yy",},

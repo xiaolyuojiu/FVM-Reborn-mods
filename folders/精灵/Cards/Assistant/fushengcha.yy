@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"fushengcha",
+  "folderPath":"folders/精灵/Cards/Assistant/fushengcha.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"fushengcha",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

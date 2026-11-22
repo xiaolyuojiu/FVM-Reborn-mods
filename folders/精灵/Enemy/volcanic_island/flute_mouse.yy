@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"0f12b025-fb01-4fa0-8a47-bae06336e889","path":"sprites/spr_flute_mouse/spr_flute_mouse.yy",},
     {"name":"3307544c-5148-48bb-a7d1-42b9955a7cf5","path":"sprites/spr_flute_mouse_effect/spr_flute_mouse_effect.yy",},

@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"thor",
+  "folderPath":"folders/精灵/mod/Cards/Pult/thor.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"thor",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

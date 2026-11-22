@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"01f810a0-c7fc-469f-b78a-7ee28ed0c535","path":"sprites/spr_sardine_mouse/spr_sardine_mouse.yy",},
     {"name":"d382f6b3-bc44-44af-a061-6c21f954512b","path":"sprites/spr_sardine_mouse_appear/spr_sardine_mouse_appear.yy",},

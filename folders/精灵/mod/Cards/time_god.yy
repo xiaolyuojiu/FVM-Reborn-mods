@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"70c8d2cf-0e06-42bb-ae5c-7c06943f4e7d","path":"sprites/spr_time_god/spr_time_god.yy",},
     {"name":"8f911fb6-17ff-4894-bd11-24d9c5680653","path":"sprites/spr_time_god_1/spr_time_god_1.yy",},

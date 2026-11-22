@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"198f65bf-eaaf-424a-aaaa-af60d3c254d0","path":"sprites/spr_mouse_train_3_body_skill_2_1/spr_mouse_train_3_body_skill_2_1.yy",},
     {"name":"0b2db39b-25bd-46f5-9dbf-4751a07df8fa","path":"sprites/spr_mouse_train_3_body_skill_2_2/spr_mouse_train_3_body_skill_2_2.yy",},

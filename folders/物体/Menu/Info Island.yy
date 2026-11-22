@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_closeinfo_btn","path":"objects/obj_closeinfo_btn/obj_closeinfo_btn.yy",},
     {"name":"obj_info_island_bg","path":"objects/obj_info_island_bg/obj_info_island_bg.yy",},

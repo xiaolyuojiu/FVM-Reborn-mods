@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_xiangshui_god","path":"objects/obj_xiangshui_god/obj_xiangshui_god.yy",}
   ],

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d2b51489-dc3e-4766-ac0d-3a9573f3b6de","path":"sprites/spr_angelababy_icon/spr_angelababy_icon.yy",},
     {"name":"d0ee84a4-0753-4d20-a52e-58ec3cbe7484","path":"sprites/spr_arno_icon/spr_arno_icon.yy",},

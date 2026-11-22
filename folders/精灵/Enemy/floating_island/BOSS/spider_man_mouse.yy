@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"ef595b41-06ab-4c7c-afe1-3000107d0e2e","path":"sprites/spr_spider_man_mouse_death/spr_spider_man_mouse_death.yy",},
     {"name":"82aeed27-96ef-4f73-9d3f-22854db2962a","path":"sprites/spr_spider_man_mouse_effect/spr_spider_man_mouse_effect.yy",},

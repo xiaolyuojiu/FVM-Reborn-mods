@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"44b34253-701f-4f6d-bb18-3941bde8289f","path":"sprites/spr_baobaoji/spr_baobaoji.yy",},
     {"name":"7b51b187-dc34-4b01-9531-e4502d001cda","path":"sprites/spr_baobaoji_1/spr_baobaoji_1.yy",},

@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"yeziguo",
+  "folderPath":"folders/精灵/mod/Cards/boomer/yeziguo.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"yeziguo",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

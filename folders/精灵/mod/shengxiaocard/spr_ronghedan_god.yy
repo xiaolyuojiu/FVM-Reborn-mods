@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"bbe0e419-3449-475f-8372-cf59a6539552","path":"sprites/spr_ronghedan_god/spr_ronghedan_god.yy",},
     {"name":"291c1b32-5156-4d01-b370-18c9e44c3367","path":"sprites/spr_ronghedan_god_1/spr_ronghedan_god_1.yy",},

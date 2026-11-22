@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"xiandima",
+  "folderPath":"folders/精灵/mod/Cards/Track/xiandima.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"xiandima",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"berry_dessert",
+  "folderPath":"folders/精灵/mod/Cards/Assistant/berry_dessert.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"berry_dessert",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_beef_hotpot","path":"objects/obj_beef_hotpot/obj_beef_hotpot.yy",},
     {"name":"obj_coal_starfish","path":"objects/obj_coal_starfish/obj_coal_starfish.yy",},

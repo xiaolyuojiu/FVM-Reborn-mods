@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"beverage_machine",
+  "folderPath":"folders/物体/Enemy/explore_camp/BOSS/beverage_machine.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"beverage_machine",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}

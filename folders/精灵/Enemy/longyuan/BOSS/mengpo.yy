@@ -1,0 +1,17 @@
+{
+  "$GMFolder":"",
+  "%Name":"mengpo",
+  "folderPath":"folders/精灵/Enemy/longyuan/BOSS/mengpo.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"mengpo",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+    {"name":"chaye","path":"folders/精灵/Enemy/longyuan/BOSS/mengpo/chaye.yy",},
+    {"name":"mogu","path":"folders/精灵/Enemy/longyuan/BOSS/mengpo/mogu.yy",},
+  ],
+  "listItems":[],
+}

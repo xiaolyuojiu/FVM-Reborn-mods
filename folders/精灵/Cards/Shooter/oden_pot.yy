@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"84fd6df7-5225-43ab-ada9-8b1937659ac2","path":"sprites/spr_oden_pot/spr_oden_pot.yy",},
     {"name":"eee0de47-65d4-49f1-b148-0e1c00ca185e","path":"sprites/spr_oden_pot_1/spr_oden_pot_1.yy",},

@@ -1,7 +1,10 @@
 // 强制清除application_surface，避免上一房间图像残留
-surface_set_target(application_surface);
-draw_clear_alpha(c_black, 0); // 用透明黑色清除surface，alpha值0表示完全透明
-surface_reset_target();
+// ⚠️ application_surface 可能短暂失效（值为 -1），直接用会抛 surface target does not exist
+if (surface_exists(application_surface)){
+	surface_set_target(application_surface);
+	draw_clear_alpha(c_black, 0); // 用透明黑色清除surface，alpha值0表示完全透明
+	surface_reset_target();
+}
 instance_create_depth(100,0,-2,obj_player_info_ui)
 
 /// @type {Asset.GMObject.EventEntranceList}
@@ -85,4 +88,10 @@ if (_cs_pending) {
 	if (instance_exists(obj_player_info_ui)) obj_player_info_ui.menu_type = 4;
 	if (instance_exists(obj_world_map_button)) obj_world_map_button.world_map = 2;
 	global.cross_server_return_page = -1;
+}
+//如果玩家达到20级，且未解锁也未完成沙漠之旅任务，则解锁该任务
+if global.save_data.player.level >= 20{
+	if !is_task_unlocked("desert_level_0") && !is_task_complete("desert_level_0"){
+		unlock_task("desert_level_0")
+	}
 }

@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"FileUtil","path":"scripts/FileUtil/FileUtil.yy",},
     {"name":"GuiStack","path":"scripts/GuiStack/GuiStack.yy",},

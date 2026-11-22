@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"19d515b8-3a41-4d7f-815f-ef7279dffeb4","path":"sprites/spr_abyss/spr_abyss.yy",},
     {"name":"959f9c25-57ab-4bd3-9323-3cb73edfe96f","path":"sprites/spr_abyss_warrior/spr_abyss_warrior.yy",},

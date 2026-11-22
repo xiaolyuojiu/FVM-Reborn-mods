@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"obj_paul_bullet","path":"objects/obj_paul_bullet/obj_paul_bullet.yy",},
     {"name":"obj_paul_bullet_effect","path":"objects/obj_paul_bullet_effect/obj_paul_bullet_effect.yy",},

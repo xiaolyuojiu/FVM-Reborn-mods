@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"70420963-09e2-4a57-a0af-d9547cef5ac0","path":"sprites/spr_rongheshuanggu/spr_rongheshuanggu.yy",},
     {"name":"e24fd2e3-48fe-4524-b20b-be3796f63157","path":"sprites/spr_rongheshuanggu_1/spr_rongheshuanggu_1.yy",},

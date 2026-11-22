@@ -9,7 +9,8 @@
   "resourceVersion":"2.0",
   "viewLocked":false,
   "visible":true,
-  "folders":[],
+  "folders":[
+  ],
   "listItems":[
     {"name":"d1087159-80e7-46fc-9956-bcfab77d5be4","path":"sprites/spr_base_ruins/spr_base_ruins.yy",},
     {"name":"7d1059c7-362f-44cf-9f4d-994d65ea2f68","path":"sprites/spr_charcoal_jungle_daytime/spr_charcoal_jungle_daytime.yy",},

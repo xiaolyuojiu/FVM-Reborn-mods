@@ -1,0 +1,15 @@
+{
+  "$GMFolder":"",
+  "%Name":"chunv",
+  "folderPath":"folders/精灵/mod/Cards/defender/chunv.yy",
+  "isDefaultView":false,
+  "listViewItems":[],
+  "name":"chunv",
+  "resourceType":"GMFolder",
+  "resourceVersion":"2.0",
+  "viewLocked":false,
+  "visible":true,
+  "folders":[
+  ],
+  "listItems":[],
+}
