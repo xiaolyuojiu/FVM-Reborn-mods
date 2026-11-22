@@ -35,11 +35,12 @@ function fruit_tart_build_cells(_col, _row, _shape, _value) {
 }
 
 /// @func fruit_tart_mult(_shape, _level, _skill, _fallback_atk)
-/// @desc 水果塔的增幅倍率（1.5 ~ 3.0），**从注册表取**，不读实例 atk。
-///   🔴 倍率取注册表，不取实例 atk：实例 atk 会被地形 / 宝石 / 海克斯 / 生肖逐层放大。
-///   注册表里的 atk 本身就是倍率（不是百分数），所以这里不做 /100。
+/// @desc 水果塔的增幅倍率（1.5 ~ 3.0），从注册表 `custom["增幅倍率"]` 取（atk 已归 0）。
+///   🔴 不读实例 atk：实例 atk 会被地形 / 宝石 / 海克斯 / 生肖逐层放大。
+///   也不读注册表 atk（已归 0，只留作兜底），倍率只活在 custom 里。
 function fruit_tart_mult(_shape, _level, _skill, _fallback_atk) {
     var _d = get_plant_data_with_skill("fruit_tart", _shape, clamp(_level, 0, 16), _skill);
+    if (_d != undefined && ds_map_exists(_d, "增幅倍率")) return _d[? "增幅倍率"];
     if (_d != undefined && ds_map_exists(_d, "atk")) return _d[? "atk"];
     return _fallback_atk;
 }
