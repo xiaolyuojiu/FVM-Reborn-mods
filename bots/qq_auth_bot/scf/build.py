@@ -44,8 +44,9 @@ def build_config():
     """复制 config.json，但把 app_secret 挖掉（走环境变量）。"""
     src = os.path.join(BOT_DIR, "config.json")
     if not os.path.exists(src):
-        print("⚠️  没有 config.json，用默认命令词（#授权 / 查码）")
-        return {"auth_command": "/授权", "allow_group_issue": True}
+        print("⚠️  没有 config.json，用默认命令词（/授权 / 严格模式）")
+        return {"auth_command": "/授权", "strict_trigger": True,
+                "bot_openid": "", "allow_group_issue": True}
     with open(src, "r", encoding="utf-8") as fh:
         cfg = json.load(fh)
     if cfg.pop("app_secret", None):

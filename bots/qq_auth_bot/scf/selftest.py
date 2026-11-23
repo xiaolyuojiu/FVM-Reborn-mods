@@ -126,7 +126,7 @@ def main():
 
     print("\n④ 错误签名必须被拒")
     payload = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
-               "d": {"id": "MSG1", "content": "/授权 CF8A-EFFE",
+               "d": {"id": "MSG1", "content": "/授权 CF8A-EFFE-B2",
                      "group_openid": "GRP1", "author": {"member_openid": "UID1"}}}
     headers, body = signed_request(handler, payload, tamper=True)
     status, _ = handler.handle(headers, body)
@@ -154,7 +154,7 @@ def main():
         code = "FVM4-" + content.split("FVM4-")[1].split()[0].strip()
     valid, code_id, hwid = qq_auth.verify(code)
     check(valid, "码的签名有效（游戏端能验过）", "码签名无效：%s" % code)
-    check(hwid == "CF8AEFFE", "码绑定了正确的机器码", "机器码错：%s" % hwid)
+    check(hwid == "CF8AEFFEB2", "码绑定了正确的机器码", "机器码错：%s" % hwid)
 
     print("\n⑥ 同一台机器重复领")
     before = len(store.Ledger(mem).used_ids())
@@ -165,8 +165,52 @@ def main():
     check(code in again, "返回同一个码", "又发了新码")
     check(before == after, "没有消耗新的码池 ID", "码池 ID 被多消耗了")
 
+    print("\n⑥·五 有效期（码自带 %d 天到期日）" % qq_auth.LICENSE_DAYS)
+    check(code.count("-") == 4, "码是 5 段（含到期日段）", "段数不对：%s" % code)
+    try:
+        _cid, _hw, _exp, _sig = qq_auth.parse_code(code)
+        _left = qq_auth.exp_decode(_exp) - qq_auth.day_number()
+        check(_left == qq_auth.LICENSE_DAYS,
+              "到期日正好 %d 天" % qq_auth.LICENSE_DAYS,
+              "到期日差 %d 天" % _left)
+        check(qq_auth.exp_date_text(_exp) in content,
+              "回复里写明了到期日 %s" % qq_auth.exp_date_text(_exp),
+              "回复里没写到期日")
+    except ValueError as exc:
+        check(False, "码能被解析", "解析失败：%s" % exc)
+
+    # 篡改到期日 → 签名必须失效（这是「离线也改不了期限」的根据）
+    _tampered = code.replace("-" + _exp + "-", "-" + qq_auth.exp_encode(_left + 3650) + "-", 1)
+    _ok, _cid2, _hw2 = qq_auth.verify(_tampered)
+    check(not _ok, "改到期日 → 验签失败", "到期日被改了还算有效：%s" % _tampered)
+
+    # 到期日已过的码，check_exp=True 时必须判无效（游戏端就是这么判的）
+    _old = qq_auth.make_code("ZZZZZZZZ", "CF8AEFFEB2",
+                             qq_auth.exp_encode(qq_auth.day_number() - 1))
+    _ok_past, _c3, _h3 = qq_auth.verify(_old, check_exp=True)
+    check(not _ok_past, "过期码 → 验签判不过", "过期码还能用：%s" % _old)
+    # 但不带 check_exp 时仍要认「签名是对的」，好让调用方区分「假码」和「过期」
+    _ok_sig, _c4, _h4 = qq_auth.verify(_old)
+    check(_ok_sig, "过期码签名本身仍有效（能区分假码/过期）",
+          "把过期码当成假码了，无法给出正确提示")
+
+    # 账本里那条手工改成已过期 → 再来领必须刷新到期日、且沿用同码 ID
+    _stale = qq_auth.exp_encode(qq_auth.day_number() - 1)
+    _snap = mem.load()
+    _snap["entries"][hwid]["exp"] = _stale
+    mem.save(_snap)
+    headers, body = signed_request(handler, payload)
+    handler.handle(headers, body)
+    _renewed = sent[-1][2] if sent else ""
+    _new_code = "FVM4-" + _renewed.split("FVM4-")[1].split()[0].strip() if "FVM4-" in _renewed else ""
+    _after_exp = mem.load()["entries"][hwid]["exp"]
+    check(_after_exp != _stale and not qq_auth.exp_expired(_after_exp),
+          "过期后重领 → 到期日被刷新", "账本里的到期日没刷新：%r" % _after_exp)
+    check(bool(_new_code) and qq_auth.parse_code(_new_code)[0] == _cid,
+          "重签沿用同一个码 ID（不消耗新码池 ID）", "码 ID 变了")
+
     print("\n⑦ 一个 QQ 最多 2 台（第 3 台必须拒）")
-    for i, hwid_extra in enumerate(["11112222", "33334444", "55556666"]):
+    for i, hwid_extra in enumerate(["1111222299", "33334444C8", "55556666DC"]):
         msg = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
                "d": {"id": "MSG%d" % (i + 2), "content": "/授权 " + hwid_extra,
                      "group_openid": "GRP1", "author": {"member_openid": "UID_NEW"}}}
@@ -176,9 +220,36 @@ def main():
     check("FVM4-" in nth[0] and "FVM4-" in nth[1], "前两台正常发码",
           "前两台就不正常")
     check("FVM4-" not in nth[2], "第 3 台被拒（没发码）", "第 3 台居然发了码")
-    check("绑满" in nth[2], "第 3 台收到「已绑满」的提示", "第 3 台的提示不对：%r" % nth[2][:40])
+    check("还没过期" in nth[2] and "2 台" in nth[2],
+          "第 3 台收到「已有 2 台在用（码还没过期）」的提示",
+          "第 3 台的提示不对：%r" % nth[2][:40])
     check("解绑" not in nth[2] and "联系" not in nth[2],
           "拒绝文案不含任何解绑线索", "拒绝文案泄露了解绑途径")
+
+    # 名额只算还有效的：把其中一台改成过期 → 第 4 台应该能领
+    print("\n⑦·五 过期的不占名额（玩家停玩几天不该被锁死）")
+    _snap2 = mem.load()
+    _hw1 = "1111222299"
+    _row = _snap2["entries"].get(_hw1)
+    if _row:
+        _dead = qq_auth.exp_encode(qq_auth.day_number() - 1)
+        _row["exp"] = _dead
+        _row["code"] = qq_auth.make_code(_row["id"], _hw1, _dead)
+        mem.save(_snap2)
+        check(store.Ledger(mem).count_by_uid("UID_NEW") == 1,
+              "过期后有效名额掉到 1 台",
+              "过期码还占名额：%d" % store.Ledger(mem).count_by_uid("UID_NEW"))
+        sent.clear()
+        msg = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
+               "d": {"id": "MSGQ1", "content": "/授权 7777888863",
+                     "group_openid": "GRP1", "author": {"member_openid": "UID_NEW"}}}
+        headers, body = signed_request(handler, msg)
+        handler.handle(headers, body)
+        _q = sent[-1][2] if sent else ""
+        check("FVM4-" in _q, "过期腾出名额后第 4 台能领码",
+              "名额没释放，玩家仍被锁：%r" % _q[:40])
+    else:
+        check(False, "前置：找到 1111222299 那条记录", "账本里没有 1111222299")
 
     print("\n⑧ 无关消息不打扰")
     sent.clear()
@@ -192,7 +263,7 @@ def main():
     print("\n⑨ 私聊通道")
     sent.clear()
     msg = {"op": 0, "t": "C2C_MESSAGE_CREATE",
-           "d": {"id": "MSG10", "content": "/授权 CF8A-EFFE",
+           "d": {"id": "MSG10", "content": "/授权 CF8A-EFFE-B2",
                  "author": {"user_openid": "UID_PRIVATE"}}}
     headers, body = signed_request(handler, msg)
     handler.handle(headers, body)
@@ -240,7 +311,7 @@ def main():
 
     # 昵称带中文，逼出「字符串 ↔ 字节」这一层
     msg_cn = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
-              "d": {"id": "MSG_CN", "content": "/授权 CF8A-EFFE",
+              "d": {"id": "MSG_CN", "content": "/授权 CF8A-EFFE-B2",
                     "group_openid": "GRP1",
                     "author": {"member_openid": "UID_CN", "nick": "北故人丿"}}}
 
@@ -287,12 +358,12 @@ def main():
         return sent[0][2] if sent else ""
 
     # 先让一个普通玩家占满两台
-    for i, h in enumerate(("AAAAAAAA", "BBBBBBBB", "CCCCCCCC")):
+    for i, h in enumerate(("AAAAAAAAC7", "BBBBBBBB5B", "CCCCCCCCB0")):
         grp("UID_PLAYER", "/授权 " + h, "AD%d" % i)
     check(store.Ledger(admin_mem).count_by_uid("UID_PLAYER") == 2,
           "前置：普通玩家已绑 2 台", "前置条件不成立")
 
-    check(c2c("UID_RANDOM", "/解绑 AAAAAAAA", "AE1") == "",
+    check(c2c("UID_RANDOM", "/解绑 AAAAAAAAC7", "AE1") == "",
           "非管理员发 /解绑 一句话都不回", "非管理员发 /解绑 居然收到回复（暴露了命令）")
 
     out = c2c("UID_RANDOM", "/管理绑定 WRONGTOKEN", "AE2")
@@ -311,13 +382,13 @@ def main():
     check(grp("UID_ADMIN", "/绑定列表", "AE5") == "",
           "群里发 /绑定列表 被忽略（不泄露 openid）", "群里居然回了绑定列表")
 
-    out = c2c("UID_ADMIN", "/解绑 AAAAAAAA", "AE6")
-    check("已解绑" in out and "AAAAAAAA" in out, "管理员解绑指定机器",
+    out = c2c("UID_ADMIN", "/解绑 AAAAAAAAC7", "AE6")
+    check("已解绑" in out and "AAAAAAAAC7" in out, "管理员解绑指定机器",
           "解绑失败：%r" % out[:60])
     check(store.Ledger(admin_mem).count_by_uid("UID_PLAYER") == 1,
           "账本里该账号只剩 1 台", "解绑没有真的删掉记录")
 
-    out = c2c("UID_PLAYER", "/授权 CCCCCCCC", "AE7")
+    out = c2c("UID_PLAYER", "/授权 CCCCCCCCB0", "AE7")
     check("FVM4-" in out, "解绑后玩家能重新领码", "解绑后仍领不到：%r" % out[:40])
 
     rows = store.Ledger(admin_mem).all()
@@ -325,7 +396,7 @@ def main():
     out = c2c("UID_ADMIN", "/解绑 " + cid, "AE8")
     check("已解绑" in out, "用码 ID 也能解绑", "按码 ID 解绑失败：%r" % out[:50])
 
-    out = c2c("UID_ADMIN", "/解绑 FFFFFFFF", "AE9")
+    out = c2c("UID_ADMIN", "/解绑 FFFF666673", "AE9")
     check("没有" in out, "解绑不存在的机器会明确说找不到",
           "不存在的机器没有提示：%r" % out[:40])
 
@@ -336,22 +407,28 @@ def main():
     check(c2c("UID_ADMIN", "/我是谁", "AEA").strip() != "", "管理员能查自己的 openid",
           "/我是谁 没回")
 
-    print("\n⑬ 群 @ 的各种写法都要认（2026-11-11 线上故障回归）")
-    # 线上原话：@小Makk  /授权 513E7579 一点反应都没有。
-    # 腾讯可能推整串明文 @昵称，也可能把 @ 剥掉只留 " 513E7579"，
-    # 还有 <@openid> / <@!openid> / 全角 ／＃ 三种变体 —— 全部必须能发码。
-    for i, text in enumerate((
-            "@小Makk  /授权 CF8A-EFFE",
-            "@小Makk /授权 CF8A-EFFE",
-            "@小Makk/授权 CF8A-EFFE",
-            "<@EAFDCF2F48> /授权 CF8A-EFFE",
-            "<@!EAFDCF2F48> /授权 CF8A-EFFE",
-            "／授权 CF8A-EFFE",
-            "／＃授权 CF8A-EFFE",
-            "  CF8A-EFFE",
-            "CF8A-EFFE",
-            "CF8AEFFE",
-    )):
+    print("\n⑬ 群 @ 的写法：严格模式只认「/授权 [识别码]」")
+    # 2026-11-11 那次故障的写法全都得认（@ 前缀 + 全角斜杠）；
+    # 2026-11-23 起因用户要求改成"只有 @机器人 /授权 才响应，其余不做响应"，
+    # 所以 ＃授权 / 裸识别码 / 只给识别码 这几种必须**静默**。
+    _must_issue = (
+        "@小Makk  /授权 B2B2-B2B2-1F",
+        "@小Makk /授权 B2B2-B2B2-1F",
+        "@小Makk/授权 B2B2-B2B2-1F",
+        "<@EAFDCF2F48> /授权 B2B2-B2B2-1F",
+        "<@!EAFDCF2F48> /授权 B2B2-B2B2-1F",
+        "／授权 B2B2-B2B2-1F",
+    )
+    _must_silent = (
+        "／＃授权 B2B2-B2B2-1F",
+        "  B2B2-B2B2-1F",
+        "B2B2-B2B2-1F",
+        "CF8AEFFEB2",
+        "#授权 B2B2-B2B2-1F",
+        "/授权码 B2B2-B2B2-1F",
+        "/查码 B2B2-B2B2-1F",
+    )
+    for i, text in enumerate(_must_issue + _must_silent):
         sent.clear()
         msg = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
                "d": {"id": "G13-%d" % i, "content": text,
@@ -359,35 +436,74 @@ def main():
                      "author": {"member_openid": "UID13"}}}
         headers, body = signed_request(handler, msg)
         handler.handle(headers, body)
-        ok = len(sent) == 1 and "FVM4-" in sent[0][2]
-        check(ok, "认得出 %r" % text, "这种写法没反应：%r" % text)
+        got = len(sent) == 1 and "FVM4-" in sent[0][2]
+        if text in _must_issue:
+            check(got, "认得出 %r" % text, "这种写法没反应：%r" % text)
+        else:
+            check(not sent, "静默丢弃 %r" % text, "这种写法不该有回复：%r" % text)
 
-    print("\n⑭ 认不出但明显在领码 → 回一句用法")
+    print("\n⑭ 认不出就闭嘴（不再回用法提示）")
     sent.clear()
     msg = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
            "d": {"id": "G14", "content": "怎么领授权码呀",
                  "group_openid": "GRP14", "author": {"member_openid": "UID14"}}}
     headers, body = signed_request(handler, msg)
     handler.handle(headers, body)
-    check(len(sent) == 1 and "识别码" in sent[0][2], "问怎么领码会得到指引",
-          "问怎么领码却没有任何回复")
+    check(not sent, "问怎么领码也不回（用户要求：其余不做响应）",
+          "问了不该答的问题：%r" % (sent[0][2][:40] if sent else ""))
+
+    sent.clear()
+    msg = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
+           "d": {"id": "G14b", "content": "",
+                 "group_openid": "GRP14", "author": {"member_openid": "UID14"}}}
+    headers, body = signed_request(handler, msg)
+    handler.handle(headers, body)
+    check(not sent, "空正文（只 @ 了一下）不回", "空正文被回了")
+
+    sent.clear()
+    msg = {"op": 0, "t": "C2C_MESSAGE_CREATE",
+           "d": {"id": "G14c", "content": "在吗",
+                 "author": {"user_openid": "UID14"}}}
+    headers, body = signed_request(handler, msg)
+    handler.handle(headers, body)
+    check(not sent, "私聊闲聊不回", "私聊闲聊被回了")
 
     print("\n⑮ 现场记录（?diag=1 的依据）")
+    # 先制造一条「回了」和一条「没回」，保证两条都在最近 10 条窗口里 ——
+    # diag 只留 10 条，前面 ⑬⑭ 的一堆静默事件会把早期记录挤出去。
+    sent.clear()
+    msg = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
+           "d": {"id": "G15", "content": "/授权 C3C3-C3C3-13",
+                 "group_openid": "GRP15", "author": {"member_openid": "UID15"}}}
+    headers, body = signed_request(handler, msg)
+    handler.handle(headers, body)
+    check(len(sent) == 1, "前置：这一条确实回了", "前置没回，后面的断言不成立")
+    sent.clear()
+    msg = {"op": 0, "t": "GROUP_AT_MESSAGE_CREATE",
+           "d": {"id": "G15b", "content": "/查码 C3C3-C3C3-13",
+                 "group_openid": "GRP15", "author": {"member_openid": "UID15"}}}
+    headers, body = signed_request(handler, msg)
+    handler.handle(headers, body)
+    check(not sent, "前置：这一条确实没回", "前置回了，后面的断言不成立")
+
     diag = store.diag_load()
     items = (diag or {}).get("items") or []
     check(len(items) >= 5, "每次事件都留了记录（现在 %d 条）" % len(items),
           "没有现场记录，线上出问题时没法判断事件到底到没到")
-    last = items[-1] if items else {}
-    check(last.get("event") == "GROUP_AT_MESSAGE_CREATE" and "content" in last,
-          "记录里带事件类型和原文", "记录缺字段：%r" % (last,))
+    grp = [it for it in items if it.get("event") == "GROUP_AT_MESSAGE_CREATE"]
+    check(bool(grp) and "content" in grp[-1],
+          "记录里带事件类型和原文", "记录缺字段：%r" % (items[-1] if items else {},))
+    check(any(it.get("replied") for it in items) and
+          any(it.get("replied") is False for it in items),
+          "记录里分得清「回了」和「没回」",
+          "记录没区分是否回复，线上判断不了到底发没发")
 
     print("\n⑯ 群消息事件（GROUP_MESSAGE_CREATE）也要认 @ ── 18:28 那次真凶")
     # 线上 ?diag=1 抓到的事件类型是 GROUP_MESSAGE_CREATE（群里每一条消息），
     # 不是 GROUP_AT_MESSAGE_CREATE。旧代码只认后者 → 每条都被丢掉 → 一直静默。
-    # 现在：群消息里 @ 了机器人就照常发码，没 @ 就闭嘴，不能全群刷屏。
+    # 现在：群消息里 @ 了机器人 + /授权 就发码，没 @ 或写法不对就闭嘴。
     for i, text in enumerate((
-            "<@1C9A1705252A5B5A3C8E05AE5BD701D5> /授权 CF8A-EFFE",
-            "<@1C9A1705252A5B5A3C8E05AE5BD701D5> ＃授权 CF8A-EFFE",
+            "<@1C9A1705252A5B5A3C8E05AE5BD701D5> /授权 E5E5-E5E5-10",
     )):
         sent.clear()
         msg = {"op": 0, "t": "GROUP_MESSAGE_CREATE",
@@ -399,6 +515,19 @@ def main():
         ok = len(sent) == 1 and "FVM4-" in sent[0][2]
         check(ok, "群消息里 @ 了机器人能发码 %r" % text[:24],
               "群消息事件被丢掉，没发码：%r" % text)
+
+    for text in ("<@1C9A1705252A5B5A3C8E05AE5BD701D5> ＃授权 E5E5-E5E5-10",
+                 "<@1C9A1705252A5B5A3C8E05AE5BD701D5> 你好",
+                 "<@1C9A1705252A5B5A3C8E05AE5BD701D5>"):
+        sent.clear()
+        msg = {"op": 0, "t": "GROUP_MESSAGE_CREATE",
+               "d": {"id": "G16-x", "content": text,
+                     "group_openid": "GRP16",
+                     "author": {"member_openid": "UID16"}}}
+        headers, body = signed_request(handler, msg)
+        handler.handle(headers, body)
+        check(not sent, "@ 了但不是 /授权：%r 不回" % text[-16:],
+              "这种内容被回了：%r" % (sent[0][2][:30] if sent else ""))
 
     for text in ("不然参考也变成无限了", "😠", "额滴命运"):
         sent.clear()
@@ -415,7 +544,7 @@ def main():
     try:
         sent.clear()
         msg = {"op": 0, "t": "GROUP_MESSAGE_CREATE",
-               "d": {"id": "G16-other", "content": "<@EAFDCF2F48D31591> /授权 CF8A-BEEF",
+               "d": {"id": "G16-other", "content": "<@EAFDCF2F48D31591> /授权 CF8A-BEEF-B2",
                      "group_openid": "GRP16", "author": {"member_openid": "UID16Y"}}}
         headers, body = signed_request(handler, msg)
         handler.handle(headers, body)
@@ -424,7 +553,7 @@ def main():
 
         sent.clear()
         msg = {"op": 0, "t": "GROUP_MESSAGE_CREATE",
-               "d": {"id": "G16-own", "content": "<@1C9A1705252A5B5A3C8E05AE5BD701D5> /授权 CF8A-BEEF",
+               "d": {"id": "G16-own", "content": "<@1C9A1705252A5B5A3C8E05AE5BD701D5> /授权 CF8A-BEEF-B2",
                      "group_openid": "GRP16", "author": {"member_openid": "UID16Z"}}}
         headers, body = signed_request(handler, msg)
         handler.handle(headers, body)

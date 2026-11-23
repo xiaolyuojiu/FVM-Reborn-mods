@@ -52,17 +52,87 @@ HTTPS 地址上，这个地址是你的云函数；有人领码它才跑几百�
 
 ```bash
 cd bots/qq_auth_bot/scf
-python build.py
+python build.py          # 只打包
+python package.py        # 打包 + 校验（推荐，会检查严格模式代码确实进了 zip）
 ```
 
-产出 `bots/qq_auth_bot/scf-qqauth.zip`（约 37 KB）。
+产出 `bots/qq_auth_bot/scf-qqauth.zip`（约 70 KB，含 4000 个码的池子快照）。
+
+`package.py` 会逐项打印 `[OK]/[FAIL]`：`bot.py` 里有 `STRICT_TRIGGER` / `strict_gate` /
+`mention_targets_me`、默认命令是 `/授权`、`webhook.py` 走严格闸、zip 内 `config.json`
+的 `strict_trigger` 为 `true` 且不含 `app_secret` / `admin_token`。全绿再上传。
 
 这个包**不含** `app_secret` 和 `auth_secret.txt`——密钥走环境变量，
 免得留在代码包的构建历史里。
 
+### 触发规则（2026-11-23 起是严格模式）
+
+| 发什么 | 会怎样 |
+|---|---|
+| `@机器人 /授权` | 回一句「带上识别码」 |
+| `@机器人 /授权 1A2B-3C4D-7E` | 发码 |
+| 私聊 `/授权`、`/授权 1A2B-3C4D-7E` | 同上（私聊不需要 @） |
+| `@机器人 #授权 …`、`/授权码 …`、`/查码 …`、只贴识别码 | **完全不回** |
+| `@机器人 你好`、问「怎么领码」、闲聊、`@别人` | **完全不回** |
+
+判定是**整串匹配**：正文必须正好是 `/授权` 或 `/授权 <识别码>`（中间一个空格）。
+全角 `／授权`、全角数字 `１A2B` 会先归一再判。想退回旧的宽松行为，
+把 `config.json` 的 `strict_trigger` 改成 `false`（不推荐，群里会开始接话茬）。
+
 ---
 
-## 三、建云函数
+## 二·五、命令行部署（不用点控制台）
+
+`deploy.py` 只用标准库（TC3-HMAC-SHA256 手写签名），不装 SDK。
+
+### 1. 拿一对 API 密钥
+
+控制台 → 访问管理 → [API 密钥管理](https://console.cloud.tencent.com/cam/capi) → 新建密钥。
+拿到 `SecretId`（`AKID...`）和 `SecretKey`（只显示一次）。
+
+> 建议建子账号并只授予 `QcloudSCFFullAccess` + 目标桶的 COS 读写，
+> 别用主账号密钥。密钥只放环境变量，不进仓库、不进 zip。
+
+```bat
+set TENCENT_SECRET_ID=AKIDxxxxxxxxxxxxxxxx
+set TENCENT_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+COS 那四项（`COS_SECRET_ID` / `COS_SECRET_KEY` / `COS_REGION` / `COS_BUCKET`）
+用**同样的方式**设置，或者写进 `bots/qq_auth_bot/config.json`。
+`AUTH_SECRET`、`QQ_APP_ID`、`QQ_APP_SECRET` 会自动从 `config.json` /
+`tools/auth_secret.txt` 里读，不用手填。
+
+### 2. 四条命令
+
+```bat
+cd bots\qq_auth_bot\scf
+
+python deploy.py --selftest     :: 先验签名逻辑（不联网）
+python deploy.py --check        :: 再验密钥（列出账号下的函数 = 通过）
+python deploy.py --create       :: 第一次：建函数 + 上传代码 + 配环境变量
+python deploy.py --all          :: 以后改代码：打包 + 校验 + 更新 + 更新环境变量
+```
+
+`--create` 默认：函数名 `qqauth-bot`、Python 3.9、`main.main_handler`、
+128 MB、10 秒超时。要改就加 `--name` / `--memory` / `--timeout` / `--region`。
+
+**只想先跑通、不接 COS**（账本落容器本地，重启就丢，仅试跑）：
+`python deploy.py --create --no-cos`。
+
+### 3. 开函数 URL
+
+`deploy.py` 建完函数不会自动开 URL（这一步腾讯要求单独授权域名）。控制台：
+函数详情 → **函数 URL** → 启用 → 鉴权方式选**免鉴权** → 复制地址。
+
+这个地址填到开放平台「事件订阅与回调地址」，详见第四节。
+
+---
+
+> **想跳过下面这些点击**：配好 `TENCENT_SECRET_ID` / `TENCENT_SECRET_KEY` 后
+> `python deploy.py --create` 一条命令建完函数并带上全部环境变量；以后改代码
+> `python deploy.py --all` 一条命令打包 + 更新 + 更新环境变量。
+> 详见「二·五、命令行部署」。控制台手动建也行，两条路等价。
 
 控制台 → 云函数 SCF → 函数服务 → 新建：
 
@@ -92,7 +162,11 @@ python build.py
 | `MAX_DEVICES` | `2` | 可省 |
 | `AUTH_ADMIN_TOKEN` | `bots/qq_auth_bot/config.json` 里的 `admin_token` | 想要 `/解绑` 就必填 |
 | `ADMIN_QQ` | `1017443780` | 可省，仅用于文案 |
-| `QQ_BOT_OPENID` | 机器人自己的 openid（见下） | 可省，但**建议填** |
+| `QQ_BOT_OPENID` | 机器人自己的 openid（见下） | 可省，但**建议填**：填了才能精确挡掉「@ 别人」 |
+| `STRICT_TRIGGER` | `1`（默认就是 1） | 可省。设成 `0` 退回旧的宽松触发 |
+| `AUTH_COMMAND` | `/授权`（默认就是） | 可省。只在严格模式之外影响文案 |
+| `LICENSE_DAYS` | `3`（默认就是 3） | 可省。每张码的有效期天数，**只影响新签发的码** |
+| `HWID_SALT` | `FVM-HWID-CHECK-2026-11`（默认就是） | 可省，但**必须与游戏端 `kAuthHwidSalt` 一致**，否则全服识别码判不合法 |
 
 `AUTH_SECRET` 的值可以直接这样取：
 
@@ -153,14 +227,14 @@ python main.py --check
 群里（或私聊）发：
 
 ```
-/授权 CF8A-EFFE
+/授权 CF8A-EFFE-B2
 ```
 
 正常会立刻回码。云函数日志里能看到：
 
 ```
-[scf] 群@ 5D253F99xx group=8A3B2C1Dxx ' /授权 CF8A-EFFE'
-[scf] 发码 uid=... hwid=CF8AEFFE new=True code=FVM4-...
+[scf] 群@ 5D253F99xx group=8A3B2C1Dxx ' /授权 CF8A-EFFE-B2'
+[scf] 发码 uid=... hwid=CF8AEFFEB2 new=True code=FVM4-...
 [scf] 群回复 status=200
 ```
 
@@ -198,7 +272,7 @@ curl -s "https://<函数URL>/?diag=1"
 | `"token": {"ok": false, "error": "...机器人不存在"}` | `QQ_APP_ID`/`QQ_APP_SECRET` 不是这个机器人的，或环境变量没保存后重新部署 | 云函数 → 函数配置 → 环境变量，改完**必须重新部署** |
 | `"diag": {"items": []}`（空） | **平台根本没把事件送到函数**。改多少代码都不会有反应 | 开放平台 → 事件订阅勾上「群聊@消息」；回调地址确认指向这个函数 URL；群确认已把机器人拉进去 |
 | `"diag": {"items": [...]}` 里 `"action": "群回复"` 但群里没看到 | 事件到了、也发出去了，是平台侧没投递 | 看 `[scf] 群回复 status=` 那行日志，403/404 多半是机器人没在群内或服务范围没勾 |
-| `"action": "忽略（不是领码消息）"` | 内容被判定为闲聊，静默是设计如此 | 把 `"content"` 原文发给维护者，加进解析规则 |
+| `"action": "忽略（不是 /授权）"` | 内容不是严格的 `/授权[ 识别码]`，静默是设计如此 | 把 `"content"` 原文发给维护者核对写法；玩家侧看上面「触发规则」表 |
 | `"admin_token": false` | 没配 `AUTH_ADMIN_TOKEN`，`/管理绑定` 不可用 | 需要解绑能力就补上 |
 
 `items` 里每条都是真实的群/私聊事件（`content` 是腾讯推来的原文，能直接看出 @ 有没有被平台剥掉），默认保留最近 10 条；配了 `COS_*` 会写进 COS，冷启动也还在。时间同时给 `at`（UTC，容器默认）和 `at_cst`（+8），不用自己换算。
@@ -221,9 +295,9 @@ curl -s "https://<函数URL>/?diag=1"
 | 做法 | 优点 | 缺点 |
 |---|---|---|
 | 开放平台 → 事件订阅里勾上**「群@消息」**（推荐） | 平台只推 @ 机器人的消息，最省调用次数、最不易误判 | 要去控制台点一下 |
-| 保留「群消息」事件 | 不用改订阅 | 群里每条消息都调一次函数，所以代码只在「@ 在最前面」时才回 |
+| 保留「群消息」事件 | 不用改订阅 | 群里每条消息都调一次函数（会消耗调用次数），所以代码先验 @ 的是谁，不是 `/授权` 就静默 |
 
-**建议顺手配 `QQ_BOT_OPENID`**：配了按 openid 精确判断是不是在 @ 机器人，群里同时 @ 好几个人也不会误判；不配就退回「正文以 `<@` 开头」的经验规则。
+**建议顺手配 `QQ_BOT_OPENID`**：配了按 openid 精确判断是不是在 @ 机器人，群里同时 @ 好几个人也不会误判，`@别人 /授权` 也不会被抢答；不配就退回平台语义兜底（`GROUP_AT_MESSAGE_CREATE` 本身就是「有人 @ 了本机器人」，`GROUP_MESSAGE_CREATE` 只要求正文带 `<@`）。
 
 怎么拿：把自己 @ 机器人的那条消息在 `?diag=1` 的 `content` 里找到 `<@这串>` —— 例如上面那条就是 `1C9A1705252A5B5A3C8E05AE5BD701D5`。
 
@@ -273,7 +347,7 @@ QQ 官方机器人事件里**只有 `openid`，没有 QQ 号**，也没有任何
 |---|---|---|
 | `/我是谁` | 任何人 | 回自己的 openid，用来核对认领的是哪个身份 |
 | `/管理绑定 <口令>` | 口令正确且尚无管理员 | 认领成为唯一管理员 |
-| `/解绑 CF8A-EFFE` | 仅管理员 | 解绑单台机器（识别码） |
+| `/解绑 CF8A-EFFE-B2` | 仅管理员 | 解绑单台机器（识别码） |
 | `/解绑 ACEF3YL5` | 仅管理员 | 解绑单台机器（按码 ID，玩家报码时用） |
 | `/解绑账号 5D253F99` | 仅管理员 | 解绑该 openid 名下全部机器（前缀匹配，需唯一） |
 | `/绑定列表` | 仅管理员 | 列出全部绑定（最新 30 条） |
@@ -291,6 +365,11 @@ QQ 官方机器人事件里**只有 `openid`，没有 QQ 号**，也没有任何
 - 但**他旧机器上的游戏仍然是已授权状态** —— 游戏端是纯离线验签，不会回连账本。
   真要彻底作废，得让他删掉 `%LOCALAPPDATA%\FVM_Reborn_makk\auth.dat`，或者换机。
 
+**名额只算「码还没过期」的机器**（`store.Ledger.count_by_uid(uid, only_valid=True)`）。
+过期码在游戏里已经验不过，继续占名额只会把玩家的两个名额永久占死，所以：
+等旧码自然过期（`LICENSE_DAYS` 天）之后，玩家拿新机器的识别码就能直接领，不用找管理解绑。
+老账本里到期日为空的历史记录同样不占名额。
+
 ### 8.4 兜底：直接改 COS（机器人不可用时）
 
 控制台 → 对象存储 → 你的桶 → `qqauth/ledger.json` → 下载 → 删掉
@@ -305,9 +384,9 @@ import store
 led = store.ledger_from_env()
 rows = led.all()
 print("共 %d 条" % len(rows))
-for hwid, uid, code_id, code, ts in rows:
-    print("%-10s %-24s %s" % (hwid, uid[:20], code_id))
-print("已解绑 %d 台" % led.drop_hwid("CF8AEFFE"))
+for hwid, uid, code_id, code, ts, exp in rows:
+    print("%-12s %-24s %s  到期 %s" % (hwid, uid[:20], code_id, exp or "无期"))
+print("已解绑 %d 台" % led.drop_hwid("CF8AEFFEB2"))
 led.close()
 EOF
 ```
@@ -334,6 +413,41 @@ python build.py                                 # 重新打包 ../scf-qqauth.zip
 
 代价：换机器 / 重装系统 / 改计算机名都会消耗一个码（本机识别码变了就得发新码），所以码的消耗速度看**机器台数**，不是人数。
 
+### 识别码是 10 位（最后 2 位是校验）
+
+游戏端显示的识别码格式是 `1A2B-3C4D-7E`，去掉连字符共 10 位：
+
+- **前 8 位**是本机指纹（`md5(机器特征)[:8]`）；
+- **后 2 位**是校验：`md5("HWID|<前8位>|<HWID_SALT>")[:2]`。
+
+机器人收到后会用同样的算法验这 2 位，**随手敲一串十六进制骗不到码**（以前 `DEADBEEF`
+这种随便编的也能领到真码，还会把自己两个设备名额占满）。
+
+环境变量 `HWID_SALT`（默认 `FVM-HWID-CHECK-2026-11`）**必须与游戏端
+`scripts/auth_client/auth_client.gml` 里的 `kAuthHwidSalt` 完全一致**——不一致的话
+游戏算出来的识别码机器人会判「不合法」，全服都领不到码。换盐等于让所有玩家的识别码
+作废，非必要别动。
+
+### 同一台机器只能归一个 QQ
+
+账本主键是识别码，里面记着「谁领的」。A 就算知道 B 的识别码，也领不走——会回
+「这台机器的授权码已经绑在另一个 QQ 名下了」。不加这条的话，B 的名额会莫名算到 A
+头上，B 自己再问反而变成「在别人名下」。真换了 QQ，只能找管理员 `/解绑`。
+
+### 有效期（默认 3 天）
+
+授权码格式是 `FVM4-<码ID>-<识别码>-<到期日>-<签名>`，第 4 段就是到期日。
+
+- **到期日进了签名**：改它必然破坏签名，所以玩家不能靠改码续期，离线也能判。
+- 游戏端每次 `auth_ok()` 都重新判一次有效期，**挂机跨过到期日也会立刻失效**；
+  授权窗会提示「授权已过期 · 请把上方识别码重新发给机器人领一张新的」。
+  客户端文案**不写死天数**——期限归签发端管，改 `LICENSE_DAYS` 不该让游戏里的字失真。
+- 机器人发码时会写明具体到期日，例如「有效期到 2026-11-26（3 天）」。
+- 到期后再发一次 `/授权 <识别码>` 就能拿到新码：**沿用原来的码 ID 重签**，
+  不消耗池子里新 ID；账本里那台的到期日同时被刷新。
+- 天数由环境变量 `LICENSE_DAYS` 决定（默认 3）。改它**只影响新签发的码**，
+  已发出去的码还按自己那段到期日算。
+
 ---
 
 ## 九、文件说明
@@ -345,12 +459,17 @@ python build.py                                 # 重新打包 ../scf-qqauth.zip
 | `ed25519_ref.py` | 纯标准库 Ed25519（含 RFC 8032 向量自检） |
 | `store.py` | COS 账本 + 手写 COS 签名（不依赖 cos-python-sdk） |
 | `build.py` | 打 zip |
+| `package.py` | 打包 + 校验 zip 内容（严格模式代码是否真进去了、配置是否泄漏密钥） |
 | `selftest.py` | 端到端自检，模拟腾讯真实请求 |
 
 三个自检入口：
 
 ```bash
-python selftest.py        # 全链路（不联网）
+python selftest.py        # 全链路（不联网），含严格触发的正/反例断言
 python main.py --check    # 配置 + COS 连通性
 python main.py --simulate # 模拟一条群 @ 消息
 ```
+
+`selftest.py` 的 ⑬⑭⑮⑯ 四节专测本轮严格化：认哪些写法、哪些必须**一句话都不回**、
+现场记录里能否分清「回了/没回」、以及 `GROUP_MESSAGE_CREATE` 事件里 `@机器人 /授权`
+能正常发码。改解析逻辑后先跑它。
