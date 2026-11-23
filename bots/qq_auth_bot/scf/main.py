@@ -390,29 +390,64 @@ def simulate():
     bot_handle = build_handler()
     bot_handle.ledger_factory = lambda: store.Ledger(mem)
 
-    text = "/授权 CF8A-EFFE"
+    # 严格模式下群里必须「@ 机器人 + /授权」，所以模拟正文要带 @ 标记
+    text = "<@!SIMULATED_BOT> /授权 CF8A-EFFE-B2"
     uid = "SIMULATED_OPENID"
 
     print("\n模拟消息：%r" % text)
-    out = bot_handle._handle_text(uid, text)
+    out = bot_handle._handle_text(uid, text, group=True)
     print("回复内容：\n%s\n" % (out or "(无回复)"))
 
     if not out or "FVM4-" not in out:
         print("✗ 没有产出授权码")
         return 1
 
+    # 码里带到期日段（FVM4-<ID>-<机器码>-<到期日>-<签名>），
+    # 所以从正文里抠码要抠到第 5 段为止，不能只按空白切一刀。
     code = "FVM4-" + out.split("FVM4-")[1].split()[0].strip()
     valid, code_id, hwid = qq_auth.verify(code)
     print("回验签名：%s  码ID=%s  绑定机器=%s"
           % ("✓ 有效" if valid else "✗ 无效", code_id, hwid))
 
+    _cid, _hw, _exp, _sig = qq_auth.parse_code(code)
+    _left = qq_auth.exp_decode(_exp) - qq_auth.day_number()
+    print("有效期：到期 %s（还剩 %d 天，配置 LICENSE_DAYS=%d）"
+          % (qq_auth.exp_date_text(_exp), _left, qq_auth.LICENSE_DAYS))
+    if _left != qq_auth.LICENSE_DAYS:
+        print("✗ 到期日不对：应为 %d 天后" % qq_auth.LICENSE_DAYS)
+        return 1
+    if "到期" not in out:
+        print("✗ 回复里没告诉玩家到期日")
+        return 1
+
     # 同一台机器再领一次，必须拿回同一个码（不消耗新码池 ID）
-    again = bot_handle._handle_text(uid, text)
+    again = bot_handle._handle_text(uid, text, group=True)
     same = again and code in again
     print("同机重领：%s" % ("✓ 返回原码，未消耗新码" if same else "✗ 又发了一个新码"))
 
-    if valid and hwid == "CF8AEFFE" and same:
-        print("\n✓ 链路正确：这条码在你这台机器（CF8A-EFFE）上可以激活")
+    # 把账本里的码手工改成「昨天到期」，再领必须重签（且沿用同码 ID）
+    # ⚠️ MemoryStore.load() 返回的是深拷贝，改完必须 save 回去才生效
+    _stale = qq_auth.exp_encode(qq_auth.day_number() - 1)
+    _snap = mem.load()
+    _snap["entries"][hwid]["exp"] = _stale
+    mem.save(_snap)
+    renewed = bot_handle._handle_text(uid, text, group=True)
+    new_code = None
+    if renewed and "FVM4-" in renewed:
+        new_code = "FVM4-" + renewed.split("FVM4-")[1].split()[0].strip()
+    # 重签后码 ID 不变、到期日刷新成今天+7。注意同一天重签出来的码文本
+    # 会和原来一模一样（因为到期日相同），所以判据不是「文本变了」，
+    # 而是「账本里那条记录的到期日被刷新了」。
+    _after = mem.load()["entries"][hwid]["exp"]
+    same_id = bool(new_code) and qq_auth.parse_code(new_code)[0] == code_id
+    refreshed = _after != _stale and not qq_auth.exp_expired(_after)
+    reissued = same_id and refreshed
+    print("过期重签：%s" % ("✓ 已刷新到期日，码 ID 不变"
+                          if reissued else "✗ 过期后没重签"))
+
+    if valid and hwid == "CF8AEFFEB2" and same and reissued and same_id:
+        print("\n✓ 链路正确：这条码在你这台机器（CF8A-EFFE-B2）上可以激活，%d 天后自动失效"
+              % qq_auth.LICENSE_DAYS)
         return 0
     print("\n✗ 链路有问题，看上面哪一步不对")
     return 1

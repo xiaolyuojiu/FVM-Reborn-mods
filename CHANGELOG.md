@@ -35,6 +35,69 @@
 - **存档 / 关卡读取失败提示**：`scripts/save_file` 保存失败、`scripts/level_integrity` + `scripts/level_hashes`
   关卡哈希校验失败都会弹提示（`global.level_hash_verify = true`，哈希表由 `tools/gen_level_hashes.py` 生成）。
 ## 优化与修复
+- **本机识别码加 2 位校验位，挡住「随手敲十六进制就能领码」（2026-11-23）**：以前识别码只是
+  8 位十六进制（`md5(机器特征)[:8]`），前后端都无法判断真假——任何人发 `/授权 DEADBEEF`
+  都能领到一张真码，还会把自己这个 QQ 的两个设备名额占满，真机再来领反而被拒「已经有 2 台
+  机器在用」。三处一起改：
+  ① **识别码改成 10 位**：前 8 位仍是本机指纹 md5 片段，后 2 位是校验位
+  `md5("HWID|<前8位>|<盐>")[:2]`。盐是 `kAuthHwidSalt`（GML）/ `HWID_SALT`（签发端环境变量），
+  两侧必须一致。客户端 `auth_hwid()` 改为「算 core → 拼 check」，`auth_hwid_valid()` 加校验位比对，
+  `auth_hwid_text()` 改 4-4-2 分段显示（`1A2B-3C4D-7E`），v1 老指纹 `auth_hwid_legacy()` 保持 8 位。
+  签发端 `tools/qq_auth.py` 新增 `HWID_CORE_LEN`/`HWID_CHECK_LEN`/`HWID_LEN`(=10)/`HWID_SALT` 与
+  `hwid_check`/`make_hwid`，`hwid_valid` 改三段校验（长度 → 字符集 → 校验位）。
+  ② **修 `bot.py` 发码不传账本**：`issue_for(uid, hwid)` 内部又开了一份本地 SQLite，走云端 Webhook
+  时等于用两套账（云端 COS 记不到、名额统计对不上）。现签名改为
+  `issue_for(uid, hwid, ledger=None)`，`handle_message` 把传入的账本传下去。
+  ③ **同一台机器只能归一个 QQ**：新增 `HwidTakenByOther` 异常，`issue_for` 命中记录后先比归属，
+  别人知道你的识别码也领不走。机器人新增 `MSG_HWID_TAKEN`（「已经绑在另一个 QQ 名下了…请联系
+  管理解绑」），`scf/webhook.py` 同步补分支。
+  文案：`MSG_NEED_HWID`/`MSG_BAD_HWID`/`MSG_GREETING`/`MSG_GROUP_HINT` 全部改为 10 位示例，
+  授权窗输入框占位符改 `FVM4-XXXXXXXX-XXXXXXXXXX-XXXX-XXXXXXXXXX`。
+  `scf/deploy.py` 下发 `HWID_SALT`，`scf/package.py` 校验项从 22 扩到 30（新增校验位、传账本、
+  抢绑提示等 8 条断言）。
+  自检踩坑：加了「一台机器只能归一个账号」之后，`scf/selftest.py` 里多个用例复用同一个识别码会
+  互相踩（前一段已把它绑给别的 UID，后面再领就抛 `HwidTakenByOther`）→ 每个用例改用独立识别码。
+- **授权码改为有有效期（到期日进码，2026-11-23）**：授权码格式从 4 段
+  `FVM4-<码ID>-<机器码>-<签名>` 改为 5 段 `FVM4-<码ID>-<机器码>-<到期日>-<签名>`，
+  第 4 段是「2020-01-01 起第几天」的 4 位 32 进制（字符集同码 ID，无 `0/O/1/I`）。
+  到期日参与签名计算，**改它必然验签失败**，所以纯离线也判得出有效期，不需要联网校验。
+  客户端 `scripts/auth_client/auth_client.gml` 新增 `auth_civil_days` / `auth_day_number` /
+  `auth_exp_encode` / `auth_exp_decode` / `auth_exp_expired` / `auth_exp_days_left` 等纯整数日期函数
+  （不依赖 `date_create_datetime` 之类全仓零先例的 API），`auth_ok()` 不再只看「码非空」——
+  每次调用都重判有效期，玩家挂机跨过到期日也会立刻失效；另存 `seen_day` 单调抬升
+  （`auth.dat` 的 `seen_day` 字段），回拨系统时钟续不了期。
+  `auth_bind` 新增返回 5（已过期）、6（旧版无期码）；授权窗 `obj_auth_gate` 的占位符改 5 段、
+  新增这两条提示文案与红字「授权已过期」状态行，说明文字加「③ 码有期限，到期要重领」。
+  **客户端文案一律不写死天数**：期限归签发端 `LICENSE_DAYS` 管，具体到期日由机器人回执给出，
+  这样改期（7 天 ↔ 3 天）不需要重新编译游戏，也不会出现「文案说 7 天、码其实 3 天」的错位。
+  签发端 `tools/qq_auth.py` 新增 `EXP_LEN`/`EXP_EPOCH`/`LICENSE_DAYS`（env 可改，**默认 3 天**）与
+  `day_number`/`exp_encode`/`exp_decode`/`exp_for`/`exp_date_text`/`exp_expired`；
+  SQLite 账本 `_ensure_schema` 自动给旧表 `ALTER TABLE` 补 `exp` / `exp_day` 两列（存量记录视为无到期，
+  下次领码自动重签）；`issue_for` 命中已过期旧码时**沿用原码 ID 重签新到期日**，不消耗码池新 ID；
+  `ledger` / `export` / `verify` 三个子命令都显示到期日。机器人 `bots/qq_auth_bot/bot.py` 的
+  `MSG_CODE` 加「有效期到 YYYY-MM-DD（N 天）」、新增 `format_code_msg` 从码里解到期日（不从账本读，
+  保证文案与码永远一致），`/绑定列表` 多一列「到期」；`scf/store.py` 的账本条目加 `exp` 键、
+  三个读取方法统一返回 6 元组，`scf/main.py --simulate` 增加到期日与过期重签两段断言。
+- **设备名额只算「还没过期」的机器（2026-11-23）**：以前 `count_by_uid` 数的是账本里的全部记录，
+  玩家停玩一段时间后两张码全过期，两个名额被两张废码永久占死，换机只能找管理解绑。
+  现 `count_by_uid(uid, only_valid=True)` 默认只数未过期的：
+  签发端 `tools/qq_auth.py` 走 `SELECT COUNT(*) ... WHERE exp_day >= 今天`（空 `exp`/老记录 `exp_day=0`
+  自然算过期）；云端账本 `scf/store.py` 因为要保持零依赖（可被 `webhook`/`main` 单独 import，不引 `qq_auth`），
+  本地实现了 `_exp_day` / `_today_number` / `_exp_valid` 三个纯函数，与 `qq_auth.exp_decode` 逐值对齐
+  （`24GT`→2521、`24GX`→2525、`""`/`"!!!!"`/`"0000"`→-1、`ZZZZ`→1048575）。
+  机器人 `MSG_TOO_MANY` 文案相应改为「已经有 N 台机器在用（码还没过期）」，
+  `qq_auth.selftest` 与 `store.selftest` 各补一段名额断言（两台有效时第 3 台必须被拒、把其中一台改成过期后
+  第 3 台能领、空 `exp` 的老记录不占名额）。
+- **授权机器人改为严格触发（2026-11-23）**：`bots/qq_auth_bot/` 原来会把群里的近似写法
+  （`#授权`、`/授权码`、只贴识别码）和「怎么领码」的提问都接住，群里噪音大也容易被误触发。
+  现改为严格模式（`strict_trigger` 默认开，`bot.py` 的 `STRICT_TRIGGER`）：**只有
+  `@机器人 /授权` 与 `@机器人 /授权 <识别码>`（私聊为 `/授权[ <识别码>]`）才响应，其余一律静默**。
+  整串匹配而非前缀匹配 —— `/授权码`、`/授权 1A2B-3C4D 多余` 都不认；全角 `／授权`、全角数字
+  `１A2B` 归一后照常认。`_mentioned_ids` + `mention_targets_me` 精确比对 `QQ_BOT_OPENID`
+  （配置项 `bot_openid`），未配置时退回平台语义兜底；`scf/webhook.py` 的 `_aimed_at_bot`
+  改为复用同一判定，闭掉了「@ 别人也发码」的口子。同时修掉 `GROUP_MESSAGE_CREATE`
+  （群里每一条消息都推的事件）被整体丢弃的问题，`bot.py --listen` 的事件自检也认它。
+  默认命令词从 `#授权` 改为 `/授权`（`config.example.json` / `build.py` 兜底同步）。
 - **本机识别码全服撞车（指纹 v2）**：`scripts/auth_client/auth_client.gml` 的 `auth_hwid()`
   原来只用 `COMPUTERNAME | PROCESSOR_IDENTIFIER | NUMBER_OF_PROCESSORS`，这三个量在 ghost 克隆镜像 /
   同批装机 / 无盘网吧里完全相同，导致所有机器算出同一个识别码（现网 `E52D26F9`），

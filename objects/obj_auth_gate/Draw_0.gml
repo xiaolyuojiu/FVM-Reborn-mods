@@ -23,7 +23,9 @@ draw_text_transformed(panel_x + panel_w * 0.5, title_y, "授权", 1.7, 1.7, 0);
 
 // ── 说明 ──
 draw_set_color(make_color_rgb(104, 88, 66));
-var _hint = "① 点下面这行复制本机识别码　② @小Makk发送  " + kAuthCommand + " 识别码";
+// 期限天数由签发端 LICENSE_DAYS 决定（默认 3 天），客户端不知道具体值，
+// 所以这里只提醒「有期限、到期要重领」；具体到期日由机器人回执和下面状态行给出。
+var _hint = "① 点下面这行复制本机识别码　② @小Makk发送  " + kAuthCommand + " 识别码　③ 码有期限，到期要重领";
 if (mandatory) {
     _hint = "未授权无法进入游戏　" + _hint;
 }
@@ -75,6 +77,13 @@ if (msg != "") {
     draw_set_color(make_color_rgb(70, 112, 80));
     draw_text_transformed(panel_x + panel_w * 0.5, status_y,
         auth_label() + "　（重新输入可换绑）", 1.0, 1.0, 0);
+} else if (variable_global_exists("auth_code_expired") && global.auth_code_expired) {
+    // 上次的码到期了 / 是旧版无期码：直接说清「去哪拿新的」，
+    // 别让玩家以为是抄错，反复检查连字符。
+    // 具体天数不写死：期限由签发端 LICENSE_DAYS 决定，改期不该让这句文案失真。
+    draw_set_color(make_color_rgb(190, 62, 50));
+    draw_text_transformed(panel_x + panel_w * 0.5, status_y,
+        "授权已过期 · 请把上方识别码重新发给机器人领一张新的", 1.0, 1.0, 0);
 } else {
     draw_set_color(make_color_rgb(150, 136, 116));
     draw_text_transformed(panel_x + panel_w * 0.5, status_y,

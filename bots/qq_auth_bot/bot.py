@@ -22,18 +22,23 @@ openid，腾讯侧给的、伪造不了、只发一次。
 
     QQ_SANDBOX=1              # 走沙箱域名（未上架时用）
 
-玩家怎么用
-----------
-    私聊机器人发  #授权      → 直接私聊回码（推荐，码不外泄）
-    群里 @机器人 发 #授权    → 机器人回"请私聊我"，不发码
+触发规则（严格模式，默认开）
+---------------------------
+    群里 @机器人 /授权            → 回一句"带上识别码"的用法
+    群里 @机器人 /授权 1A2B-3C4D  → 发码
+    私聊     /授权 1A2B-3C4D      → 发码
+    **其余一切内容一律不回复**（闲聊、#授权、授权码 这类近似写法、@ 了别人）
 
-为什么群里不发码：码是自证票据，谁拿到谁都能激活，群里发等于送给全群。
-详见 docs/QQ号校验与授权方案.md 第 12 章。
+判定两道闸，缺一不可：
+  1. @ 的必须是本机器人 —— 精确比对 QQ_BOT_OPENID（配了才认 GROUP_MESSAGE_CREATE）
+  2. 剥掉 @ 之后整条正文必须完全等于 /授权（或 /授权 + 一个识别码），
+     是整串匹配，不是 startsWith，所以「/授权码给我」不会误触发
 """
 
 import asyncio
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -84,7 +89,7 @@ APP_ID = _conf("QQ_APP_ID", "app_id")
 APP_SECRET = _conf("QQ_APP_SECRET", "app_secret")
 SANDBOX = _flag("QQ_SANDBOX", "sandbox")
 
-AUTH_COMMAND = _conf("AUTH_COMMAND", "auth_command", "#授权")
+AUTH_COMMAND = _conf("AUTH_COMMAND", "auth_command", "/授权")
 LOOKUP_COMMAND = _conf("LOOKUP_COMMAND", "lookup_command", "查码")
 
 
@@ -133,6 +138,22 @@ ALLOW_GROUP_ISSUE = _flag("ALLOW_GROUP_ISSUE", "allow_group_issue", "1")
 # 打印每个收到的事件（排查"机器人没反应"时开）
 TRACE = _flag("QQ_TRACE", "trace", "0")
 
+# ── 严格触发（默认开）──────────────────────────────────────────
+# 只有「@本机器人 /授权」这一种写法会得到回复，其余一律静默：
+#   · 群里 @ 了但正文不是 /授权   → 不回
+#   · 群里没 @ 直接发 /授权       → 不回
+#   · #授权 / 授权 / /授权码       → 不回（只认一个斜杠的 /授权）
+#   · 闲聊、问问题、@ 别人         → 不回
+# 回退旧宽松模式：config.json 里 "strict_trigger": false
+STRICT_TRIGGER = _flag("STRICT_TRIGGER", "strict_trigger", "1")
+
+# 本机器人 openid。填了才能精确判断「@ 的到底是不是我」；
+# 留空时退回平台语义（GROUP_AT_MESSAGE_CREATE 本身就代表 @ 了本机器人）。
+BOT_OPENID = _conf("QQ_BOT_OPENID", "bot_openid", "")
+
+# 严格模式唯一认的命令：一个斜杠 + 配置里的命令词（默认 /授权）
+STRICT_CMD = "/" + (AUTH_COMMAND or "授权").lstrip("/#＃／ \t")
+
 # 正式 / 沙箱两套域名
 API_BASE = "https://sandbox.api.sgroup.qq.com" if SANDBOX else "https://api.sgroup.qq.com"
 TOKEN_URL = "https://bots.qq.com/app/getAppAccessToken"
@@ -150,6 +171,7 @@ MSG_CODE = (
     "授权码（已绑定你这台机器，别人拿去也用不了）：\n"
     "{code}\n"
     "\n"
+    "有效期到 {expires}（{days} 天），到期后再发一次 {cmd} 换新码。\n"
     "游戏 → 右上角授权 → 粘贴上面这串。\n"
     "换电脑或重装系统后，识别码会变，需要重新领一次。"
 )
@@ -159,30 +181,39 @@ MSG_NEED_HWID = (
     "\n"
     "获取方式：打开游戏，启动时弹出的授权窗口里会显示识别码，点一下即可复制\n"
     "然后这样发给我：\n"
-    "{cmd} XXXX-XXXX"
+    "{cmd} XXXX-XXXX-XX"
 )
 
+# 识别码 = 8 位正文 + 2 位校验，共 10 位。校验位由客户端算，
+# 所以乱敲一串十六进制会被这里挡掉 —— 不发码，也不占设备名额。
 MSG_BAD_HWID = (
-    "识别码不对，应该是 8 位字母数字（像 1A2B-3C4D）。\n"
-    "在游戏授权窗口里点一下识别码就能复制，直接粘过来。"
+    "识别码不对。正确形式是 10 位，像 1A2B-3C4D-7E 这样（最后 2 位是校验）。\n"
+    "在游戏授权窗口里点一下识别码就能复制，直接粘过来 —— 手打会漏字符。"
 )
 
 MSG_GREETING = (
     "发送 {cmd} 加你的本机识别码即可领取授权码。\n"
-    "例：{cmd} 1A2B-3C4D\n"
+    "例：{cmd} 1A2B-3C4D-7E\n"
     "（识别码在游戏启动时弹出的授权窗口里，点一下就能复制）"
 )
 
 MSG_GROUP_HINT = (
-    "领码请带上本机识别码：{cmd} XXXX-XXXX\n"
+    "领码请带上本机识别码：{cmd} XXXX-XXXX-XX\n"
     "（识别码在游戏启动时弹出的授权窗口里点一下就能复制）"
 )
 
 MSG_POOL_EMPTY = "授权码暂时发完了，请联系管理加码后再领。"
 # 到上限就是硬拒绝：不提任何解绑/重领的办法，避免玩家觉得"磨一磨就能换"
+# 名额只算「还没过期」的码：过期的机器不再占名额，等它过期就能换新机。
 MSG_TOO_MANY = (
-    "这个 QQ 已经绑满 {n} 台机器，不能再领新码了。\n"
+    "这个 QQ 名下已经有 {n} 台机器在用（码还没过期），不能再领新码了。\n"
     "授权码一发出就和机器绑定，不能转移也不能重领。"
+)
+# 这台机器已经绑在别的 QQ 名下。不能把归属改走，否则知道别人识别码
+# 就能把人家的名额算到自己头上（详见 qq_auth.HwidTakenByOther）。
+MSG_HWID_TAKEN = (
+    "这台机器的授权码已经绑在另一个 QQ 名下了，这边不能再领。\n"
+    "如果确实是你自己的机器换号了，请联系管理解绑。"
 )
 MSG_ERROR = "发码出错了，请联系管理。"
 
@@ -237,16 +268,50 @@ MSG_ADMIN_LIST_HEAD = "绑定记录：共 {n} 台"
 
 # ────────────────────────────── 发码 ──────────────────────────────
 
-def issue_for(uid, hwid):
-    """返回 (code, is_new)。同一台机器永远只对应一个码。"""
-    ledger = qq_auth.Ledger(qq_auth.DB_PATH)
-    try:
-        row = ledger.get_by_hwid(hwid)
-        if row:
-            return row[3], False
+def issue_for(uid, hwid, ledger=None):
+    """返回 (code, is_new)。
+
+    同一台机器在有效期内永远只对应一个码（这是「别人不能再用」的根）；
+    码过期后再来领，会**沿用原来的码 ID 重签一张新到期日**，不消耗池子里的新 ID。
+    这段逻辑只有一份，在 `qq_auth.issue_for()` 里，这里不重复实现。
+
+    ⚠️ ledger 必须传下去：云端 Webhook 用的是 COS 账本，
+        不传就会另外开一份本地 SQLite —— 发出去的码云端不记账、
+        名额统计也对不上（同一台机器能反复领，还会被算成没绑过）。
+    """
+    if ledger is not None:
         return qq_auth.issue_for(uid, hwid, ledger)
+    own = qq_auth.Ledger(qq_auth.DB_PATH)
+    try:
+        return qq_auth.issue_for(uid, hwid, own)
     finally:
-        ledger.close()
+        own.close()
+
+
+def code_exp_text(code):
+    """从码里解出到期日，返回 (到期日文本, 剩余天数)。解析失败给 ("?", 0)。"""
+    try:
+        _cid, _hwid, exp, _sig = qq_auth.parse_code(code)
+    except Exception:
+        return "?", 0
+    if qq_auth.exp_decode(exp) < 0:
+        return "?", 0
+    return qq_auth.exp_date_text(exp), qq_auth.exp_decode(exp) - qq_auth.day_number()
+
+
+def format_code_msg(code):
+    """把码套进玩家可见的文案，顺带算出「还剩几天」。
+
+    到期日是从码里解出来的，不从账本读 —— 这样即使账本丢了/旧了，
+    回给玩家的话也和码本身永远一致。
+    """
+    expires, days = code_exp_text(code)
+    return MSG_CODE.format(
+        code=code,
+        expires=expires,
+        days=max(0, days),
+        cmd=STRICT_CMD if STRICT_TRIGGER else AUTH_COMMAND,
+    )
 
 
 # ────────────────────────────── HTTP ──────────────────────────────
@@ -377,10 +442,57 @@ def _looks_like_hwid(token):
     return len(raw) == qq_auth.HWID_LEN and qq_auth.hwid_valid(raw.upper())
 
 
+def _mentioned_ids(text):
+    """取出正文里所有 `<@!xxx>` / `<@xxx>` 的 id。"""
+    return re.findall(r"<@!?([^>\s]+)>", text or "")
+
+
+def _bot_openid():
+    """本机器人 openid。环境变量优先，方便自检脚本临时改。"""
+    return (os.environ.get("QQ_BOT_OPENID") or BOT_OPENID or "").strip()
+
+
+def mention_targets_me(text, require_mention=False):
+    """@ 的对象是不是本机器人。返回 (是否, 原因)。
+
+    · BOT_OPENID 已配置 → 精确比对 id，@ 了别人一律 False
+    · BOT_OPENID 为空   → 平台语义兜底：GROUP_AT_MESSAGE_CREATE 本身就是
+                          "有人 @ 了本机器人"，此时只要求正文带 @ 标记
+    · require_mention=True（群里的普通消息事件）→ 没有 @ 直接 False
+    """
+    ids = _mentioned_ids(text)
+    own = _bot_openid()
+    if own:
+        if own in ids:
+            return (True, "精确匹配")
+        if ids:
+            return (False, "at_other")
+        return (False, "no_mention")
+    if not ids:
+        return (False, "no_mention") if require_mention else (True, "平台语义")
+    return (True, "未配 openid，按平台语义放行")
+
+
+def strict_gate(text, group=False):
+    """严格模式的唯一入口。返回 (kind, arg) 或 None（None = 完全不回）。
+
+    只管「正文是不是 /授权[...]」。@ 的判定在事件层做（见 mention_targets_me）：
+      · C2C_MESSAGE_CREATE    —— 私聊，本来就没有 @
+      · GROUP_AT_MESSAGE_CREATE —— 平台已保证 @ 了本机器人
+      · GROUP_MESSAGE_CREATE  —— 群里每一条都会推，必须先自己验 @ 的是谁
+    两处都放在这里会重复判定，反而把「平台已保证 @」的事件错杀。
+    """
+    return parse_strict_command(text)
+
+
 _FULLWIDTH_MAP = {
     ord("／"): "/", ord("＃"): "#", ord("＠"): "@",
     ord("　"): " ",
 }
+# 全角数字/字母（Ａ-Ｚ ａ-ｚ ０-９）也要归一：手机输入法很容易打出 １A2B。
+# FF01~FF5E 与 ASCII 的 21~7E 一一对应，整体平移 0xFEE0 即可。
+for _cp in range(0xFF01, 0xFF5F):
+    _FULLWIDTH_MAP.setdefault(_cp, chr(_cp - 0xFEE0))
 
 
 def _norm_cmd(plain):
@@ -435,6 +547,43 @@ def looks_like_issue_attempt(text):
     parts = plain.split()
     token = parts[-1] if parts else ""
     return _hwid_like(token.replace("-", "").replace(" ", "").upper())
+
+
+def parse_strict_command(text):
+    """严格模式：整条正文必须是 `/授权` 或 `/授权 <识别码>`，否则 None。
+
+    与 parse_command 的区别（这就是"防不住乱回"的关键）：
+      · 不做前缀补全 —— `授权 1A2B-3C4D`、`#授权 ...` 都不认
+      · 不做 startsWith 判命令 —— `/授权码给我` 不是命令
+      · 不猜"末段像识别码就当他领码" —— 必须命令在前
+      · 参数位只接受识别码；塞别的东西一律 None（静默）
+
+    返回 (kind, arg)，kind 恒为 "auth"；arg 可能是 ""（要提示补识别码）。
+    """
+    plain = _norm_cmd(strip_mention(text))
+    if not plain:
+        return None
+
+    cmd = STRICT_CMD
+    if plain == cmd:
+        return ("auth", "")
+    if not plain.startswith(cmd):
+        return None
+    # 命令后面必须紧跟空白，`/授权码` `/授权1A2B3C4D` 都不算
+    rest = plain[len(cmd):]
+    if rest[:1] not in (" ", "\u3000", "\t"):
+        return None
+    rest = rest.strip()
+
+    if not rest:
+        return ("auth", "")
+    # 只许一个参数位：多段内容（'/授权 1A2B-3C4D 多余'）一律不认
+    if len(rest.split()) > 1:
+        return None
+    if _looks_like_hwid(rest) or _hwid_like(rest.replace("-", "").upper()):
+        return ("auth", rest)
+    # 命令对了但参数不像识别码 —— 只提示，不发码，也不当闲聊处理
+    return ("auth", "\x00bad")
 
 
 def parse_admin_command(text):
@@ -506,9 +655,11 @@ def handle_admin(uid, kind, arg, ledger):
             return MSG_ADMIN_LIST_HEAD.format(n=0)
         rows = rows[::-1][:30]
         lines = [MSG_ADMIN_LIST_HEAD.format(n=ledger.count()), ""]
-        for i, (hwid, owner, code_id, _code, ts) in enumerate(rows, 1):
-            lines.append("%d. %s  %s  %s  %s"
-                         % (i, hwid, str(owner)[:8], code_id,
+        for i, (hwid, owner, code_id, _code, ts, exp) in enumerate(rows, 1):
+            # exp 是授权码第 4 段；旧账本里的条目没有它（空串），显示「无期」
+            _exp_txt = qq_auth.exp_date_text(exp) if exp else "无期"
+            lines.append("%d. %s  %s  %s  到期%s  %s"
+                         % (i, hwid, str(owner)[:8], code_id, _exp_txt,
                             time.strftime("%m-%d %H:%M", time.localtime(ts))))
         if ledger.count() > len(rows):
             lines.append("（只显示最近 30 条）")
@@ -556,11 +707,13 @@ def handle_admin(uid, kind, arg, ledger):
     return None
 
 
-def handle_message(uid, text, ledger=None):
+def handle_message(uid, text, ledger=None, group=False):
     """返回要回的内容（None 表示不理）。
 
-    ledger 传进来的话就用它（云端 COS 账本），不传就开本地 SQLite。
+    ledger 传进来就用它（云端 COS 账本），不传就开本地 SQLite。
     管理员命令只有带 admins/is_admin 的账本才支持。
+
+    group=True 表示这条来自群聊 —— 严格模式下必须 @ 到本机器人。
     """
     adm = parse_admin_command(text)
     if adm is not None:
@@ -576,30 +729,44 @@ def handle_message(uid, text, ledger=None):
         print("  [管理] 本地账本不支持管理员命令，请用云端 Webhook")
         return None
 
-    parsed = parse_command(text)
-    if parsed is None:
-        return MSG_GREETING.format(cmd=AUTH_COMMAND) if strip_mention(text) == "" else None
+    if STRICT_TRIGGER:
+        parsed = strict_gate(text, group=group)
+        if parsed is None:
+            return None
+        _cmd, arg = parsed
+        if not arg:
+            return MSG_NEED_HWID.format(cmd=STRICT_CMD)
+        if arg == "\x00bad":
+            return MSG_BAD_HWID
+    else:
+        parsed = parse_command(text)
+        if parsed is None:
+            return MSG_GREETING.format(cmd=AUTH_COMMAND) if strip_mention(text) == "" else None
+        _cmd, arg = parsed
 
-    _cmd, arg = parsed
     hwid = qq_auth.norm_hwid(arg)
     if not arg:
-        return MSG_NEED_HWID.format(cmd=AUTH_COMMAND)
+        return MSG_NEED_HWID.format(cmd=STRICT_CMD if STRICT_TRIGGER else AUTH_COMMAND)
     if not qq_auth.hwid_valid(hwid):
         return MSG_BAD_HWID
 
     try:
-        code, is_new = issue_for(uid, hwid)
+        code, is_new = issue_for(uid, hwid, ledger)
         print("  [发码] uid=%s hwid=%s new=%s code=%s"
               % (uid.replace(chr(10), "")[:12], hwid, is_new, code))
-        return MSG_CODE.format(code=code)
+        return format_code_msg(code)
     except qq_auth.PoolExhausted:
         return MSG_POOL_EMPTY
+    except qq_auth.HwidTakenByOther as exc:
+        print("  [抢绑] %s" % exc)   # 仅日志可见
+        return MSG_HWID_TAKEN
     except qq_auth.TooManyDevices as exc:
         print("  [上限] %s（玩家只会看到「绑满了」）" % exc)   # 仅日志可见
         return MSG_TOO_MANY.format(n=qq_auth.MAX_DEVICES_PER_UID)
     except Exception as exc:
         print("  [发码失败] uid=%s: %s" % (uid, exc))
         return MSG_ERROR
+
 
 
 def uid_of(data):
@@ -661,12 +828,14 @@ class Bot(object):
                 status, body = send_c2c(self.token, uid, content, msg_id)
                 _log_reply("私聊回复", status, body, msg_id)
 
-            out = handle_message(uid, text)
+            out = handle_message(uid, text, group=False)
             if out:
                 await reply(out)
+            else:
+                print("  [忽略] 私聊内容不是 %s" % STRICT_CMD)
             return
 
-        if name == "GROUP_AT_MESSAGE_CREATE":
+        if name in ("GROUP_AT_MESSAGE_CREATE", "GROUP_MESSAGE_CREATE"):
             group_openid = data.get("group_openid", "")
             uid = uid_of(data)
             text = data.get("content", "")
@@ -682,15 +851,30 @@ class Bot(object):
                 status, body = send_group(self.token, group_openid, content, msg_id)
                 _log_reply("群回复", status, body, msg_id)
 
-            if ALLOW_GROUP_ISSUE:
-                out = handle_message(uid, text)
-                if out:
-                    await reply(out)
-                else:
-                    print("  [忽略] 内容没命中命令（需要 %s 加识别码）"
-                          % " / ".join(AUTH_CMDS))
-            elif parse_command(text):
-                await reply(MSG_GROUP_HINT.format(cmd=AUTH_COMMAND))
+            if not STRICT_TRIGGER:
+                # 旧宽松模式（保留，config 里 strict_trigger=false 才走）
+                if ALLOW_GROUP_ISSUE:
+                    out = handle_message(uid, text, group=True)
+                    if out:
+                        await reply(out)
+                elif parse_command(text):
+                    await reply(MSG_GROUP_HINT.format(cmd=AUTH_COMMAND))
+                return
+
+            # 严格模式：必须是 @本机器人 + 整条正文 /授权[...]
+            # GROUP_MESSAGE_CREATE 是"群里有人说话"，必须自己验 @ 的是谁；
+            # GROUP_AT_MESSAGE_CREATE 平台已保证 @ 了本机器人。
+            if name == "GROUP_MESSAGE_CREATE":
+                ok, why = mention_targets_me(text, require_mention=True)
+                if not ok:
+                    print("  [严格] 丢弃群消息：%s" % why)
+                    return
+            out = handle_message(uid, text, group=True)
+            if out:
+                await reply(out)
+            else:
+                print("  [忽略] 群内容不是 %s %s" % (STRICT_CMD, "<识别码>"))
+            return
 
     async def run_once(self):
         """连一次，跑到断开为止。返回 True 表示应该重连。"""
@@ -824,6 +1008,8 @@ def check():
     print("池子剩余可发: %d" % remaining)
     if not ok or remaining == 0:
         print("⚠️  池子为空或未生成：python tools/qq_auth.py poolgen 500")
+    print("触发模式: %s" % ("严格（只回 %s）" % STRICT_CMD if STRICT_TRIGGER else "宽松（#授权/授权/裸识别码都认）"))
+    print("机器人 openid: %s" % (BOT_OPENID or "未配置（群消息只按平台语义判断 @）"))
     print("\n配置没问题，直接 python bot.py 启动。")
     return 0
 
@@ -877,7 +1063,8 @@ async def listen(seconds):
                     data = msg.get("d") or {}
                     brief = json.dumps(data, ensure_ascii=False)
                     print("[事件] %-22s %s" % (name, brief[:220]))
-                    if name in ("C2C_MESSAGE_CREATE", "GROUP_AT_MESSAGE_CREATE"):
+                    if name in ("C2C_MESSAGE_CREATE", "GROUP_AT_MESSAGE_CREATE",
+                                "GROUP_MESSAGE_CREATE"):
                         got_message = True
                         print("       ↑ 消息事件已到达，普通模式会处理它")
                 elif op == 11:

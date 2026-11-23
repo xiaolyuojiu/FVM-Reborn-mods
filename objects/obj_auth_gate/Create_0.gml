@@ -99,7 +99,7 @@ if (mandatory) {
 }
 _box.set_position(box_x, box_y);
 _box.set_size(box_w, box_h);
-_box.set_placeholder("FVM4-XXXXXXXX-XXXXXXXX-XXXXXXXXXX");
+_box.set_placeholder("FVM4-XXXXXXXX-XXXXXXXXXX-XXXX-XXXXXXXXXX");
 _box.set_theme({
     bg:           make_color_rgb(252, 248, 238),
     bg_focus:     make_color_rgb(255, 253, 246),

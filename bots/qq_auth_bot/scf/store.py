@@ -22,6 +22,7 @@
 一份，整个函数真正零第三方依赖。
 """
 
+import datetime
 import hashlib
 import hmac
 import json
@@ -241,16 +242,34 @@ class Ledger(object):
         row = self._data["entries"].get(_norm(hwid))
         if not row:
             return None
-        # 返回顺序对齐 SQLite：(hwid, uid, code_id, code, ts)
-        return (row["hwid"], row["uid"], row["id"], row["code"], row["ts"])
+        # 返回顺序对齐 SQLite：(hwid, uid, code_id, code, ts, exp)
+        # 第 6 位 exp 是后加的：老账本里的条目没有这个键，取空串 = 视为无到期。
+        return (row["hwid"], row["uid"], row["id"], row["code"], row["ts"],
+                row.get("exp", ""))
 
-    def count_by_uid(self, uid):
-        return sum(1 for r in self._data["entries"].values() if r["uid"] == str(uid))
+    def count_by_uid(self, uid, only_valid=True):
+        """数某个账号占了几台机器。
+
+        only_valid=True（默认）：**只数还没过期的**。
+        过期码在游戏里已经验不过，再占名额没有意义 —— 否则玩家停几天不玩，
+        名额就被几张废码永久占死，只能找管理解绑。
+
+        过期判定不 import qq_auth（store 要保持零依赖、能被 webhook 单独 import），
+        所以这里用账本自己存的 exp 段解析：4 位 32 进制，字符集和码 ID 同一套，
+        解出来的日数与 `qq_auth.day_number()` 同一口径（2020-01-01 起的天数）。
+        exp 解不出来（老条目空串 / 损坏）→ 视为**已过期**，和 qq_auth.exp_expired 一致。
+        """
+        rows = [r for r in self._data["entries"].values() if r["uid"] == str(uid)]
+        if not only_valid:
+            return len(rows)
+        today = _today_number()
+        return sum(1 for r in rows if _exp_valid(r.get("exp", ""), today))
 
     def get_by_uid(self, uid):
         rows = [r for r in self._data["entries"].values() if r["uid"] == str(uid)]
         rows.sort(key=lambda r: r["ts"])
-        return [(r["hwid"], r["uid"], r["id"], r["code"], r["ts"]) for r in rows]
+        return [(r["hwid"], r["uid"], r["id"], r["code"], r["ts"], r.get("exp", ""))
+                for r in rows]
 
     def used_ids(self):
         return set(r["id"] for r in self._data["entries"].values())
@@ -261,7 +280,8 @@ class Ledger(object):
     def all(self):
         rows = list(self._data["entries"].values())
         rows.sort(key=lambda r: r["ts"])
-        return [(r["hwid"], r["uid"], r["id"], r["code"], r["ts"]) for r in rows]
+        return [(r["hwid"], r["uid"], r["id"], r["code"], r["ts"], r.get("exp", ""))
+                for r in rows]
 
     def get_by_code_id(self, code_id):
         """按码 ID 反查。
@@ -274,11 +294,11 @@ class Ledger(object):
             return None
         for r in self._data["entries"].values():
             if str(r["id"]).upper() == cid:
-                return (r["hwid"], r["uid"], r["id"], r["code"], r["ts"])
+                return (r["hwid"], r["uid"], r["id"], r["code"], r["ts"], r.get("exp", ""))
         return None
 
     # ── 写 ──
-    def put(self, uid, hwid, code_id, code):
+    def put(self, uid, hwid, code_id, code, exp=""):
         hwid = _norm(hwid)
         self._data["entries"][hwid] = {
             "hwid": hwid,
@@ -286,6 +306,8 @@ class Ledger(object):
             "id": code_id,
             "code": code,
             "ts": int(time.time()),
+            # 到期日段（授权码第 4 段）。旧版码没有这个段，存空串。
+            "exp": str(exp or ""),
         }
         self._dirty = True
 
@@ -320,6 +342,50 @@ class Ledger(object):
 
 def _norm(hwid):
     return str(hwid or "").strip().upper()
+
+
+# ── 到期日解析（与 tools/qq_auth.py 的 exp_decode / day_number 同口径）──
+# store.py 刻意不 import qq_auth：它要能被 webhook/main 单独 import，
+# 而且不想把「密码学那一大坨」拖进云函数的冷启动路径。
+# 这里只需要两个纯函数，重复 20 行比引一层依赖干净。
+
+_EXP_CHARS = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
+_EXP_LEN = 4
+# 2020-01-01 的序数。到期日段记的就是「从这天起第几天」。
+# 用 date.toordinal() 算，不写魔法数 —— 手写下错会让过期判定整体偏移。
+_EXP_EPOCH_ORDINAL = datetime.date(2020, 1, 1).toordinal()
+
+
+def _exp_day(exp):
+    """到期日段 → 「2020-01-01 起第几天」。解不出来返回 -1（视为已过期）。"""
+    s = str(exp or "").strip().upper()
+    if len(s) != _EXP_LEN:
+        return -1
+    day = 0
+    for ch in s:
+        if ch not in _EXP_CHARS:
+            return -1
+        day = day * len(_EXP_CHARS) + _EXP_CHARS.index(ch)
+    return day
+
+
+def _today_number():
+    """今天（本地时区的日历日）是「2020-01-01 起第几天」。
+
+    必须走日历日而不是 (时间戳 - t0) // 86400：
+    后者在本地零点附近会把 3 天期算成 2 天或 4 天。
+    """
+    return datetime.date.today().toordinal() - _EXP_EPOCH_ORDINAL
+
+
+def _exp_valid(exp, today=None):
+    """这张码现在还能用吗。空串 / 损坏 / 已过到期日都算不能用。"""
+    day = _exp_day(exp)
+    if day < 0:
+        return False
+    if today is None:
+        today = _today_number()
+    return today <= day
 
 
 def build_ledger(store, autosave=True):
@@ -457,12 +523,26 @@ def selftest():
     check(led.count() == 0, "空账本", "空账本计数不为 0")
     check(led.get_by_hwid("1a2b3c4d") is None, "查不到不存在的机器", "幽灵记录")
 
-    led.put("uid-1", "1a2b3c4d", "ABCD1234", "FVM4-ABCD1234-1A2B3C4D-0011223344")
+    led.put("uid-1", "1a2b3c4d", "ABCD1234", "FVM4-ABCD1234-1A2B3C4D-24GX-0011223344", "24GX")
     check(led.count_by_uid("uid-1") == 1, "按 uid 计数", "按 uid 计数错误")
     row = led.get_by_hwid("1A2B3C4D")
     check(row is not None and row[3].startswith("FVM4-"), "机器码大小写归一",
           "机器码没有归一化")
+    # 第 6 位是到期日段，和 SQLite 账本的列序对齐；老条目没有这个键 → 空串
+    check(row is not None and row[5] == "24GX", "到期日段被存进账本",
+          "到期日段没存进账本：%r" % (row[5] if row else None))
+    check(len(led.all()[0]) == 6, "all() 返回 6 元组（含到期日）",
+          "all() 元组长度不对：%d" % len(led.all()[0]))
     check(led.used_ids() == {"ABCD1234"}, "已用 ID 集合", "已用 ID 集合错误")
+
+    # 名额只算还有效的：同一账号再塞一条已过期的记录，不该占名额
+    # "2222" 解出来是第 0 天（2020-01-01），必然过期
+    led.put("uid-1", "DEADBEEF", "DEADDDDD", "FVM4-DEADDDDD-DEADBEEF-2222-0000000000", "2222")
+    check(led.count_by_uid("uid-1") == 1, "过期记录不占名额",
+          "过期记录仍然占了名额：%d" % led.count_by_uid("uid-1"))
+    check(led.count_by_uid("uid-1", only_valid=False) == 2, "全量计数把过期记录算上",
+          "only_valid=False 没有算全量")
+    check(led.drop_hwid("DEADBEEF") == 1, "清掉过期测试记录", "清理失败")
     led.flush()
 
     # 换一个 Ledger 实例读同一份存储 → 模拟函数冷启动
@@ -482,7 +562,7 @@ def selftest():
     path = os.path.join(tmpdir, "ledger.json")
     fstore = FileStore(path)
     f1 = Ledger(fstore)
-    f1.put("u", "AABBCCDD", "ZZZZ9999", "FVM4-ZZZZ9999-AABBCCDD-0000000000")
+    f1.put("u", "AABBCCDD", "ZZZZ9999", "FVM4-ZZZZ9999-AABBCCDD-24GX-0000000000", "24GX")
     f1.close()
     f2 = Ledger(FileStore(path))
     check(f2.count() == 1 and os.path.exists(path), "文件后端落盘",

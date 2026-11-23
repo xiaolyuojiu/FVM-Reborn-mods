@@ -1,8 +1,12 @@
 {
+  "_说明": "复制成 config.json 再填。这个文件是模板，不含任何真实密钥。",
   "app_id": "1906122973",
   "app_secret": "在这里填开放平台生成的 AppSecret",
   "sandbox": false,
-  "auth_command": "#授权",
+  "auth_command": "/授权",
+  "strict_trigger": true,
+  "bot_openid": "",
+  "_bot_openid说明": "可选。填本机器人的 openid 才能精确判断群里 @ 的是不是自己；不知道就留空，留空时靠平台语义兜底（@ 事件本身就代表 @ 了本机器人）。千万别把这段说明文字填进去，那会让机器人谁也认不出。",
   "allow_group_issue": true,
   "admin_qq": "1017443780",
   "admin_token": "在这里填一串随机口令，只私下发给管理员本人，别发群里"

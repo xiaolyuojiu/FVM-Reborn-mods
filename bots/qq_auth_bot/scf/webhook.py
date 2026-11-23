@@ -159,17 +159,7 @@ class WebhookHandler(object):
           3. 没配 → 退回「正文以 `<@` 开头」这条经验规则：正常用法永远是
              `@小Makk /授权 xxx`，@ 一定在最前面。
         """
-        raw = (text or "").lstrip()
-        if "<@" not in raw:
-            return False, "正文里没有 @"
-        own = (os.environ.get("QQ_BOT_OPENID", "") or "").strip()
-        if own:
-            if ("<@" + own + ">") in raw or ("<@!" + own + ">") in raw:
-                return True, "命中 QQ_BOT_OPENID"
-            return False, "@ 的不是机器人（QQ_BOT_OPENID 不匹配）"
-        if raw.startswith("<@"):
-            return True, "以 @ 开头（未配 QQ_BOT_OPENID，按经验规则）"
-        return False, "@ 不在开头"
+        return self.bot.mention_targets_me(text, require_mention=True)
 
     def _dispatch(self, name, data):
         """返回 (动作说明, 是否真的发了消息)。"""
@@ -183,7 +173,7 @@ class WebhookHandler(object):
             text = data.get("content", "")
             msg_id = data.get("id", "")
             self._log("私聊 %s %r" % (uid[:12], text[:30]))
-            out = self._handle_text(uid, text, allow_admin=True)
+            out = self._handle_text(uid, text, allow_admin=True, group=False)
             if out:
                 self._send_c2c(uid, out, msg_id)
                 return "私聊回复", True
@@ -210,8 +200,21 @@ class WebhookHandler(object):
             if not group_openid or not msg_id:
                 self._log("跳过：缺 group_openid / msg_id")
                 return "缺 group_openid / msg_id", False
+
+            # ── 严格模式（默认）：只回「@本机器人 + 整条正文 /授权[...]」──
+            # 其余一律静默：闲聊不刷屏、近似写法（#授权 / 授权 / /授权码）
+            # 不误触发、@ 了别人的消息不抢答。回退旧行为：
+            # config.json 里 "strict_trigger": false。
+            if bot.STRICT_TRIGGER:
+                out = self._handle_text(uid, text, allow_admin=False, group=True)
+                if out:
+                    self._send_group(group_openid, out, msg_id)
+                    return "群回复", True
+                self._log("忽略：正文不是 %s <识别码>" % bot.STRICT_CMD)
+                return "忽略（不是 %s）" % bot.STRICT_CMD, False
+
             if bot.ALLOW_GROUP_ISSUE:
-                out = self._handle_text(uid, text)
+                out = self._handle_text(uid, text, group=True)
                 if out:
                     self._send_group(group_openid, out, msg_id)
                     return "群回复", True
@@ -237,45 +240,59 @@ class WebhookHandler(object):
         self._log("事件 %s 不处理" % name)
         return "不处理的事件 %s" % name, False
 
-    def _handle_text(self, uid, text, allow_admin=False):
+    def _handle_text(self, uid, text, allow_admin=False, group=False):
         """把发码这件事接到 COS 账本上，其余逻辑全用 bot.py 的。
 
         allow_admin：管理员命令只在私聊生效。群里 @ 一律不给 ——
         /绑定列表 会把别人的 openid 贴到群里，那是泄露。
+        group：这条是不是来自群聊（严格模式下必须 @ 到本机器人）。
         """
         bot = self.bot
 
         # 管理员命令要先于发码判断，而且**不走 secret_ok 那道闸**：
         # 认领管理员、解绑设备都不涉及签名密钥，密钥没配好也得能解绑。
-        adm = bot.parse_admin_command(text)
-        if adm is not None:
-            if not allow_admin:
-                self._log("群里收到管理命令 %s，已忽略（仅私聊可用）" % adm[0])
-                return None
-            if adm[0] == "whoami":
-                return bot.handle_admin(uid, adm[0], adm[1], None)
-            ledger = self.ledger_factory()
-            try:
-                out = bot.handle_admin(uid, adm[0], adm[1], ledger)
-            finally:
-                ledger.close()   # close() 里带 flush，解绑/白名单都靠它落盘
-            self._log("管理员命令 %s uid=%s -> %s"
-                      % (adm[0], str(uid)[:10], "已回复" if out else "静默忽略"))
-            return out
+        # 严格模式下群里根本不解析管理命令（避免任何意外回复）。
+        if allow_admin or not bot.STRICT_TRIGGER:
+            adm = bot.parse_admin_command(text)
+            if adm is not None:
+                if not allow_admin:
+                    self._log("群里收到管理命令 %s，已忽略（仅私聊可用）" % adm[0])
+                    return None
+                if adm[0] == "whoami":
+                    return bot.handle_admin(uid, adm[0], adm[1], None)
+                ledger = self.ledger_factory()
+                try:
+                    out = bot.handle_admin(uid, adm[0], adm[1], ledger)
+                finally:
+                    ledger.close()   # close() 里带 flush，解绑/白名单都靠它落盘
+                self._log("管理员命令 %s uid=%s -> %s"
+                          % (adm[0], str(uid)[:10], "已回复" if out else "静默忽略"))
+                return out
 
-        parsed = bot.parse_command(text)
-        if parsed is None:
-            return (bot.MSG_GREETING.format(cmd=bot.AUTH_COMMAND)
-                    if bot.strip_mention(text) == "" else None)
+        if bot.STRICT_TRIGGER:
+            parsed = bot.strict_gate(text, group=group)
+            if parsed is None:
+                return None
+            _cmd, arg = parsed
+            if not arg:
+                return bot.MSG_NEED_HWID.format(cmd=bot.STRICT_CMD)
+            if arg == "\x00bad":
+                return bot.MSG_BAD_HWID
+        else:
+            parsed = bot.parse_command(text)
+            if parsed is None:
+                return (bot.MSG_GREETING.format(cmd=bot.AUTH_COMMAND)
+                        if bot.strip_mention(text) == "" else None)
+            _cmd, arg = parsed
 
         if not self.secret_ok:
             self._log("拒绝发码：授权签名密钥还是占位符，配好 AUTH_SECRET 再重启")
             return "机器人还没配置好，请联系管理。"
 
-        _cmd, arg = parsed
-        hwid = bot.qq_auth.norm_hwid(arg)
         if not arg:
-            return bot.MSG_NEED_HWID.format(cmd=bot.AUTH_COMMAND)
+            return bot.MSG_NEED_HWID.format(
+                cmd=bot.STRICT_CMD if bot.STRICT_TRIGGER else bot.AUTH_COMMAND)
+        hwid = bot.qq_auth.norm_hwid(arg)
         if not bot.qq_auth.hwid_valid(hwid):
             return bot.MSG_BAD_HWID
 
@@ -283,9 +300,12 @@ class WebhookHandler(object):
             code, is_new = self._issue(uid, hwid)
             self._log("发码 uid=%s hwid=%s new=%s code=%s"
                       % (uid[:12], hwid, is_new, code))
-            return bot.MSG_CODE.format(code=code)
+            return bot.format_code_msg(code)
         except bot.qq_auth.PoolExhausted:
             return bot.MSG_POOL_EMPTY
+        except bot.qq_auth.HwidTakenByOther as exc:
+            self._log("抢绑：%s" % exc)
+            return bot.MSG_HWID_TAKEN
         except bot.qq_auth.TooManyDevices as exc:
             self._log("上限：%s（玩家只看到「绑满了」）" % exc)
             return bot.MSG_TOO_MANY.format(n=bot.qq_auth.MAX_DEVICES_PER_UID)
@@ -296,12 +316,13 @@ class WebhookHandler(object):
             return bot.MSG_ERROR
 
     def _issue(self, uid, hwid):
-        """发码 + 落盘。账本在函数里存不住，所以每次都要读回来再写回去。"""
+        """发码 + 落盘。账本在函数里存不住，所以每次都要读回来再写回去。
+
+        过期重签的逻辑在 `qq_auth.issue_for()` 里，这里不复制一份 ——
+        两份实现迟早会漂移成「机器人按旧规则发、游戏端按新规则验」。
+        """
         ledger = self.ledger_factory()
         try:
-            row = ledger.get_by_hwid(hwid)
-            if row:
-                return row[3], False
             return self.bot.qq_auth.issue_for(uid, hwid, ledger)
         finally:
             ledger.close()   # close() 里带 flush
