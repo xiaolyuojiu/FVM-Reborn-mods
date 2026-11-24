@@ -80,7 +80,7 @@ function info_island_starts_block(_s) {
 
 
 /// @function info_island_is_title_line(_s)
-/// @description 来源 / 卡片分类 / 攻击对象（官服叫法；原「可以攻击」→「伤害范围」）/ 可用增幅 这几行只说一件事，后面必须换行。
+/// @description 来源 / 卡片分类 / 攻击对象 / 可用增幅 这几行只说一件事，后面必须换行。
 function info_island_is_title_line(_s) {
 	if (string_copy(_s, 1, 2) == "来源") return true;
 	if (string_copy(_s, 1, 4) == "卡片分类") return true;

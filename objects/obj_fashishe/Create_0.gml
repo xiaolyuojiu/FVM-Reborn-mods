@@ -41,7 +41,6 @@ fashishe_art_up       = 36;                     // 贴图格线比逻辑网格�
 fashishe_start_cells   = -0.5;                  // 出膛点：地图最左沿再往左几格（负 = 更靠后；贴边写 0，同 bbq）
 fashishe_poison_cells = (shape >= 1) ? 3 : 1;   // 毒雾覆盖行末几格：0 转 1 格 / 1·2 转 3 格
 fashishe_end_cells    = 1;                      // 飞出地图右沿几格开始消散（原来 2 格太远，特效看不见）
-fashishe_poison_extra_col = 1;                  // 毒雾能烧到场外几格（1 = 第 10 格 / BOSS 出生位，同 bbq；特效不跟着外扩）
 fashishe_shot_count   = 0;                      // 跨轮累加的「发」序号
 fashishe_burst_rows   = [grid_row];             // 本轮要出的行（二转 = 3 行）
 fashishe_burst_left   = 0;                      // 本轮还剩几发没出膛
@@ -57,18 +56,23 @@ fashishe_poison_at = function(_row)
         var _c = _c0 - _i;
         if (_c < 0) continue;
 
-        // 叠加上限（xlsx 11.直射 R130：可叠加 ∞/6/6 层）：同一格已有 >= fashishe_stack_max 片就不再铺，
-        //   多片各自跳伤 = 叠层伤害。0 转不限（custom 存的是 "∞" → is_string 视为 -1）
-        if (fashishe_stack_max > 0)
+        // 叠加上限（xlsx 11.直射 R130：可叠加 ∞/6/6 层）
+        //   2026-11-24 性能：同格合并成 1 个实例，层数记进 layer_t（每层各自 1 秒后过期），
+        //   跳伤 = 每层毒雾伤害 × 存活层数；原来是「一层一个实例」，同格最多 6+ 个实例各自结算
+        var _hit = noone;
+        var _pn_n = instance_number(obj_fashishe_poison_cell);
+        for (var _pn_i = 0; _pn_i < _pn_n; _pn_i++)
         {
-            var _cnt = 0;
-            var _pn_n = instance_number(obj_fashishe_poison_cell);
-            for (var _pn_i = 0; _pn_i < _pn_n; _pn_i++)
-            {
-                var _pg = instance_find(obj_fashishe_poison_cell, _pn_i);
-                if (_pg.grid_col == _c && _pg.grid_row == _row) _cnt++;
-            }
-            if (_cnt >= fashishe_stack_max) continue;
+            var _pg = instance_find(obj_fashishe_poison_cell, _pn_i);
+            if (_pg == noone) continue;
+            if (_pg.grid_col == _c && _pg.grid_row == _row) { _hit = _pg; break; }
+        }
+        if (_hit != noone)
+        {
+            // fashishe_stack_max <= 0 = 0 转「不限层」，加层不设上限（老行为就是无限叠）
+            if (fashishe_stack_max <= 0 || array_length(_hit.layer_t) < fashishe_stack_max)
+                array_push(_hit.layer_t, _hit.t);
+            continue;
         }
 
         var _cell = get_world_position_from_grid(_c, _row);
@@ -87,19 +91,16 @@ fashishe_poison_at = function(_row)
         _p.frame_start  = 0;
         _p.frame_end    = sprite_get_number(spr_fashishe_burn_ground) - 1;
         _p.anim_loop_frames = 30;
-        // 每跳伤害直接读卡片当前 atk（同 bbq 读攻击表，但**不翻倍**）；
-        //   铺毒这一刻现取 → 星级 / 技能 / 平射增幅都吃得到，每跳 = 一发子弹的伤害
-        _p.damage        = atk;
+        // 每跳伤害读 custom["毒雾伤害"]（数据表 11.直射 r135：每秒 80 点、固定值，不随星级 / 攻击力变）
+        _p.dmg_per_layer = poison_damage;      // damage 由毒雾格按存活层数重算
         _p.damage_type   = "normal";
         _p.life          = poison_frames;
         _p.tick_interval = poison_interval;
+        _p.tick_phase    = irandom(max(0, poison_interval - 1));   // 错峰：别让同一轮的几格同帧结算
         _p.lock_grid     = true;
         _p.grid_col      = _c;
         _p.grid_row      = _row;
         _p.hittable_types = get_hittable_enemy_types("all");
-        // 只有最右一格放宽到「场外 1 格」（第 10 格 / BOSS 出生位）；
-        //   中间几格放宽的话会互相覆盖，同一条老鼠会被相邻格重复烧。
-        _p.extra_col_right = (_i == 0) ? fashishe_poison_extra_col : 0;
         _p.image_xscale = _sx;
         _p.image_yscale = _sy;
     }
@@ -144,18 +145,19 @@ fashishe_fire_one = function()
 };
 
 // ── 毒雾数值 ──
-//   每跳伤害 = **卡片当前攻击力 atk**（2026-11-08 用户口径：同 bbq 读攻击表，但不用双倍，直接读）。
-//     不再走 custom["毒雾伤害"]：注册表里那条已删，铺毒时现取 atk（见上面 fashishe_poison_at）。
-//   持续 / 跳数仍走注册表 custom：情报岛里的 {毒雾持续} / {毒雾次数} 读的就是这两个 key，改表即生效。
-//   持续时间（秒）× 60 = 总帧数；总帧数 ÷ 跳数 = 每跳间隔（1s / 5 跳 → 12 帧 = 0.2s 一跳）。
+//   每跳伤害 = custom["毒雾伤害"]（数据表 11.直射 r135：每秒 80 点、共 5 次；**固定值，不随星级变**）
+//   持续 / 跳数 / 轮次同样走注册表 custom：情报岛里的 {毒雾持续} / {毒雾次数} / {毒雾轮} 读的是同一份 key
+//   持续时间（秒）× 60 = 总帧数；总帧数 ÷ 跳数 = 每跳间隔（5s / 5 跳 → 60 帧 = 1s 一跳）
 var _sk   = variable_instance_exists(id, "skill") ? skill : 0;
 var _info = get_plant_data_with_skill("fashishe", shape, clamp(current_level, 0, 16), _sk);
 
-poison_time   = 1;      // 持续秒数（custom["毒雾持续"]）
+poison_time   = 5;      // 持续秒数（custom["毒雾持续"]）
 poison_ticks  = 5;      // 跳数 / 次数（custom["毒雾次数"]）
+poison_damage = 80;     // 每跳伤害（custom["毒雾伤害"]）
 poison_rounds = (shape >= 1) ? 1 : 2;   // 每几「轮」（一次开火 = 一轮）铺一次毒雾（custom["毒雾轮"]）
 if (_info != undefined && ds_map_exists(_info, "毒雾持续")) poison_time   = _info[? "毒雾持续"];
 if (_info != undefined && ds_map_exists(_info, "毒雾次数")) poison_ticks  = _info[? "毒雾次数"];
+if (_info != undefined && ds_map_exists(_info, "毒雾伤害")) poison_damage = _info[? "毒雾伤害"];
 if (_info != undefined && ds_map_exists(_info, "毒雾轮"))   poison_rounds = _info[? "毒雾轮"];
 
 // 叠加上限：custom["叠加层数"]（0 转存的是 "∞" → 当不限处理）

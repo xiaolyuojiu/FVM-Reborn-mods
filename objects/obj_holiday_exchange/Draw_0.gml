@@ -78,6 +78,17 @@ for (var k = 0; k < hal_per; k++){
 		_can   = holiday_clover_upgrade_max(_cl) > 0;
 		_res_spr = craft_material_spr(_cl.to);
 		_res_frame = craft_material_frame(_cl.to);
+	} else if (_it.kind == "cardx"){
+		var _cx = _it.row;
+		array_push(_icons, { spr: -1, frame: 0 });          // 进化凭证：图不是单帧精灵，下面单独画
+		array_push(_icons, { spr: spr_holiday_coin, frame: 0 });
+		if (_cx.warcard > 0) array_push(_icons, { spr: spr_craft_material, frame: holiday_warcard_frame(12) });
+		else                 array_push(_icons, { spr: spr_prestige_icon, frame: 0 });
+		_owned = get_material_amount(mod_evo_credit_id(_cx.card));
+		_need  = 1;
+		_gold  = _cx.gold;
+		_can   = holiday_card_exchange_max(_cx) > 0;
+		_res_spr = -1;                                      // 结果是卡面，下面单独画
 	} else {
 		var _r = _it.row;
 		array_push(_icons, { spr: craft_material_spr(_r.spice), frame: craft_material_frame(_r.spice) });
@@ -92,8 +103,13 @@ for (var k = 0; k < hal_per; k++){
 	for (var sl = 0; sl < 3; sl++){
 		var _sx = _rowx + hal_slot_dx[sl] * RS;
 		if (sl < array_length(_icons)){
-			var _isc = (_icons[sl].spr == spr_holiday_coin) ? 0.96 : 0.52;
-			draw_sprite_ext(_icons[sl].spr, _icons[sl].frame, _sx, _iy, _isc * RS, _isc * RS, 0, c_white, 1);
+			if (_icons[sl].spr == -1){
+				// 进化凭证：金底 + 该金卡立绘（同诸神商店 / 背包那套）
+				mod_evo_draw_credit(_it.row.card, _sx, _iy, true, 26 * RS, 19 * RS);
+			} else {
+				var _isc = (_icons[sl].spr == spr_holiday_coin || _icons[sl].spr == spr_prestige_icon) ? 0.96 : 0.52;
+				draw_sprite_ext(_icons[sl].spr, _icons[sl].frame, _sx, _iy, _isc * RS, _isc * RS, 0, c_white, 1);
+			}
 		} else {
 			draw_sprite_ext(spr_holiday_forbid, 0, _sx, _iy, 0.80 * RS, 0.80 * RS, 0, c_white, 1);
 		}
@@ -101,7 +117,34 @@ for (var k = 0; k < hal_per; k++){
 
 	// 结果圆牌
 	var _rx = _rowx + hal_circ_dx * RS - 4 * RS;
-	draw_sprite_ext(_res_spr, _res_frame, _rx, _iy, 0.52 * RS, 0.52 * RS, 0, c_white, 1);
+	if (_it.kind == "cardx"){
+		// 跟合成屋「右侧防御卡列表」同一套画法：卡槽框 + 金卡 0 形态立绘（立绘按静态表裁到框内）
+		var _cd = deck_get_card_data(_it.row.card, 0);
+		if (_cd != noone && ds_map_exists(_cd, "sprite")){
+			var _art = _cd[? "sprite"];
+			var _slot_spr = spr_slot_1;
+			var _fs = (56 * RS) / max(1, sprite_get_height(_slot_spr));   // 卡框是竖的，按高度套
+			draw_sprite_ext(_slot_spr, 0, _rx, _iy, _fs, _fs, 0, c_white, 1);
+
+			var _face_box = 34 * RS;
+			var _fsc = 0.5236, _fox = 0, _foy = 0;
+			var _tbl = mod_evo_credit_face();
+			if (variable_struct_exists(_tbl, _it.row.card)){
+				var _f = _tbl[$ _it.row.card];                 // [左, 上, 宽, 高]
+				_fsc = min(_face_box / _f[2], _face_box / _f[3]);
+				_fox = (_f[0] + _f[2] * 0.5 - sprite_get_xoffset(_art)) * _fsc;
+				_foy = (_f[1] + _f[3] * 0.5 - sprite_get_yoffset(_art)) * _fsc;
+			}
+			draw_sprite_ext(_art, 0, _rx - _fox, _iy - _foy, _fsc, _fsc, 0, c_white, 1);
+
+			// 12★ 版：卡框左上角角标（与卡槽同一套 spr_star_slot，帧号 = 星级 - 1）
+			if (_it.row.star >= 12){
+				draw_sprite_ext(spr_star_slot, _it.row.star - 1, _rx - 20 * RS, _iy - 25 * RS, 0.62 * RS, 0.62 * RS, 0, c_white, 1);
+			}
+		}
+	} else {
+		draw_sprite_ext(_res_spr, _res_frame, _rx, _iy, 0.52 * RS, 0.52 * RS, 0, c_white, 1);
+	}
 
 	// 数字：白字黑描边，贴在格子**内部**右下角；按实际字宽自动缩字号，保证不越出格子
 	draw_set_valign(fa_middle);
@@ -122,6 +165,16 @@ for (var k = 0; k < hal_per; k++){
 		var _gsc = min(0.95 * RS, _maxw / max(1, string_width(_gs)));
 		holiday_draw_num(_rowx + (hal_slot_dx[1] + 21) * RS, _ccy + 19 * RS, _gs, _gsc,
 		                 (_have_gold >= _gold) ? c_white : _red);
+	}
+
+	// 第三格：威望 / 12★卡包 的需求量（只有直接兑换型金卡用这一格）
+	if (_it.kind == "cardx"){
+		var _t_need = (_it.row.warcard > 0) ? _it.row.warcard : _it.row.prestige;
+		var _t_have = (_it.row.warcard > 0) ? get_material_amount("warcard_12") : get_material_amount("prestige");
+		var _ts  = string(_t_need);
+		var _tsc = min(0.95 * RS, _maxw / max(1, string_width(_ts)));
+		holiday_draw_num(_rowx + (hal_slot_dx[2] + 21) * RS, _ccy + 19 * RS, _ts, _tsc,
+		                 (_t_have >= _t_need) ? c_white : _red);
 	}
 
 	// 兑换按钮：能换 = 原色三态；不能换 = 走 sh_fusion_gray 去色（黑白灰，同融合页未拥有）

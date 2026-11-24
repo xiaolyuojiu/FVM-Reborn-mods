@@ -41,22 +41,25 @@ function material_sell_init(){
 	//      到奶昔/圣代一关 324,000~432,000，折成每张 6,000 ~ 144,000，中位 21,000、平均 34,000。
 	//      这里取**段内最低关**（18,000÷3 = 6,000）作基准 —— 那是「刚进 10★」的收益，
 	//      高关掉落属于后期刷金奖励，不能拿来当回收价，否则跨服 58 银换的卡包能反手卖 3 万+。
-	//   11★ 起没有掉落（只走跨服），按 10★ 每档 +2,000 递增。
-	global.material_sell_prices[$ "warcard_1"] = 200
-	global.material_sell_prices[$ "warcard_2"] = 300
-	global.material_sell_prices[$ "warcard_3"] = 450
-	global.material_sell_prices[$ "warcard_4"] = 500        // 2026-11-21：原 400 是打错，3★450 > 4★400 倒挂（一键强化会为省 50 金去烧更贵的 4★）
-	global.material_sell_prices[$ "warcard_5"] = 600
-	global.material_sell_prices[$ "warcard_6"] = 1700
-	global.material_sell_prices[$ "warcard_7"] = 2800
-	global.material_sell_prices[$ "warcard_8"] = 5000
-	global.material_sell_prices[$ "warcard_9"] = 6000
-	global.material_sell_prices[$ "warcard_10"] = 8000
-	global.material_sell_prices[$ "warcard_11"] = 10000
-	global.material_sell_prices[$ "warcard_12"] = 30000
-	global.material_sell_prices[$ "warcard_13"] = 50000
-	global.material_sell_prices[$ "warcard_14"] = 70000
-	global.material_sell_prices[$ "warcard_15"] = 90000
+	//   11★ 起没有掉落（只走跨服），从 11★ 11,000 起、每档 +2.2w 递增。
+	//   2026-11-23 用户口径：前中期金币偏少（转职 / 转转都要金币），**1~10★ 分档上调**：
+	//     1~6★ +10%（略动）、7~10★ 火山岛时期 +20%（抬高）、11★ 起 1w1 起步并同比例 +10%。
+	//     价格严格递增，10★ 不给越过 11★ 造成倒挂（一键强化会挑错档）。
+	global.material_sell_prices[$ "warcard_1"] = 220
+	global.material_sell_prices[$ "warcard_2"] = 330
+	global.material_sell_prices[$ "warcard_3"] = 500
+	global.material_sell_prices[$ "warcard_4"] = 550
+	global.material_sell_prices[$ "warcard_5"] = 660
+	global.material_sell_prices[$ "warcard_6"] = 1870
+	global.material_sell_prices[$ "warcard_7"] = 3360
+	global.material_sell_prices[$ "warcard_8"] = 6000
+	global.material_sell_prices[$ "warcard_9"] = 7200
+	global.material_sell_prices[$ "warcard_10"] = 9600
+	global.material_sell_prices[$ "warcard_11"] = 11000
+	global.material_sell_prices[$ "warcard_12"] = 33000
+	global.material_sell_prices[$ "warcard_13"] = 55000
+	global.material_sell_prices[$ "warcard_14"] = 77000
+	global.material_sell_prices[$ "warcard_15"] = 99000
 	global.material_sell_prices[$ "advanced_crystal"] = 300
 	global.material_sell_prices[$ "natural_spices"] = 30
 	global.material_sell_prices[$ "secret_spices"] = 60

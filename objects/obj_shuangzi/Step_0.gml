@@ -25,7 +25,6 @@ if (first_produce == 0)
     else
     {
         event_user(1);
-        event_user(1);
         attack_timer = 0;
         state = 0;
         first_produce = 1;
@@ -43,8 +42,6 @@ else if (attack_timer <= cycle)
 else
 {
     event_user(1);
-    event_user(1);
     attack_timer = 0;
     state = 0;
 }
-

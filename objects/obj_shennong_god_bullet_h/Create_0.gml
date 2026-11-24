@@ -1,5 +1,6 @@
 damage = 0;
 move_speed = 0;
+dir = 1;              // 飞行方向：+1 向右（左边出弹口）/ -1 向左（右边出弹口）
 row = 0;
 damage_type = "pierce";
 target_type = "land_air_ug";   // 炎帝四转起：陆 + 空 + 地（生成方会按形态覆盖）

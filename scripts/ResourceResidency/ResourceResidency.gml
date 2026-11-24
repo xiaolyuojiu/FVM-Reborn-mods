@@ -102,9 +102,23 @@ function resource_sprite_ready(_sprite) {
     return false;
 }
 
+/// 组名必须是工程里真实存在的纹理组：传未知名字时 texture_prefetch 会按垃圾页 id
+/// 去算长度（表现为「Attempting to allocate 18446744073709551468 bytes」直接崩）。
+function resource_group_exists(_group) {
+    static _names = undefined;
+    if (is_undefined(_names)) _names = texturegroup_get_names();
+    if (!is_string(_group) || _group == "") return false;
+    return array_get_index(_names, _group) >= 0;
+}
+
 function resource_texture_prepare(_group) {
+    if (!resource_group_exists(_group)) {
+        show_debug_message("[Textures] Skip unknown group: " + string(_group));
+        return true;
+    }
     if (!resource_memory_enabled()) {
-        texture_prefetch(_group);
+        // 无 assets 流式资源（IDE 运行 / 旧包）：所有页启动即常驻，再按组 prefetch 只是重复申请；
+        // cards / enemy_volcanic 单组已超 4GB，页总长溢出成负数当场崩，这里直接跳过。
         return true;
     }
     if (_group == "maps") {

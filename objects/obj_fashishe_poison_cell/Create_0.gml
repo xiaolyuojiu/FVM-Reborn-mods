@@ -3,11 +3,11 @@
 //   以后调 bbq 的火格 / 蛋糕的蜡烛都不会牵连这里，反过来也一样。
 //
 // 口径（数值基本来自 obj_fashishe 读的注册表 custom，改表即生效）：
-//   · 每跳伤害 = **调用方传进来的卡片攻击力 atk**（2026-11-08 起不走 custom["毒雾伤害"]：
-//       同 bbq 读攻击表，但**不翻倍**，铺毒当帧现取 → 星级 / 技能 / 平射增幅都吃得到）
+//   · 每跳伤害 = 调用方传进来的 dmg_per_layer（= custom["毒雾伤害"]，固定值）× 同格存活层数
+//       （2026-11-24 起同格合并成 1 个实例，层数记 layer_t；原来一层一个实例）
 //   · 跳数     = custom["毒雾次数"]（默认 5）
 //   · 持续     = custom["毒雾持续"] 秒（默认 1s → 60 帧 → 每跳 12 帧）
-//   · 命中范围 = 「就是这一格」+ 右边 extra_col_right 格（只有最右一格放宽 1 格 = 场外第 10 格 / BOSS 出生位）
+//   · 命中范围 = 严格本格（2026-11-24 用户口径：不烧场外第 10 列 / BOSS 出生位）
 //   · 行必须严格相等（不做 bbox 兜底：老鼠贴图很高，相邻行头顶会探进来，用 bbox 会连带烧上下行）
 //   · 命中类型由调用方给（法师蛇 = get_hittable_enemy_types("all")，空军 / 钻地 / 幽灵全吃）
 //   · 击杀一律出灰烬（obj_mouse_ash_death）
@@ -19,10 +19,13 @@ image_blend  = c_white;
 image_xscale = 1;
 image_yscale = 1;
 
-damage        = 400;
-life          = 60;     // 存在帧数（1 秒）
+damage        = 400;    // 实际结算值：Step 里 = dmg_per_layer × 存活层数
+dmg_per_layer = 0;      // 每层伤害（= custom["毒雾伤害"]），铺毒时由调用方给
+life          = 60;     // 每层存活帧数（1 秒）
 t             = 0;
 tick_interval = 12;     // 每跳间隔（1 秒 5 跳）
+tick_phase    = 0;      // 错峰偏移（铺毒时随机 0~interval-1）
+layer_t       = [0];    // 每层的加入时刻（实例自己的 t）；2026-11-24 同格合并，空数组即雾散
 
 frame_start = 0;
 frame_end   = sprite_get_number(sprite_index) - 1;
@@ -35,7 +38,7 @@ hittable_types = get_hittable_enemy_types("all");
 grid_col = -1;
 grid_row = -1;
 lock_grid = true;
-extra_col_right = 0;    // 只有最右一格由调用方设成 1
+extra_col_right = 0;    // 2026-11-24 起调用方不再放宽（只烧本格）
 
 // 鼠身紫雾（挂在被毒到的老鼠身上）：缩 2.0 / 抬 90 / 左移 10，存活 16 帧（毒雾 12 帧一跳，刚好接上不叠成一片）
 mouse_fx_spr   = spr_fashishe_burn_mouse;

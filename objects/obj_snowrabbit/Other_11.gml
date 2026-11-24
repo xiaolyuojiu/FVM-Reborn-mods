@@ -1,10 +1,6 @@
 /// 雪球兔 开火事件：挑最靠前的 N 个目标，各砸一颗雪球
-///   1 转起「集火」：目标不够攻击上限时，多余的雪球全部堆到**主目标**上（冷萃机 2 转同款）
-///   一颗雪球对一个目标；集火时会有多颗砸同一只
+///   一颗雪球对一个目标；目标不足攻击上限时不补打（2026-11-24 去掉一转集火）
 var _list = ds_priority_create();
-// ⚠️ 主目标要用**实例变量**：`with` 里读不到调用方的 var（交接 坑 12）
-sr_main       = noone;        // 主目标（BOSS 优先，其次最靠前）
-sr_main_score = 999999;
 
 with (obj_enemy_parent){
     // ⚠️ 这里必须是 continue：GML 里 with 内写 exit 会直接跳出整个事件，
@@ -18,15 +14,9 @@ with (obj_enemy_parent){
     var _score = grid_col * 1000 + random(99);
     if (is_boss) _score -= 100000;
     ds_priority_add(_list, id, _score);
-    if (_score < other.sr_main_score){
-        other.sr_main_score = _score;
-        other.sr_main       = id;
-    }
 }
 
-// ── 组发射列表 ──
-//   1 转起（shape >= 1）：雪球数固定 = 攻击上限（5 / 8），目标不够就把剩下的堆给主目标
-//   0 转：有几个目标打几颗（不集火）
+// ── 组发射列表：有几个目标打几颗，最多 sr_target_max 颗 ──
 var _targets = [];
 var _have    = ds_priority_size(_list);
 var _n       = min(sr_target_max, _have);
@@ -35,15 +25,6 @@ for (var _i = 0; _i < _n; _i++){
     array_push(_targets, ds_priority_delete_min(_list));
 }
 
-if (shape >= 1 && _have > 0 && _have < sr_target_max && instance_exists(sr_main)){
-    var _extra = sr_target_max - _have;
-    for (var _k = 0; _k < _extra; _k++){
-        array_push(_targets, sr_main);    // 集火：多余的雪球砸同一只
-    }
-}
-
-// 集火时同一主目标已经砸了几发（决定这一发错开几帧）；分散弹不受影响
-var _repeat = 0;
 for (var _j = 0; _j < array_length(_targets); _j++){
     var _t = _targets[_j];
     if (!instance_exists(_t)) continue;
@@ -66,14 +47,7 @@ for (var _j = 0; _j < array_length(_targets); _j++){
     _b.splash_ratio   = sr_splash_ratio;
     _b.splash_cells   = sr_splash_cells;
     _b.move_speed     = 14;
-    // 分散弹同时落；只有集火（多余的雪球砸同一主目标）才一发发错开 10 帧 —— 与冷萃机同口径
-    if (_t == sr_main){
-        _b.fall_delay = _repeat * 10;
-        _repeat++;
-    }
-    else{
-        _b.fall_delay = 0;
-    }
+    _b.fall_delay     = 0;
     _b.start_y        = _by;
 
     // 三形态共用同一张冰球（_1/_2 与本体相同，2026-11-13 已删）

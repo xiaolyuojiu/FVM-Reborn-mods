@@ -60,15 +60,15 @@ if shape < 2{
 	effect_inst1.type = 1
 }
 if enemy_encounted{
-	for(var i = 0 ; i < 2 ; i++){
+	// 朵数读注册表 custom["火苗朵数"]（基础 2 / 一转 4 / 二转 4）
+	var _sk   = variable_instance_exists(id, "skill") ? skill : 0;
+	var _info = get_plant_data_with_skill(plant_id, shape, clamp(current_level, 0, 16), _sk);
+	var _cnt  = 2;
+	if (_info != undefined && ds_map_exists(_info, "火苗朵数")) _cnt = _info[? "火苗朵数"];
+
+	for (var i = 0 ; i < _cnt ; i++){
 		var inst = instance_create_depth(x, y - 60, depth - 1000, obj_flame);
 		inst.value = flame_produce
-	}
-	if shape == 2{
-		for(var i = 0 ; i < 2 ; i++){
-			var inst2 = instance_create_depth(x, y - 60, depth - 1000, obj_flame);
-			inst2.value = flame_produce
-		}
 	}
 }
 

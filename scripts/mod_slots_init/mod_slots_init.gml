@@ -68,7 +68,7 @@ function mod_slots_init()
     register_card("yinghuoshe", obj_yinghuoshe, [
     { shape: 0, sprite: sp_yinghuoshe, cost: 75, cooldown: 1800, description: "萤火蛇：照亮全场同时产火，并且防萤火虫", plant_type: "normal", feature_type: "normal", target_card: "none", is_gold: 0, place_preview: sp_yinghuoshe },
     { shape: 1, sprite: sp_yinghuoshe_1, cost: 75, cooldown: 1800, description: "星辉萤火蛇：照亮全场同时产火，并且防萤火虫", plant_type: "normal", feature_type: "normal", target_card: "none", is_gold: 0, place_preview: sp_yinghuoshe_1 },
-    { shape: 2, sprite: sp_yinghuoshe_2, cost: 75, cooldown: 1800, description: "皓月萤火蛇：照亮全场同时产火，并且防萤火虫", plant_type: "normal", feature_type: "normal", target_card: "none", is_gold: 0, place_preview: sp_yinghuoshe_2 }]);
+    { shape: 2, sprite: sp_yinghuoshe_2, cost: 75, cooldown: 1800, description: "月芒萤火蛇：照亮全场同时产火，并且防萤火虫", plant_type: "normal", feature_type: "normal", target_card: "none", is_gold: 0, place_preview: sp_yinghuoshe_2 }]);
     // 随机礼盒：固定50火苗、10秒冷却，只能放置在陆地。
     register_card("lihe", obj_lihe, [
     {

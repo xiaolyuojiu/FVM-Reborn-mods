@@ -18,7 +18,7 @@ idle_anim = 10;
 flash_speed = 5;
 plant_type = "normal";
 is_slowdown = false;
-// 陆 / 空 / 地鼠（全屏打击口径）：不含 潜水·非主流·幽灵·障碍；钻地中的龙渊地精由 scatter_target_blocked 另排。
-// 不能留 track：冰晶由 Other_11 按 x 排序随机丢，只剩地鼠时 Step 会判"没有敌人"而彻底不开火。
-target_type = "track_under";
+// 表 9.追踪 r83：只有终转冰神能索敌并攻击地鼠；0~四转用 track（陆/潜/空）。
+//   track_under = 多一个地鼠；钻地中的龙渊地精仍由 scatter_target_blocked 另排。
+target_type = (shape >= 3) ? "track_under" : "track";
 attack_timer = 0;

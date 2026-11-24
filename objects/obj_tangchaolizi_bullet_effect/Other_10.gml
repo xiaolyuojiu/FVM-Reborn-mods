@@ -21,6 +21,9 @@ with (obj_enemy_parent)
         if (!_cross && !_cross_cell)
             _dmg = (other.damage_corner > 0) ? other.damage_corner : other.damage;
 
+        // 边路强化：火焰位于第 0 行或最后一行时，本路伤害翻倍，相邻行不变
+        if ((other.grid_row == 0 || other.grid_row == global.grid_rows - 1) && grid_row == other.grid_row) _dmg *= 2;
+
         var _prev_hp = hp;
         damage_amount = _dmg;
         damage_type = other.damage_type;

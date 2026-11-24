@@ -38,14 +38,14 @@ function cross_server_shop_init()
     };
 
     // ── 只在跨服卖的商品，注册点就在这里（普通商店那两个文件不再出现）──
-    register_goods("laipishe", { type: "card", cost: "1320", unlock_item_id: "laipishe", description: "赖皮蛇：召唤沿固定轨迹飞行的海胆子弹，伤害轨迹上的陆、空军老鼠", display_name: "赖皮蛇" });
-    register_goods("double_blade_snake", { type: "card", cost: "1320", unlock_item_id: "double_blade_snake", description: "双刃蛇：向前发射2发穿透剑气子弹，可斩杀生命值≤15%的普通老鼠", display_name: "双刃蛇" });
-    register_goods("niuyouguo", { type: "card", cost: "2030", unlock_item_id: "niuyouguo", description: "邪恶牛油果：向前方三个方向各发射1发穿透飞镖", display_name: "邪恶牛油果" });
-    register_goods("wuxingshe", { type: "card", cost: "1500", unlock_item_id: "wuxingshe", description: "五行蛇：为3*3范围内5方向卡片增加攻击力", display_name: "五行蛇" });
-    register_goods("huanyingshe", { type: "card", cost: "1700", unlock_item_id: "huanyingshe", description: "幻影蛇：大范围发射可追踪的投掷类子弹", display_name: "幻影蛇" });
-    register_goods("jingangma", { type: "card", cost: "3000", unlock_item_id: "jingangma", description: "金刚马：全屏索敌最远目标，发射追踪穿透音波，可伤害幽灵鼠", display_name: "金刚马" });
-    register_goods("sheshejiu", { type: "card", cost: "2500", unlock_item_id: "sheshejiu", description: "蛇蛇酒：为3*3范围内卡片随机升星或者降星，持续一段时间后恢复", display_name: "蛇蛇酒" });
-    register_goods("zhuanlonghu", { type: "card", cost: "2300", unlock_item_id: "zhuanlonghu", description: "转龙壶：缩减3*3范围内正在冷却的美食的冷却时间30%", display_name: "转龙壶" });
+    register_goods("laipishe", { type: "card", cost: "1320", card_id: "laipishe", card_shape: 0, unlock_item_id: "laipishe", description: "赖皮蛇：发射固定轨迹子弹伤害沿途老鼠", display_name: "赖皮蛇" });
+    register_goods("double_blade_snake", { type: "card", cost: "1320", card_id: "double_blade_snake", card_shape: 0, unlock_item_id: "double_blade_snake", description: "双刃蛇：发射穿透类型子弹，附加斩杀效果", display_name: "双刃蛇" });
+    register_goods("niuyouguo", { type: "card", cost: "2030", card_id: "niuyouguo", card_shape: 0, unlock_item_id: "niuyouguo", description: "邪恶牛油果：穿透攻击前方3方向老鼠", display_name: "邪恶牛油果" });
+    register_goods("wuxingshe", { type: "card", cost: "1500", card_id: "wuxingshe", card_shape: 0, unlock_item_id: "wuxingshe", description: "五行蛇：大幅提高周围5方向卡片攻击力", display_name: "五行蛇" });
+    register_goods("huanyingshe", { type: "card", cost: "1700", card_id: "huanyingshe", card_shape: 0, unlock_item_id: "huanyingshe", description: "幻影蛇：大范围发射可追踪的投掷类子弹", display_name: "幻影蛇" });
+    register_goods("jingangma", { type: "card", cost: "3000", card_id: "jingangma", card_shape: 0, unlock_item_id: "jingangma", description: "金刚马：海陆空全方位攻击鼠军", display_name: "金刚马" });
+    register_goods("sheshejiu", { type: "card", cost: "2500", card_id: "sheshejiu", card_shape: 0, unlock_item_id: "sheshejiu", description: "蛇蛇酒：一段时间内改变卡片星级", display_name: "蛇蛇酒" });
+    register_goods("zhuanlonghu", { type: "card", cost: "2300", card_id: "zhuanlonghu", card_shape: 0, unlock_item_id: "zhuanlonghu", description: "转龙壶：缩减范围内卡片冷却时间", display_name: "转龙壶" });
 
     // ── 跨服白银页：香料（2026-11-17 用户口径，一次卖 200 个）─────────────
     //   香料原先只在金马盛典的幸运星商店卖，现在整批挪到跨服白银页，按白银勋章定价。
@@ -59,13 +59,17 @@ function cross_server_shop_init()
     //   10★ 无门槛 —— 打任意跨服关才有银勋章，本来就买不到；
     //   11★ 要通关**跨服 10★ 关卡**，12★ 起各自对应（12★ → 12★ 关，13/14/15 同理）。
     //   判定走 cross_server_stage_star_met()：任意一章通关该星即算。
+    // 2026-11-23：黄金页也卖同一批卡包（商品 id = 原 id + "_gold"），金勋章价 = 银价 ÷ **该档解锁关**的
+    //   「银/金」掉落比（重复通关档位，5 章同一条比例曲线：8★ 3.88 → 15★ 0.43），
+    //   所以花金与花银要刷的关数一样（15★ 两边都是 8.6 关）。
+    //   比例来源 scripts/cross_server_level_index 的 cross_server_reward(_id, false)，别在别处再抄一份。
     var _cs_material_goods = [
-        {id: "warcard_10", qty: 3, cost:   70, stage:  0},
-        {id: "warcard_11", qty: 3, cost:  150, stage: 10},
-        {id: "warcard_12", qty: 3, cost:  450, stage: 12},
-        {id: "warcard_13", qty: 3, cost:  750, stage: 13},
-        {id: "warcard_14", qty: 3, cost: 1050, stage: 14},
-        {id: "warcard_15", qty: 3, cost: 1350, stage: 15}
+        {id: "warcard_10", qty: 3, cost:   70, gold:   20, stage:  0},
+        {id: "warcard_11", qty: 3, cost:  150, gold:   45, stage: 10},
+        {id: "warcard_12", qty: 3, cost:  450, gold:  180, stage: 12},
+        {id: "warcard_13", qty: 3, cost:  750, gold:  440, stage: 13},
+        {id: "warcard_14", qty: 3, cost: 1050, gold: 1270, stage: 14},
+        {id: "warcard_15", qty: 3, cost: 1350, gold: 3150, stage: 15}
     ];
     for (var _csm = 0; _csm < array_length(_cs_material_goods); _csm++) {
         var _cmi = _cs_material_goods[_csm];
@@ -82,6 +86,19 @@ function cross_server_shop_init()
             sort_no: _csm + 1            // 白银页排最前，5 件挨在一起（排序见 obj_cross_server_shop/Create_0）
         });
         if (_cmi.stage > 0) global.goods_map[? _cmi.id].cs_stage_star = _cmi.stage;
+
+        var _cmgold_id = _cmi.id + "_gold";
+        register_goods(_cmgold_id, {
+            type: "material",
+            material_id: _cmi.id,
+            material_qty: _cmi.qty,
+            cost: string(_cmi.gold),
+            cross_server_shop: "gold",
+            display_name: _cmdata.name,
+            description: _cmdata.description,
+            sort_no: _csm + 1
+        });
+        if (_cmi.stage > 0) global.goods_map[? _cmgold_id].cs_stage_star = _cmi.stage;
     }
 
     // ── 跨服白银页卖的卡片本体 ────────────────────────────────────

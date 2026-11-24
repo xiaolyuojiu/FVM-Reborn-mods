@@ -68,7 +68,7 @@ with (obj_enemy_parent)
         || !variable_instance_exists(id, "target_type"))
         continue;
 
-    // can_hit(子弹口径, 敌人类型) 就是 can_target_on 的别名：穿透口径 = 陆/非主流/障碍/未显形
+    // can_hit(子弹类型, 敌人类型) = can_target_on 的别名；这里子弹类型是 pierce（陆/非主流/障碍/未显形）
     var _hit_ok = (hp > 0)
         && (grid_row == other.row)
         && (ds_list_find_index(other.hitted, id) == -1)

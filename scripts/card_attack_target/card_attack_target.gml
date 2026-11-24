@@ -1,5 +1,5 @@
 /// =====================================================================
-/// card_attack_target —— 情报岛「攻击对象」行（官服叫法；原「可以攻击」→「伤害范围」）的数据源（白名单制）
+/// card_attack_target —— 情报岛「攻击对象」行的数据源（白名单制）
 ///   ① card_attack_target_data()    白名单：卡片 → target_type（形态差异写成数组）
 ///      只在表里（或例外区）的卡才显示这一行，没列出的一律不显示。
 ///   ② card_attack_target_exclude() 生成了也不显示的卡（写了 target_type 但实际不出伤害）
@@ -73,7 +73,7 @@ function card_attack_target_data()
         "huojianzhu": "track",
         "ice_bucket_bomb": "normal",
         "ice_egg_boiler_pult": "throw",
-        "ice_god": "track_under",
+        "ice_god": ["track", "track", "track", "track_under"],
         "ice_long_bao": "normal",
         "iron_fishbone": "pierce",
         "jiejiema": "land_air_ug",
@@ -187,7 +187,9 @@ function card_attack_target_override()
         "hongliukaochuan": "陆军丨潜水丨空军丨幽灵鼠",
         "hufa_god": ["陆军丨潜水丨空军丨幽灵鼠", "陆军丨潜水丨空军丨幽灵鼠",
                      "陆军丨潜水丨空军丨幽灵鼠丨地鼠", "陆军丨潜水丨空军丨幽灵鼠丨地鼠"],
-        "gaia": "陆军丨地鼠丨潜水丨空军丨障碍"
+        "gaia": "陆军丨地鼠丨潜水丨空军丨障碍",
+        // 萤火蛇：3×3 范围伤害，排除地鼠 / 非主流 / 幽灵（表 13.辅助 r69、r72），其余全打
+        "yinghuoshe": "陆军丨潜水丨空军丨障碍"
     };
     return _o;
 }

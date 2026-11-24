@@ -7,7 +7,10 @@ with (obj_enemy_parent)
     if (grid_col >= (other.grid_col - col_offset) && grid_col <= (other.grid_col + col_offset) && abs(grid_row - other.grid_row) <= row_offset && can_hit(other.target_type, target_type) && hp > 0)
     {
         var _prev_hp = hp;
-        damage_amount = other.damage;
+        // 边路强化：火焰位于第 0 行或最后一行时，本路伤害翻倍，相邻行不变
+        var _dmg = other.damage;
+        if ((other.grid_row == 0 || other.grid_row == global.grid_rows - 1) && grid_row == other.grid_row) _dmg *= 2;
+        damage_amount = _dmg;
         damage_type = other.damage_type;
         event_user(0);
 

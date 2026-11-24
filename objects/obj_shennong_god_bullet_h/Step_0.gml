@@ -6,12 +6,11 @@ if (global.is_paused)
 
 image_speed = 1;
 
-x += move_speed;
+x += move_speed * dir;
 
-var col0_x = get_world_position_from_grid(0, 0).x;
-var col_last_x = get_world_position_from_grid(global.grid_cols - 1, 0).x;
-
-if (x < col0_x - 100 || x > col_last_x + 100 || y > 1200 || y < -100)
+// 出弹口在战斗域边界外 20px（右侧还要算上第 10 列，格子 107 → 约 col_last+127），
+//   旧销毁线 col_last+100 会让右向那发一出生就自毁，所以边界按战斗域再放宽一格。
+if (x < combat_left_x() - 60 || x > combat_right_x() + 60 || y > 1200 || y < -100)
 {
     if (ds_exists(hitted_enemy, ds_type_list))
         ds_list_destroy(hitted_enemy);

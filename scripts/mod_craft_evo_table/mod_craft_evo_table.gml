@@ -103,18 +103,14 @@ function mod_evo_table(){
                                         {id:"budingwang", slot:1, need:2} ] },  // 忒提丝神使 ← 热量反弹布丁 + 什锦布丁汪（2026-11-06 用户指定副卡）
         hundun_god:              { cards:[ {id:"hamburger", slot:0, need:2},
                                         {id:"tunshilong", slot:1, need:2} ] },  // 混沌神使 ← 牛肉双黑汉堡 + 成年吞噬龙（2026-11-06 用户指定副卡）
-        // ⚠️ 下面 4 张不在用户给的配方表里（图上没有），沿用旧前置，等补表再改
+        // ⚠️ 真·花火龙不在用户给的配方表里（图上没有），沿用旧前置，等补表再改
         firework_dragon_real:    { cards:[ {id:"firework_dragon", slot:0, need:2},
                                         {id:"shegengbao", slot:1, need:2} ] },  // 真·花火龙 ← 花火龙 + 蛇羹煲
-        hera:                    { cards:[ {id:"chunv", slot:0, need:2},
-                                        {id:"melon_shield", slot:1, need:2} ] },  // 天后 ← 处女座精灵 + 瓜皮护罩
-        ice_god:                 { cards:[ {id:"cold_drew", slot:0, need:2},
-                                        {id:"snowrabbit", slot:1, need:2} ] },  // 典伊神使 ← 迅捷冷萃机 + 导师雪球兔
-        zeus:                    { cards:[ {id:"athena", slot:0, need:2} ] },  // 宙斯神使 ← 雅典娜守护（2026-10-28：取消第 2 槽咖喱龙虾炮，只需一张）
         love_god:                { cards:[ {id:"sheshou", slot:0, need:2},
                                         {id:"triple_wine_rack", slot:1, need:2} ] },  // 丘比特神使 ← 射手座星宿 + 终结者酒架
-        panduola_god:            { cards:[ {id:"aquarius_elve", slot:0, need:2},
-                                        {id:"pufferfish", slot:1, need:2} ] },  // 潘多拉 ← 水瓶座精灵（星座槽）+ 爆辣河豚（2026-10-28 改）
+        // 2026-11-24：赫拉 / 冰神·典伊 / 宙斯 / 潘多拉**没有进化路线**了 ——
+        //   官方进化表里本来就没有这四条，改成「直接兑换型金卡」（假期特惠-其他兑换：
+        //   进化凭证 + 金币 + 威望 或 12★卡包）。进化凭证仍可在诸神商店买，只用于这条兑换。
         // 2026-11-13 新卡：星轨神·阿斯特 ← 忘忧浮生茶（二转）+ 玲珑音盒马（二转）+ 进化凭证
         xinggui_god:             { cards:[ {id:"fushengcha", slot:0, need:2},
                                         {id:"yinhema", slot:1, need:2} ] },
@@ -305,8 +301,10 @@ function mod_evo_has_credit(_target){
 
 /// @func mod_evo_buyable_locked(target) 商店里这张进化凭证是不是「售完」
 ///   （置灰 + 盖售罄罩 + 点不动；诸神商店 Create 与 Draw 只准调这一个，别再各写一份）
-///   两条就够：① 背包里已经有一张（进化凭证只能持有 1 张）② 这张金卡已经进化出来了
+///   两条就够：① 背包里已经有一张（进化凭证只能持有 1 张）② 这张金卡已经拥有了
 ///   ⚠️ 不走 mod_evo_has_credit()：它 debug 下恒真，会把整页商店置灰
+///   ⚠️ 直接兑换型 4 张金卡（无进化路线）也只走这里：已有本体就售完 ——
+///      凭证只在「还没有本体」时买得到（兑换是二选一，换 0★ 之后想要 12★ 就自己强化上去）
 function mod_evo_buyable_locked(_target){
     if (_target == "") return true;
     if (get_material_amount(mod_evo_credit_id(_target)) > 0) return true;
@@ -339,7 +337,9 @@ function mod_evo_tooltip(_target, _desc = ""){
     var _route = mod_evo_route_text(_target);
     if (_route != "") _out += "\n进化路线：" + _route;
     if (_desc != "") _out += "\n" + _desc;
-    _out += "\n在合成屋-金卡进化中使用";
+    // 2026-11-24：没有进化路线的 4 张金卡（直接兑换型）凭证只用于兑换
+    if (_route == "") _out += "\n在假期特惠-其他兑换中直接换取该卡";
+    else             _out += "\n在合成屋-金卡进化中使用";
     return _out;
 }
 

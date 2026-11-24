@@ -57,7 +57,7 @@ for (var i = 0; i < 3; i++)
         var _now  = _prev + shots_n;
         burn_acc[i] = _now;
         var _added = floor(_now / 3) - floor(_prev / 3);
-        for (var _k = 0; _k < _added; _k++) houyi_burn_at(target_row, dmg_mul);
+        for (var _k = 0; _k < _added; _k++) houyi_burn_at(target_row);
 
         var inst = instance_create_depth(start_x, start_y, depth - 500, obj_houyi_god_bullet);
         inst.damage = atk * dmg_mul;

@@ -28,7 +28,11 @@ function mod_skill_init()
         [600, 700, 800, 900, 1000, 1100, 1200, 1400, 1800]
     ]);
     register_card_skill("gaia", "cooldown", [2100, 1920, 1740, 1560, 1380, 1200, 1020, 840, 540]);
-    register_card_skill("warm_birds", "flame_produce", [25, 27, 29, 31, 34, 37, 40, 44, 48]);
+    register_card_skill("warm_birds", "flame_produce", [
+        [25, 26, 27, 28, 29, 30, 31, 32, 34],
+        [25, 26, 27, 28, 29, 30, 31, 32, 34],
+        [26, 27, 28, 29, 30, 32, 33, 34, 36]
+    ]);
     register_card_skill("aurora", "cooldown", [1800, 1680, 1560, 1380, 1200, 1020, 840, 660, 420]);
     register_card_skill("cold_drew", "cycle", [360, 348, 336, 324, 312, 300, 288, 276, 258]);
     register_card_skill("berry_dessert", "cooldown", [2400, 2220, 2040, 1860, 1680, 1500, 1320, 1140, 900]);
@@ -48,7 +52,7 @@ function mod_skill_init()
     register_card_skill("spoon_rabbit", "cycle", [132, 129, 126, 122.99999999999999, 120, 117, 114, 111, 105]);
     register_card_skill("hspeed_juicer", "cooldown", [2700, 2520, 2340, 2160, 1980, 1800, 1620, 1440, 1080]);
     register_card_skill("joker", "cycle", [78, 75, 72, 69, 66, 63, 60, 54, 48]);
-    register_card_skill("shuangzi", "flame_produce", [25, 27, 29, 31, 34, 37, 40, 44, 48]);
+    register_card_skill("shuangzi", "flame_produce", [25, 26, 27, 28, 29, 30, 31, 32, 34]);
     register_card_skill("sheshou", "cycle", [78, 75, 72, 69, 66, 63, 60, 54, 48]);
     register_card_skill("tiancheng", "cycle", [84, 81, 78, 75, 72, 69, 66, 63, 54]);
     register_card_skill("shuangyu", "cycle", [150, 144, 138, 132, 126, 120, 114, 108, 102]);
@@ -60,7 +64,7 @@ function mod_skill_init()
     register_card_skill("mojie", "cooldown", [3000, 2820, 2640, 2400, 2160, 1920, 1620, 1320, 1080]);
     register_card_skill("athena", "cycle", [360, 348, 336, 324, 312, 300, 288, 270, 240]);
     register_card_skill("odin", "cycle", [78, 75, 72, 69, 66, 63, 60, 54, 48]);
-    register_card_skill("sun_god", "flame_produce", [25, 27, 29, 31, 34, 37, 40, 44, 48]);
+    register_card_skill("sun_god", "flame_produce", [25, 26, 27, 28, 29, 30, 31, 32, 35]);
     // 玉蜀黍：技能影响[攻击间隔]（2026-10-30 用户定，单位秒 → 帧：
     //   1.3 / 1.25 / 1.2 / 1.15 / 1.1 / 1.05 / 1 / 0.95 / 0.9  × 60）
     register_card_skill("corn_shooter", "cycle", [78, 75, 72, 69, 66, 63, 60, 57, 54]);
@@ -74,7 +78,7 @@ function mod_skill_init()
     register_card_skill("water_god", "毒伤", [100, 120, 140, 160, 180, 200, 220, 250, 300]);
     register_card_skill("zeus", "cycle", [360, 348, 336, 324, 312, 300, 288, 270, 240]);
     register_card_skill("ghost_god", "cycle", [78, 75, 72, 69, 66, 63, 60, 57, 54]);
-    register_card_skill("ice_god", "cycle", [360, 348, 336, 324, 312, 300, 282, 264, 240]);
+    register_card_skill("ice_god", "cycle", [360, 348, 336, 324, 312, 300, 288, 276, 258]);
     register_card_skill("power_god", "cycle", [180, 168, 156, 144, 132, 120, 108, 96, 72]);
     register_card_skill("sheng_huo", "cycle", [78, 75, 72, 69, 66, 63, 60, 54, 48]);
     register_card_skill("save_god", "atk", [900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300]);

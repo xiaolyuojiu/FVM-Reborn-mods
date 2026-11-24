@@ -27,7 +27,8 @@ function is_cross_server_level(_id){
 /// @param _is_first true = 首通 / false = 重复通关
 /// @return struct {silver, gold_medal, coins}；非跨服关卡返回 undefined
 /// 数值来源：
-///   古堡 ancient_castle_N —— 项目原有硬编码档位，本次不动
+///   古堡 ancient_castle_N —— 项目原有硬编码档位。2026-11-23 修：10★ 起银徽章那串被金徽章覆盖
+///                           （两串后半段原来是同一组数，首通银少给约 3/4），按「金 × 同关卡首通银金比」回填
 ///   天空 nightmare_sky_N  —— 用户 2026-11-04 的表「天空8~天空15」（按星级门槛排，正好是关卡 0~7）
 ///                           注：该表只有银/金两档，金币沿用古堡同档，待补
 ///   灼热地域 zhuore_N     —— 用户 2026-11-05 的两张表「首通 / 重复」，
@@ -93,7 +94,7 @@ function cross_server_reward(_id, _is_first){
     }
 
     if (_is_first){
-        var _s3 = [350, 400, 181, 240, 280, 395, 635, 875];
+        var _s3 = [350, 400, 580, 695, 700, 675, 525, 375];
         var _g3 = [90, 120, 181, 240, 280, 395, 635, 875];
         var _c3 = [60000, 84000, 104000, 129000, 140000, 160000, 190000, 220000];
         return { silver: _s3[_k], gold_medal: _g3[_k], coins: _c3[_k] };

@@ -132,3 +132,67 @@ function holiday_draw_num(_x, _y, _str, _sc, _face, _edge){
 function holiday_warcard_frame(_star){
 	return 29 + _star;          // 图集重排后 1~15★ = 帧 30~44，连续
 }
+
+// ═════════════════════════════════════════════════════════════════════════
+//  ⑤ 直接兑换型金卡（2026-11-24 用户定）
+//     官方进化表里没有四条路线（冰神·典伊 / 宙斯 / 赫拉 / 潘多拉）→ 不走前置卡进化，改成直接兑换：
+//     每张卡两条，三格 = 进化凭证 + 金币 + (威望 | 12★卡包)
+//       · 威望版：给 0★ 本体（已有本体就换不了）
+//       · 12卡包版：直接给 12★（已经 12★ 就不用换）
+//     价格（用户 2026-11-24 定）：
+//       金币   潘多拉 10 万 / 赫拉 15 万 / 宙斯 20 万 / 冰神 25 万（两版同价）
+//       威望   潘多拉 2 万 / 赫拉 3 万 / 宙斯 5 万 / 冰神 6 万
+//       卡包   12★ 各 3 张；凭证各 1 张（诸神商店 20~25 神石那张）
+// ═════════════════════════════════════════════════════════════════════════
+
+/// @func holiday_card_exchange_table() 8 条：每张卡「威望版（0★）、卡包版（12★）」各一条
+function holiday_card_exchange_table(){
+	return [
+		{ card:"panduola_god", gold:100000, prestige: 20000, warcard:0, star: 0 },
+		{ card:"panduola_god", gold:100000, prestige:     0, warcard:3, star:12 },
+		{ card:"hera",         gold:150000, prestige: 30000, warcard:0, star: 0 },
+		{ card:"hera",         gold:150000, prestige:     0, warcard:3, star:12 },
+		{ card:"zeus",         gold:200000, prestige: 50000, warcard:0, star: 0 },
+		{ card:"zeus",         gold:200000, prestige:     0, warcard:3, star:12 },
+		{ card:"ice_god",      gold:250000, prestige: 60000, warcard:0, star: 0 },
+		{ card:"ice_god",      gold:250000, prestige:     0, warcard:3, star:12 }
+	];
+}
+
+/// @func holiday_card_save_level(card_id) 存档里这张卡的星级 index；没解锁返回 -1
+function holiday_card_save_level(_id){
+	var _uc = global.save_data.unlocked_cards;
+	for (var i = 0; i < array_length(_uc); i++) if (_uc[i].id == _id) return _uc[i].level;
+	return -1;
+}
+
+/// @func holiday_card_exchange_max(row) 这条现在能不能换（每张卡每种只换一次，所以返回 1 / 0）
+///   威望版：已有本体就不能换；卡包版：已经到 12★ 就不能换
+///   两张都吃 1 张进化凭证（二选一：换 0★ 或换 12★，不换 12★ 就自己强化上去）
+function holiday_card_exchange_max(_row){
+	var _lv = holiday_card_save_level(_row.card);
+	if (_row.star <= 0){ if (_lv >= 0) return 0; }
+	else { if (_lv >= _row.star) return 0; }
+
+	if (get_material_amount(mod_evo_credit_id(_row.card)) < 1) return 0;
+	if (global.save_data.player.gold < _row.gold) return 0;
+	if (_row.warcard > 0){
+		if (get_material_amount("warcard_12") < _row.warcard) return 0;
+	} else {
+		if (get_material_amount("prestige") < _row.prestige) return 0;
+	}
+	return 1;
+}
+
+/// @func holiday_card_exchange_do(row, times) 扣料 → 直接发卡（威望版 0★ / 卡包版 12★）
+function holiday_card_exchange_do(_row, _times){
+	var _n = min(_times, holiday_card_exchange_max(_row));
+	if (_n <= 0) return 0;
+	add_material_amount(mod_evo_credit_id(_row.card), -1);
+	global.save_data.player.gold -= _row.gold;
+	if (_row.warcard > 0) add_material_amount("warcard_12", -_row.warcard);
+	else add_material_amount("prestige", -_row.prestige);
+	unlock_card(_row.card, _row.star, 0, global.save_data.unlocked_items.max_skill_level);
+	if (variable_global_exists("save_slot")) save_file(global.save_slot);
+	return _n;
+}

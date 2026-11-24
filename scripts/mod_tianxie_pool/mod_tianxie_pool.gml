@@ -692,6 +692,7 @@ function tx_special_shot(_self, _card, _si)
             _ib.row             = _ie.grid_row;
             _ib.grid_row        = _ie.grid_row;
             _ib.sprite_index    = spr_ice_god_bullet_1;
+            _ib.target_type     = "track_under";   // 复刻按终转口径：可打地鼠
         }
         return;
     }

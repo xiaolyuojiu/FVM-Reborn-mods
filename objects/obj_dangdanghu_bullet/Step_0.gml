@@ -59,6 +59,7 @@ if (tick_timer >= tick_gap){
     var _cross = (shape < 2);      // 0/1 转 3×3 十字；2 转 3×3 方块
     var _gc = col;
     var _gr = row;
+    var _edge = (_gr == 0 || _gr == global.grid_rows - 1);
     with (obj_enemy_parent){
         if (hp <= 0) continue;
         // 🔴 2026-11-06：原来只看格子，空军 / 非主流 / 幽灵 / 障碍站在火格里也会被烧。
@@ -77,7 +78,10 @@ if (tick_timer >= tick_gap){
             }
         }
         if (_in){
-            damage_amount = _per;
+            // 边路强化：火焰位于第 0 行或最后一行时，本路伤害翻倍，相邻行不变
+            var _dmg = _per;
+            if (_edge && grid_row == _gr) _dmg *= 2;
+            damage_amount = _dmg;
             // 🔴 2026-11-06：原来写 "ash"，但龙渊魂体（ly_kailu / ly_zhinian / 符咒魂鼠）会
             //   对 damage_type == "ash" 的伤害**整额退还** → 灼烧对魂系鼠等于 0 伤害。
             //   糖炒栗子/生煎锅都是 "throw"，这里跟它们对齐。

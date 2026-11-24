@@ -110,6 +110,9 @@ if (variable_global_exists("enemy_by_type"))
 
                 if (ash_kill && _prev_hp > 0 && _e.hp <= 0)
                 {
+                    // 🔴 先隐去本体（同横排朱雀 / 后羿地火）：否则父类的死亡动画会和灰烬叠在一起
+                    _e.ash_death   = true;
+                    _e.image_alpha = 0;
                     instance_create_depth(_e.x, _e.y - 20, depth, obj_mouse_ash_death);
                 }
             }

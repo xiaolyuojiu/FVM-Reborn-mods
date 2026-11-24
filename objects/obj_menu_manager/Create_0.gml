@@ -39,23 +39,9 @@ global.laboretory_room = false
 
 
 
-self.texture_to_load = [
-	"UI",
-	"cards",
-	"enemy_delicious",
-	"enemy_volcanic",
-	"bullet",
-	"effects",
-	"player",
-	"maps",
-	"enemy_floating",
-	"enemy_tower",
-	"pack_explore_camp",
-	"pack_desert_trip"
-]
-
-// Desktop dynamic groups are warmed by scene; do not fetch every enemy region at startup.
-if (resource_memory_enabled()) self.texture_to_load = ["UI", "player", "maps"]
+// 只预热共用 UI 组：cards / enemy_volcanic / enemy_floating 单组已超 4GB，
+// 按组 prefetch 会把页总长溢成负数直接崩（2026-11-24 报错），其余组按场景再取。
+self.texture_to_load = ["UI", "player", "maps"]
 
 self.texture_count = array_length(self.texture_to_load)
 self.texture_loaded = 0

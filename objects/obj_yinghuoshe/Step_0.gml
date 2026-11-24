@@ -18,14 +18,19 @@ for (var yh_i = 0; yh_i < instance_number(obj_kuileima_decoy); yh_i++) {
     if (instance_exists(yh_d) && yh_d.hp > 0 && !array_contains(yh1_list,yh_d)) array_push(yh1_list,yh_d);
 }
 var radius = 1;
+// 伤害口径（表 13.辅助 r72「范围3*3，二转伤害可叠加」）：0/1 转同一只鼠只吃一次萤火虫伤害，二转才可叠加
+var _yh_stack = (shape >= 2);
 for (var i = 0; i < array_length(yh1_list); i++) {
     var e = yh1_list[i];
-    if (e.target_type == "underground" || e.target_type == "non_mainstream"
-        || e.target_type == "ghost" || e.target_type == "invisible") continue;
-    if (array_contains(zodiac_firefly_hit_ids,e.id)) continue;
+    if (e.target_type == "underground" || e.target_type == "dance"
+        || e.target_type == "invisible") continue;
+    if (_yh_stack) {
+        if (array_contains(zodiac_firefly_hit_ids,e.id)) continue;
+    } else if (variable_instance_exists(e,"yh_hit") && e.yh_hit) continue;
     var eg = get_grid_position_from_world(e.x,e.y);
     if (abs(eg.col-grid_col) <= radius && abs(eg.row-grid_row) <= radius) {
-        array_push(zodiac_firefly_hit_ids,e.id);
+        if (_yh_stack) array_push(zodiac_firefly_hit_ids,e.id);
+        else e.yh_hit = true;
         var yhs_dmg = atk;
         with (e) {
             damage_amount = yhs_dmg;
@@ -50,8 +55,8 @@ if (state == CARD_STATE.IDLE && zodiac_timer == 0) {
     var has_target = false;
     for (var j = 0; j < array_length(yh2_list); j++) {
         var e2 = yh2_list[j];
-        if (e2.target_type == "underground" || e2.target_type == "non_mainstream"
-            || e2.target_type == "ghost" || e2.target_type == "invisible") continue;
+        if (e2.target_type == "underground" || e2.target_type == "dance"
+            || e2.target_type == "invisible") continue;
         var eg2 = get_grid_position_from_world(e2.x,e2.y);
         if (abs(eg2.col-grid_col) <= radius && abs(eg2.row-grid_row) <= radius) {has_target = true; break;}
     }
@@ -69,9 +74,11 @@ if (state == CARD_STATE.ATTACK) {
     // 与星星兔一致：动画第18帧执行攻击动作。
     if (!zodiac_shot_this_anim && image_index == 18) {
         zodiac_shot_this_anim = true;
-        // 每15秒产生火苗：0转1朵，一二转各2朵
-        var count = 2;
-        if (shape == 0) count = 1;
+        // 每 15 秒产生火苗，朵数读注册表 custom["火苗朵数"]
+        var _fsk   = variable_instance_exists(id, "skill") ? skill : 0;
+        var _finfo = get_plant_data_with_skill(plant_id, shape, clamp(current_level, 0, 16), _fsk);
+        var count  = 1;
+        if (_finfo != undefined && ds_map_exists(_finfo, "火苗朵数")) count = _finfo[? "火苗朵数"];
         var value = 20;
         if (variable_instance_exists(id,"flame_produce")) {
             value = is_array(flame_produce)

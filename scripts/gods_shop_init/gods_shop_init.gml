@@ -1075,7 +1075,7 @@ register_gods_goods("shennong_god_3",
     cost: "10",
     unlock_item_id: "shennong_god",
     target_shape: 3,
-    description: "至尊炎帝：召唤两只朱雀神焰分扫自身上下两路，单只神焰伤害范围扩大到3行，沿途5行分别受击1/1/2/1/1次；场上神农达到7张时，攻击力最高的1只每5秒在7~9列召唤竖向朱雀轰击"
+    description: "至尊炎帝：召唤朱雀攻击沿途老鼠"
 });
 
 register_gods_goods("chongsheng_god",

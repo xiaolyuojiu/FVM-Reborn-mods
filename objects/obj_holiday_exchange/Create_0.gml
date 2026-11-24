@@ -2,6 +2,7 @@
 ///   长期兑换 = 卡包低换高（3 张 N★ + 金币 → 1 张 N+1★）+ 四叶草 1~4 级低换高（5 个 + 金币 → 高一阶）
 ///              + 融合剂（3 张 10/11/12★ 卡包 → 1 个初级/深度/灵魂融合剂）
 ///   其他兑换 = 旧香料换强化用卡（1★ 起 7 档，2★/4★ 本来就刷不到所以不做）
+///              + 直接兑换型金卡（冰神 / 宙斯 / 赫拉 / 潘多拉，凭证+金币+威望 或 12★卡包）
 ///
 /// 一行 = 一块底板，三块散图拼在里面（导出里 DefineSprite_112 那张 378×89 是**合成好的参考图**，
 /// 上面「剩余时间 / 剩余次数」是占位测试数字，不能直接当底板）：
@@ -29,6 +30,10 @@ for (var _m = 0; _m < array_length(hal_agents); _m++)
 	array_push(hal_tab0, { kind: "agent", row: hal_agents[_m] });       // 卡包换融合剂
 
 hal_tab1 = [];
+// 直接兑换型金卡排最前（4 张卡 × 威望版 / 12卡包版 = 8 条，正好占满第一页）
+var _hal_cex = holiday_card_exchange_table();
+for (var _cx = 0; _cx < array_length(_hal_cex); _cx++)
+	array_push(hal_tab1, { kind: "cardx", row: _hal_cex[_cx] });
 for (var _k = 0; _k < array_length(hal_rows); _k++)
 	array_push(hal_tab1, { kind: "spice", row: hal_rows[_k] });         // 旧香料换卡包
 
@@ -100,6 +105,7 @@ function hal_batch_rect(_i){
 function hal_batch_max_of(_kind, _row){
 	if (_kind == "clover") return holiday_clover_upgrade_max(_row);
 	if (_kind == "spice")  return holiday_exchange_max(_row);
+	if (_kind == "cardx")  return holiday_card_exchange_max(_row);
 	return holiday_card_upgrade_max(_row);          // up / agent
 }
 
@@ -109,11 +115,23 @@ function hal_batch_gold_of(_kind, _row){
 	return 0;
 }
 
-/// @func hal_batch_do(kind, row, n) 执行批量兑换
+/// @func hal_batch_result_name(kind, row) 兑换成功的产物名（提示用）
+function hal_batch_result_name(_kind, _row){
+	if (_kind == "cardx") return mod_evo_card_name(_row.card) + "（" + string(_row.star) + "★）";
+	var _id = (_kind == "spice") ? _row.card : _row.to;   // spice 给卡包，其余给 _row.to
+	var _m  = get_material_info(_id);
+	return (is_struct(_m) && variable_struct_exists(_m, "name")) ? _m.name : string(_id);
+}
+
+/// @func hal_batch_do(kind, row, n) 执行批量兑换（成功后弹一句结果）
 function hal_batch_do(_kind, _row, _n){
-	if (_kind == "clover") return holiday_clover_upgrade_do(_row, _n);
-	if (_kind == "spice")  return holiday_exchange_do(_row, _n);
-	return holiday_card_upgrade_do(_row, _n);       // up / agent
+	var _got = 0;
+	if (_kind == "clover") _got = holiday_clover_upgrade_do(_row, _n);
+	else if (_kind == "spice")  _got = holiday_exchange_do(_row, _n);
+	else if (_kind == "cardx")  _got = holiday_card_exchange_do(_row, _n);
+	else _got = holiday_card_upgrade_do(_row, _n);       // up / agent
+	if (_got > 0) show_notice("兑换成功：" + hal_batch_result_name(_kind, _row), 80);
+	return _got;
 }
 
 /// @func hal_batch_recipe(kind, row) 配方的图标 / 结果 / 拥有量 / 单次消耗
@@ -134,6 +152,14 @@ function hal_batch_recipe(_kind, _row){
 		_d.owned = get_material_amount(_row.from); _d.need = _row.need;
 		_d.res_spr = craft_material_spr(_row.to); _d.res_frame = craft_material_frame(_row.to);
 	}
+	else if (_kind == "cardx"){
+		array_push(_d.icons, { spr: -1, frame: 0 });        // 进化凭证（弹窗里单独画）
+		array_push(_d.icons, { spr: spr_holiday_coin, frame: 0 });
+		if (_row.warcard > 0) array_push(_d.icons, { spr: spr_craft_material, frame: holiday_warcard_frame(12) });
+		else                 array_push(_d.icons, { spr: spr_prestige_icon, frame: 0 });
+		_d.owned = get_material_amount(mod_evo_credit_id(_row.card)); _d.need = 1;
+		_d.res_spr = spr_slot_1; _d.res_frame = 0;
+	}
 	else {
 		array_push(_d.icons, { spr: craft_material_spr(_row.spice), frame: craft_material_frame(_row.spice) });
 		_d.owned = get_material_amount(_row.spice); _d.need = _row.ratio;
@@ -152,8 +178,11 @@ function hal_batch_draw_recipe(_cx, _cy, _RS, _n){
 	for (var sl = 0; sl < 3; sl++){
 		var _sx = _cx + hal_slot_dx[sl] * _RS;
 		if (sl < array_length(_d.icons)){
-			var _isc = (_d.icons[sl].spr == spr_holiday_coin) ? 0.96 : 0.52;
-			draw_sprite_ext(_d.icons[sl].spr, _d.icons[sl].frame, _sx, _iy, _isc * _RS, _isc * _RS, 0, c_white, 1);
+			if (_d.icons[sl].spr == -1) mod_evo_draw_credit(hal_batch_row.card, _sx, _iy, true, 26 * _RS, 19 * _RS);
+			else {
+				var _isc = (_d.icons[sl].spr == spr_holiday_coin) ? 0.96 : 0.52;
+				draw_sprite_ext(_d.icons[sl].spr, _d.icons[sl].frame, _sx, _iy, _isc * _RS, _isc * _RS, 0, c_white, 1);
+			}
 		}
 		else draw_sprite_ext(spr_holiday_forbid, 0, _sx, _iy, 0.80 * _RS, 0.80 * _RS, 0, c_white, 1);
 	}

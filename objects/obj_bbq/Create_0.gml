@@ -9,7 +9,7 @@
 //       2026-11-08 用户改口径：灼烧**每跳伤害**直接读卡片 atk（同法师蛇，不再 ×2、不再走 custom）；
 //         持续秒数 / 跳数走 custom["灼烧持续"] / ["灼烧跳数"]（默认 2 秒 4 跳）。
 //       其余节奏（0.5 秒 / 4 跳 / 2 秒）不动，仍写在对象里。
-//       灼烧**能烧到场外 1 格**（第 10 格 / BOSS 出生位），但火格特效仍然只铺在第 9 格（不跟着外扩）。
+//       火格只在第 9 格内烧（2026-11-24 用户口径：不再烧到场外第 10 列 / BOSS 出生位）。
 //       火格与**烤串本发出膛同帧**生成（2026-11-04）。
 //       一转 +1 发子弹（单行 2 发）；二转同时在上下三路各发。
 event_inherited();
@@ -45,14 +45,14 @@ bbq_pending_timer = 0;   // 还有几帧出膛（0 = 没有待发射）
 // 贴图格线与逻辑网格的原点差（36px）。串串飞行高度、灼烧火格都用它抬高，要微调只改这一个数。
 bbq_art_up = 36;
 
-// ── 灼烧区：每跳伤害 = 卡片当前 atk（2026-11-08 用户口径，同法师蛇）──
-//   不再走 custom["灼烧伤害"]（注册表里那条已删），也不乘 2 —— 铺火那一帧现取 atk，
-//   星级 / 技能 / 平射增幅全都跟得上；持续与跳数才走 custom（改表即生效）。
+// ── 灼烧区：每跳伤害 = custom["灼烧伤害"]（数据表 11.直射 r136：每秒 50 点、共 4 次；固定值，不随星级变）──
+//   持续 / 跳数 / 层数同样走 custom（改表即生效）。
 var _bsk   = variable_instance_exists(id, "skill") ? skill : 0;
 var _binfo = get_plant_data_with_skill("bbq", shape, clamp(current_level, 0, 16), _bsk);
-burn_damage  = atk;
-burn_duration = 2;   // custom["灼烧持续"]（秒）
+burn_damage  = 50;   // custom["灼烧伤害"]
+burn_duration = 4;   // custom["灼烧持续"]（秒）
 burn_ticks    = 4;   // custom["灼烧跳数"]（跳）
+if (_binfo != undefined && ds_map_exists(_binfo, "灼烧伤害")) burn_damage   = _binfo[? "灼烧伤害"];
 if (_binfo != undefined && ds_map_exists(_binfo, "灼烧持续")) burn_duration = _binfo[? "灼烧持续"];
 if (_binfo != undefined && ds_map_exists(_binfo, "灼烧跳数")) burn_ticks    = _binfo[? "灼烧跳数"];
 // 同一格灼烧区叠加上限（xlsx 11.直射 R131「可叠加 4 层」，多片各自跳伤 = 叠层伤害）
@@ -61,9 +61,6 @@ if (_binfo != undefined && ds_map_exists(_binfo, "叠加层数")) bbq_stack_max 
 burn_life          = max(1, round(burn_duration * 60));                 // 总帧数
 burn_tick_interval = max(1, round(burn_life / max(1, burn_ticks)));     // 每跳间隔帧
 
-// 灼烧**能烧到场外 1 格**（第 10 格 / BOSS 出生位），火格特效仍铺在第 9 格不动。
-//   要改能烧出去几格就改这一个数（0 = 只烧第 9 格，回到老行为）。
-bbq_burn_extra_col = 1;
 
 // 灼烧区（爆辣烤串铺的火格）：**跟烤串那一发「出膛的同一帧」铺**，不再跟本轮第一发。
 //   0 转烤串就是当帧那发 → Other_11 里立刻调；1 转起烤串通常是延迟出膛的第二发 → 等 Step_0 补发时再调。
@@ -73,18 +70,22 @@ bbq_spawn_burn_cell = function(_row)
 {
     var _bc = global.grid_cols - 1;
 
-    // 叠加上限：同一格已有 >= bbq_stack_max 片就不再铺。
+    // 叠加上限 + 同格合并（2026-11-24 性能）：一格只留 1 个实例，层数记进 layer_t
+    //   （每层各自从铺下那刻起算 burn_duration 秒），跳伤 = 每层伤害 × 存活层数
     //   火格用 bbq 专用对象 obj_bbq_burn_cell，直接数它
-    if (bbq_stack_max > 0)
+    var _hit = noone;
+    var _bn = instance_number(obj_bbq_burn_cell);
+    for (var _bi = 0; _bi < _bn; _bi++)
     {
-        var _cnt = 0;
-        var _bn = instance_number(obj_bbq_burn_cell);
-        for (var _bi = 0; _bi < _bn; _bi++)
-        {
-            var _bg = instance_find(obj_bbq_burn_cell, _bi);
-            if (_bg.grid_col == _bc && _bg.grid_row == _row) _cnt++;
-        }
-        if (_cnt >= bbq_stack_max) return;
+        var _bg = instance_find(obj_bbq_burn_cell, _bi);
+        if (_bg == noone) continue;
+        if (_bg.grid_col == _bc && _bg.grid_row == _row) { _hit = _bg; break; }
+    }
+    if (_hit != noone)
+    {
+        if (bbq_stack_max <= 0 || array_length(_hit.layer_t) < bbq_stack_max)
+            array_push(_hit.layer_t, _hit.t);
+        return;
     }
 
     var _cell = get_world_position_from_grid(_bc, _row);
@@ -107,12 +108,10 @@ bbq_spawn_burn_cell = function(_row)
     _b.frame_end = 16;
     _b.anim_loop_frames = 42;      // 14 帧 × 3 = 20fps，1 秒不到一轮，一直有火
     // 每跳伤害 = 卡片 atk；存在时长 / 跳数走 custom（默认 2 秒 4 跳 → 每 30 帧一跳）
-    _b.damage = burn_damage;
+    _b.dmg_per_layer = burn_damage;    // damage 由火格按存活层数重算
     _b.life = burn_life;
     _b.tick_interval = burn_tick_interval;
-    // 灼烧能烧到场外 1 格（第 10 格 / BOSS 出生位）；火格特效仍铺在第 9 格（_bc），不跟着外扩
-    //   → 只在判定上放宽，位置 / 缩放都不动（2026-11-06 用户口径）
-    _b.extra_col_right = bbq_burn_extra_col;
+    _b.tick_phase = irandom(max(0, burn_tick_interval - 1));   // 错峰：别让同轮铺下的几格同帧结算
     _b.lock_grid = true;
     _b.grid_col = _bc;
     _b.grid_row = _row;

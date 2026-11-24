@@ -191,7 +191,16 @@ function register_plant_lite(plant_id, shapes_array) {
         ds_map_add(base_upgrade, "cycle", shape_info.cycle[0]);
 		if struct_exists(shape_info,"flame_produce"){
 			ds_map_add(base_upgrade,"flame_produce",shape_info.flame_produce[0])}
-        
+
+        // 自定义数值（custom）：与 add_plant_upgrade_lite 同口径，0 档也要写，否则 0★ 读不到
+        if (struct_exists(shape_info, "custom")){
+            var _ck0 = variable_struct_get_names(shape_info.custom);
+            for (var _ci0 = 0; _ci0 < array_length(_ck0); _ci0++){
+                var _cv0 = variable_struct_get(shape_info.custom, _ck0[_ci0]);
+                ds_map_add(base_upgrade, _ck0[_ci0], is_array(_cv0) ? _cv0[0] : _cv0);
+            }
+        }
+
         ds_map_add(upgrades, "0", base_upgrade);
         
         // 将形态数据添加到植物数据中

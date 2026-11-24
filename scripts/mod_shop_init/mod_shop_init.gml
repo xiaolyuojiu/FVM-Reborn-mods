@@ -682,7 +682,7 @@ function mod_shop_init()
     register_goods("qiedanlong", { type: "card", cost: "110000", unlock_item_id: "qiedanlong", description: "窃蛋龙：向前方3行投掷龙蛋", display_name: "窃蛋龙" });
     register_goods("qishui", { type: "card", cost: "80000", unlock_item_id: "qishui", description: "弹珠汽水：向前喷射可弹射攻击的弹珠", display_name: "弹珠汽水" });
     register_goods("shiguangji", { type: "card", cost: "80000", unlock_item_id: "shiguangji", description: "13周年时光机：随机为格子内卡片升星或者降星", display_name: "13周年时光机" });
-    register_goods("snowrabbit", { type: "card", cost: "200000", unlock_item_id: "snowrabbit", description: "雪球兔：召唤雪球攻击全屏老鼠", display_name: "雪球兔" });
+    register_goods("snowrabbit", { type: "card", cost: "180000", unlock_item_id: "snowrabbit", description: "雪球兔：召唤雪球攻击全屏老鼠", display_name: "雪球兔" });
     register_goods("tanhuanghu", { type: "card", cost: "220000", unlock_item_id: "tanhuanghu", description: "弹簧虎：连续攻击本行敌人，优先伤害空中", display_name: "弹簧虎" });
     register_goods("yuanqiniu", { type: "card", cost: "60000", unlock_item_id: "yuanqiniu", description: "元气牛：全方位攻击范围内的老鼠", display_name: "元气牛" });
 }

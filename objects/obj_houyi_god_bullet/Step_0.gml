@@ -56,6 +56,10 @@ if (variable_global_exists("enemy_by_type"))
 
                 if (ash_kill && _prev_hp > 0 && _e.hp <= 0)
                 {
+                    // 🔴 先隐去本体：不设 ash_death 的话父类照常播死亡动画，
+                    //   画面上就是「本体躺着 + 灰烬冒出来」两套（地火格 / 炎帝朱雀同款坑）
+                    _e.ash_death   = true;
+                    _e.image_alpha = 0;
                     if (shape >= 2)
                     {
                         var _ash = instance_create_depth(_e.x, _e.y - 20, depth, obj_mouse_ash_death);
